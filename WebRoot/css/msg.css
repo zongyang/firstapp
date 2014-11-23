@@ -1,0 +1,15 @@
+/*页眉*/
+.msg-header{
+	background: #2a2c2e;
+height: 60px;
+}
+/*主要部分*/
+.msg-main{
+	padding: 10px 0 ;
+min-height: 750px;
+}
+/*页脚*/
+.msg-footer{
+	height: 30px;
+	background: #2a2c2e;
+}

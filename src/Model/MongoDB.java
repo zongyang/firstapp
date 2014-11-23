@@ -13,9 +13,10 @@ public class MongoDB {
 		}
 
 		private String id;
-		private String name;
+		private String email;
+		private String nick;
 		private String sex;
-		private String psd;// 用户密码
+		private String psw;// 用户密码
 		private String img;// 用户图像
 		private String reg_time;// 用户注册时间
 		private String sign;// 用户签名
@@ -33,14 +34,6 @@ public class MongoDB {
 			this.id = id;
 		}
 
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
 		public String getSex() {
 			return sex;
 		}
@@ -49,12 +42,28 @@ public class MongoDB {
 			this.sex = sex;
 		}
 
-		public String getPsd() {
-			return psd;
+		public String getEmail() {
+			return email;
 		}
 
-		public void setPsd(String psd) {
-			this.psd = psd;
+		public void setEmail(String email) {
+			this.email = email;
+		}
+
+		public String getNick() {
+			return nick;
+		}
+
+		public void setNick(String nick) {
+			this.nick = nick;
+		}
+
+		public String getPsw() {
+			return psw;
+		}
+
+		public void setPsw(String psw) {
+			this.psw = psw;
 		}
 
 		public String getImg() {

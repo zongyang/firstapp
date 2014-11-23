@@ -241,14 +241,14 @@ html {
 }
 
 .bg-mail {
-	background: url(../img/login/rl-sprite.png) no-repeat -80px -678px;
+	background: url(../img/rl-sprite.png) no-repeat -80px -678px;
 }
 
 .bg-psw {
-	background: url(../img/login/rl-sprite.png) no-repeat -80px -774px;
+	background: url(../img/rl-sprite.png) no-repeat -80px -774px;
 }
 .bg-nick {
-	background: url(../img/login/rl-sprite.png) no-repeat -80px -726px;
+	background: url(../img/rl-sprite.png) no-repeat -80px -726px;
 }
 .input-error{
 	border-color: #be3948;
@@ -260,12 +260,12 @@ html {
 }
 
 .tip-error {
-	background: url(../img/login/rl-sprite.png) no-repeat -108px -934px;
+	background: url(../img/rl-sprite.png) no-repeat -108px -934px;
 	padding-left: 15px;
 	color: #be3948;
 }
 .tip-right{
-	background: url(../img/login/rl-sprite.png) no-repeat -108px -934px;
+	background: url(../img/rl-sprite.png) no-repeat -108px -934px;
 	padding-left: 15px;
 	color: #39b94e;
 }
