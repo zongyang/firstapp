@@ -1,71 +1,209 @@
-html, body {
-	height: 100%;
-}
-/*Ò³Ã¼*/
 .msg-header {
 	min-height: 60px;
 	height: 10%;
 }
-/*Ö÷Òª²¿·Ö*/
+
 .msg-main {
-	margin: 10px auto;
-	width: 1200px; height : 990px;
+	margin: 10px 5%;
+	width: 1200px;
+	height: 600px;
+	position: relative;
 	background: url(../img/msgbg.jpg) no-repeat;
-	height: 990px;
 }
 
-.msg-main-left {
-	width: 400px;
-	height: 95%;
-	min-height: 480px;
-	clear: both;
+.msg-user-img {
+	border-radius: 22px;
+	border: 2px solid #FFF;
+	box-shadow: 2px 2px 3px #999;
+	margin-right: 10px;
 }
 
-.msg-main-left-nav {
-	
+.msg-main-l {
+	width: 80px;
 }
 
-.msg-main-left-nav li {
+.msg-main-l li {
+	cursor: pointer;
 	width: 80px;
 	height: 70px;
+}
+
+.msg-main-l li:hover {
+	background-color: rgba(70, 74, 77, 0.6);
+}
+
+.msg-main-l li.active {
+	background-color: rgba(70, 74, 77, 1);
+	background-position-x: -80px;
+}
+
+.msg-main-l-recent {
+	background: url(../img/nl-msg.png) no-repeat 0 0;
+}
+
+.msg-main-l-friend {
+	background: url(../img/nl-msg.png) no-repeat 0 -62px;
+}
+
+.msg-main-l-group {
+	background: url(../img/nl-msg.png) no-repeat 0 0;
+}
+
+.msg-main-m {
+	width: 320px;
+}
+
+.msg-main-m li {
 	cursor: pointer;
-	background: url(../img/nl-msg.png) no-repeat;
-}
-
-.msg-main-left-nav li:nth-child(0) {
-	background-position: 0 0;
-}
-
-.msg-main-left-nav li:nth-child(1) {
-	background-position: 0 -62px;
-}
-
-.msg-main-left-nav li:nth-child(2) {
-	background-position: 0 0;
-}
-
-.msg-main-left-nav a.active {
-	background-color: #464A4D;
-	background-position: -80px -70px;
-}
-
-.msg-main-left-content {
-	
-}
-
-.msg-main-left-content-item li {
 	height: 40px;
+	padding: 15px;
 	border-bottom: 1px solid #A59D9A;
 	color: #1F2427;
-	padding: 15px;
-	overflow: hidden;
-	cursor: pointer;
 }
-/*Ò³½Å*/
-.msg-footer {
-	min-height: 30px;
-	height: 5%;
-	width: 100%;
-	bottom: 0;
+
+.msg-main-m li:hover {
+	background-color: rgba(255, 255, 255, 0.7)
+}
+
+.msg-main-m li.active {
+	background-color: rgba(213, 215, 214, 1);
+}
+
+.msg-main-m li img {
+	border-radius: 22px;
+	border: 2px solid #FFF;
+	box-shadow: 2px 2px 3px #999;
+	margin-right: 10px;
+}
+
+.msg-main-m li div {
+	width: 215px;
+	height: 44px;
+	margin-top: -5px;
+}
+
+.msg-main-m li h5 {
+	font-size: 16px;
+	height: 27px;
+	line-height: 27px;
+}
+
+.msg-main-m li p {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	height: 27px;
+	line-height: 27px;
+}
+
+.msg-main-r {
+	position: relative;
+	width: 800px;
+}
+
+.msg-main-r ul {
+	padding: 10px 20px;
+}
+
+.msg-main-r li {
+	margin: 25px 0 0 -5px;
+	min-height: 46px;
+	overflow: hidden;
+	padding: 0 5px;
+}
+
+.msg-main-r-content {
+	position: relative;
+	background: none;
+	box-shadow: none;
+	margin: 0 15px;
+	display: inline;
+	max-width: 420px;
+}
+
+.msg-main-r-content pre {
+	box-shadow: 2px 2px 3px #999;
+	color: #1F2427;
+	min-height: 28px;
+	margin-bottom: 10px;
+	padding: 8px 15px;
+	white-space: pre-wrap;
+	word-break: break-all;
+	word-wrap: break-word;
+	font-size: 16px;
+	font-family: 'Î¢ÈíÑÅºÚ';
+}
+
+.msg-main-r-content-l pre {
+	background: #DEEDFF;
+}
+
+.msg-main-r-content-r pre {
+	background: white;
+}
+
+.arrow_left {
+	border: 6px solid #DEEDFF;
+	border-color: transparent #DEEDFF transparent transparent;
+	border-style: dashed solid dashed dashed;
+	top: 16px;
 	position: absolute;
+	left: -12px;
+}
+
+.arrow_right {
+	border: 6px solid #FFF;
+	border-color: transparent transparent transparent #FFF;
+	border-style: dashed dashed dashed solid;
+	top: 16px;
+	position: absolute;
+	right: -12px;
+}
+
+.msg-main-input {
+	position: absolute;
+	left: 400px;
+	bottom: 0;
+	width: 800px;
+	background: none;
+}
+
+.msg-main-input table {
+	position: relative;
+	border-top: 1px solid #AEAEAC;
+	width: 90%;
+	margin: 10px 20px;
+	border-top: 1px solid #AEAEAC;
+}
+
+.msg-main-input td {
+	width: 50px;
+}
+
+#chart-input {
+	margin-top: 15px;
+	height: 40px;
+	width: 400px;
+	border: 1px solid #8A8A8A;
+	background: #f8f8f8;
+	overflow: hidden;
+}
+
+#send-msg {
+	margin-top: 5px;
+	height:40px;
+	line-height:30px;
+	width: 150px;
+	color: #fff;
+	font-size: 14px;
+	background-color: #39b94e;
+	cursor: pointer;
+	text-align: center;
+	transition: background-color 0.2s;
+	-webkit-transition: background-color 0.2s;
+	-moz-transition: background-color 0.2s;
+	-o-transition: background-color 0.2s;
+}
+#send-msg:hover{
+	background-color: #33a646;
 }
