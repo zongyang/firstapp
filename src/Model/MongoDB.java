@@ -1,259 +1,327 @@
 package Model;
-import java.util.ArrayList;
-public class MongoDB {
-//ÓÃ»§Àà
-public class User{
-	public User(){
-		this.chartMsgs=new ArrayList<ChartMsg>();
-		this.leaveMsgs=new ArrayList<LeaveMsg>();
-		this.firendGroups=new ArrayList<FriendGroup>();
-		this.chartGroups=new ArrayList<ChartGroup>();
-	}
-	private String id;
-	private String name;
-	private String sex;
-	private String psd;//ÓÃ»§ÃÜÂë
-	private String img;//ÓÃ»§Í¼Ïñ
-	private String reg_time;//ÓÃ»§×¢²áÊ±¼ä
-	private String sign;//ÓÃ»§Ç©Ãû
-	private String ip;//ÓÃ»§×îĞÂµÇÂ¼ip
-	private ArrayList<ChartMsg> chartMsgs;//ÓÃ»§ÁÄÌì¼ÇÂ¼
-	private ArrayList<LeaveMsg> leaveMsgs;//ÓÃ»§ÀëÏßÏûÏ¢
-	private ArrayList<FriendGroup> firendGroups;//ÓÃ»§ºÃÓÑ·Ö×é
-	private ArrayList<ChartGroup> chartGroups;//ÓÃ»§Èº
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getSex() {
-		return sex;
-	}
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-	public String getPsd() {
-		return psd;
-	}
-	public void setPsd(String psd) {
-		this.psd = psd;
-	}
-	public String getImg() {
-		return img;
-	}
-	public void setImg(String img) {
-		this.img = img;
-	}
-	public String getReg_time() {
-		return reg_time;
-	}
-	public void setReg_time(String reg_time) {
-		this.reg_time = reg_time;
-	}
-	public String getSign() {
-		return sign;
-	}
-	public void setSign(String sign) {
-		this.sign = sign;
-	}
-	public String getIp() {
-		return ip;
-	}
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-	public ArrayList<ChartMsg> getChartMsgs() {
-		return chartMsgs;
-	}
-	public void setChartMsgs(ArrayList<ChartMsg> chartMsgs) {
-		this.chartMsgs = chartMsgs;
-	}
-	public ArrayList<LeaveMsg> getLeaveMsgs() {
-		return leaveMsgs;
-	}
-	public void setLeaveMsgs(ArrayList<LeaveMsg> leaveMsgs) {
-		this.leaveMsgs = leaveMsgs;
-	}
-	public ArrayList<FriendGroup> getFirendGroups() {
-		return firendGroups;
-	}
-	public void setFirendGroups(ArrayList<FriendGroup> firendGroups) {
-		this.firendGroups = firendGroups;
-	}
-	public ArrayList<ChartGroup> getChartGroups() {
-		return chartGroups;
-	}
-	public void setChartGroups(ArrayList<ChartGroup> chartGroups) {
-		this.chartGroups = chartGroups;
-	}
-	
-}
-//Ë½ÁÄÀà
-public class ChartMsg{
-	private String time;
-	private String content;
-	private String from;//·¢ÆğºÃÓÑµÄid
-	public String getTime() {
-		return time;
-	}
-	public void setTime(String time) {
-		this.time = time;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public String getFrom() {
-		return from;
-	}
-	public void setFrom(String from) {
-		this.from = from;
-	}
-	
-}
-//ÀëÏßÏûÏ¢Àà
-public class LeaveMsg{
-	public LeaveMsg(){
-		this.ops=new ArrayList<String>();
-	}
-	private int type;//ÀëÏßÏûÏ¢ÀàĞÍ
-	private String content;//ÏûÏ¢ÄÚÈİ
-	private String from;//·¢ÆğºÃÓÑµÄid
-	private String time;//·¢ÆğÊ±¼ä
-	private ArrayList<String> ops;//µÇÂ¼³É¹¦ºó´ı²Ù×÷µÄĞòÁĞ
-	public int getType() {
-		return type;
-	}
-	public void setType(int type) {
-		this.type = type;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public String getFrom() {
-		return from;
-	}
-	public void setFrom(String from) {
-		this.from = from;
-	}
-	public String getTime() {
-		return time;
-	}
-	public void setTime(String time) {
-		this.time = time;
-	}
-	public ArrayList<String> getOps() {
-		return ops;
-	}
-	public void setOps(ArrayList<String> ops) {
-		this.ops = ops;
-	}
-	
-}
-//¸öÈËºÃÓÑ·Ö×éÀà
-public class FriendGroup{
-	
-	public FriendGroup() {
-		this.friends=new ArrayList<Friend>();
-	}
-	private String name;
-	ArrayList<Friend> friends;
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public ArrayList<Friend> getFriends() {
-		return friends;
-	}
-	public void setFriends(ArrayList<Friend> friends) {
-		this.friends = friends;
-	} 
-	
-}
-//ºÃÓÑÀà
-public class Friend{
-	private String id;//ºÃÓÑid
-	private String name;
-	private String remarkName;//ºÃÓÑ±ğÃû
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getRemarkName() {
-		return remarkName;
-	}
-	public void setRemarkName(String remarkName) {
-		this.remarkName = remarkName;
-	}
-	
-}
 
-//ÈºÀà
-public class ChartGroup{
-	
-	public ChartGroup(  ) {
-		this.members = new ArrayList<User>();
-		this.msgs = new ArrayList<ChartMsg>() ;
+import java.util.ArrayList;
+
+public class MongoDB {
+	// ç”¨æˆ·ç±»
+	public class User {
+		public User() {
+			this.chartMsgs = new ArrayList<ChartMsg>();
+			this.leaveMsgs = new ArrayList<LeaveMsg>();
+			this.firendGroups = new ArrayList<FriendGroup>();
+			this.chartGroups = new ArrayList<ChartGroup>();
+		}
+
+		private String id;
+		private String name;
+		private String sex;
+		private String psd;// ç”¨æˆ·å¯†ç 
+		private String img;// ç”¨æˆ·å›¾åƒ
+		private String reg_time;// ç”¨æˆ·æ³¨å†Œæ—¶é—´
+		private String sign;// ç”¨æˆ·ç­¾å
+		private String ip;// ç”¨æˆ·æœ€æ–°ç™»å½•ip
+		private ArrayList<ChartMsg> chartMsgs;// ç”¨æˆ·èŠå¤©è®°å½•
+		private ArrayList<LeaveMsg> leaveMsgs;// ç”¨æˆ·ç¦»çº¿æ¶ˆæ¯
+		private ArrayList<FriendGroup> firendGroups;// ç”¨æˆ·å¥½å‹åˆ†ç»„
+		private ArrayList<ChartGroup> chartGroups;// ç”¨æˆ·ç¾¤
+
+		public String getId() {
+			return id;
+		}
+
+		public void setId(String id) {
+			this.id = id;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getSex() {
+			return sex;
+		}
+
+		public void setSex(String sex) {
+			this.sex = sex;
+		}
+
+		public String getPsd() {
+			return psd;
+		}
+
+		public void setPsd(String psd) {
+			this.psd = psd;
+		}
+
+		public String getImg() {
+			return img;
+		}
+
+		public void setImg(String img) {
+			this.img = img;
+		}
+
+		public String getReg_time() {
+			return reg_time;
+		}
+
+		public void setReg_time(String reg_time) {
+			this.reg_time = reg_time;
+		}
+
+		public String getSign() {
+			return sign;
+		}
+
+		public void setSign(String sign) {
+			this.sign = sign;
+		}
+
+		public String getIp() {
+			return ip;
+		}
+
+		public void setIp(String ip) {
+			this.ip = ip;
+		}
+
+		public ArrayList<ChartMsg> getChartMsgs() {
+			return chartMsgs;
+		}
+
+		public void setChartMsgs(ArrayList<ChartMsg> chartMsgs) {
+			this.chartMsgs = chartMsgs;
+		}
+
+		public ArrayList<LeaveMsg> getLeaveMsgs() {
+			return leaveMsgs;
+		}
+
+		public void setLeaveMsgs(ArrayList<LeaveMsg> leaveMsgs) {
+			this.leaveMsgs = leaveMsgs;
+		}
+
+		public ArrayList<FriendGroup> getFirendGroups() {
+			return firendGroups;
+		}
+
+		public void setFirendGroups(ArrayList<FriendGroup> firendGroups) {
+			this.firendGroups = firendGroups;
+		}
+
+		public ArrayList<ChartGroup> getChartGroups() {
+			return chartGroups;
+		}
+
+		public void setChartGroups(ArrayList<ChartGroup> chartGroups) {
+			this.chartGroups = chartGroups;
+		}
+
 	}
-	private String id;//Èºid
-	private String admin;//¹ÜÀíÔ±
-	private String remarkName;//Èº±ğÃû
-	private ArrayList<User> members;
-	private ArrayList<ChartMsg> msgs;//ÏûÏ¢
-	public String getId() {
-		return id;
+
+	// ç§èŠç±»
+	public class ChartMsg {
+		private String time;
+		private String content;
+		private String from;// å‘èµ·å¥½å‹çš„id
+
+		public String getTime() {
+			return time;
+		}
+
+		public void setTime(String time) {
+			this.time = time;
+		}
+
+		public String getContent() {
+			return content;
+		}
+
+		public void setContent(String content) {
+			this.content = content;
+		}
+
+		public String getFrom() {
+			return from;
+		}
+
+		public void setFrom(String from) {
+			this.from = from;
+		}
+
 	}
-	public void setId(String id) {
-		this.id = id;
+
+	// ç¦»çº¿æ¶ˆæ¯ç±»
+	public class LeaveMsg {
+		public LeaveMsg() {
+			this.ops = new ArrayList<String>();
+		}
+
+		private int type;// ç¦»çº¿æ¶ˆæ¯ç±»å‹
+		private String content;// æ¶ˆæ¯å†…å®¹
+		private String from;// å‘èµ·å¥½å‹çš„id
+		private String time;// å‘èµ·æ—¶é—´
+		private ArrayList<String> ops;// ç™»å½•æˆåŠŸåå¾…æ“ä½œçš„åºåˆ—
+
+		public int getType() {
+			return type;
+		}
+
+		public void setType(int type) {
+			this.type = type;
+		}
+
+		public String getContent() {
+			return content;
+		}
+
+		public void setContent(String content) {
+			this.content = content;
+		}
+
+		public String getFrom() {
+			return from;
+		}
+
+		public void setFrom(String from) {
+			this.from = from;
+		}
+
+		public String getTime() {
+			return time;
+		}
+
+		public void setTime(String time) {
+			this.time = time;
+		}
+
+		public ArrayList<String> getOps() {
+			return ops;
+		}
+
+		public void setOps(ArrayList<String> ops) {
+			this.ops = ops;
+		}
+
 	}
-	public String getAdmin() {
-		return admin;
+
+	// ä¸ªäººå¥½å‹åˆ†ç»„ç±»
+	public class FriendGroup {
+
+		public FriendGroup() {
+			this.friends = new ArrayList<Friend>();
+		}
+
+		private String name;
+		ArrayList<Friend> friends;
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public ArrayList<Friend> getFriends() {
+			return friends;
+		}
+
+		public void setFriends(ArrayList<Friend> friends) {
+			this.friends = friends;
+		}
+
 	}
-	public void setAdmin(String admin) {
-		this.admin = admin;
+
+	// å¥½å‹ç±»
+	public class Friend {
+		private String id;// å¥½å‹id
+		private String name;
+		private String remarkName;// å¥½å‹åˆ«å
+
+		public String getId() {
+			return id;
+		}
+
+		public void setId(String id) {
+			this.id = id;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getRemarkName() {
+			return remarkName;
+		}
+
+		public void setRemarkName(String remarkName) {
+			this.remarkName = remarkName;
+		}
+
 	}
-	public String getRemarkName() {
-		return remarkName;
+
+	// ç¾¤ç±»
+	public class ChartGroup {
+
+		public ChartGroup() {
+			this.members = new ArrayList<User>();
+			this.msgs = new ArrayList<ChartMsg>();
+		}
+
+		private String id;// ç¾¤id
+		private String admin;// ç®¡ç†å‘˜
+		private String remarkName;// ç¾¤åˆ«å
+		private ArrayList<User> members;
+		private ArrayList<ChartMsg> msgs;// æ¶ˆæ¯
+
+		public String getId() {
+			return id;
+		}
+
+		public void setId(String id) {
+			this.id = id;
+		}
+
+		public String getAdmin() {
+			return admin;
+		}
+
+		public void setAdmin(String admin) {
+			this.admin = admin;
+		}
+
+		public String getRemarkName() {
+			return remarkName;
+		}
+
+		public void setRemarkName(String remarkName) {
+			this.remarkName = remarkName;
+		}
+
+		public ArrayList<User> getMembers() {
+			return members;
+		}
+
+		public void setMembers(ArrayList<User> members) {
+			this.members = members;
+		}
+
+		public ArrayList<ChartMsg> getMsgs() {
+			return msgs;
+		}
+
+		public void setMsgs(ArrayList<ChartMsg> msgs) {
+			this.msgs = msgs;
+		}
+
 	}
-	public void setRemarkName(String remarkName) {
-		this.remarkName = remarkName;
-	}
-	public ArrayList<User> getMembers() {
-		return members;
-	}
-	public void setMembers(ArrayList<User> members) {
-		this.members = members;
-	}
-	public ArrayList<ChartMsg> getMsgs() {
-		return msgs;
-	}
-	public void setMsgs(ArrayList<ChartMsg> msgs) {
-		this.msgs = msgs;
-	}
-	
-	
-}
 }

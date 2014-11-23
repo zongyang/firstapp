@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken;
 
 
 /*
- * JSONµÄĞòÁĞ»¯ºÏ·¹ĞòÁĞ»¯ 
+ * JSONçš„åºåˆ—åŒ–å’Œååºåˆ—åŒ–
  */
 public class JSON {
 	

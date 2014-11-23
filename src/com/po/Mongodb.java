@@ -25,9 +25,9 @@ public class Mongodb {
 
 	public static void main(String args[]) {
 		try {
-			// Á¬½Óµ½ mongodb ·şÎñ
+			// è¿æ¥åˆ° mongodb æœåŠ¡
 			MongoClient mongoClient = new MongoClient(_host, _port);
-			// Á¬½Óµ½Êı¾İ¿â
+			// è¿æ¥åˆ°æ•°æ®åº“
 			db = mongoClient.getDB(_dbName);
 			System.out.println("Connect to database successfully");
 			// boolean auth = db.authenticate(_user, _psw);
@@ -37,34 +37,36 @@ public class Mongodb {
 		}
 	}
 
-	// »ñÈ¡¼¯ºÏ£¨±í£©
+	// è·å–é›†åˆï¼ˆè¡¨ï¼‰
 	public static DBCollection getCollection(String collection) {
 		return db.getCollection(collection);
 	}
 
-	// ²åÈë
+	// æ’å…¥
 	public static void insert(String collection, String key, String val) {
 		BasicDBObject doc = new BasicDBObject(key, val);
 		getCollection(collection).insert(doc);
 	}
 
-	// „h³ı
+	// åˆªé™¤
 	public static void delete(String collection, String Key, String val) {
 
 	}
 
-	// ¸üĞÂ
+	// æ›´æ–°
 	public static void update(String collection, String Key, String val) {
 
 	}
-	// ²éÕÒ¶ÔÏó
+
+	// æŸ¥æ‰¾å¯¹è±¡
 	public DBObject findById(String collection, String _id) {
 		DBObject obj = new BasicDBObject();
 		obj.put("_id", ObjectId.massageToObjectId(_id));
 		return getCollection(collection).findOne(obj);
 	}
-     //²éÕÒ¼¯ºÏËùÓĞ¶ÔÏó
-     public List<DBObject> findAll(String collection) {
-          return getCollection(collection).find().toArray();
-     }
+
+	// æŸ¥æ‰¾é›†åˆæ‰€æœ‰å¯¹è±¡
+	public List<DBObject> findAll(String collection) {
+		return getCollection(collection).find().toArray();
+	}
 }

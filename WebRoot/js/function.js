@@ -1,4 +1,3 @@
-var LOGIN_ERRORS = [ '邮箱地址不对！', '密码不对！', '用户名或者密码错误', '昵称不对!' ];
 
 function getComIndex(doms, dom) {
 	return doms.index(dom);
@@ -18,31 +17,22 @@ function checkNull(str) {
 	}
 	return false;
 }
-function checkEmail(str) {
-	if (checkNull(str)) {
-		return true;
+function checkObjNull(obj){
+	for(var i in obj){
+		if(checkNull(obj[i])){
+			return true
+		}
 	}
-	str = str.trim();
-	var reg = new RegExp('^\w+@\w+\.\w+$');
-	return reg.test(str);
+	return false;
 }
-function checkPsw() {
-	if (checkNull(str)) {
-		return true;
+function inputCheck(el, regex, error, correct) {
+	var reg = new RegExp(regex);
+	var val = el.val();
+	if (reg.test(val)) {
+		el.removeClass('input-error');
+		el.siblings().removeClass('tip-error').text(correct);
+	} else {
+		el.addClass('input-error');
+		el.siblings().addClass('tip-error').text(error);
 	}
-	var len = str.length;
-	if (6 <= len <= 18) {
-		return false;
-	}
-	return true;
-}
-function checkNick() {
-	if (checkNull(str)) {
-		return true;
-	}
-	var len = str.length;
-	if (6 <= len <= 18) {
-		return false;
-	}
-	return true;
 }
