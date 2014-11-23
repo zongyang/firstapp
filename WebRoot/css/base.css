@@ -214,6 +214,7 @@ h5 {
 .color-gray, a.color-gray:link, a.color-gray:visited {
 	color: #b7bcc0;
 } /*Layout*/
+
 html {
 	overflow-y: scroll;
 }
@@ -249,6 +250,9 @@ html {
 }
 .bg-nick {
 	background: url(../img/rl-sprite.png) no-repeat -80px -726px;
+}
+.bg-main-color{
+	background: #2a2c2e;
 }
 .input-error{
 	border-color: #be3948;

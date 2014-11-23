@@ -1,15 +1,71 @@
+html, body {
+	height: 100%;
+}
 /*页眉*/
-.msg-header{
-	background: #2a2c2e;
-height: 60px;
+.msg-header {
+	min-height: 60px;
+	height: 10%;
 }
 /*主要部分*/
-.msg-main{
-	padding: 10px 0 ;
-min-height: 750px;
+.msg-main {
+	margin: 10px auto;
+	width: 1200px; height : 990px;
+	background: url(../img/msgbg.jpg) no-repeat;
+	height: 990px;
+}
+
+.msg-main-left {
+	width: 400px;
+	height: 95%;
+	min-height: 480px;
+	clear: both;
+}
+
+.msg-main-left-nav {
+	
+}
+
+.msg-main-left-nav li {
+	width: 80px;
+	height: 70px;
+	cursor: pointer;
+	background: url(../img/nl-msg.png) no-repeat;
+}
+
+.msg-main-left-nav li:nth-child(0) {
+	background-position: 0 0;
+}
+
+.msg-main-left-nav li:nth-child(1) {
+	background-position: 0 -62px;
+}
+
+.msg-main-left-nav li:nth-child(2) {
+	background-position: 0 0;
+}
+
+.msg-main-left-nav a.active {
+	background-color: #464A4D;
+	background-position: -80px -70px;
+}
+
+.msg-main-left-content {
+	
+}
+
+.msg-main-left-content-item li {
+	height: 40px;
+	border-bottom: 1px solid #A59D9A;
+	color: #1F2427;
+	padding: 15px;
+	overflow: hidden;
+	cursor: pointer;
 }
 /*页脚*/
-.msg-footer{
-	height: 30px;
-	background: #2a2c2e;
+.msg-footer {
+	min-height: 30px;
+	height: 5%;
+	width: 100%;
+	bottom: 0;
+	position: absolute;
 }
