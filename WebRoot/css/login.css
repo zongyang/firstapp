@@ -1,0 +1,109 @@
+.sg {
+	margin-top: 10%;
+	width: 458px;
+	background: #fff;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+	transition: all 0.2s;
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+}
+
+.sg-header {
+	padding: 9px 20px 0;
+}
+
+.sg-header h1 {
+	font-size: 16px;
+	line-height: 45px;
+	height: 45px;
+	color: #666;
+	border-bottom: 1px solid #e9eaea;
+}
+
+.sg-header span {
+	float: left;
+	height: 45px;
+	line-height: 45px;
+	padding: 0 20px;
+	cursor: pointer;
+}
+
+.sg-header span:hover {
+	border-bottom: 1px solid #cc3433;
+	color: #333;
+}
+.sg-header-span-click {
+	border-bottom: 1px solid #cc3433;
+	color: #333;
+}
+.sg-header button {
+	width: 17px;
+	height: 17px;
+	margin-top: 12px;
+	cursor: pointer;
+	background: url(../img/login/nlogin.png) no-repeat 0 0;
+	transition: transform 0.2s;
+	-webkit-transition: transform 0.2s;
+	-moz-transition: transform 0.2s;
+	-o-transition: transform 0.2s;
+}
+
+.sg-header button:hover {
+	background-position: 0 -20px;
+}
+.sg-body{
+	padding: 40px 70px;
+}
+.sg-body input[type=text] {
+	border: 1px solid #ccc;
+	width: 260px;
+	height: 24px;
+	line-height: 24px;
+	padding: 7px 7px 7px 48px;
+	font-size: 14px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+	transition: border-color 0.2s;
+	-webkit-transition: border-color 0.2s;
+	-moz-transition: border-color 0.2s;
+	-o-transition: border-color 0.2s;
+	transition: padding 0.15s;
+	-webkit-transition: padding 0.15s;
+	-moz-transition: padding 0.15s;
+	-o-transition: padding 0.15s;
+	border-color: #d0d6d9;
+}
+.sg-body input[type=text]:focus {
+	border-color: #7bd089;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px
+		#c6ebcc;
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c6ebcc;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c6ebcc;
+}
+
+.sg-body p {
+	height: 30px;
+}
+.sg-body button {
+	color: #fff;
+	font-size: 14px;
+	background-color: #39b94e;
+	height: 40px;
+	line-height: 40px;
+	width: 100%;
+	cursor: pointer;
+	text-align: center;
+	transition: background-color 0.2s;
+	-webkit-transition: background-color 0.2s;
+	-moz-transition: background-color 0.2s;
+	-o-transition: background-color 0.2s;
+}
+.sg-body button:hover {
+	background-color: #33a646;
+}
+/*µÇÂ¼*/
+.sg-body-l {
+}
+/*×¢²á*/
+.sg-body-r {}

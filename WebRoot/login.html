@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>登陆页</title>
+<link rel="stylesheet" type="text/css" href="css/base.css">
+<link rel="stylesheet" type="text/css" href="css/login.css">
+<script type="text/javascript" src='js/jquery-1.7.1.min.js'></script>
+<script type="text/javascript" src='js/function.js'></script>
+<script type="text/javascript" src='js/login_function.js'></script>
+</head>
+<body>
+	<div class='sg divCenter'>
+		<div class='sg-header'>
+			<h1>
+				<span class='sg-header-span-click'>登录</span> <span>注册</span>
+				<button class='r'></button>
+			</h1>
+		</div>
+		<div>
+			<div class='sg-body  sg-body-l'>
+				<div class='sg-l-email'>
+					<input class='bg-mail' type='text' placeholder='请输入登录邮箱' />
+					<p class='tip'>邮箱地址不对</p>
+				</div>
+				<div class='sg-l-pwd'>
+					<input class='bg-psw' type='text' placeholder='请输入密码' />
+					<p class='tip'>密码错误</p>
+				</div>
+				<div class='sg-body-l-forget clearfix'>
+					<label class='l inline' for="auto-signin"> <input
+						type="checkbox" checked="checked" id="auto-signin" />自动登录
+					</label> <a class='r inline' href="###" target="_blank">忘记密码？ </a>
+					<p></p>
+				</div>
+				<div class='sg-body-login clearfix'>
+					<p class='tip'>登录错误</p>
+					<button>登录</button>
+				</div>
+			</div>
+
+			<div class='sg-body sg-body-r hide'>
+				<div class='sg-r-email'>
+					<input class='bg-mail' type='text' placeholder='请输入登录邮箱' />
+					<p class='tip'>请输入有效的邮箱！</p>
+				</div>
+				<div class='sg-r-psw'>
+					<input class='bg-psw' type='text' placeholder='请输入密码' />
+					<p class='tip'>请输入6-16位密码，不能使用空格！</p>
+				</div>
+				<div class='sg-r-nick'>
+					<input class='bg-nick' type='text' placeholder='请输入用户昵称' />
+					<p class='tip'>请输入昵称，2-18位中英文、数字或下划线！</p>
+				</div>
+				<div class='sg-body-reg clearfix'>
+					<p class='tip'>注册失败！</p>
+					<button>注册</button>
+				</div>
+			</div>
+		</div>
+		<div class='sg-body-footer'></div>
+	</div>
+</body>
+</html>
