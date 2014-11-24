@@ -29,17 +29,18 @@ function btnClick(event) {
 		psw : inputs[1].value,
 		nick : inputs[2].value
 	};
-	if (errors.length > 0||checkObjNull(data)) {
+	if (errors.length > 0 || checkObjNull(data)) {
 		self.siblings().addClass('tip-error').text(LOGIN_TIPS[6]);
 		return;
 	}
+
+	data.method = 'login';
 	$.ajax({
-		url : '',
+		url : 'serverhandle.jsp',
 		data : data,
-		dataType : 'json',
 		success : function(obj) {
-			// success
-			// failure
+			obj = JSON.parse(obj);
+			debugger;
 		}
 	});
 }

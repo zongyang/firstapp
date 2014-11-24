@@ -19,8 +19,6 @@
 			<attribute name="owner.project.facets" value="jst.web.jstl"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Documents/Downloads/mongo-2.10.1.jar"/>
-	<classpathentry kind="lib" path="D:/Documents/Downloads/json-lib-2.4-jdk15.jar"/>
 	<classpathentry kind="lib" path="D:/Documents/Downloads/gson-2.3.1.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
