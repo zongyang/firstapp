@@ -1,7 +1,7 @@
 package Model;
 
-import CommFuns.JSON;
-
+import Controller.JSON;
+//提示信息模型类
 public class TipModel {
 	private Boolean success;
 	private String msg;

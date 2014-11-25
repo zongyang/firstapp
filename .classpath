@@ -20,5 +20,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="D:/Documents/Downloads/gson-2.3.1.jar"/>
+	<classpathentry kind="lib" path="D:/tomcat/me-webapps/firstapp/WEB-INF/lib/tomcat-juli-8.0.15.jar"/>
+	<classpathentry kind="lib" path="D:/tomcat/lib/catalina.jar"/>
+	<classpathentry kind="lib" path="D:/tomcat/lib/websocket-api.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

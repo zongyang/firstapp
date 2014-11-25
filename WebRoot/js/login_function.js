@@ -36,11 +36,10 @@ function btnClick(event) {
 
 	data.method = 'login';
 	$.ajax({
-		url : 'serverhandle.jsp',
+		url : 'action',
 		data : data,
 		success : function(obj) {
 			obj = JSON.parse(obj);
-			debugger;
 		}
 	});
 }
