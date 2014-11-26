@@ -3,7 +3,7 @@ package Model;
 public class UserModel {
 	private String id;
 	private String email;
-	private String pwd;
+	private String psw;
 	private String nickName;
 	private String online;
 	private String ip;
@@ -11,7 +11,7 @@ public class UserModel {
 	
 	public UserModel() {
 		this.email = "";
-		this.pwd = "";
+		this.psw = "";
 		this.nickName = "";
 		this.online = "";
 		this.ip = "";
@@ -29,10 +29,10 @@ public class UserModel {
 		this.email = email;
 	}
 	public String getPwd() {
-		return pwd;
+		return psw;
 	}
 	public void setPwd(String pwd) {
-		this.pwd = pwd;
+		this.psw = pwd;
 	}
 	public String getNickName() {
 		return nickName;
@@ -51,5 +51,11 @@ public class UserModel {
 	}
 	public void setIp(String ip) {
 		this.ip = ip;
+	}
+	public String getPsw() {
+		return psw;
+	}
+	public void setPsw(String psw) {
+		this.psw = psw;
 	}
 }

@@ -15,7 +15,6 @@ public class GetMethod {
 		Enumeration<String> enu = request.getParameterNames();
 		Hashtable<String, String> paraHash = new Hashtable<String, String>();
 		
-		
 		while (enu.hasMoreElements()) {
 			String paraName = (String) enu.nextElement();
 			String paraValue = request.getParameter(paraName);

@@ -1,3 +1,6 @@
+var LOGIN_TIPS = [ '邮箱地址不对！', '输入有效的邮箱！', '密码不对！', '输入6-16位密码,不能使用空格!',
+		'昵称不对!', '输入昵称，2-18位中英文、数字或下划线！', '请仔细检查输入项!' ];
+
 $(function() {
 	// header
 	$('.sg-header span').click(headerClick);
@@ -9,8 +12,7 @@ $(function() {
 	$('.sg-body-r button').click(regClick);
 	// footer
 });
-var LOGIN_TIPS = [ '邮箱地址不对！', '输入有效的邮箱！', '密码不对！', '输入6-16位密码,不能使用空格!',
-		'昵称不对!', '输入昵称，2-18位中英文、数字或下划线！', '请仔细检查输入项!' ];
+
 function headerClick(event) {
 	var self = $(this);
 	self.addClass('sg-header-span-click');
@@ -20,7 +22,7 @@ function headerClick(event) {
 	var sg_body = $('.sg-body:nth(' + body_index + ')').removeClass('hide');
 	sg_body.siblings().addClass('hide');
 }
-
+//登录动作
 function loginClick(event) {
 	var self = $(event.target);
 	var inputs = self.parent().parent().find('input');
@@ -49,7 +51,7 @@ function loginClick(event) {
 		}
 	});
 }
-
+//注册动作
 function regClick(event) {
 	var self = $(event.target);
 	var inputs = self.parent().parent().find('input');

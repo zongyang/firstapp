@@ -28,7 +28,7 @@ public class UserAction {
 
 		String sql_check = " select id from user where email='"
 				+ model.getEmail() + "' ";
-		String sql_insert = " insert into user (`email`,`pwd`,`nickName`,`online`,`ip`) values ('"
+		String sql_insert = " insert into user (`email`,`psw`,`nickName`,`online`,`ip`) values ('"
 				+ model.getEmail()
 				+ "','"
 				+ model.getPwd()
@@ -43,7 +43,7 @@ public class UserAction {
 		if (rs.next()) {
 			return CommFuns.getTip(false, "该邮箱已注册！", "");
 		}
-		rs = DBHelper.executeQuery(sql_insert);
+		DBHelper.executeNonQuery(sql_insert);
 		return CommFuns.getTip(true, "注册成功！", "");
 
 	}
