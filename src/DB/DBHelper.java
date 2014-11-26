@@ -15,7 +15,7 @@ public final class DBHelper {
 
 		try {
 			String driver = "com.mysql.jdbc.Driver"; // 数据库驱动
-			String url = "jdbc:MySQL://127.0.0.1:3306/chart"; // 数据库
+			String url = "jdbc:MySQL://127.0.0.1:3306/chat"; // 数据库
 			String user = "root"; // 用户名
 			String password = ""; // 密码
 			Class.forName(driver); // 加载数据库驱动

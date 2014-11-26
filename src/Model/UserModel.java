@@ -8,6 +8,14 @@ public class UserModel {
 	private String online;
 	private String ip;
 	
+	
+	public UserModel() {
+		this.email = "";
+		this.pwd = "";
+		this.nickName = "";
+		this.online = "";
+		this.ip = "";
+	}
 	public String getId() {
 		return id;
 	}

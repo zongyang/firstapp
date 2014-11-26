@@ -6,7 +6,7 @@ import java.util.Hashtable;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Controller.LoginAction;
+import Controller.UserAction;
 
 //入口函数处理类:通过url的参数找到对用的处理方法
 public class GetMethod {
@@ -27,9 +27,12 @@ public class GetMethod {
 		}
 
 		if (paraHash.get("method").endsWith("login")) {
-			return LoginAction.login(paraHash.get("email"), paraHash.get("psw"));
+			return UserAction.login(paraHash.get("email"), paraHash.get("psw"));
 		}
 
+		if (paraHash.get("method").endsWith("register")) {
+			return UserAction.register(paraHash.get("user"));
+		}
 		return "";
 	   
 	}

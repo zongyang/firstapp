@@ -1,6 +1,7 @@
 package Model;
 
-import Controller.JSON;
+import com.google.gson.Gson;
+
 //提示信息模型类
 public class TipModel {
 	private Boolean success;
@@ -15,7 +16,8 @@ public class TipModel {
 	}
 
 	public String ToJSON() {
-		return JSON.ObjToJSON(this);
+		Gson gson=new Gson();
+		return gson.toJson(this);
 	}
 
 	public Boolean getSuccess() {

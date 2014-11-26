@@ -5,7 +5,8 @@ $(function() {
 	$('.bg-mail').on('input', emailCheck);
 	$('.bg-psw').on('input', pswCheck);
 	$('.bg-nick').on('input', nickCheck);
-	$('.sg-body button').click(btnClick);
+	$('.sg-body-l button').click(loginClick);
+	$('.sg-body-r button').click(regClick);
 	// footer
 });
 var LOGIN_TIPS = [ '邮箱地址不对！', '输入有效的邮箱！', '密码不对！', '输入6-16位密码,不能使用空格!',
@@ -20,16 +21,15 @@ function headerClick(event) {
 	sg_body.siblings().addClass('hide');
 }
 
-function btnClick(event) {
+function loginClick(event) {
 	var self = $(event.target);
 	var inputs = self.parent().parent().find('input');
 	var errors = inputs.hasClass('input-error');
 	var data = {
 		email : inputs[0].value,
-		psw : inputs[1].value,
-		nick : inputs[2].value
+		psw : inputs[1].value
 	};
-	if (errors.length > 0 || checkObjNull(data)) {
+	if (errors > 0 || checkObjNull(data)) {
 		self.siblings().addClass('tip-error').text(LOGIN_TIPS[6]);
 		return;
 	}
@@ -40,12 +40,46 @@ function btnClick(event) {
 		data : data,
 		success : function(obj) {
 			obj = JSON.parse(obj);
+			if (obj.success) {
+				$('.login-tip').removeClass('tip-error').text(obj.msg);
+				location.href = 'chat.html';
+			} else {
+				$('.login-tip').addClass('tip-error').text(obj.msg);
+			}
 		}
 	});
 }
 
-function regClick() {
+function regClick(event) {
+	var self = $(event.target);
+	var inputs = self.parent().parent().find('input');
+	var errors = inputs.hasClass('input-error');
+	var data= {
+		email : inputs[0].value,
+		psw : inputs[1].value,
+		nickName : inputs[2].value
+	};
+	if (errors > 0 || checkObjNull(data)) {
+		self.siblings().addClass('tip-error').text(LOGIN_TIPS[6]);
+		return;
+	}
 
+	$.ajax({
+		url : 'action',
+		data : {
+			user : JSON.stringify(data),
+			method:'register'
+		},
+		success : function(obj) {
+			obj = JSON.parse(obj);
+			if (obj.success) {
+				$('.reg-tip').removeClass('tip-error').text(obj.msg);
+				location.href = 'chat.html';
+			} else {
+				$('.reg-tip').addClass('tip-error').text(obj.msg);
+			}
+		}
+	});
 }
 function emailCheck(event) {
 	var self = $(event.target);

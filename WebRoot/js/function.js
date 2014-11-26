@@ -1,4 +1,3 @@
-
 function getComIndex(doms, dom) {
 	return doms.index(dom);
 }
@@ -12,14 +11,14 @@ function checkNull(str) {
 	if (str == '') {
 		return true;
 	}
-	if (str.trim() == '') {
+	if (str.trim && str.trim() == '') {
 		return true;
 	}
 	return false;
 }
-function checkObjNull(obj){
-	for(var i in obj){
-		if(checkNull(obj[i])){
+function checkObjNull(obj) {
+	for ( var i in obj) {
+		if (checkNull(obj[i])) {
 			return true
 		}
 	}

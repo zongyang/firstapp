@@ -63,6 +63,7 @@ public class Handle extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String json="";
+		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
@@ -73,7 +74,10 @@ public class Handle extends HttpServlet {
 			
 			e.printStackTrace();
 		}
-		json=CommFuns.filter(json);
+		//json=CommFuns.filter(json);
+		if(json.isEmpty()){
+			json=CommFuns.getTip(false, "非法！", "");
+		}
 		out.print(json);
 		out.flush();
 		out.close();
