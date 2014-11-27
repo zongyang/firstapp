@@ -65,6 +65,7 @@ public class Handle extends HttpServlet {
 		String json="";
 		
 		response.setContentType("text/html;charset=UTF-8");
+		//response.setCharacterEncoding("UTF-8");
 		//request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		
@@ -81,7 +82,7 @@ public class Handle extends HttpServlet {
 		}
 		out.print(json);
 		out.flush();
-		out.close();
+		out.close(); 
 	}
 
 	/**

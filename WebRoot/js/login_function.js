@@ -1,7 +1,12 @@
 var LOGIN_TIPS = [ '邮箱地址不对！', '输入有效的邮箱！', '密码不对！', '输入6-16位密码,不能使用空格!',
-		'昵称不对!', '输入昵称，2-18位中英文、数字或下划线！', '请仔细检查输入项!' ];
+		'昵称不对!', '输入昵称，2-18位中英文、数字或下划线！', '请仔细检查输入项!', '登录成功！', '注册成功！' ];
 
 $(function() {
+	//检测是否已登录过
+	if (!g_user.check()) {
+		//location.href = 'chat.html';
+	}
+
 	// header
 	$('.sg-header span').click(headerClick);
 	// body
@@ -22,7 +27,7 @@ function headerClick(event) {
 	var sg_body = $('.sg-body:nth(' + body_index + ')').removeClass('hide');
 	sg_body.siblings().addClass('hide');
 }
-//登录动作
+// 登录动作
 function loginClick(event) {
 	var self = $(event.target);
 	var inputs = self.parent().parent().find('input');
@@ -42,8 +47,15 @@ function loginClick(event) {
 		data : data,
 		success : function(obj) {
 			obj = JSON.parse(obj);
+			// 登录成功
 			if (obj.success) {
-				$('.login-tip').removeClass('tip-error').text(obj.msg);
+				// 本地存储
+				g_user.setEmail(data.email);
+				g_user.setNickName(obj.msg.split(',')[0]);
+				g_user.setId(obj.msg.split(',')[1]);
+				// 样式修改
+				$('.login-tip').removeClass('tip-error').text(LOGIN_TIPS[7]);
+				// 跳转
 				location.href = 'chat.html';
 			} else {
 				$('.login-tip').addClass('tip-error').text(obj.msg);
@@ -51,12 +63,12 @@ function loginClick(event) {
 		}
 	});
 }
-//注册动作
+// 注册动作
 function regClick(event) {
 	var self = $(event.target);
 	var inputs = self.parent().parent().find('input');
 	var errors = inputs.hasClass('input-error');
-	var data= {
+	var data = {
 		email : inputs[0].value,
 		psw : inputs[1].value,
 		nickName : inputs[2].value
@@ -70,12 +82,19 @@ function regClick(event) {
 		url : 'action',
 		data : {
 			user : JSON.stringify(data),
-			method:'register'
+			method : 'register'
 		},
 		success : function(obj) {
 			obj = JSON.parse(obj);
+			// 注册成功
 			if (obj.success) {
-				$('.reg-tip').removeClass('tip-error').text(obj.msg);
+				// 本地存储
+				g_user.setEmail(data.email);
+				g_user.setNickName(data.nickName);
+				g_user.setId(obj.msg);
+				// 样式修改
+				$('.reg-tip').removeClass('tip-error').text(LOGIN_TIPS[8]);
+				// 跳转
 				location.href = 'chat.html';
 			} else {
 				$('.reg-tip').addClass('tip-error').text(obj.msg);

@@ -38,11 +38,12 @@
 }
 
 .msg-main-l-recent {
-	background: url(../img/nl-msg.png) no-repeat 0 0;
+	background: url(../img/nl-msg.png) no-repeat 0 -62px;
+	
 }
 
 .msg-main-l-friend {
-	background: url(../img/nl-msg.png) no-repeat 0 -62px;
+	background: url(../img/nl-msg.png) no-repeat 0 0;
 }
 
 .msg-main-l-group {

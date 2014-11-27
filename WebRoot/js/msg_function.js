@@ -11,3 +11,6 @@ function liClick(){
 	self.addClass('active');
 	self.siblings().removeClass('active');
 }
+function getFriendList(){
+	
+}

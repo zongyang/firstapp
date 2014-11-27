@@ -8,7 +8,6 @@ public class UserModel {
 	private String online;
 	private String ip;
 	
-	
 	public UserModel() {
 		this.email = "";
 		this.psw = "";

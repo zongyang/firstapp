@@ -14,7 +14,8 @@ public class GetMethod {
 	public static String getRequestMehthod (HttpServletRequest request, HttpServletResponse response) throws Exception{
 		Enumeration<String> enu = request.getParameterNames();
 		Hashtable<String, String> paraHash = new Hashtable<String, String>();
-		
+		String ip=request.getRemoteAddr();
+				
 		while (enu.hasMoreElements()) {
 			String paraName = (String) enu.nextElement();
 			String paraValue = request.getParameter(paraName);
@@ -26,11 +27,11 @@ public class GetMethod {
 		}
 
 		if (paraHash.get("method").endsWith("login")) {
-			return UserAction.login(paraHash.get("email"), paraHash.get("psw"));
+			return UserAction.login(paraHash.get("email"), paraHash.get("psw"),ip);
 		}
 
 		if (paraHash.get("method").endsWith("register")) {
-			return UserAction.register(paraHash.get("user"));
+			return UserAction.register(paraHash.get("user"),ip);
 		}
 		return "";
 	   

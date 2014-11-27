@@ -1,3 +1,6 @@
+
+var g_user=new UserInfo();
+
 //获得元素在数组中的序号
 function getComIndex(doms, dom) {
 	return doms.index(dom);
@@ -18,6 +21,19 @@ function checkNull(str) {
 	}
 	return false;
 }
+function checkObjNull(obj) {
+	if (checkNull(obj)) {
+		return true;
+	}
+
+	for ( var i in obj) {
+		if (checkNull(obj[i])) {
+			return true;
+		}
+	}
+	return false;
+
+}
 // 输入框的检测及样式的修改
 function inputCheck(el, regex, error, correct) {
 	var reg = new RegExp(regex);
@@ -33,10 +49,10 @@ function inputCheck(el, regex, error, correct) {
 
 // 用户信息存储
 function UserInfo(id, email, nickName) {
-	this.id = (checkNull(this.id)) ? sessionStorage.getItem('id') : id;
-	this.email = (checkNull(this.email)) ? sessionStorage.getItem('email')
+	this.id = (checkNull(this.id)) ? localStorage.getItem('id') : id;
+	this.email = (checkNull(this.email)) ? localStorage.getItem('email')
 			: email;
-	this.nickName = (checkNull(this.nickName)) ? sessionStorage
+	this.nickName = (checkNull(this.nickName)) ? localStorage
 			.getItem('nickName') : nickName;
 }
 UserInfo.prototype.check = function() {
@@ -45,17 +61,17 @@ UserInfo.prototype.check = function() {
 	}
 	return false;
 }
-UserInfo.prototype.setId(val){
-	this.id=val;
-	sessionStorage.setItem('id',val);
+UserInfo.prototype.setId = function(val) {
+	this.id = val;
+	localStorage.setItem('id', val);
 }
-UserInfo.prototype.setEmail(val){
-	this.email=val;
-	sessionStorage.setItem('email',val);
+UserInfo.prototype.setEmail = function(val) {
+	this.email = val;
+	localStorage.setItem('email', val);
 }
-UserInfo.prototype.setNickName(val){
-	this.nickName=val;
-	sessionStorage.setItem('nickName',val);
+UserInfo.prototype.setNickName = function(val) {
+	this.nickName = val;
+	localStorage.setItem('nickName', val);
 }
 UserInfo.prototype.loginOut = function() {// 注销操作
 	if (this.check()) {
@@ -65,7 +81,13 @@ UserInfo.prototype.loginOut = function() {// 注销操作
 		id : this.id,
 		email : this.email
 	};
-
+	
+	localStorage.clear();
+	this.setIfd();
+	this.setEmail();
+	this.setNickName();
+	return ;
+	
 	$.ajax({
 		url : 'action',
 		data : {
@@ -75,7 +97,7 @@ UserInfo.prototype.loginOut = function() {// 注销操作
 		success : function(obj) {
 			obj = JSON.parse(obj);
 			if (obj.success) {
-				sessionStorage.clear();
+				localStorage.clear();
 				alert(obj.msg);
 				location.href = 'login.html';
 			}
