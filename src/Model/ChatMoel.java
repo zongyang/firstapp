@@ -5,20 +5,29 @@ public class ChatMoel {
 	private String id;
 	private String from;
 	private String to;
-
+	private String content;
+	private String recept;
+	private String time;
+	private String actions;
+	
 	public ChatMoel() {
 		this.id = "";
 		this.from = "";
 		this.to = "";
 		this.recept = "";
 		this.time = "";
+		this.content="";
 		this.actions = "";
 	}
 
-	private String recept;
-	private String time;
-	private String actions;
+	
+	public String getContent() {
+		return content;
+	}
 
+	public void setContent(String content) {
+		this.content = content;
+	}
 	public String getId() {
 		return id;
 	}

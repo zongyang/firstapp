@@ -52,6 +52,8 @@
 
 .msg-main-m {
 	width: 320px;
+	height: 100%;
+	overflow-y: auto;
 }
 
 .msg-main-m li {
@@ -100,10 +102,13 @@
 .msg-main-r {
 	position: relative;
 	width: 800px;
+	height:100%;
 }
 
 .msg-main-r ul {
 	padding: 10px 20px;
+	height:80%;
+	overflow-y: auto;
 }
 
 .msg-main-r li {

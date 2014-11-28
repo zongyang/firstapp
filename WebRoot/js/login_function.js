@@ -51,8 +51,8 @@ function loginClick(event) {
 			if (obj.success) {
 				// 本地存储
 				g_user.setEmail(data.email);
-				g_user.setNickName(obj.msg.split(',')[0]);
-				g_user.setId(obj.msg.split(',')[1]);
+				g_user.setId(obj.msg.split(',')[0]);
+				g_user.setNickName(obj.msg.split(',')[1]);
 				// 样式修改
 				$('.login-tip').removeClass('tip-error').text(LOGIN_TIPS[7]);
 				// 跳转
