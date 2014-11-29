@@ -37,17 +37,17 @@
 	background-position-x: -80px;
 }
 
-.msg-main-l-recent {
-	background: url(../img/nl-msg.png) no-repeat 0 -62px;
-	
-}
 
 .msg-main-l-friend {
 	background: url(../img/nl-msg.png) no-repeat 0 0;
 }
+.msg-main-l-recent {
+	background: url(../img/nl-msg.png) no-repeat 0 -68px;
+	
+}
 
-.msg-main-l-group {
-	background: url(../img/nl-msg.png) no-repeat 0 0;
+.msg-main-l-left {
+	background: url(../img/nl-msg.png) no-repeat 0 -68px;
 }
 
 .msg-main-m {

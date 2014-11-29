@@ -1,7 +1,8 @@
 $(function() {
 	// left
 	$('.msg-main-l li').click(liClick);
-	$('.msg-main-l-friend').click(getFriendList);
+	$('.msg-main-l-recent').click(getChatByUser);
+	$('.msg-main-l-friend').click(getFriendByUser);
 	// middle
 	$('.msg-main-m li').click(liClick);
 	// right
@@ -14,12 +15,12 @@ function liClick() {
 	self.siblings().removeClass('active');
 }
 // 获得好友列表
-function getFriendList(event) {
+function getFriendByUser(event) {
 	$.ajax({
 		url : 'action',
 		data : {
 			id : g_user.id,
-			method : 'getFriendBy'
+			method : 'getFriendByUser'
 		},
 		success : function(data) {
 			var obj = JSON.parse(data);
@@ -56,7 +57,25 @@ function getChatByFriend(event) {
 	});
 }
 //根据用户id获得聊天记录
-function getChatByUser(){}
+function getChatByUser(){
+	$.ajax({
+		url : 'action',
+		data : {
+			id : g_user.id,
+			method : 'getChatByUser'
+		},
+		success : function(data) {
+			var obj = JSON.parse(data);
+
+			if (!obj.success) {
+				alert(obj.msg);
+				return;
+			}
+
+			createMidChat(JSON.parse(obj.msg));
+		}
+	});
+}
 //创建主聊天的快
 function createMainChat(arr) {
 	var lis = '';
@@ -111,7 +130,7 @@ function createMidChat(arr){
 		lis += '<li>';
 		lis += '<img class="msg-user-img l" src="img/meinv.jpg" />';
 		lis += '<div class="l">';
-		lis += '<h5 user="' + arr[i].id + '">' + arr[i].content + '</h5>';
+		lis += '<h5 user="' + arr[i].friend + '">' + arr[i].friendName + '</h5>';
 		lis += '<p>'+arr[i].content+'</p>';
 		lis += '</div>';
 		lis += '</li>';

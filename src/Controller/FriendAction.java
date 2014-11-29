@@ -54,7 +54,7 @@ public class FriendAction {
 		return CommFuns.getTip(true, "修改成功!", "");
 	}
 	
-	public static String getFriendBy(String id) throws SQLException{
+	public static String getFriendByUser(String id) throws SQLException{
 		String sql="select * from friend where `from`='"+id+"' or `to`='"+id+"'";
 		ResultSet rs = DBHelper.executeQuery(sql);
 		String json="[";

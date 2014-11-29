@@ -42,8 +42,8 @@ public class GetMethod {
 		/**
 		 * 好友和消息
 		 **/
-		if (paraHash.get("method").endsWith("getFriendBy")) {
-			return FriendAction.getFriendBy(paraHash.get("id"));
+		if (paraHash.get("method").endsWith("getFriendByUser")) {
+			return FriendAction.getFriendByUser(paraHash.get("id"));
 		}
 		if (paraHash.get("method").endsWith("getChatByFriend")) {
 			return ChatAction.getChatByFriend(paraHash.get("user"),paraHash.get("friend"));

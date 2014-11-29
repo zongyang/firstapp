@@ -9,7 +9,10 @@ public class ChatMoel {
 	private String recept;
 	private String time;
 	private String actions;
-	
+	private String friend;
+	private String friendName;
+
+
 	public ChatMoel() {
 		this.id = "";
 		this.from = "";
@@ -18,9 +21,21 @@ public class ChatMoel {
 		this.time = "";
 		this.content="";
 		this.actions = "";
+		this.friend="";
+		this.friendName="";
 	}
 
 	
+	public String getFriendName() {
+		return friendName;
+	}
+
+
+	public void setFriendName(String friendName) {
+		this.friendName = friendName;
+	}
+
+
 	public String getContent() {
 		return content;
 	}
@@ -74,5 +89,13 @@ public class ChatMoel {
 
 	public void setActions(String actions) {
 		this.actions = actions;
+	}
+	public String getFriend() {
+		return friend;
+	}
+
+
+	public void setFriend(String friend) {
+		this.friend = friend;
 	}
 }

@@ -36,7 +36,7 @@ public class ChatAction {
 	}
 
 	public static String getChatByUser(String user) throws SQLException {
-		String sql = "select * from chat where `from`='" + user + "' or `to`='"
+		String sql = "select * from chat_view where `from`='" + user + "' or `to`='"
 				+ user + "' order by time desc";
 
 		Gson gson = new Gson();
@@ -44,38 +44,44 @@ public class ChatAction {
 		HashMap<String, ChatMoel> hm = new HashMap<String, ChatMoel>();
 		LinkedList<ChatMoel> models = new LinkedList<ChatMoel>();
 		ResultSet rs = DBHelper.executeQuery(sql);
-		
-		//存储每个好友的最近记录
+
+		// 存储每个好友的最近记录
 		while (rs.next()) {
 			ChatMoel model = new ChatMoel();
-			//主动发起的
-			if (rs.getString("from").equals(user)&&!hm.containsKey(rs.getString("to"))) {
+			// 主动发起的(key是friend)
+			if (rs.getString("from").equals(user)
+					&& !hm.containsKey(rs.getString("to"))) {
 				model.setFrom(rs.getString("from"));
 				model.setTo(rs.getString("to"));
 				model.setContent(rs.getString("content"));
 				model.setRecept(rs.getString("recept"));
 				model.setTime(rs.getString("time"));
 				model.setActions(rs.getString("actions"));
+				model.setFriend(rs.getString("to"));
+				model.setFriendName(rs.getString("toName"));
 				hm.put(rs.getString("to"), model);
-				
+
 			}
-			//好友发起的
-			if(rs.getString("to").equals(user)&&!hm.containsKey(rs.getString("from"))){
+			// 好友发起的(key是friend)
+			if (rs.getString("to").equals(user)
+					&& !hm.containsKey(rs.getString("from"))) {
 				model.setTo(rs.getString("to"));
 				model.setContent(rs.getString("content"));
 				model.setRecept(rs.getString("recept"));
 				model.setTime(rs.getString("time"));
 				model.setActions(rs.getString("actions"));
+				model.setFriend(rs.getString("from"));
+				model.setFriendName(rs.getString("fromName"));
 				hm.put(rs.getString("from"), model);
+				
 			}
-			
-			//字典存储到队列
-			String key;
-			Iterator<String> iter = hm.keySet().iterator();
-			while (iter.hasNext()) {
-			    key = iter.next();
-			    models.push(hm.get(key));
-			}
+		}
+		// 字典存储到队列
+		String key;
+		Iterator<String> iter = hm.keySet().iterator();
+		while (iter.hasNext()) {
+			key = iter.next();
+			models.push(hm.get(key));
 		}
 
 		return CommFuns.getTip(true, gson.toJson(models), "");
