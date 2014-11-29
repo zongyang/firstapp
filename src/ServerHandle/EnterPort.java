@@ -1,26 +1,33 @@
 package ServerHandle;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import Controller.ChatAction;
+import Controller.CommFuns;
 import Controller.FriendAction;
 import Controller.UserAction;
+import DB.DBHelper;
+import Model.UserModel;
 
 //入口函数处理类:通过url的参数找到对用的处理方法
-public class GetMethod {
+public class EnterPort {
 
 	public static String getRequestMehthod(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		
+
 		Enumeration<String> enu = request.getParameterNames();
 		Hashtable<String, String> paraHash = new Hashtable<String, String>();
 		String ip = request.getRemoteAddr();
-		UserAction.session=request.getSession();
-		
+		UserAction.session = request.getSession();
+
 		while (enu.hasMoreElements()) {
 			String paraName = (String) enu.nextElement();
 			String paraValue = request.getParameter(paraName);
@@ -34,8 +41,7 @@ public class GetMethod {
 		 * 注册和登录
 		 **/
 		if (paraHash.get("method").endsWith("login")) {
-			return UserAction.login(paraHash.get("email"), paraHash.get("psw"),
-					ip);
+			return UserAction.login(paraHash.get("email"), paraHash.get("psw"), ip);
 		}
 
 		if (paraHash.get("method").endsWith("register")) {
@@ -48,7 +54,8 @@ public class GetMethod {
 			return FriendAction.getFriendByUser(paraHash.get("id"));
 		}
 		if (paraHash.get("method").endsWith("getChatByFriend")) {
-			return ChatAction.getChatByFriend(paraHash.get("user"),paraHash.get("friend"));
+			return ChatAction.getChatByFriend(paraHash.get("user"),
+					paraHash.get("friend"));
 		}
 		if (paraHash.get("method").endsWith("getChatByUser")) {
 			return ChatAction.getChatByUser(paraHash.get("id"));

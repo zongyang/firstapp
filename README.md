@@ -26,4 +26,8 @@ response.setContentType("text/html;charset=UTF-8");
 把mysql-connector-java-5.1.7-bin.jar拷贝到tomcat下lib目录就可以了。
 
 四：
-把参考包放到相应的lib下
+把参考包放到相应的lib下:
+gson-2.3.1.jar
+tomcat-juli-8.0.15.jar
+tomcat-jdbc.jar
+servlet-api.jar??

@@ -44,7 +44,7 @@ public class ChatWsAction {
     private Session session;
     
     public ChatWsAction() {
-    	this.user=UserAction.getSession("user");
+    	this.user=UserAction.getSession("email");
     }
 
 

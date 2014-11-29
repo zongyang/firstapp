@@ -5,16 +5,15 @@ function startWebSocket() {
 	ws = new WebSocket(url);
 	
 	ws.onmessage = function(evt) {
-		debugger;
 		alert(evt.data);
 	};
 
 	ws.onclose = function(evt) {
-		alert("close");
+		//alert("close");
 	};
 
 	ws.onopen = function(evt) {
-		alert("open");
+		//alert("open");
 	};
 }
 

@@ -2,8 +2,6 @@ package Controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.servlet.http.HttpSession;
@@ -11,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import DB.DBHelper;
-import Model.ChatMoel;
 import Model.UserModel;
 
 //登录注册类
@@ -77,7 +74,7 @@ public class UserAction {
 	}
 
 	public static LinkedList<String> getFirends() throws SQLException {
-		String user = getSession("user");
+		String user = getSession("email");
 		String sql = "select fromName,toName from friend_view where fromName='"
 				+ user + "' or toName='" + user + "' ";
 		LinkedList<String> friends = new LinkedList<String>();

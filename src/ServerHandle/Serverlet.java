@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import Controller.CommFuns;
 
 //serverlet 
-public class Handle extends HttpServlet {
+public class Serverlet extends HttpServlet {
 
+	
+	
 	/**
 	 * 
 	 */
@@ -21,7 +23,7 @@ public class Handle extends HttpServlet {
 	/**
 	 * Constructor of the object.
 	 */
-	public Handle() {
+	public Serverlet() {
 		super();
 	}
 
@@ -71,7 +73,7 @@ public class Handle extends HttpServlet {
 		
 		
 		try {
-			json=GetMethod.getRequestMehthod(request, response);
+			json=EnterPort.getRequestMehthod(request, response);
 		} catch (Exception e) {
 			
 			e.printStackTrace();
