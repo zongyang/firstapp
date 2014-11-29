@@ -1,21 +1,17 @@
 package ServerHandle;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.Enumeration;
 import java.util.Hashtable;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 import Controller.ChatAction;
-import Controller.CommFuns;
+
 import Controller.FriendAction;
 import Controller.UserAction;
-import DB.DBHelper;
-import Model.UserModel;
+
 
 //入口函数处理类:通过url的参数找到对用的处理方法
 public class EnterPort {
@@ -65,3 +61,4 @@ public class EnterPort {
 	}
 
 }
+

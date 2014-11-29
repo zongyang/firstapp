@@ -27,6 +27,7 @@ import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
 import org.apache.juli.logging.Log;
@@ -34,37 +35,46 @@ import org.apache.juli.logging.LogFactory;
 
 //消息聊类：使用websocket实现消息的聊天消息的推送
 
-@ServerEndpoint(value = "/chat")
+@ServerEndpoint(value = "/chat/{email}")
 public class ChatWsAction {
 
     private static final Log log = LogFactory.getLog(ChatWsAction.class);
     //连接池
     private static final HashMap<String,ChatWsAction> connections =new HashMap<String,ChatWsAction>();
-    private String user;
+    private String email;
     private Session session;
     
     public ChatWsAction() {
-    	this.user=UserAction.getSession("email");
+
     }
 
 
     @OnOpen
-    public void start(Session session) {
+    public void start(Session session,@PathParam("email") String email) {
+    	if(email.isEmpty()){
+    		return ;
+    	}
+    	
+    	this.email=email;
     	this.session = session;
-        connections.put(this.user,this);
+        connections.put(this.email,this);
     }
 
 
     @OnClose
     public void end() {
-    	connections.remove(user);
+    	connections.remove(this.email);
     }
 
 
     @OnMessage
     public void incoming(String message) throws SQLException {
+    	if(email.isEmpty()){
+    		return ;
+    	}
+    	
         String filteredMessage = CommFuns.filter(message.toString());
-        LinkedList<String> friends= UserAction.getFirends();
+        LinkedList<String> friends= UserAction.getFirends(this.email);
         
         for(int i=0;i<friends.size();i++){
         	sendMessageToUser(friends.get(i),filteredMessage);

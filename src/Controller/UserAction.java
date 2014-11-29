@@ -27,9 +27,7 @@ public class UserAction {
 		if (rs.next()) {
 			if (rs.getString("psw").equals(psw)) {
 				DBHelper.executeNonQuery(update_ip);
-				// 写入session
-				setSession(email, rs.getString("id"));
-
+		
 				return CommFuns
 						.getTip(true,
 								rs.getString("id") + ","
@@ -66,15 +64,12 @@ public class UserAction {
 		DBHelper.executeNonQuery(sql_insert);
 		rs = DBHelper.executeQuery(sql_check);
 		rs.next();
-		// 写入session
-		setSession(model.getEmail(), rs.getString("id"));
-
 		return CommFuns.getTip(true, rs.getString("id"), "");
 
 	}
 
-	public static LinkedList<String> getFirends() throws SQLException {
-		String user = getSession("email");
+	public static LinkedList<String> getFirends(String user) throws SQLException {
+		
 		String sql = "select fromName,toName from friend_view where fromName='"
 				+ user + "' or toName='" + user + "' ";
 		LinkedList<String> friends = new LinkedList<String>();
@@ -102,14 +97,4 @@ public class UserAction {
 		return friends;
 	}
 
-	// 登录信息写入session
-	public static void setSession(String eamil, String id) {
-		session.setAttribute("email", eamil);
-		session.setAttribute("id", id);
-	}
-
-	// 读取session
-	public static String getSession(String name) {
-		return (String) session.getAttribute(name);
-	}
 }
