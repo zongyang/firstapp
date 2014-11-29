@@ -2,18 +2,25 @@ package Controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
 import DB.DBHelper;
+import Model.ChatMoel;
 import Model.UserModel;
 
 //登录注册类
 public class UserAction {
+	public static HttpSession session;
+
 	public static String login(String email, String psw, String ip)
 			throws SQLException {
-		
-		
+
 		String condition = " where email='" + email + "' ";
 		String sql = "select id,nickName,psw from user " + condition;
 		String update_ip = "update  user set online='1',ip='" + ip + "'"
@@ -23,7 +30,13 @@ public class UserAction {
 		if (rs.next()) {
 			if (rs.getString("psw").equals(psw)) {
 				DBHelper.executeNonQuery(update_ip);
-				return CommFuns.getTip(true,  rs.getString("id")+","+rs.getString("nickName"), "");
+				// 写入session
+				setSession(email, rs.getString("id"));
+
+				return CommFuns
+						.getTip(true,
+								rs.getString("id") + ","
+										+ rs.getString("nickName"), "");
 			}
 		}
 		return CommFuns.getTip(false, "用户名或者密码错误！", "");
@@ -46,18 +59,60 @@ public class UserAction {
 				+ "','"
 				+ model.getOnline()
 				+ "','"
-				+ model.getIp() + "')"; 
-        //查询记录是否可以存在，插入后返回id，本来可以只需要一次数据库操作的，但由于总是报错，所以用了最笨的
+				+ model.getIp() + "')";
+		// 查询记录是否可以存在，插入后返回id，本来可以只需要一次数据库操作的，但由于总是报错，所以用了最笨的
 		ResultSet rs = DBHelper.executeQuery(sql_check);
 		if (rs.next()) {
 			return CommFuns.getTip(false, "该邮箱已注册！", "");
 		}
-		//插入后返回的id
+		// 插入后返回的id
 		DBHelper.executeNonQuery(sql_insert);
 		rs = DBHelper.executeQuery(sql_check);
 		rs.next();
-		return CommFuns.getTip(true,rs.getString("id"), "");
+		// 写入session
+		setSession(model.getEmail(), rs.getString("id"));
+
+		return CommFuns.getTip(true, rs.getString("id"), "");
 
 	}
 
+	public static LinkedList<String> getFirends() throws SQLException {
+		String user = getSession("user");
+		String sql = "select fromName,toName from friend_view where fromName='"
+				+ user + "' or toName='" + user + "' ";
+		LinkedList<String> friends = new LinkedList<String>();
+
+		if (user == null) {
+			return friends;
+		}
+
+		String toName, fromName;
+		ResultSet rs = DBHelper.executeQuery(sql);
+		// 存储每个好友的最近记录
+		while (rs.next()) {
+			toName = rs.getString("toName");
+			fromName = rs.getString("fromName");
+			// 主动发起的(key是friend)
+			if (fromName.equals(user) && !friends.contains(toName)) {
+				friends.push(toName);
+			}
+			// 好友发起的(key是friend)
+			if (toName.equals(user) && !friends.contains(fromName)) {
+				friends.push(fromName);
+			}
+		}
+
+		return friends;
+	}
+
+	// 登录信息写入session
+	public static void setSession(String eamil, String id) {
+		session.setAttribute("email", eamil);
+		session.setAttribute("id", id);
+	}
+
+	// 读取session
+	public static String getSession(String name) {
+		return (String) session.getAttribute(name);
+	}
 }

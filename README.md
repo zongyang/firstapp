@@ -3,11 +3,6 @@
 
 java 一万行
 
-/*
-待完成的：
-1.图像上传
-2.好友的在线状态显示
-*/
 一：
 数据库字符集的设置：
 SET character_set_client = utf8 ;

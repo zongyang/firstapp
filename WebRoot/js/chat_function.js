@@ -6,8 +6,15 @@ $(function() {
 	// middle
 	$('.msg-main-m li').click(liClick);
 	// right
+	$('#send-msg').click(sendClick);
+	startWebSocket();
 });
 
+//发送按钮‘
+function sendClick(){
+	var msg=$('#chart-input').val();
+	sendMsg(msg);
+}
 // 左侧和中间所有li的样式改变
 function liClick() {
 	var self = $(this);

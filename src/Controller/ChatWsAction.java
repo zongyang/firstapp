@@ -18,9 +18,9 @@ package Controller;
 
 
 import java.io.IOException;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -38,73 +38,56 @@ import org.apache.juli.logging.LogFactory;
 public class ChatWsAction {
 
     private static final Log log = LogFactory.getLog(ChatWsAction.class);
-
-    private static final String GUEST_PREFIX = "Guest";
-    private static final AtomicInteger connectionIds = new AtomicInteger(0);
-    private static final Set<ChatWsAction> connections =
-            new CopyOnWriteArraySet<ChatWsAction>();
-
-    private final String nickname;
+    //连接池
+    private static final HashMap<String,ChatWsAction> connections =new HashMap<String,ChatWsAction>();
+    private String user;
     private Session session;
-
+    
     public ChatWsAction() {
-        nickname = GUEST_PREFIX + connectionIds.getAndIncrement();
+    	this.user=UserAction.getSession("user");
     }
 
 
     @OnOpen
     public void start(Session session) {
-        this.session = session;
-        connections.add(this);
-        String message = String.format("* %s %s", nickname, "has joined.");
-        broadcast(message);
+    	this.session = session;
+        connections.put(this.user,this);
     }
 
 
     @OnClose
     public void end() {
-        connections.remove(this);
-        String message = String.format("* %s %s",
-                nickname, "has disconnected.");
-        broadcast(message);
+    	connections.remove(user);
     }
 
 
     @OnMessage
-    public void incoming(String message) {
-        // Never trust the client
-        String filteredMessage = String.format("%s: %s",
-                nickname, CommFuns.filter(message.toString()));
-        broadcast(filteredMessage);
+    public void incoming(String message) throws SQLException {
+        String filteredMessage = CommFuns.filter(message.toString());
+        LinkedList<String> friends= UserAction.getFirends();
+        
+        for(int i=0;i<friends.size();i++){
+        	sendMessageToUser(friends.get(i),filteredMessage);
+        }
+        
     }
-
-
-
 
     @OnError
     public void onError(Throwable t) throws Throwable {
         log.error("Chat Error: " + t.toString(), t);
     }
+    
+    //向特定的用户发送数据  
+    public static void sendMessageToUser(String user,String message){  
+        try {   
+            System.out.println("send message to user : " + user + " ,message content : " + message);  
+            ChatWsAction ws = connections.get(user);  
+            if(ws != null){  
+            	ws.session.getBasicRemote().sendText(message); 
+            }  
+        } catch (IOException e) {  
+            e.printStackTrace();  
+        }  
+    } 
 
-
-    private static void broadcast(String msg) {
-        for (ChatWsAction client : connections) {
-            try {
-                synchronized (client) {
-                    client.session.getBasicRemote().sendText(msg);
-                }
-            } catch (IOException e) {
-                log.debug("Chat Error: Failed to send message to client", e);
-                connections.remove(client);
-                try {
-                    client.session.close();
-                } catch (IOException e1) {
-                    // Ignore
-                }
-                String message = String.format("* %s %s",
-                        client.nickname, "has been disconnected.");
-                broadcast(message);
-            }
-        }
-    }
 }

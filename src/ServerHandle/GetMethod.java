@@ -15,10 +15,12 @@ public class GetMethod {
 
 	public static String getRequestMehthod(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		
 		Enumeration<String> enu = request.getParameterNames();
 		Hashtable<String, String> paraHash = new Hashtable<String, String>();
 		String ip = request.getRemoteAddr();
-
+		UserAction.session=request.getSession();
+		
 		while (enu.hasMoreElements()) {
 			String paraName = (String) enu.nextElement();
 			String paraValue = request.getParameter(paraName);

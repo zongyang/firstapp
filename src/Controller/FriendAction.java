@@ -55,7 +55,7 @@ public class FriendAction {
 	}
 	
 	public static String getFriendByUser(String id) throws SQLException{
-		String sql="select * from friend where `from`='"+id+"' or `to`='"+id+"'";
+		String sql="select * from friend_view where `from`='"+id+"' or `to`='"+id+"'";
 		ResultSet rs = DBHelper.executeQuery(sql);
 		String json="[";
 		while(rs.next()){
