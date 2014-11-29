@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2014-11-29 11:13:28
+Date: 2014-11-29 17:39:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -57,16 +57,14 @@ INSERT INTO `chat` VALUES ('17', '42', '44', 'sdasd1ret23张sssss曾洋ss', null
 DROP TABLE IF EXISTS `friend`;
 CREATE TABLE `friend` (
   `from` int(50) DEFAULT NULL,
-  `fromName` text,
-  `to` int(50) DEFAULT NULL,
-  `toName` text
+  `to` int(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of friend
 -- ----------------------------
-INSERT INTO `friend` VALUES ('42', 'zongyang@qq.com', '43', 'zhangzengyang@qq.com');
-INSERT INTO `friend` VALUES ('42', 'zongyang@qq.com', '44', 'zzy@qq.com');
+INSERT INTO `friend` VALUES ('42', '43');
+INSERT INTO `friend` VALUES ('42', '44');
 
 -- ----------------------------
 -- Table structure for user
@@ -94,5 +92,13 @@ INSERT INTO `user` VALUES ('44', 'zzy@qq.com', '123456', 'qq', '1', '127.0.0.1')
 -- ----------------------------
 DROP VIEW IF EXISTS `chat_view`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `chat_view` AS SELECT t1.*, t2.email as fromName,t3.email as toName  from chat t1
+INNER JOIN user t2 on t1.from=t2.id
+INNER JOIN  user t3 on t1.to=t3.id ;
+
+-- ----------------------------
+-- View structure for friend_view
+-- ----------------------------
+DROP VIEW IF EXISTS `friend_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost`  VIEW `friend_view` AS SELECT t1.*, t2.email as fromName,t3.email as toName  from friend t1
 INNER JOIN user t2 on t1.from=t2.id
 INNER JOIN  user t3 on t1.to=t3.id ;
