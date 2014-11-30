@@ -4,7 +4,7 @@ $(function() {
 	$('.msg-main-l-recent').click(getChatByUser);
 	$('.msg-main-l-friend').click(getFriendByUser);
 	// middle
-	$('.msg-main-m li').click(liClick);
+	//$('.msg-main-m li').click(liClick);
 	// right
 	$('#send-msg').click(sendClick);
 	startWebSocket();
@@ -38,6 +38,8 @@ function getFriendByUser(event) {
 			}
 
 			createFriendList(JSON.parse(obj.msg));
+			$('.msg-main-m li').click(liClick);
+		
 		}
 	});
 }
@@ -60,6 +62,7 @@ function getChatByFriend(event) {
 			}
 
 			createMainChat(JSON.parse(obj.msg));
+			scrollButton();
 		}
 	});
 }
@@ -80,6 +83,8 @@ function getChatByUser(){
 			}
 
 			createMidChat(JSON.parse(obj.msg));
+			$('.msg-main-m li').click(liClick);
+			scrollButton();
 		}
 	});
 }
@@ -144,4 +149,12 @@ function createMidChat(arr){
 	}
 	el.append(lis);
 	el.find('li').click(getChatByFriend);
+}
+function scrollButton(){
+	var ul=$('.msg-main-r ul');
+	var li=ul.find('li:last');
+	if(li.length>0){
+		ul.scrollTop(0).scrollTop(li.offset().top);
+	}
+	
 }

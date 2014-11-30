@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import com.google.gson.Gson;
 
 import DB.DBHelper;
-import Model.ChatMoel;
+import Model.ChatModel;
 
 //消息聊类：负责聊天页面非websocket的请求
 public class ChatAction {
@@ -17,12 +17,12 @@ public class ChatAction {
 			throws SQLException {
 		String sql = "select * from chat where (`from`='" + user
 				+ "' and `to`='" + friend + "') or (`from`='" + friend
-				+ "' and `to`='" + user + "') ";
+				+ "' and `to`='" + user + "') order by time desc ";
 		Gson gson = new Gson();
-		LinkedList<ChatMoel> models = new LinkedList<ChatMoel>();
+		LinkedList<ChatModel> models = new LinkedList<ChatModel>();
 		ResultSet rs = DBHelper.executeQuery(sql);
 		while (rs.next()) {
-			ChatMoel model = new ChatMoel();
+			ChatModel model = new ChatModel();
 			model.setFrom(rs.getString("from"));
 			model.setTo(rs.getString("to"));
 			model.setContent(rs.getString("content"));
@@ -36,18 +36,18 @@ public class ChatAction {
 	}
 
 	public static String getChatByUser(String user) throws SQLException {
-		String sql = "select * from chat_view where `from`='" + user + "' or `to`='"
-				+ user + "' order by time desc";
+		String sql = "select * from chat_view where `from`='" + user
+				+ "' or `to`='" + user + "' order by time desc";
 
 		Gson gson = new Gson();
 
-		HashMap<String, ChatMoel> hm = new HashMap<String, ChatMoel>();
-		LinkedList<ChatMoel> models = new LinkedList<ChatMoel>();
+		HashMap<String, ChatModel> hm = new HashMap<String, ChatModel>();
+		LinkedList<ChatModel> models = new LinkedList<ChatModel>();
 		ResultSet rs = DBHelper.executeQuery(sql);
 
 		// 存储每个好友的最近记录
 		while (rs.next()) {
-			ChatMoel model = new ChatMoel();
+			ChatModel model = new ChatModel();
 			// 主动发起的(key是friend)
 			if (rs.getString("from").equals(user)
 					&& !hm.containsKey(rs.getString("to"))) {
@@ -73,7 +73,7 @@ public class ChatAction {
 				model.setFriend(rs.getString("from"));
 				model.setFriendName(rs.getString("fromName"));
 				hm.put(rs.getString("from"), model);
-				
+
 			}
 		}
 		// 字典存储到队列
@@ -86,4 +86,33 @@ public class ChatAction {
 
 		return CommFuns.getTip(true, gson.toJson(models), "");
 	}
+
+	public static void insertChatRecord(LinkedList<ChatModel> mdoels) {
+		String insert = "";
+		ChatModel temp;
+		int len= mdoels.size();
+		
+		if(len==0){
+			return ;
+		}
+		
+		for (int i = 0; i < len; i++) {
+			temp = mdoels.get(i);
+			insert = "INSERT INTO chat (`from`, `to`, `content`, `recept`, `time`, `actions`) VALUES ('"
+					+ temp.getFrom()
+					+ "', '"
+					+ temp.getTo()
+					+ "', '"
+					+ temp.getContent()
+					+ "', '"
+					+ temp.getRecept()
+					+ "', '"
+					+ temp.getTime() + "', '" + temp.getActions() + "'); ";
+			DBHelper.executeNonQuery(insert);
+		}
+		
+		
+
+	}
+
 }

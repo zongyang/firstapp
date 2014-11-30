@@ -2,13 +2,14 @@ package Controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
+
 
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
 import DB.DBHelper;
+
 import Model.UserModel;
 
 //登录注册类
@@ -68,33 +69,5 @@ public class UserAction {
 
 	}
 
-	public static LinkedList<String> getFirends(String user) throws SQLException {
-		
-		String sql = "select fromName,toName from friend_view where fromName='"
-				+ user + "' or toName='" + user + "' ";
-		LinkedList<String> friends = new LinkedList<String>();
-
-		if (user == null) {
-			return friends;
-		}
-
-		String toName, fromName;
-		ResultSet rs = DBHelper.executeQuery(sql);
-		// 存储每个好友的最近记录
-		while (rs.next()) {
-			toName = rs.getString("toName");
-			fromName = rs.getString("fromName");
-			// 主动发起的(key是friend)
-			if (fromName.equals(user) && !friends.contains(toName)) {
-				friends.push(toName);
-			}
-			// 好友发起的(key是friend)
-			if (toName.equals(user) && !friends.contains(fromName)) {
-				friends.push(fromName);
-			}
-		}
-
-		return friends;
-	}
-
+	
 }

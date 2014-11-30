@@ -1,7 +1,7 @@
 package Model;
 
 //聊天模型类
-public class ChatMoel {
+public class ChatModel {
 	private String id;
 	private String from;
 	private String to;
@@ -13,7 +13,7 @@ public class ChatMoel {
 	private String friendName;
 
 
-	public ChatMoel() {
+	public ChatModel() {
 		this.id = "";
 		this.from = "";
 		this.to = "";
