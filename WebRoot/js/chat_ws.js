@@ -15,10 +15,13 @@ function startWebSocket() {
 	};
 }
 
-function sendMsg(str) {
-	ws.send(str);
-	//发送后清空内容
-	$('#chart-input').text();
+function sendMsg(method,msg,friend,callback) {
+	var obj={method:method,msg:msg,friend:friend};
+	ws.send(JSON.stringify(obj));
+	
+	if(callback){
+		callback();
+	}
 }
 
 function createChatLi(obj) {
@@ -26,7 +29,7 @@ function createChatLi(obj) {
 	var self = g_user.email;
 
 	//如果不是自己发起的消息，并且对话也不再当前对话框则不做操作，在聊天记录里面查找
-	if ($('.msg-main-m li.active h5').text() != obj.friend
+	if (getFriendId() != obj.friend
 			&& obj.friend != self) {
 		return;
 	}

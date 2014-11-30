@@ -35,8 +35,10 @@ import javax.websocket.server.ServerEndpoint;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 
+import com.google.gson.Gson;
+
 import Model.ChatModel;
-import Model.FriendModel;
+import Model.ChatWsModel;
 
 //消息聊类：使用websocket实现消息的聊天消息的推送
 
@@ -70,43 +72,41 @@ public class ChatWsAction {
 	}
 
 	@OnMessage
-	public void incoming(String message) throws SQLException {
+	public void incoming(String paras) throws SQLException {
 		if (email.isEmpty()) {
 			return;
 		}
-		
-		String json ;
-		String filteredMessage = CommFuns.filter(message.toString());
+
+		String json;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		String now = sdf.format(new Date());
-		LinkedList<FriendModel> friends = FriendAction.getFirends(this.email);
-		LinkedList<ChatModel> chats = new LinkedList<ChatModel>();
-		
-		for (int i = 0; i < friends.size(); i++) {
+		Gson gson = new Gson();
+		ChatWsModel model = gson.fromJson(paras, ChatWsModel.class);
 
-			ChatModel chatModel = new ChatModel();
-			 json = "{\"msg\":\"" + filteredMessage + "\",\"time\":\""
-					+ now + "\",\"friend\":\"" + this.email + "\"}";
+		// 给好友发消息
+		if (model.getMethod().equals(ChatWsModel.SEND_TO_FRIEND)) {
 			
-			// send to friend
-			sendMessageToUser( friends.get(i).getToName(), json);
-			// insert to db
+			// 给好友
+			json = "{\"msg\":\"" + model.getMsg() + "\",\"time\":\"" + now
+					+ "\",\"friend\":\"" + this.email + "\"}";
+			sendMessageToUser(model.getFriend(), json);
+
+			// 给自己
+			json = "{\"msg\":\"" + model.getMsg() + "\",\"time\":\"" + now
+					+ "\",\"friend\":\"" + this.email + "\"}";
+			sendMessageToUser(this.email, json);
 			
-			chatModel.setFrom(friends.get(i).getFrom());
-			chatModel.setTo(friends.get(i).getTo());
-			chatModel.setContent(filteredMessage);
-			chatModel.setTime(now);
-			chats.push(chatModel);
+			// 插入到数据库
+			ChatModel chat=new ChatModel();
+			LinkedList<ChatModel> chats =new LinkedList<ChatModel>() ;
+			chat.setTo(UserAction.getIdByName(model.getFriend()));
+			chat.setFrom(UserAction.getIdByName(this.email));
+			chat.setContent(model.getMsg());
+			chat.setTime(now);
+			chats.push(chat);
+			ChatAction.insertChatRecord(chats);
+		
 		}
-		ChatAction.insertChatRecord(chats);
-		
-		//发给自己
-		json = "{\"msg\":\"" + filteredMessage + "\",\"time\":\""
-				+ now + "\",\"friend\":\"" + this.email + "\"}";
-		sendMessageToUser(this.email,json);
-
-		// 1.构建getmehtod 方法 2.传回消息{msg:'',time:'',toName:''} 3.传回的消息包括自己
-		// 1.前台：根据判断是否是当前聊天框，如不是出发click相应的事件即可，如果是自己left ，不是right
 
 	}
 
@@ -122,7 +122,7 @@ public class ChatWsAction {
 					+ " ,message content : " + message);
 			ChatWsAction ws = connections.get(user);
 			if (ws != null) {
-				ws.session.getBasicRemote().sendText(message);
+				ws.session.getBasicRemote().sendText( message);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -4,16 +4,21 @@ $(function() {
 	$('.msg-main-l-recent').click(getChatByUser);
 	$('.msg-main-l-friend').click(getFriendByUser);
 	// middle
-	//$('.msg-main-m li').click(liClick);
+	// $('.msg-main-m li').click(liClick);
 	// right
 	$('#send-msg').click(sendClick);
 	startWebSocket();
 });
 
-//发送按钮‘
-function sendClick(){
-	var msg=$('#chart-input').val();
-	sendMsg(msg);
+// 发送按钮
+function sendClick() {
+	var msg = $('#chart-input').val();
+	var friend = sendMsg('sendToFriend', msg, getFriendId(), function() {
+		// 发送后清空内容
+		$('#chart-input').val("");
+
+	});
+
 }
 // 左侧和中间所有li的样式改变
 function liClick() {
@@ -39,7 +44,7 @@ function getFriendByUser(event) {
 
 			createFriendList(JSON.parse(obj.msg));
 			$('.msg-main-m li').click(liClick);
-		
+
 		}
 	});
 }
@@ -66,8 +71,8 @@ function getChatByFriend(event) {
 		}
 	});
 }
-//根据用户id获得聊天记录
-function getChatByUser(){
+// 根据用户id获得聊天记录
+function getChatByUser() {
 	$.ajax({
 		url : 'action',
 		data : {
@@ -88,7 +93,7 @@ function getChatByUser(){
 		}
 	});
 }
-//创建主聊天的快
+// 创建主聊天的快
 function createMainChat(arr) {
 	var lis = '';
 	var el = $('.msg-main-r ul');
@@ -133,8 +138,8 @@ function createFriendList(arr) {
 	el.append(lis);
 	el.find('li').click(getChatByFriend);
 }
-//创建用户中间聊天的记录块
-function createMidChat(arr){
+// 创建用户中间聊天的记录块
+function createMidChat(arr) {
 	var lis = '';
 	var el = $('.msg-main-m ul');
 	el.empty();
@@ -142,19 +147,23 @@ function createMidChat(arr){
 		lis += '<li>';
 		lis += '<img class="msg-user-img l" src="img/meinv.jpg" />';
 		lis += '<div class="l">';
-		lis += '<h5 user="' + arr[i].friend + '">' + arr[i].friendName + '</h5>';
-		lis += '<p>'+arr[i].content+'</p>';
+		lis += '<h5 user="' + arr[i].friend + '">' + arr[i].friendName
+				+ '</h5>';
+		lis += '<p>' + arr[i].content + '</p>';
 		lis += '</div>';
 		lis += '</li>';
 	}
 	el.append(lis);
 	el.find('li').click(getChatByFriend);
 }
-function scrollButton(){
-	var ul=$('.msg-main-r ul');
-	var li=ul.find('li:last');
-	if(li.length>0){
+function scrollButton() {
+	var ul = $('.msg-main-r ul');
+	var li = ul.find('li:last');
+	if (li.length > 0) {
 		ul.scrollTop(0).scrollTop(li.offset().top);
 	}
-	
+
+}
+function getFriendId() {
+	return $('.msg-main-m li.active h5').text();
 }

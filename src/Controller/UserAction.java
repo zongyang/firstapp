@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import DB.DBHelper;
-
 import Model.UserModel;
 
 //登录注册类
@@ -28,7 +27,7 @@ public class UserAction {
 		if (rs.next()) {
 			if (rs.getString("psw").equals(psw)) {
 				DBHelper.executeNonQuery(update_ip);
-		
+
 				return CommFuns
 						.getTip(true,
 								rs.getString("id") + ","
@@ -69,5 +68,22 @@ public class UserAction {
 
 	}
 
+	public static String getIdByName(String name) throws SQLException {
+
+		String id="";
+		
+		if (name.isEmpty()) {
+			return id;
+		}
+		
+		String sql="select id from user where email='"+name+"'";
+		ResultSet rs = DBHelper.executeQuery(sql);
+		if (rs.next()) {
+			id=rs.getString("id");
+		}
+		
+		return id;
 	
+	}
+
 }

@@ -98,7 +98,7 @@ public class ChatAction {
 		
 		for (int i = 0; i < len; i++) {
 			temp = mdoels.get(i);
-			insert = "INSERT INTO chat (`from`, `to`, `content`, `recept`, `time`, `actions`) VALUES ('"
+			insert += "INSERT INTO chat (`from`, `to`, `content`, `recept`, `time`, `actions`) VALUES ('"
 					+ temp.getFrom()
 					+ "', '"
 					+ temp.getTo()
@@ -108,10 +108,9 @@ public class ChatAction {
 					+ temp.getRecept()
 					+ "', '"
 					+ temp.getTime() + "', '" + temp.getActions() + "'); ";
-			DBHelper.executeNonQuery(insert);
+			
 		}
-		
-		
+		DBHelper.executeNonQuery(insert);	
 
 	}
 

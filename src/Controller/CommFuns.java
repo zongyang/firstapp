@@ -34,6 +34,9 @@ public class CommFuns {
 			case '"':
 				result.append("&quot;");
 				break;
+			case '\n':
+				result.append("<br />");
+				break;
 			default:
 				result.append(content[i]);
 			}
