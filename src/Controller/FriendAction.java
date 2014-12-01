@@ -12,25 +12,24 @@ import com.google.gson.Gson;
 public class FriendAction {
 	// 考虑 from和to
 	public static String addFriend(String friend) throws SQLException {
+		if (friend == null) {
+			return null;
+		}
+
 		Gson gson = new Gson();
 		FriendModel model = gson.fromJson(friend, FriendModel.class);
-		String exist_sql = "select * from friend where (`from`='"
-				+ model.getFrom() + "' and `to`='" + model.getTo()
-				+ "') or( `from`='" + model.getTo() + "' and `to`='"
-				+ model.getFrom() + "')";
 
-		String insert_sql = "insert into friend (`from`,from_name,`to`,to_name) values ('"
-				+ model.getFrom()
-				+ "','"
-				+ model.getFromName()
-				+ "','"
-				+ model.getTo() + "','" + model.getToName() + "')";
+		return addFriend(model);
+	}
 
-		ResultSet rs = DBHelper.executeQuery(exist_sql);
-		if (rs.next()) {
+	public static String addFriend(FriendModel friend) throws SQLException {
+		String sql = "insert into friend (`from`,`to`) values ('"
+				+ friend.getFrom() + "','" + friend.getTo() + "')";
+
+		if (isFriend(friend.getFrom(), friend.getTo())) {
 			return CommFuns.getTip(false, "已经是好友!", "");
 		}
-		DBHelper.executeNonQuery(insert_sql);
+		DBHelper.executeNonQuery(sql);
 		return CommFuns.getTip(true, "添加成功!", "");
 	}
 
@@ -78,26 +77,24 @@ public class FriendAction {
 		return CommFuns.getTip(true, json, "");
 	}
 
-	public static Boolean isFriend(String id, String email) throws SQLException {
-		String sql = "";
-		Boolean id_flg = (id == null || id.isEmpty());
-		Boolean email_flg = (email == null || email.isEmpty());
+	public static Boolean isFriend(String from, String to) throws SQLException {
 
-		if (id_flg && email_flg) {
-			return false;
-		}
+		Boolean flg = (from == null || from.isEmpty() || to == null || to
+				.isEmpty());
 
-		if (!id_flg) {
-			sql = "select id from user where id='" + id + "' ";
-		} else if (!email_flg) {
-			sql = "select id from user where email='" + email + "'";
-		}
-
-		ResultSet rs = DBHelper.executeQuery(sql);
-		if (rs.next()) {
+		if (flg) {
 			return true;
 		}
-		return false;
+
+		if (from.equals(to)) {
+			return true;
+		}
+
+		String sql = "select * from friend where (`from`='" + from
+				+ "' and `to`='" + to + "') or( `from`='" + to + "' and `to`='"
+				+ from + "')";
+
+		return DBHelper.isExist(sql);
 
 	}
 

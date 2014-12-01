@@ -5,7 +5,8 @@ import Controller.CommFuns;
 public class ChatWsModel {
 	public static String SEND_TO_FRIEND = "sendToFriend";
 	public static String FRIEND_REQUEST = "friendRequest";
-    public static String[] MSG_TYPE={"IM","ALERT"};//即时消息、弹框
+	public static String RECEPT_REQUEST = "receptFriendRequest";
+    public static String[] MSG_TYPE={"IM","ALERT","CONFIRM"};//即时消息、弹框、确认框
 	
     public ChatWsModel() {
 		super();

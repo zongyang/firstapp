@@ -8,18 +8,32 @@ $(function() {
 	$('.msg-main-m li').click(liClick);
 	// right
 	$('#send-msg').click(sendClick);
+	$('#chart-input').keydown(function(event){
+		 if(event.keyCode==13){
+			 sendClick();
+	     }    
+	});
 	startWebSocket();
 });
 
 // 发送按钮
 function sendClick() {
 	var msg = $('#chart-input').val();
-	var friend = sendMsg('sendToFriend', msg, getFriendId(), function() {
+	if(getFriendId()==""){
+		Ext.Msg.alert('警告','请选择好友、消息不能为空！');
+		$('#chart-input').val('');
+		return;
+	}
+	if(msg==""||new RegExp(/^\r*$/).test(msg)){
+		Ext.Msg.alert('警告','请选择好友、消息不能为空！');
+		$('#chart-input').val('');
+		return;
+	}
+	
+	var friend = sendMsg('sendToFriend', msg.trim(), getFriendId(), function() {
 		// 发送后清空内容
-		$('#chart-input').val("");
-
+		$('#chart-input').val('');
 	});
-
 }
 // 左侧和中间所有li的样式改变
 function liClick() {
@@ -237,27 +251,18 @@ function getAddPanel() {
 
 function addFriend() {
 	var combox = Ext.getCmp('btn-friend');
+	var friend={from:g_user.id,to: combox.getValue()};
     //推送加好友请求
-	/*Ext.Ajax.request({
-		url : 'action',
-		method:'GET',
-		params : {
-			method:'addFriend',
-			id : combox.getRawValue()
-		},
-		success : function(response) {
-			var obj = Ext.JSON.decode(response.responseText);
-		}
-	});*/
-	
+	sendMsg('friendRequest','',combox.getRawValue());
+	/*
 	$.ajax({
 		url : 'action',
 		data : {
 			method:'addFriend',
-			id : combox.getRawValue()
+			friend :Ext.JSON.encode(friend)
 		},
 		success : function(data) {
 			var obj = Ext.JSON.decode(data);
 		}
-	});
+	});*/
 }

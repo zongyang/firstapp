@@ -39,6 +39,7 @@ import com.google.gson.Gson;
 
 import Model.ChatModel;
 import Model.ChatWsModel;
+import Model.FriendModel;
 
 //消息聊类：使用websocket实现消息的聊天消息的推送
 
@@ -49,6 +50,7 @@ public class ChatWsAction {
 	// 连接池
 	private static final HashMap<String, ChatWsAction> connections = new HashMap<String, ChatWsAction>();
 	private String email;
+	private String id;
 	private Session session;
 
 	public ChatWsAction() {
@@ -56,17 +58,19 @@ public class ChatWsAction {
 	}
 
 	@OnOpen
-	public void start(Session session, @PathParam("email") String email) {
+	public void start(Session session, @PathParam("email") String email)
+			throws SQLException {
 		if (email.isEmpty()) {
 			return;
 		}
 
-		if(connections.containsKey(this.email)){
-			return ;
+		if (connections.containsKey(this.email)) {
+			return;
 		}
-		
+
 		this.email = email;
 		this.session = session;
+		this.id = UserAction.getIdByName(this.email);
 		connections.put(this.email, this);
 	}
 
@@ -77,7 +81,7 @@ public class ChatWsAction {
 
 	@OnMessage
 	public void incoming(String paras) throws SQLException {
-		if (email.isEmpty()) {
+		if (this.email.isEmpty()) {
 			return;
 		}
 
@@ -91,48 +95,82 @@ public class ChatWsAction {
 		if (model.getMethod().equals(ChatWsModel.SEND_TO_FRIEND)) {
 
 			model.setMsgType(ChatWsModel.MSG_TYPE[0]);
-			
-			json = "{msg: '"+ model.getMsg() +"' ,time:'" + now
-					+ "',friend:'" + this.email + "',msgType:'"+model.getMsgType()+"'}";
+
+			json = "{msg: '" + model.getMsg() + "' ,time:'" + now
+					+ "',friend:'" + this.email + "',msgType:'"
+					+ model.getMsgType() + "'}";
 			// 给好友
-			/*json = "{\"msg\":\"" + model.getMsg() + "\",\"time\":\"" + now
-					+ "\",\"friend\":\"" + this.email + "\"}";*/
-			
+			/*
+			 * json = "{\"msg\":\"" + model.getMsg() + "\",\"time\":\"" + now +
+			 * "\",\"friend\":\"" + this.email + "\"}";
+			 */
+
 			sendMessageToUser(model.getFriend(), json);
 
 			// 给自己
-			/*json = "{\"msg\":\"" + model.getMsg() + "\",\"time\":\"" + now
-					+ "\",\"friend\":\"" + this.email + "\"}";*/
+			/*
+			 * json = "{\"msg\":\"" + model.getMsg() + "\",\"time\":\"" + now +
+			 * "\",\"friend\":\"" + this.email + "\"}";
+			 */
 			sendMessageToUser(this.email, json);
 
 			// 插入到数据库
 			ChatModel chat = new ChatModel();
 			LinkedList<ChatModel> chats = new LinkedList<ChatModel>();
 			chat.setTo(UserAction.getIdByName(model.getFriend()));
-			chat.setFrom(UserAction.getIdByName(this.email));
+			chat.setFrom(this.id);
 			chat.setContent(model.getMsg());
 			chat.setTime(now);
 			chats.push(chat);
 			ChatAction.insertChatRecord(chats);
 
 		}
-		
-		//加好友请求
-		if(model.getMethod().equals(ChatWsModel.FRIEND_REQUEST)){
-			//已经是好友
-			if(FriendAction.isFriend(null, model.getFriend())){
+
+		// 加好友请求
+		if (model.getMethod().equals(ChatWsModel.FRIEND_REQUEST)) {
+			String friendId = UserAction.getIdByName(model.getFriend());
+			// 已经是好友
+			if (FriendAction.isFriend(this.id, friendId)) {
 				model.setMsgType(ChatWsModel.MSG_TYPE[1]);
-				json = "{msg: '和"+model.getFriend()+"已经是好友！' ,time:'" + now
-						+ "',friend:'" + this.email + "',msgType:'"+model.getMsgType()+"'}";
+				json = "{msg: '" + this.email + "和" + model.getFriend()
+						+ "已经是好友！' ,time:'" + now + "',friend:'" + this.email
+						+ "',msgType:'" + model.getMsgType() + "'}";
 				sendMessageToUser(this.email, json);
 			}
-			//发送申请
-			else{
-				model.setMsgType(ChatWsModel.MSG_TYPE[0]);
-				json = "{msg: '"+this.email+" 想加你为好友！' ,time:'" + now
-						+ "',friend:'" + model.getFriend() + "',msgType:'"+model.getMsgType()+"'}";
-				sendMessageToUser(this.email, json);
+			// 发送申请
+			else {
+				model.setMsgType(ChatWsModel.MSG_TYPE[2]);
+				json = "{msg: '" + this.email + " 想加你为好友！' ,time:'" + now
+						+ "',friend:'" + this.email + "',friendId:'" + this.id
+						+ "',msgType:'" + model.getMsgType() + "'}";
+				sendMessageToUser(model.getFriend(), json);
 			}
+		}
+
+		// 同意加为好友
+		if (model.getMethod().equals(ChatWsModel.RECEPT_REQUEST)) {
+			
+			//此时msg的内容是 fromName，friend是fromId
+			
+			model.setMsgType(ChatWsModel.MSG_TYPE[1]);
+
+			// 向数据添加关系
+			FriendModel fm = new FriendModel();
+			fm.setFrom(model.getMsg());
+			fm.setTo(this.id);
+			FriendAction.addFriend(fm);
+
+			// 返回给自己
+			json = "{msg: ' 添加 " + model.getFriend() + " 为好友成功！' ,time:'" + now
+					+ "',friend:'" + model.getFriend() + "',msgType:'"
+					+ model.getMsgType() + "'}";
+			sendMessageToUser(this.email, json);
+
+			// 返回给申请加好友的人
+			json = "{msg: ' 添加 " + this.email + " 为好友成功！' ,time:'" + now
+					+ "',friend:'" + this.email + "',msgType:'"
+					+ model.getMsgType() + "'}";
+			sendMessageToUser(model.getFriend(), json);
 		}
 
 	}

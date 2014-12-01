@@ -5,9 +5,13 @@ function startWebSocket() {
 	ws.onmessage = function(evt) {
 		var obj = Ext.JSON.decode(evt.data);
 		if (obj.msgType == 'IM') {
-			createChatLi(obj);
+			createIMLi(obj);
 		}
 		if (obj.msgType == 'ALERT') {
+			createAlertWin(obj);
+		}
+		if (obj.msgType == 'CONFIRM') {
+			createConfirmWin(obj);
 		}
 	};
 
@@ -33,7 +37,7 @@ function sendMsg(method, msg, friend, callback) {
 	}
 }
 
-function createChatLi(obj) {
+function createIMLi(obj) {
 	var li;
 	var self = g_user.email;
 
@@ -68,19 +72,72 @@ function createChatLi(obj) {
 	scrollButton();
 }
 
-//弹出消息提示框
-function createInfoWin(obj) {
+// 弹出消息提示框
+function createAlertWin(obj) {
 	var win = Ext.create('Ext.window.Window', {
 		title : '消息提示',
-		height:20,
+		height : 20,
 		width : 250,
-	    html:'<p id="rb-tip">'+obj.msg+'</p>'
+		html : '<p id="rb-tip">' + obj.msg + '</p>'
 	});
 	win.showAt($(window).width() - 250, $(window).height() - 50);
 	win.animate({
 		to : {
 			height : 150,
-			y:$(window).height()-140
+			y : $(window).height() - 140
+		}
+	});
+}
+// 弹出确认提示框
+function createConfirmWin(obj) {
+	// var obj={from:'',fromName:'',to:'',toName:''} to是自己
+	// sendMsg('receptFriendRequest', obj,'fromName');
+	var win = Ext.create('Ext.window.Window', {
+		title : '消息提示',
+		height : 150,
+		width : 250,
+		layout : {
+			type : 'border'
+		},
+		items : [ {
+			xtype : 'panel',
+			region : 'center',
+			html : '<p id="rb-tip">' + obj.msg + '</p>',
+			border : false,
+			dockedItems : [ {
+				xtype : 'toolbar',
+				dock : 'bottom',
+				items : [
+						{
+							xtype : 'button',
+							margin : '0 50 0 50',
+							width : 50,
+							text : '接 受',
+							listeners : {
+								click : function() {
+									sendMsg('receptFriendRequest',
+											obj.friendId, obj.friend);
+									win.close();
+								}
+							}
+						}, {
+							xtype : 'button',
+							width : 50,
+							text : '拒 绝',
+							listeners : {
+								click : function() {
+									win.close();
+								}
+							}
+						} ]
+			} ]
+		} ]
+	});
+	win.showAt($(window).width() - 250, $(window).height() - 50);
+	win.animate({
+		to : {
+			height : 150,
+			y : $(window).height() - 140
 		}
 	});
 }
