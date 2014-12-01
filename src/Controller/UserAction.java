@@ -2,7 +2,7 @@ package Controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.LinkedList;
 
 import javax.servlet.http.HttpSession;
 
@@ -70,20 +70,48 @@ public class UserAction {
 
 	public static String getIdByName(String name) throws SQLException {
 
-		String id="";
-		
+		String id = "";
+
 		if (name.isEmpty()) {
 			return id;
 		}
-		
-		String sql="select id from user where email='"+name+"'";
+
+		String sql = "select id from user where email='" + name + "'";
 		ResultSet rs = DBHelper.executeQuery(sql);
 		if (rs.next()) {
-			id=rs.getString("id");
+			id = rs.getString("id");
 		}
-		
+
 		return id;
-	
+
 	}
 
+	public static String getAllUser() throws SQLException {
+		return getAllUser("");
+	}
+	public static String getAllUser(String query) throws SQLException{
+		
+		String sql="select * from user ";
+		
+		if(!query.isEmpty()){
+			query=" where email like '%"+query+"%' ";
+			sql+=query;
+		}
+		
+		
+		ResultSet rs=DBHelper.executeQuery(sql); 
+		LinkedList<UserModel> models=new LinkedList<UserModel>();
+		Gson gson=new Gson();
+		
+		while(rs.next()){
+			UserModel model=new UserModel();
+			model.setId(rs.getString("id"));
+			model.setEmail(rs.getString("email"));
+			model.setPsw(rs.getString("nickName"));
+			model.setNickName(rs.getString("online"));
+			models.push(model);
+		}
+		
+		return gson.toJson(models);
+	}
 }

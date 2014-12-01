@@ -13,8 +13,6 @@ import Controller.CommFuns;
 //serverlet 
 public class Serverlet extends HttpServlet {
 
-	
-	
 	/**
 	 * 
 	 */
@@ -40,10 +38,14 @@ public class Serverlet extends HttpServlet {
 	 *
 	 * This method is called when a HTTP delete request is received.
 	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
+	 * @param request
+	 *            the request send by the client to the server
+	 * @param response
+	 *            the response send by the server to the client
+	 * @throws ServletException
+	 *             if an error occurred
+	 * @throws IOException
+	 *             if an error occurred
 	 */
 	public void doDelete(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -56,46 +58,54 @@ public class Serverlet extends HttpServlet {
 	 *
 	 * This method is called when a form has its tag value method equals to get.
 	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
+	 * @param request
+	 *            the request send by the client to the server
+	 * @param response
+	 *            the response send by the server to the client
+	 * @throws ServletException
+	 *             if an error occurred
+	 * @throws IOException
+	 *             if an error occurred
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		String json="";
-		
+
+		String json = "";
+
 		response.setContentType("text/html;charset=UTF-8");
-		//response.setCharacterEncoding("UTF-8");
-		//request.setCharacterEncoding("UTF-8");
+		// response.setCharacterEncoding("UTF-8");
+		// request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-		
-		
+
 		try {
-			json=EnterPort.getRequestMehthod(request, response);
+			json = EnterPort.getRequestMehthod(request, response);
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
-		//json=CommFuns.filter(json);
-		if(json.isEmpty()){
-			json=CommFuns.getTip(false, "非法！", "");
+		// json=CommFuns.filter(json);
+		if (json.isEmpty()) {
+			json = CommFuns.getTip(false, "非法！", "");
 		}
 		out.print(json);
 		out.flush();
-		out.close(); 
+		out.close();
 	}
 
 	/**
 	 * The doPost method of the servlet. <br>
 	 *
-	 * This method is called when a form has its tag value method equals to post.
+	 * This method is called when a form has its tag value method equals to
+	 * post.
 	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
+	 * @param request
+	 *            the request send by the client to the server
+	 * @param response
+	 *            the response send by the server to the client
+	 * @throws ServletException
+	 *             if an error occurred
+	 * @throws IOException
+	 *             if an error occurred
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -120,10 +130,14 @@ public class Serverlet extends HttpServlet {
 	 *
 	 * This method is called when a HTTP put request is received.
 	 * 
-	 * @param request the request send by the client to the server
-	 * @param response the response send by the server to the client
-	 * @throws ServletException if an error occurred
-	 * @throws IOException if an error occurred
+	 * @param request
+	 *            the request send by the client to the server
+	 * @param response
+	 *            the response send by the server to the client
+	 * @throws ServletException
+	 *             if an error occurred
+	 * @throws IOException
+	 *             if an error occurred
 	 */
 	public void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -132,8 +146,8 @@ public class Serverlet extends HttpServlet {
 	}
 
 	/**
-	 * Returns information about the servlet, such as 
-	 * author, version, and copyright. 
+	 * Returns information about the servlet, such as author, version, and
+	 * copyright.
 	 *
 	 * @return String information about this servlet
 	 */
@@ -144,7 +158,8 @@ public class Serverlet extends HttpServlet {
 	/**
 	 * Initialization of the servlet. <br>
 	 *
-	 * @throws ServletException if an error occurs
+	 * @throws ServletException
+	 *             if an error occurs
 	 */
 	public void init() throws ServletException {
 		// Put your code here

@@ -46,4 +46,3 @@ public class FriendModel {
 		this.toName = toName;
 	}
 }
-

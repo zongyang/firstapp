@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 
 public class FriendAction {
 	// 考虑 from和to
-	public static String insert(String friend) throws SQLException {
+	public static String addFriend(String friend) throws SQLException {
 		Gson gson = new Gson();
 		FriendModel model = gson.fromJson(friend, FriendModel.class);
 		String exist_sql = "select * from friend where (`from`='"
@@ -76,6 +76,29 @@ public class FriendAction {
 		json += "]";
 		// return "{success:true,msg:"+json+"}";
 		return CommFuns.getTip(true, json, "");
+	}
+
+	public static Boolean isFriend(String id, String email) throws SQLException {
+		String sql = "";
+		Boolean id_flg = (id == null || id.isEmpty());
+		Boolean email_flg = (email == null || email.isEmpty());
+
+		if (id_flg && email_flg) {
+			return false;
+		}
+
+		if (!id_flg) {
+			sql = "select id from user where id='" + id + "' ";
+		} else if (!email_flg) {
+			sql = "select id from user where email='" + email + "'";
+		}
+
+		ResultSet rs = DBHelper.executeQuery(sql);
+		if (rs.next()) {
+			return true;
+		}
+		return false;
+
 	}
 
 	public static LinkedList<FriendModel> getFirends(String user)

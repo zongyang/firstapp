@@ -61,6 +61,10 @@ public class ChatWsAction {
 			return;
 		}
 
+		if(connections.containsKey(this.email)){
+			return ;
+		}
+		
 		this.email = email;
 		this.session = session;
 		connections.put(this.email, this);
@@ -85,27 +89,50 @@ public class ChatWsAction {
 
 		// 给好友发消息
 		if (model.getMethod().equals(ChatWsModel.SEND_TO_FRIEND)) {
+
+			model.setMsgType(ChatWsModel.MSG_TYPE[0]);
 			
+			json = "{msg: '"+ model.getMsg() +"' ,time:'" + now
+					+ "',friend:'" + this.email + "',msgType:'"+model.getMsgType()+"'}";
 			// 给好友
-			json = "{\"msg\":\"" + model.getMsg() + "\",\"time\":\"" + now
-					+ "\",\"friend\":\"" + this.email + "\"}";
+			/*json = "{\"msg\":\"" + model.getMsg() + "\",\"time\":\"" + now
+					+ "\",\"friend\":\"" + this.email + "\"}";*/
+			
 			sendMessageToUser(model.getFriend(), json);
 
 			// 给自己
-			json = "{\"msg\":\"" + model.getMsg() + "\",\"time\":\"" + now
-					+ "\",\"friend\":\"" + this.email + "\"}";
+			/*json = "{\"msg\":\"" + model.getMsg() + "\",\"time\":\"" + now
+					+ "\",\"friend\":\"" + this.email + "\"}";*/
 			sendMessageToUser(this.email, json);
-			
+
 			// 插入到数据库
-			ChatModel chat=new ChatModel();
-			LinkedList<ChatModel> chats =new LinkedList<ChatModel>() ;
+			ChatModel chat = new ChatModel();
+			LinkedList<ChatModel> chats = new LinkedList<ChatModel>();
 			chat.setTo(UserAction.getIdByName(model.getFriend()));
 			chat.setFrom(UserAction.getIdByName(this.email));
 			chat.setContent(model.getMsg());
 			chat.setTime(now);
 			chats.push(chat);
 			ChatAction.insertChatRecord(chats);
+
+		}
 		
+		//加好友请求
+		if(model.getMethod().equals(ChatWsModel.FRIEND_REQUEST)){
+			//已经是好友
+			if(FriendAction.isFriend(null, model.getFriend())){
+				model.setMsgType(ChatWsModel.MSG_TYPE[1]);
+				json = "{msg: '和"+model.getFriend()+"已经是好友！' ,time:'" + now
+						+ "',friend:'" + this.email + "',msgType:'"+model.getMsgType()+"'}";
+				sendMessageToUser(this.email, json);
+			}
+			//发送申请
+			else{
+				model.setMsgType(ChatWsModel.MSG_TYPE[0]);
+				json = "{msg: '"+this.email+" 想加你为好友！' ,time:'" + now
+						+ "',friend:'" + model.getFriend() + "',msgType:'"+model.getMsgType()+"'}";
+				sendMessageToUser(this.email, json);
+			}
 		}
 
 	}
@@ -122,7 +149,7 @@ public class ChatWsAction {
 					+ " ,message content : " + message);
 			ChatWsAction ws = connections.get(user);
 			if (ws != null) {
-				ws.session.getBasicRemote().sendText( message);
+				ws.session.getBasicRemote().sendText(message);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

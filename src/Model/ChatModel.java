@@ -12,29 +12,25 @@ public class ChatModel {
 	private String friend;
 	private String friendName;
 
-
 	public ChatModel() {
 		this.id = "";
 		this.from = "";
 		this.to = "";
 		this.recept = "";
 		this.time = "";
-		this.content="";
+		this.content = "";
 		this.actions = "";
-		this.friend="";
-		this.friendName="";
+		this.friend = "";
+		this.friendName = "";
 	}
 
-	
 	public String getFriendName() {
 		return friendName;
 	}
 
-
 	public void setFriendName(String friendName) {
 		this.friendName = friendName;
 	}
-
 
 	public String getContent() {
 		return content;
@@ -43,6 +39,7 @@ public class ChatModel {
 	public void setContent(String content) {
 		this.content = content;
 	}
+
 	public String getId() {
 		return id;
 	}
@@ -90,10 +87,10 @@ public class ChatModel {
 	public void setActions(String actions) {
 		this.actions = actions;
 	}
+
 	public String getFriend() {
 		return friend;
 	}
-
 
 	public void setFriend(String friend) {
 		this.friend = friend;

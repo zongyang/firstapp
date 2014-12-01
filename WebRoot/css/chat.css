@@ -37,17 +37,16 @@
 	background-position-x: -80px;
 }
 
-
 .msg-main-l-friend {
 	background: url(../img/nl-msg.png) no-repeat 0 0;
 }
+
 .msg-main-l-recent {
 	background: url(../img/nl-msg.png) no-repeat 0 -68px;
-	
 }
 
-.msg-main-l-left {
-	background: url(../img/nl-msg.png) no-repeat 0 -68px;
+.msg-main-l-add {
+	background: url(../img/nl-msg.png) no-repeat 0 -0px;
 }
 
 .msg-main-m {
@@ -102,12 +101,12 @@
 .msg-main-r {
 	position: relative;
 	width: 800px;
-	height:100%;
+	height: 100%;
 }
 
 .msg-main-r ul {
 	padding: 10px 20px;
-	height:80%;
+	height: 80%;
 	overflow-y: auto;
 }
 
@@ -116,6 +115,13 @@
 	min-height: 46px;
 	overflow: hidden;
 	padding: 0 5px;
+}
+
+.msg-main-r small {
+	line-height: 100%;
+	height: 100px;
+	padding-top: 10px;
+	color: #22638E;
 }
 
 .msg-main-r-content {
@@ -137,7 +143,6 @@
 	word-break: break-all;
 	word-wrap: break-word;
 	font-size: 16px;
-	font-family: 'Î¢ÈíÑÅºÚ';
 }
 
 .msg-main-r-content-l pre {
@@ -197,8 +202,8 @@
 
 #send-msg {
 	margin-top: 5px;
-	height:40px;
-	line-height:30px;
+	height: 40px;
+	line-height: 30px;
 	width: 150px;
 	color: #fff;
 	font-size: 14px;
@@ -210,6 +215,15 @@
 	-moz-transition: background-color 0.2s;
 	-o-transition: background-color 0.2s;
 }
-#send-msg:hover{
+
+#send-msg:hover {
 	background-color: #33a646;
+}
+
+#rb-tip {
+	margin: 0 auto;
+    position: relative;
+	margin-top: 10%;
+	height: 100%;
+	overflow-y: auto;
 }

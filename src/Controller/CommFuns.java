@@ -5,13 +5,13 @@ import Model.TipModel;
 //公用类：常用方法的封装
 public class CommFuns {
 
-	//获得提示消息
+	// 获得提示消息
 	public static String getTip(boolean success, String msg, String actions) {
 		TipModel tip = new TipModel(success, msg, actions);
 		return tip.ToJSON();
 	}
 
-	//字符串过滤
+	// 字符串过滤
 	public static String filter(String message) {
 
 		if (message == null)
@@ -44,19 +44,18 @@ public class CommFuns {
 		return (result.toString());
 
 	}
-	public static String TrimEnd(String input, String charsToTrim)
-	{
-		return input.replaceAll("[" + charsToTrim + "]+$", "");		
-	}	
-	
-	public static String TrimStart(String input, String charsToTrim)
-	{
-		return input.replaceAll("^[" + charsToTrim + "]+", "");	
+
+	public static String TrimEnd(String input, String charsToTrim) {
+		return input.replaceAll("[" + charsToTrim + "]+$", "");
 	}
 
-	public static String Trim(String input, String charsToTrim)
-	{
-		return input.replaceAll("^[" + charsToTrim + "]+|[" + charsToTrim + "]+$", "");	
+	public static String TrimStart(String input, String charsToTrim) {
+		return input.replaceAll("^[" + charsToTrim + "]+", "");
+	}
+
+	public static String Trim(String input, String charsToTrim) {
+		return input.replaceAll("^[" + charsToTrim + "]+|[" + charsToTrim
+				+ "]+$", "");
 	}
 
 }

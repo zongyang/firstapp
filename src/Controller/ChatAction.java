@@ -90,12 +90,12 @@ public class ChatAction {
 	public static void insertChatRecord(LinkedList<ChatModel> mdoels) {
 		String insert = "";
 		ChatModel temp;
-		int len= mdoels.size();
-		
-		if(len==0){
-			return ;
+		int len = mdoels.size();
+
+		if (len == 0) {
+			return;
 		}
-		
+
 		for (int i = 0; i < len; i++) {
 			temp = mdoels.get(i);
 			insert += "INSERT INTO chat (`from`, `to`, `content`, `recept`, `time`, `actions`) VALUES ('"
@@ -108,9 +108,9 @@ public class ChatAction {
 					+ temp.getRecept()
 					+ "', '"
 					+ temp.getTime() + "', '" + temp.getActions() + "'); ";
-			
+
 		}
-		DBHelper.executeNonQuery(insert);	
+		DBHelper.executeNonQuery(insert);
 
 	}
 

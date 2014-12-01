@@ -1,6 +1,5 @@
 package ServerHandle;
 
-
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -11,7 +10,6 @@ import Controller.ChatAction;
 
 import Controller.FriendAction;
 import Controller.UserAction;
-
 
 //入口函数处理类:通过url的参数找到对用的处理方法
 public class EnterPort {
@@ -37,15 +35,24 @@ public class EnterPort {
 		 * 注册和登录
 		 **/
 		if (paraHash.get("method").endsWith("login")) {
-			return UserAction.login(paraHash.get("email"), paraHash.get("psw"), ip);
+			return UserAction.login(paraHash.get("email"), paraHash.get("psw"),
+					ip);
 		}
 
 		if (paraHash.get("method").endsWith("register")) {
 			return UserAction.register(paraHash.get("user"), ip);
 		}
+		
+		if(paraHash.get("method").endsWith("getAllUser")){
+			return (paraHash.containsKey("query"))?UserAction.getAllUser(paraHash.get("query")):UserAction.getAllUser();
+			
+		}
 		/**
 		 * 好友和消息
 		 **/
+		if (paraHash.get("method").endsWith("addFriend")) {
+			return FriendAction.addFriend(paraHash.get("friend"));
+		}
 		if (paraHash.get("method").endsWith("getFriendByUser")) {
 			return FriendAction.getFriendByUser(paraHash.get("id"));
 		}
@@ -61,4 +68,3 @@ public class EnterPort {
 	}
 
 }
-

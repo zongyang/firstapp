@@ -16,7 +16,7 @@ public class TipModel {
 	}
 
 	public String ToJSON() {
-		Gson gson=new Gson();
+		Gson gson = new Gson();
 		return gson.toJson(this);
 	}
 
@@ -44,4 +44,3 @@ public class TipModel {
 		this.actions = actions;
 	}
 }
-

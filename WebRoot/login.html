@@ -3,8 +3,11 @@
 <head>
 <title>登陆页</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="extjs/resources/css/ext-all-neptune-rtl.css">
 <link rel="stylesheet" type="text/css" href="css/base.css">
 <link rel="stylesheet" type="text/css" href="css/login.css">
+<script src="extjs/ext-all.js"></script>
 <script type="text/javascript" src='js/jquery-1.7.1.min.js'></script>
 <script type="text/javascript" src='js/function.js'></script>
 <script type="text/javascript" src='js/login_function.js'></script>
@@ -20,18 +23,19 @@
 		<div>
 			<div class='sg-body  sg-body-l'>
 				<div class='sg-l-email'>
-					<input class='bg-mail' type='text' placeholder='请输入登录邮箱' />
+					<input class='bg-mail input' type='text' placeholder='请输入登录邮箱' />
 					<p class='tip'>请输入有效的邮箱！</p>
 				</div>
 				<div class='sg-l-pwd'>
-					<input class='bg-psw' type='password' placeholder='请输入密码' />
+					<input class='bg-psw password' type='password' placeholder='请输入密码' />
 					<p class='tip'>输入6-16位密码，不能使用空格！</p>
 				</div>
 				<div class='sg-body-l-forget clearfix'>
-					<label class='l inline' for="auto-signin"> <input
+					<!-- <label class='l inline' for="auto-signin"> <input
 						type="checkbox" checked="checked" id="auto-signin" />自动登录
 					</label> <a class='r inline' href="###" target="_blank">忘记密码？ </a>
 					<p></p>
+					 -->
 				</div>
 				<div class='clearfix'>
 					<p class='tip login-tip'></p>
@@ -41,15 +45,15 @@
 
 			<div class='sg-body sg-body-r hide'>
 				<div class='sg-r-email'>
-					<input class='bg-mail' type='text' placeholder='请输入登录邮箱' />
+					<input class='bg-mail input' type='text' placeholder='请输入登录邮箱' />
 					<p class='tip'>输入有效的邮箱！</p>
 				</div>
 				<div class='sg-r-psw'>
-					<input class='bg-psw' type='password' placeholder='请输入密码' />
+					<input class='bg-psw password ' type='password' placeholder='请输入密码' />
 					<p class='tip'>输入6-16位密码，不能使用空格！</p>
 				</div>
 				<div class='sg-r-nick'>
-					<input class='bg-nick' type='text' placeholder='请输入用户昵称' />
+					<input class='bg-nick input' type='text' placeholder='请输入用户昵称' />
 					<p class='tip'>输入昵称，2-18位中英文、数字或下划线！</p>
 				</div>
 				<div class='clearfix'>

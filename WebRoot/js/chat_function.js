@@ -3,8 +3,9 @@ $(function() {
 	$('.msg-main-l li').click(liClick);
 	$('.msg-main-l-recent').click(getChatByUser);
 	$('.msg-main-l-friend').click(getFriendByUser);
+	$('.msg-main-l-add').click(getAddPanel);
 	// middle
-	// $('.msg-main-m li').click(liClick);
+	$('.msg-main-m li').click(liClick);
 	// right
 	$('#send-msg').click(sendClick);
 	startWebSocket();
@@ -166,4 +167,97 @@ function scrollButton() {
 }
 function getFriendId() {
 	return $('.msg-main-m li.active h5').text();
+}
+// 添加好友框
+function getAddPanel() {
+	var el = $('.msg-main-m ul');
+	el.empty();
+	Ext.define('User', {
+		extend : 'Ext.data.Model',
+		fields : [ {
+			name : 'email'
+		}, {
+			name : 'id'
+		} ]
+	});
+
+	var store = Ext.create('Ext.data.Store', {
+		model : 'User',
+		proxy : {
+			type : 'ajax',
+			url : 'action',
+			extraParams : {
+				email : g_user.email,
+				method : 'getAllUser'
+			},
+			reader : {
+				type : 'json'
+			}
+		}
+	});
+
+	var panel = Ext.create('Ext.panel.Panel', {
+		width : 320,
+		border : false,
+		renderTo : el[0],
+
+		layout : {
+			align : 'stretch',
+			type : 'hbox'
+		},
+		bodyStyle : {
+			background : 'transparent'
+		},
+		titleAlign : 'center',
+		items : [ {
+			xtype : 'combobox',
+			width : 200,
+			margin : '30 20',
+			id : 'btn-friend',
+			typeAhead : true,
+			minChars : 1,
+			fieldLabel : '',
+			store : store,
+			displayField : 'email',
+			valueField : 'id'
+		}, {
+			xtype : 'button',
+			margin : '30 0',
+			text : '添 加',
+			listeners:{
+				click:function(button, e, eOpts){
+					addFriend();
+				}
+			}
+		} ]
+	});
+	return panel;
+}
+
+
+function addFriend() {
+	var combox = Ext.getCmp('btn-friend');
+    //推送加好友请求
+	/*Ext.Ajax.request({
+		url : 'action',
+		method:'GET',
+		params : {
+			method:'addFriend',
+			id : combox.getRawValue()
+		},
+		success : function(response) {
+			var obj = Ext.JSON.decode(response.responseText);
+		}
+	});*/
+	
+	$.ajax({
+		url : 'action',
+		data : {
+			method:'addFriend',
+			id : combox.getRawValue()
+		},
+		success : function(data) {
+			var obj = Ext.JSON.decode(data);
+		}
+	});
 }
