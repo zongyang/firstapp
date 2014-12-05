@@ -31,20 +31,26 @@ public class EnterPort {
 		if (!paraHash.containsKey("method")) {
 			return "";
 		}
-		
-		
+
 		/**
 		 * 注册和登录
 		 **/
-		
+		if (paraHash.get("method").endsWith("reg_req")) {
+			return UserAction.reg_req(paraHash.get("userName"),
+					paraHash.get("email"), paraHash.get("password"));
+		}
 		if (paraHash.get("method").endsWith("forget_req")) {
-			return UserAction.forget_req(paraHash.get("userName"), paraHash.get("email"),
-					paraHash.get("password"));
+			return UserAction.forget_req(paraHash.get("userName"),
+					paraHash.get("email"), paraHash.get("password"));
 		}
 		if (paraHash.get("method").endsWith("area_req")) {
 			return UserAction.area_req(paraHash.get("areaId"));
 		}
-		
+		if (paraHash.get("method").endsWith("log_req")) {
+			return UserAction.log_req(paraHash.get("userName"),
+					paraHash.get("password"));
+		}
+
 		if (paraHash.get("method").endsWith("login")) {
 			return UserAction.login(paraHash.get("email"), paraHash.get("psw"),
 					ip);
@@ -53,10 +59,12 @@ public class EnterPort {
 		if (paraHash.get("method").endsWith("register")) {
 			return UserAction.register(paraHash.get("user"), ip);
 		}
-		
-		if(paraHash.get("method").endsWith("getAllUser")){
-			return (paraHash.containsKey("query"))?UserAction.getAllUser(paraHash.get("query")):UserAction.getAllUser();
-			
+
+		if (paraHash.get("method").endsWith("getAllUser")) {
+			return (paraHash.containsKey("query")) ? UserAction
+					.getAllUser(paraHash.get("query")) : UserAction
+					.getAllUser();
+
 		}
 		/**
 		 * 好友和消息
