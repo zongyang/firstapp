@@ -1,14 +1,12 @@
-
 var g_user = new UserInfo();
 // 获得元素在数组中的序号
 function getComIndex(doms, dom) {
 	return doms.index(dom);
 }
 
-
 /*
  * 检测字符串是否为空
- */ 
+ */
 function checkNull(str) {
 	if (str == undefined) {
 		return true;
@@ -52,20 +50,23 @@ function inputCheck(el, regex, error, correct) {
 
 /*
  * 用户信息存储
-*/
+ */
 function UserInfo(userName) {
-	var userName = (checkNull(userName)) ? localStorage.getItem('userName')
-			: userName;
+	this. userName = (checkNull(this.userName)) ? localStorage.getItem('userName')
+			: this.userName;
 }
 UserInfo.prototype.check = function() {
-	if ( checkNull(this.userName)) {
+	if (checkNull(this.userName)) {
 		return true;
 	}
 	return false;
 }
 UserInfo.prototype.setUserName = function(val) {
-	userName = val;
-	localStorage.setItem('userNamel', val);
+	this.userName = val;
+	localStorage.setItem('userName', val);
+}
+UserInfo.prototype.getUserName = function() {
+	return this.userName;
 }
 UserInfo.prototype.loginOut = function() {// 注销操作
 	if (this.check()) {
@@ -80,7 +81,7 @@ UserInfo.prototype.loginOut = function() {// 注销操作
 
 /*
  * 字符串检测
-*/
+ */
 function regCheck(reg_exp, str) {
 	var reg = new RegExp(reg_exp);
 	return reg.test(str);

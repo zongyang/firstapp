@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import DB.DBHelper;
+import Model.AreaModel;
 import Model.UserModel;
 
 //登录注册类
@@ -84,6 +85,70 @@ public class UserAction {
 			return "{success:true,msg:'登录成功！'}";
 		}
 		return "{success:false,msg:'登录失败：用户名或者密码错误！'}";
+	}
+
+	public static String info_modify_req(String model) {
+		if (model == null || model.isEmpty()) {
+			return "{success:false,msg:'非法操作！'}";
+		}
+
+		Gson gson = new Gson();
+		UserModel user = gson.fromJson(model, UserModel.class);
+		String update = "update userInfo set area='" + user.getArea()
+				+ "',sex='" + user.getSex() + "',mark='" + user.getMark() + "'";
+
+		int rst = DBHelper.executeNonQuery(update);
+		if (rst == 1) {
+
+			return "{success:true,msg:'修改成功！'}";
+		} else {
+			return "{success:false,msg:'修改失败：没有找到该用户！'}";
+		}
+
+	}
+
+	public static String get_userInfo_req(String userName) throws SQLException {
+		if (userName == null || userName.isEmpty()) {
+			return "{success:fasle,msg:'非法操作！'}";
+		}
+
+		String json = "";
+		String query = "select userName,password,img,mark,regTime,sex,area from userInfo where userName='"
+				+ userName + "'";
+
+		ResultSet rs = DBHelper.executeQuery(query);
+
+		if (rs.next()) {
+			json += "{";
+			json += "userName:'" + rs.getString("userName") + "',";
+			json += "password:'" + rs.getString("password") + "',";
+			json += "img:'" + rs.getString("img") + "',";
+			json += "mark:'" + rs.getString("mark") + "',";
+			json += "regTime:'" + rs.getString("regTime") + "',";
+			json += "area:'" + get_full_are_by_areaId(rs.getString("area"))
+					+ "'";
+			json += "}";
+		}
+		return json;
+	}
+
+	private static String get_full_are_by_areaId(String areaId)
+			throws SQLException {
+		AreaModel model = new AreaModel(areaId);
+		String fullName = "";
+		String sql = " SELECT name from area where id='" + model.getProvince()
+				+ "' ";
+		sql += " union " + " SELECT name from area where id='"
+				+ model.getCity() + "' ";
+		sql += " union ";
+		sql += " SELECT name from area where id='" + model.getCounty() + "' ";
+
+		ResultSet rs = DBHelper.executeQuery(sql);
+		while (rs.next()) {
+			fullName +=  rs.getString("name")+"-" ;
+		}
+		fullName = CommFuns.TrimEnd(fullName, "-");
+		return fullName;
 	}
 
 	public static String login(String email, String psw, String ip)

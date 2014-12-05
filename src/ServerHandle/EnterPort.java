@@ -50,7 +50,13 @@ public class EnterPort {
 			return UserAction.log_req(paraHash.get("userName"),
 					paraHash.get("password"));
 		}
-
+		if (paraHash.get("method").endsWith("info_modify_req")) {
+			return UserAction.info_modify_req(paraHash.get("model"));
+		}
+		if (paraHash.get("method").endsWith("get_userInfo_req")) {
+			return UserAction.get_userInfo_req(paraHash.get("userName"));
+		}
+		
 		if (paraHash.get("method").endsWith("login")) {
 			return UserAction.login(paraHash.get("email"), paraHash.get("psw"),
 					ip);
@@ -85,5 +91,4 @@ public class EnterPort {
 		return "";
 
 	}
-
 }
