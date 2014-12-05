@@ -51,9 +51,10 @@ function inputCheck(el, regex, error, correct) {
 /*
  * 用户信息存储
  */
-function UserInfo(userName) {
-	this. userName = (checkNull(this.userName)) ? localStorage.getItem('userName')
-			: this.userName;
+function UserInfo(userName, img) {
+	this.userName = (checkNull(this.userName)) ? localStorage
+			.getItem('userName') : this.userName;
+	this.img = (checkNull(this.img)) ? localStorage.getItem('img') : this.img;// 保存图像，监听变化，以便相关图像的改变
 }
 UserInfo.prototype.check = function() {
 	if (checkNull(this.userName)) {
@@ -65,14 +66,22 @@ UserInfo.prototype.setUserName = function(val) {
 	this.userName = val;
 	localStorage.setItem('userName', val);
 }
+UserInfo.prototype.setImg = function(val) {
+	this.img = val;
+	localStorage.setItem('img', val);
+}
 UserInfo.prototype.getUserName = function() {
 	return this.userName;
+}
+UserInfo.prototype.getImg = function() {
+	return this.img;
 }
 UserInfo.prototype.loginOut = function() {// 注销操作
 	if (this.check()) {
 		return;
 	}
 	this.setUserName();
+	this.setImg();
 	localStorage.clear();
 	return;
 

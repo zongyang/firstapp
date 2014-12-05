@@ -133,22 +133,40 @@ public class UserAction {
 		return json;
 	}
 
-	public static String get_random_img_req() throws SQLException{
-		int max=20;
-        int min=0;
-        Random random = new Random();
-        int s = random.nextInt(max)%(max-min+1) + min;
-        
-        String sql="select url from icon where random="+s+" ";
-        
-        ResultSet rs=DBHelper.executeQuery(sql);
-        if(rs.next()){
-        	return "{success:true,msg:'"+rs.getString("url")+"'}";
-        }
-        return "{success:false,msg:'获取图片出错！'}";
-        
+	public static String get_random_img_req() throws SQLException {
+		int max = 10;
+		int min = 1;
+		Random random = new Random();
+		int s = random.nextInt(max) % (max - min + 1) + min;
+
+		String sql = "select url from icon where random=" + s + " ";
+
+		ResultSet rs = DBHelper.executeQuery(sql);
+		if (rs.next()) {
+			return "{success:true,msg:'" + rs.getString("url") + "'}";
+		}
+		return "{success:false,msg:'获取图片出错！'}";
+
 	}
-		private static String get_full_are_by_areaId(String areaId)
+
+	public static String icon_uodate_req(String userName, String img) {
+		if (userName == null || userName.isEmpty() || img == null || img.isEmpty()) {
+			return "{success:false,msg:'非法操作！'}";
+		}
+
+		String sql = "update userInfo set img='" + img + "' where userName='"
+				+ userName + "'";
+		int rst = DBHelper.executeNonQuery(sql);
+
+		if (rst <= 0) {
+			return "{success:false,msg:'数据库操作失败！'}";
+		}
+
+		return "{success:true,msg:'操作成功！'}";
+
+	}
+
+	private static String get_full_are_by_areaId(String areaId)
 			throws SQLException {
 		AreaModel model = new AreaModel(areaId);
 		String fullName = "";
@@ -161,7 +179,7 @@ public class UserAction {
 
 		ResultSet rs = DBHelper.executeQuery(sql);
 		while (rs.next()) {
-			fullName +=  rs.getString("name")+"-" ;
+			fullName += rs.getString("name") + "-";
 		}
 		fullName = CommFuns.TrimEnd(fullName, "-");
 		return fullName;

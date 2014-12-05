@@ -10,11 +10,18 @@ $(function() {
 	// 信息修改
 	$('.set-main-info-btn').click(set_main_info_btn_click);
 	// 头像修改
-	$('.icon-btn-change').click(icon_btn_change_click)
+	$('.set-main-icon-img img').click(set_main_icon_img_click);
+	$('.icon-btn').click(icon_btn_click);
 	// 个人资料初始化
 	init_info();
+	//头像初始化
+	init_img();
 });
-function icon_btn_change_click() {
+function init_img(){
+	var url=g_user.getImg();
+	$('.set-main-icon-img img').attr('src',url);
+}
+function set_main_icon_img_click() {
 
 	$.ajax({
 		url : 'action',
@@ -29,6 +36,26 @@ function icon_btn_change_click() {
 				return;
 			}
 			$('.set-main-icon-img img').attr('src', obj.msg);
+		}
+	});
+}
+
+function icon_btn_click(){
+	var url=$('.set-main-icon-img img').attr('src');
+	$.ajax({
+		url:'action',
+		data:{
+			method:'icon_uodate_req',
+			img:url,
+			userName:g_user.getUserName()
+		},
+		success:function(data){
+			var obj = Ext.JSON.decode(data);
+
+			if (!obj.success) {
+				Ext.Msg.alert('提示', obj.msg);
+				return;
+			}
 		}
 	});
 }
