@@ -15,6 +15,44 @@ import Model.UserModel;
 public class UserAction {
 	public static HttpSession session;
 
+	public static String forget_req(String userName,String email,String password) {
+		
+		String query="select email from userInfo where userName='"+userName+"'";
+		String update="update userInfo set password='"+password+"' where userName='"+userName+"'";
+		ResultSet rs=DBHelper.executeQuery(query);
+		
+		try {
+			if(rs.next()){
+				if(!rs.getString("email").equals(email)){
+					return "{success:false,msg:'注册邮箱不对或者该用户不存在！'}";
+				}
+			}
+			else{
+				return "{success:false,msg:'注册邮箱不对或者该用户不存在！'}";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		DBHelper.executeNonQuery(update);
+		return "{success:false,msg:'密码修改成功！'}";
+		
+	}
+	
+	public static String area_req(String areaId) throws SQLException{
+		areaId=(areaId==null||areaId.length()<6)?"000000":areaId;
+		String json="[";
+		String sql="select * from area where father='"+areaId+"'";
+		
+		
+		ResultSet rs=DBHelper.executeQuery(sql);
+		while(rs.next()){
+			json+="{id:'"+rs.getString("id")+"',name:'"+rs.getString("name")+"',father:'"+rs.getString("father")+"'},";
+		}
+		json=CommFuns.TrimEnd(json, ",")+"]";
+		return json;
+	}
 	public static String login(String email, String psw, String ip)
 			throws SQLException {
 
@@ -38,7 +76,8 @@ public class UserAction {
 	}
 
 	public static String register(String user, String ip) throws SQLException {
-		Gson gson = new Gson();
+		return "";
+		/*Gson gson = new Gson();
 		UserModel model = gson.fromJson(user, UserModel.class);
 		model.setIp(ip);
 		model.setOnline("1");
@@ -64,7 +103,7 @@ public class UserAction {
 		DBHelper.executeNonQuery(sql_insert);
 		rs = DBHelper.executeQuery(sql_check);
 		rs.next();
-		return CommFuns.getTip(true, rs.getString("id"), "");
+		return CommFuns.getTip(true, rs.getString("id"), "");*/
 
 	}
 
@@ -90,7 +129,8 @@ public class UserAction {
 		return getAllUser("");
 	}
 	public static String getAllUser(String query) throws SQLException{
-		
+		return "";
+		/*
 		String sql="select * from user ";
 		
 		if(!query.isEmpty()){
@@ -113,5 +153,6 @@ public class UserAction {
 		}
 		
 		return gson.toJson(models);
+		*/
 	}
 }

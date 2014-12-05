@@ -2,74 +2,78 @@ package Model;
 
 //人员基本信息模型类
 public class UserModel {
-	private String id;
-	private String email;
-	private String psw;
-	private String nickName;
-	private String online;
-	private String ip;
+	private String userName;
+	private String password;
+	private String area;
+	private String sex;
+	private String img;
+	private String mark;
+	private String regtime;
 
 	public UserModel() {
-		this.email = "";
-		this.psw = "";
-		this.nickName = "";
-		this.online = "";
-		this.ip = "";
+		this.userName = "";
+		this.password = "";
+		this.area = "";
+		this.sex = "保密";
+		this.img = "";
+		this.mark = "";
+		this.regtime = "";
 	}
 
-	public String getId() {
-		return id;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getPwd() {
-		return psw;
+	public String getArea() {
+		return area;
 	}
 
-	public void setPwd(String pwd) {
-		this.psw = pwd;
+	public void setArea(String area) {
+		this.area = area;
 	}
 
-	public String getNickName() {
-		return nickName;
+	public String getSex() {
+		return sex;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
-	public String getOnline() {
-		return online;
+	public String getImg() {
+		return img;
 	}
 
-	public void setOnline(String online) {
-		this.online = online;
+	public void setImg(String img) {
+		this.img = img;
 	}
 
-	public String getIp() {
-		return ip;
+	public String getMark() {
+		return mark;
 	}
 
-	public void setIp(String ip) {
-		this.ip = ip;
+	public void setMark(String mark) {
+		this.mark = mark;
 	}
 
-	public String getPsw() {
-		return psw;
+	public String getRegtime() {
+		return regtime;
 	}
 
-	public void setPsw(String psw) {
-		this.psw = psw;
+	public void setRegtime(String regtime) {
+		this.regtime = regtime;
 	}
+
 }

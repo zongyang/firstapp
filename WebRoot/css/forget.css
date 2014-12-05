@@ -61,22 +61,9 @@
 	height: 30px;
 }
 .sg-body button {
-	color: #fff;
-	font-size: 14px;
-	background-color: #39b94e;
-	height: 40px;
-	line-height: 40px;
-	width: 100%;
-	cursor: pointer;
-	text-align: center;
-	transition: background-color 0.2s;
-	-webkit-transition: background-color 0.2s;
-	-moz-transition: background-color 0.2s;
-	-o-transition: background-color 0.2s;
+	width: 100%;	
 }
-.sg-body button:hover {
-	background-color: #33a646;
-}
+
 
 .sg-body-l {
 }

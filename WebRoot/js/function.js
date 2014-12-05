@@ -1,11 +1,14 @@
 
-var g_user=new UserInfo();
-
-//获得元素在数组中的序号
+var g_user = new UserInfo();
+// 获得元素在数组中的序号
 function getComIndex(doms, dom) {
 	return doms.index(dom);
 }
-// 检测字符串是否为空
+
+
+/*
+ * 检测字符串是否为空
+ */ 
 function checkNull(str) {
 	if (str == undefined) {
 		return true;
@@ -47,61 +50,47 @@ function inputCheck(el, regex, error, correct) {
 	}
 }
 
-// 用户信息存储
-function UserInfo(id, email, nickName) {
-	this.id = (checkNull(this.id)) ? localStorage.getItem('id') : id;
-	this.email = (checkNull(this.email)) ? localStorage.getItem('email')
-			: email;
-	this.nickName = (checkNull(this.nickName)) ? localStorage
-			.getItem('nickName') : nickName;
+/*
+ * 用户信息存储
+*/
+function UserInfo(userName) {
+	var userName = (checkNull(userName)) ? localStorage.getItem('userName')
+			: userName;
 }
 UserInfo.prototype.check = function() {
-	if (checkNull(this.id) && checkNull(this.email)) {
+	if ( checkNull(this.userName)) {
 		return true;
 	}
 	return false;
 }
-UserInfo.prototype.setId = function(val) {
-	this.id = val;
-	localStorage.setItem('id', val);
-}
-UserInfo.prototype.setEmail = function(val) {
-	this.email = val;
-	localStorage.setItem('email', val);
-}
-UserInfo.prototype.setNickName = function(val) {
-	this.nickName = val;
-	localStorage.setItem('nickName', val);
+UserInfo.prototype.setUserName = function(val) {
+	userName = val;
+	localStorage.setItem('userNamel', val);
 }
 UserInfo.prototype.loginOut = function() {// 注销操作
 	if (this.check()) {
 		return;
 	}
-	var user = {
-		id : this.id,
-		email : this.email
-	};
-	
+	this.setUserName();
 	localStorage.clear();
-	this.setIfd();
-	this.setEmail();
-	this.setNickName();
-	return ;
-	
-	$.ajax({
-		url : 'action',
-		data : {
-			user : JSON.stringify(user),
-			method : 'loginOut'
-		},
-		success : function(obj) {
-			obj = JSON.parse(obj);
-			if (obj.success) {
-				localStorage.clear();
-				alert(obj.msg);
-				location.href = 'login.html';
-			}
-		}
-	});
+	return;
 
+	// 删除websocket会话
+}
+
+/*
+ * 字符串检测
+*/
+function regCheck(reg_exp, str) {
+	var reg = new RegExp(reg_exp);
+	return reg.test(str);
+}
+function userNameCheck(str) {
+	return regCheck(/^\S{2,18}$/, str);
+}
+function emailCheck(str) {
+	return regCheck(/^\w+@\w+\.\w+$/, str);
+}
+function passwordCheck(str) {
+	return regCheck(/^\S{6,16}$/, str);
 }

@@ -1,0 +1,75 @@
+.set {
+	margin: 20px 5% 20px 5%;
+	width: 1200px;
+	min-height: 660px;
+}
+
+.set label {
+	font-family: 微软雅黑;
+	font-size: 14px;
+	color: #333;
+}
+
+.set-banner {
+	width: 262px;
+	background: #fff;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+	transition: all 0.2s;
+	-webkit-transition: all 0.2s
+}
+
+.set-banner-ul {
+	border: 1px solid #e6e8e9;
+	border-top: none;
+	box-shadow: 0 3px 3px -2px rgba(0, 0, 0, 0.25);
+	background: #fff;
+}
+
+.set-banner-ul li {
+	position: relative;
+	cursor: pointer;
+	border-bottom: 1px solid #e6e8e9;
+	margin-bottom: -1px;
+}
+
+.set-banner-ul a {
+	display: block;
+	height: 59px;
+	padding-left: 47px;
+	line-height: 59px;
+	font-size: 14px;
+	color: #333;
+	border-color: transparent;
+	-webkit-transition: color, border-color 0.2s;
+	-moz-transition: color, border-color 0.2s;
+	-ms-transition: color, border-color 0.2s;
+	transition: color, border-color 0.2s;
+}
+
+.set-banner-ul a:hover {
+	color: #be3948;
+}
+
+.set-banner-ul .active a {
+	border-left: 2px solid #be3948;
+	padding-left: 45px;
+}
+
+.set-main {
+	position: relative;
+	width: 900px;
+	margin-left: 20px;
+	min-height: 600px;
+	border: 1px solid #e6e8e9;
+	border-top: none;
+	box-shadow: 0 3px 3px -2px rgba(0, 0, 0, 0.25);
+	background: #fff;
+}
+
+.set-main-info-btn {
+	position: absolute;
+	bottom: 180px;
+	left: 175px;
+	width: 300px;
+}
+

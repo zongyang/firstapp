@@ -31,9 +31,20 @@ public class EnterPort {
 		if (!paraHash.containsKey("method")) {
 			return "";
 		}
+		
+		
 		/**
 		 * 注册和登录
 		 **/
+		
+		if (paraHash.get("method").endsWith("forget_req")) {
+			return UserAction.forget_req(paraHash.get("userName"), paraHash.get("email"),
+					paraHash.get("password"));
+		}
+		if (paraHash.get("method").endsWith("area_req")) {
+			return UserAction.area_req(paraHash.get("areaId"));
+		}
+		
 		if (paraHash.get("method").endsWith("login")) {
 			return UserAction.login(paraHash.get("email"), paraHash.get("psw"),
 					ip);

@@ -4,7 +4,8 @@
 <title>登陆页</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="extjs/resources/css/ext-all-neptune-rtl.css">
+<link rel="stylesheet"
+	href="extjs/resources/css/ext-all-neptune-rtl.css">
 <link rel="stylesheet" type="text/css" href="css/base.css">
 <link rel="stylesheet" type="text/css" href="css/login.css">
 <script src="extjs/ext-all.js"></script>
@@ -22,20 +23,16 @@
 		</div>
 		<div>
 			<div class='sg-body  sg-body-l'>
-				<div class='sg-l-email'>
-					<input class='bg-mail input' type='text' placeholder='请输入登录邮箱' />
-					<p class='tip'>请输入有效的邮箱！</p>
+				<div class='sg-l-user'>
+					<input class='bg-user input' type='text' placeholder='请输入用户名' />
+					<p class='tip'>请输入有效用户名！</p>
 				</div>
 				<div class='sg-l-pwd'>
 					<input class='bg-psw password' type='password' placeholder='请输入密码' />
 					<p class='tip'>输入6-16位密码，不能使用空格！</p>
 				</div>
 				<div class='sg-body-l-forget clearfix'>
-					<!-- <label class='l inline' for="auto-signin"> <input
-						type="checkbox" checked="checked" id="auto-signin" />自动登录
-					</label> <a class='r inline' href="###" target="_blank">忘记密码？ </a>
-					<p></p>
-					 -->
+					<a class='r' href="###" target="_blank">忘记密码？ </a>
 				</div>
 				<div class='clearfix'>
 					<p class='tip login-tip'></p>
@@ -44,18 +41,27 @@
 			</div>
 
 			<div class='sg-body sg-body-r hide'>
-				<div class='sg-r-email'>
-					<input class='bg-mail input' type='text' placeholder='请输入登录邮箱' />
-					<p class='tip'>输入有效的邮箱！</p>
+				<div class='sg-r-user'>
+					<input class='bg-user input reg-username' type='text' placeholder='请输入用户名' />
+					<p class='tip  reg-username-tip'>请输入有效用户名！</p>
+				</div>
+				<div class='sg-r-user'>
+					<input class='bg-user input reg-email' type='text' placeholder='请输入注册邮箱' />
+					<p class='tip reg-tip-email'>请输入有效注册邮箱！</p>
 				</div>
 				<div class='sg-r-psw'>
-					<input class='bg-psw password ' type='password' placeholder='请输入密码' />
-					<p class='tip'>输入6-16位密码，不能使用空格！</p>
+					<input class='bg-psw password reg-password' type='password' placeholder='请输入密码' />
+					<p class='tip reg-tip-password'>输入6-16位密码，不能使用空格！</p>
 				</div>
-				<div class='sg-r-nick'>
+				<div class='sg-r-psw'>
+					<input class='bg-psw password reg-password-again' type='password' placeholder='密码确认' />
+					<p class='tip reg-tip-password-again'>输入再次输入密码，不能使用空格！</p>
+				</div>
+				<!-- <div class='sg-r-nick'>
 					<input class='bg-nick input' type='text' placeholder='请输入用户昵称' />
 					<p class='tip'>输入昵称，2-18位中英文、数字或下划线！</p>
 				</div>
+				 -->
 				<div class='clearfix'>
 					<p class='tip reg-tip'></p>
 					<button>注册</button>
