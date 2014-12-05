@@ -3,6 +3,7 @@ package Controller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -132,7 +133,22 @@ public class UserAction {
 		return json;
 	}
 
-	private static String get_full_are_by_areaId(String areaId)
+	public static String get_random_img_req() throws SQLException{
+		int max=20;
+        int min=0;
+        Random random = new Random();
+        int s = random.nextInt(max)%(max-min+1) + min;
+        
+        String sql="select url from icon where random="+s+" ";
+        
+        ResultSet rs=DBHelper.executeQuery(sql);
+        if(rs.next()){
+        	return "{success:true,msg:'"+rs.getString("url")+"'}";
+        }
+        return "{success:false,msg:'获取图片出错！'}";
+        
+	}
+		private static String get_full_are_by_areaId(String areaId)
 			throws SQLException {
 		AreaModel model = new AreaModel(areaId);
 		String fullName = "";

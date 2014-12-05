@@ -9,10 +9,29 @@ $(function() {
 	$('.set-banner-ul li').click(set_banner_ul_li_click);
 	// 信息修改
 	$('.set-main-info-btn').click(set_main_info_btn_click);
-	
-	//个人资料初始化
+	// 头像修改
+	$('.icon-btn-change').click(icon_btn_change_click)
+	// 个人资料初始化
 	init_info();
 });
+function icon_btn_change_click() {
+
+	$.ajax({
+		url : 'action',
+		data : {
+			method : 'get_random_img_req'
+		},
+		success : function(data) {
+			var obj = Ext.JSON.decode(data);
+
+			if (!obj.success) {
+				Ext.Msg.alert('提示', obj.msg);
+				return;
+			}
+			$('.set-main-icon-img img').attr('src', obj.msg);
+		}
+	});
+}
 function init_info() {
 	var mark = Ext.getCmp('info_mark');
 	var area = Ext.getCmp('info_area');
@@ -58,7 +77,22 @@ function radio_group_select(name) {
 }
 // tab切换事件
 function set_banner_ul_li_click(event) {
-	$(event.currentTarget).addClass('active').siblings().removeClass('active');
+	var li = $(event.currentTarget).addClass('active');
+	li.siblings().removeClass('active');
+
+	$('.set-main:nth(0)').addClass('hide');
+	$('.set-main:nth(1)').addClass('hide');
+	$('.set-main:nth(2)').addClass('hide');
+
+	if (li.hasClass('l-info')) {
+		$('.set-main:nth(0)').removeClass('hide');
+	}
+	if (li.hasClass('l-icon')) {
+		$('.set-main:nth(1)').removeClass('hide');
+	}
+	if (li.hasClass('l-password')) {
+		$('.set-main:nth(2)').removeClass('hide');
+	}
 }
 // 创建消息窗口
 function set_main_info() {
@@ -69,7 +103,7 @@ function set_main_info() {
 			align : 'stretch',
 			type : 'vbox'
 		},
-		renderTo : $('.set .info')[0],
+		renderTo : $('.set .l-info:nth(1)')[0],
 		items : [ {
 			xtype : 'combobox',
 			margin : 20,
@@ -110,8 +144,13 @@ function set_main_info() {
 				valueField : 'id',
 				listeners : {
 					select : function(combo, records, eOpts) {
-						Ext.getCmp('info_city').clearValue();
-						Ext.getCmp('info_county').clearValue();
+						var city = Ext.getCmp('info_city');
+						var county = Ext.getCmp('info_county');
+
+						city.clearValue();
+						county.clearValue();
+						city.getStore().removeAll();
+						county.getStore().removeAll();
 
 						load_store('city', records[0].get('id'));
 						info_area_change();
@@ -129,7 +168,13 @@ function set_main_info() {
 				valueField : 'id',
 				listeners : {
 					select : function(combo, records, eOpts) {
-						Ext.getCmp('info_county').clearValue();
+
+						var county = Ext.getCmp('info_county');
+
+						county.clearValue();
+
+						county.getStore().removeAll();
+
 						load_store('county', records[0].get('id'));
 						info_area_change();
 					}
@@ -261,7 +306,8 @@ function create_area_store(store_id) {
 	});
 	return store;
 }
-function load_store(store_id, areaId, callback) {
+function load_store(store_id, areaId) {
+
 	var store = Ext.StoreMgr.get(store_id);
 	var proxy = store.getProxy();
 	var extraParams = proxy.extraParams;
@@ -274,14 +320,5 @@ function load_store(store_id, areaId, callback) {
 	}
 
 	extraParams.areaId = areaId;
-	store.load({
-		scope : this,
-		callback : function(records, operation, success) {
-			// the operation object
-			// contains all of the details of the load operation
-			if (callback) {
-				callback();
-			}
-		}
-	});
+	store.load();
 }

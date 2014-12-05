@@ -56,7 +56,10 @@ public class EnterPort {
 		if (paraHash.get("method").endsWith("get_userInfo_req")) {
 			return UserAction.get_userInfo_req(paraHash.get("userName"));
 		}
-		
+		if (paraHash.get("method").endsWith("get_random_img_req")) {
+			return UserAction.get_random_img_req();
+		}
+		/*****************/
 		if (paraHash.get("method").endsWith("login")) {
 			return UserAction.login(paraHash.get("email"), paraHash.get("psw"),
 					ip);
