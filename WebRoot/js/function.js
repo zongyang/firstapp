@@ -51,10 +51,17 @@ function inputCheck(el, regex, error, correct) {
 /*
  * 用户信息存储
  */
-function UserInfo(userName, img) {
+function UserInfo(userName, img, mark, regTime, sex, area) {
 	this.userName = (checkNull(this.userName)) ? localStorage
 			.getItem('userName') : this.userName;
-	this.img = (checkNull(this.img)) ? localStorage.getItem('img') : this.img;// 保存图像，监听变化，以便相关图像的改变
+	this.img = (checkNull(this.img)) ? localStorage.getItem('img') : this.img;
+	this.mark = (checkNull(this.mark)) ? localStorage.getItem('mark')
+			: this.mark;
+	this.regTime = (checkNull(this.regTime)) ? localStorage.getItem('regTime')
+			: this.regTime;
+	this.sex = (checkNull(this.sex)) ? localStorage.getItem('sex') : this.sex;
+	this.area = (checkNull(this.area)) ? localStorage.getItem('area')
+			: this.area;
 }
 UserInfo.prototype.check = function() {
 	if (checkNull(this.userName)) {
@@ -70,11 +77,40 @@ UserInfo.prototype.setImg = function(val) {
 	this.img = val;
 	localStorage.setItem('img', val);
 }
+UserInfo.prototype.setMark = function(val) {
+	this.mark = val;
+	localStorage.setItem('mark', val);
+}
+UserInfo.prototype.setRegTime = function(val) {
+	this.regTime = val;
+	localStorage.setItem('regTime', val);
+}
+UserInfo.prototype.setSex = function(val) {
+	this.sex = val;
+	localStorage.setItem('sex', val);
+}
+UserInfo.prototype.setArea = function(val) {
+	this.area = val;
+	localStorage.setItem('area', val);
+}
+
 UserInfo.prototype.getUserName = function() {
 	return this.userName;
 }
 UserInfo.prototype.getImg = function() {
 	return this.img;
+}
+UserInfo.prototype.getMark = function() {
+	return this.mark;
+}
+UserInfo.prototype.getRegTime = function() {
+	return this.regTime;
+}
+UserInfo.prototype.getSex = function() {
+	return this.sex;
+}
+UserInfo.prototype.getArea = function() {
+	return this.area;
 }
 UserInfo.prototype.loginOut = function() {// 注销操作
 	if (this.check()) {
@@ -82,10 +118,35 @@ UserInfo.prototype.loginOut = function() {// 注销操作
 	}
 	this.setUserName();
 	this.setImg();
+	this.setArea();
+	this.setMark();
+	this.setRegTime();
+	this.setSex();
 	localStorage.clear();
 	return;
+}
+UserInfo.prototype.login = function(callback) {
+	var that = this;
+	$.ajax({
+		url : 'action',
+		data : {
+			method : 'get_userInfo_req',
+			userName : that.getUserName()
+		},
+		success : function(data) {
+			var obj = Ext.JSON.decode(data);
+			that.setUserName(obj.userName);
+			that.setImg(obj.img);
+			that.setMark(obj.mark);
+			that.setSex(obj.sex);
+			that.setRegTime(obj.sex);
+			that.setArea(obj.area);
 
-	// 删除websocket会话
+			if (callback) {
+				callback();
+			}
+		}
+	});
 }
 
 /*

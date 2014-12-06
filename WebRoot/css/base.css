@@ -333,3 +333,8 @@ html {
 .btn:hover {
 	background-color: #33a646;
 }
+.strong{
+	font-weight: bold;
+	color:red;
+	font-size:120%;
+}

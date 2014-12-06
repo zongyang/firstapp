@@ -205,6 +205,14 @@ function send_forget_res() {
 			}
 
 			Ext.Msg.alert('提示', obj.msg, function() {// 注册成功
+				
+				g_user.setUserName(input_userName.val());
+				g_user.login(function(){
+					location.href = 'chat.html';
+				});
+				
+				return ;
+				
 				g_user.setUserName(input_userName.val());
 				location.href = 'chat.html';
 			});
@@ -217,6 +225,7 @@ function send_log_res() {
 	var input_userName = $('.log-username');
 	var input_password = $('.log-password');
 
+	
 	$.ajax({
 		url : 'action',
 		data : {
@@ -233,6 +242,12 @@ function send_log_res() {
 
 			Ext.Msg.alert('提示', obj.msg, function() {// 登录成功
 				g_user.setUserName(input_userName.val());
+				
+				g_user.login(function(){
+					location.href = 'chat.html';
+				});
+				return;
+				
 				location.href = 'chat.html';
 			});
 

@@ -122,7 +122,7 @@ public class UserAction {
 		if (rs.next()) {
 			json += "{";
 			json += "userName:'" + rs.getString("userName") + "',";
-			json += "password:'" + rs.getString("password") + "',";
+			// json += "password:'" + rs.getString("password") + "',";
 			json += "img:'" + rs.getString("img") + "',";
 			json += "mark:'" + rs.getString("mark") + "',";
 			json += "regTime:'" + rs.getString("regTime") + "',";
@@ -150,7 +150,8 @@ public class UserAction {
 	}
 
 	public static String icon_uodate_req(String userName, String img) {
-		if (userName == null || userName.isEmpty() || img == null || img.isEmpty()) {
+		if (userName == null || userName.isEmpty() || img == null
+				|| img.isEmpty()) {
 			return "{success:false,msg:'非法操作！'}";
 		}
 
@@ -159,10 +160,33 @@ public class UserAction {
 		int rst = DBHelper.executeNonQuery(sql);
 
 		if (rst <= 0) {
-			return "{success:false,msg:'数据库操作失败！'}";
+			return "{success:false,msg:'修改图像失败：数据库操作失败！'}";
 		}
 
-		return "{success:true,msg:'操作成功！'}";
+		return "{success:true,msg:'修改图像成功！'}";
+
+	}
+
+	public static String psw_update_req(String userName, String old,
+			String refresh, String again) {
+		if (CommFuns
+				.CheckNull((new String[] { userName, old, refresh, again }))) {
+			return "{success:false,msg:'非法操作！'}";
+		}
+		if (!refresh.equals(again)) {
+			return "{success:false,msg:'非法操作！'}";
+		}
+
+		String sql = "update userInfo set password='" + again
+				+ "' where userName='" + userName + "' and password='" + old
+				+ "'";
+		int rst = DBHelper.executeNonQuery(sql);
+
+		if (rst <= 0) {
+			return "{success:false,msg:'修改密码失败：原密码错误！'}";
+		}
+
+		return "{success:true,msg:'修改密码成功！'}";
 
 	}
 

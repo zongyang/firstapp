@@ -12,14 +12,144 @@ $(function() {
 	// 头像修改
 	$('.set-main-icon-img img').click(set_main_icon_img_click);
 	$('.icon-btn').click(icon_btn_click);
+	// 密码修改
+	$('.set-main-psw input').on('input', modify_psw_click);
+	$('.btn-modify-icon').click(btn_modify_icon_click);
 	// 个人资料初始化
 	init_info();
-	//头像初始化
+	// 头像初始化
 	init_img();
 });
-function init_img(){
-	var url=g_user.getImg();
-	$('.set-main-icon-img img').attr('src',url);
+function modify_psw_click() {
+	var target = event.target;
+	var input_old = $('.modify-psw-old');
+	var input_new = $('.modify-psw-new');
+	var input_again = $('.modify-psw-again');
+
+	var tip_old = $('.tip-modify-old');
+	var tip_new = $('.tip-modify-new');
+	var tip_again = $('.tip-modify-again');
+
+	if (target == input_old[0]) {
+		if (!passwordCheck(input_old.val())) {
+			input_old.addClass('input-error');
+			tip_old.addClass('tip-error').text('请输入有效密码！');
+		} else {
+			input_old.removeClass('input-error');
+			tip_old.removeClass('tip-error').text('');
+		}
+	}
+	if (target == input_new[0]) {
+		if (!passwordCheck(input_new.val())) {
+			input_new.addClass('input-error');
+			tip_new.addClass('tip-error').text('请输入有效密码！');
+		} else {
+			input_new.removeClass('input-error');
+			tip_new.removeClass('tip-error').text('');
+		}
+		if (input_again.val() != input_new.val()) {
+			input_again.addClass('input-error');
+			tip_again.addClass('tip-error').text('密码不一致！');
+		} else {
+			input_again.removeClass('input-error');
+			tip_again.removeClass('tip-error').text('');
+		}
+	}
+
+	if (target == input_again[0]) {
+		if (input_again.val() != input_new.val()) {
+			input_again.addClass('input-error');
+			tip_again.addClass('tip-error').text('密码不一致！');
+		} else {
+			input_again.removeClass('input-error');
+			tip_again.removeClass('tip-error').text('');
+		}
+	}
+}
+function btn_modify_icon_click() {
+	var flg = true;
+	var input_old = $('.modify-psw-old');
+	var input_new = $('.modify-psw-new');
+	var input_again = $('.modify-psw-again');
+	var tip_old = $('.tip-modify-old');
+	var tip_new = $('.tip-modify-new');
+	var tip_again = $('.tip-modify-again');
+
+	if (!passwordCheck(input_old.val())) {
+		input_old.addClass('input-error');
+		tip_old.addClass('tip-error').text('请输入有效密码！');
+		flg = false;
+	}
+	if (!passwordCheck(input_new.val())) {
+		input_new.addClass('input-error');
+		tip_new.addClass('tip-error').text('请输入有效密码！');
+		flg = false;
+	}
+	if (input_again.val() != input_new.val()) {
+		input_again.addClass('input-error');
+		tip_again.addClass('tip-error').text('密码不一致！');
+		flg = false;
+	}
+
+	if (flg) {
+		input_old.removeClass('input-error');
+		tip_old.removeClass('tip-error').text('');
+		input_new.removeClass('input-error');
+		tip_new.removeClass('tip-error').text('');
+		input_again.removeClass('input-error');
+		tip_again.removeClass('tip-error').text('');
+		send_modify_psw_req();
+	}
+}
+
+function send_modify_psw_req() {
+	var input_old = $('.modify-psw-old').val();
+	var input_new = $('.modify-psw-new').val();
+	var input_again = $('.modify-psw-again').val();
+
+	$.ajax({
+		url : 'action',
+		data : {
+			method : 'psw_update_req',
+			old : input_old,
+			refresh : input_new,
+			again : input_again,
+			userName : g_user.getUserName()
+		},
+		success : function(data) {
+			var obj = Ext.JSON.decode(data);
+
+			if (!obj.success) {
+				Ext.Msg.alert('提示', obj.msg);
+				return;
+			}
+
+			Ext.Msg.show({
+				title : '提示',
+				msg : obj.msg 
+						+ '点击 <font class="strong">确定</font> 后跳转到登陆页。',
+				buttons : Ext.Msg.YES,
+				icon : Ext.Msg.OK,
+				closable : false,
+				width:380,
+				fn : function() {
+					g_user.loginOut();
+					location.href = 'login.html';
+				}
+			});
+			/*
+			 * Ext.Msg.alert('提示', obj.msg+'\n'+'点击 <font class="strong">确定</font>
+			 * 后跳转到登陆页。', function() { g_user.loginOut(); location.href =
+			 * 'login.html'; });
+			 */
+
+		}
+	});
+}
+
+function init_img() {
+	var url = g_user.getImg();
+	$('.set-main-icon-img img').attr('src', url);
 }
 function set_main_icon_img_click() {
 
@@ -40,28 +170,34 @@ function set_main_icon_img_click() {
 	});
 }
 
-function icon_btn_click(){
-	var url=$('.set-main-icon-img img').attr('src');
+function icon_btn_click() {
+	var url = $('.set-main-icon-img img').attr('src');
 	$.ajax({
-		url:'action',
-		data:{
-			method:'icon_uodate_req',
-			img:url,
-			userName:g_user.getUserName()
+		url : 'action',
+		data : {
+			method : 'icon_uodate_req',
+			img : url,
+			userName : g_user.getUserName()
 		},
-		success:function(data){
+		success : function(data) {
 			var obj = Ext.JSON.decode(data);
-
+			Ext.Msg.alert('提示', obj.msg);
 			if (!obj.success) {
-				Ext.Msg.alert('提示', obj.msg);
 				return;
 			}
+
+			g_user.setImg(url);
 		}
 	});
 }
 function init_info() {
 	var mark = Ext.getCmp('info_mark');
 	var area = Ext.getCmp('info_area');
+
+	radio_group_select(g_user.getSex());
+	mark.setValue(g_user.getMark());
+	area.setValue(g_user.getArea());
+	return;
 	$.ajax({
 		url : 'action',
 		data : {

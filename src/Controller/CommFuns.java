@@ -45,6 +45,19 @@ public class CommFuns {
 
 	}
 
+	public static Boolean CheckNull(String[] args) {
+	
+		if(args==null){
+			return true;
+		}
+		for(int i=0;i<args.length;i++){
+			if(args[i]==null||args.equals("")){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public static String TrimEnd(String input, String charsToTrim) {
 		return input.replaceAll("[" + charsToTrim + "]+$", "");
 	}

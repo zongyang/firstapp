@@ -60,9 +60,15 @@ public class EnterPort {
 			return UserAction.get_random_img_req();
 		}
 		if (paraHash.get("method").endsWith("icon_uodate_req")) {
-			return UserAction.icon_uodate_req(paraHash.get("userName"),paraHash.get("img"));
+			return UserAction.icon_uodate_req(paraHash.get("userName"),
+					paraHash.get("img"));
 		}
-		
+		if (paraHash.get("method").endsWith("psw_update_req")) {
+			return UserAction.psw_update_req(paraHash.get("userName"),
+					paraHash.get("old"), paraHash.get("refresh"),
+					paraHash.get("again"));
+		}
+
 		/*****************/
 		if (paraHash.get("method").endsWith("login")) {
 			return UserAction.login(paraHash.get("email"), paraHash.get("psw"),
