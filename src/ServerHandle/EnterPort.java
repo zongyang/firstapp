@@ -68,7 +68,12 @@ public class EnterPort {
 					paraHash.get("old"), paraHash.get("refresh"),
 					paraHash.get("again"));
 		}
-
+		if (paraHash.get("method").endsWith("get_friend_lsit_req")) {
+			return FriendAction.get_friend_lsit_req(paraHash.get("userName"));
+		}
+		
+		
+		
 		/*****************/
 		if (paraHash.get("method").endsWith("login")) {
 			return UserAction.login(paraHash.get("email"), paraHash.get("psw"),

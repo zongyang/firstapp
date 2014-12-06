@@ -8,16 +8,16 @@ public class UserModel {
 	private String sex;
 	private String img;
 	private String mark;
-	private String regtime;
+	private String regTime;
 
 	public UserModel() {
 		this.userName = "";
 		this.password = "";
 		this.area = "";
-		this.sex = "保密";
+		this.sex = "";
 		this.img = "";
 		this.mark = "";
-		this.regtime = "";
+		this.setRegTime("");
 	}
 
 	public String getUserName() {
@@ -68,12 +68,14 @@ public class UserModel {
 		this.mark = mark;
 	}
 
-	public String getRegtime() {
-		return regtime;
+
+
+	public String getRegTime() {
+		return regTime;
 	}
 
-	public void setRegtime(String regtime) {
-		this.regtime = regtime;
+	public void setRegTime(String regTime) {
+		this.regTime = regTime;
 	}
 
 }

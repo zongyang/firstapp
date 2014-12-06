@@ -12,10 +12,7 @@
 }
 
 .msg-user-img {
-	border-radius: 22px;
-	border: 2px solid #FFF;
-	box-shadow: 2px 2px 3px #999;
-	margin-right: 10px;
+	margin-right: 18px;
 }
 
 .msg-main-l {
@@ -85,17 +82,19 @@
 }
 
 .msg-main-m li h5 {
-	font-size: 16px;
+	font-size: 15px;
 	height: 27px;
 	line-height: 27px;
 }
 
 .msg-main-m li p {
+	color: rgb(49, 49, 126);
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
 	height: 27px;
 	line-height: 27px;
+	text-overflow: ellipsis;
 }
 
 .msg-main-r {
@@ -171,24 +170,19 @@
 	right: -12px;
 }
 
-.msg-main-input {
+.msg-main-send {
 	position: absolute;
 	left: 400px;
 	bottom: 0;
 	width: 800px;
+	border-top: 1px solid #AEAEAC;
 	background: none;
 }
 
-.msg-main-input table {
+.msg-main-send-div {
 	position: relative;
-	border-top: 1px solid #AEAEAC;
-	width: 90%;
-	margin: 10px 20px;
-	border-top: 1px solid #AEAEAC;
-}
-
-.msg-main-input td {
-	width: 50px;
+	width: 700px;
+	margin: 0 auto 10px auto;
 }
 
 #chart-input {
@@ -200,30 +194,41 @@
 	overflow: hidden;
 }
 
-#send-msg {
-	margin-top: 5px;
-	height: 40px;
-	line-height: 30px;
+#btn-send-msg {
 	width: 150px;
-	color: #fff;
-	font-size: 14px;
-	background-color: #39b94e;
-	cursor: pointer;
-	text-align: center;
-	transition: background-color 0.2s;
-	-webkit-transition: background-color 0.2s;
-	-moz-transition: background-color 0.2s;
-	-o-transition: background-color 0.2s;
-}
-
-#send-msg:hover {
-	background-color: #33a646;
+	margin-left: 50px;
 }
 
 #rb-tip {
 	text-align: center;
-    position: relative;
+	position: relative;
 	margin-top: 10%;
 	height: 100%;
 	overflow-y: auto;
+}
+
+.friend-table {
+	display: block;
+	position: relative;
+	margin: 20px auto 20px auto;
+	width: 280px;
+	font-size: 15px;
+}
+
+.friend-table img {
+	height: 60px;
+	width: 60px;
+}
+
+.friend-table tr {
+	font-size: 15px;
+	height: 27px;
+	line-height: 27px;
+	
+}
+.friend-table tr td{
+	color: rgb(49, 49, 126);
+}
+.friend-table .text-right{
+	color: black;
 }

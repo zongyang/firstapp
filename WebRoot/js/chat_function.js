@@ -1,35 +1,111 @@
 $(function() {
 	// left
 	$('.msg-main-l li').click(liClick);
+	$('.msg-main-l-friend').click(msg_main_l_friend_click);
+	
+	
+	return;
 	$('.msg-main-l-recent').click(getChatByUser);
-	$('.msg-main-l-friend').click(getFriendByUser);
 	$('.msg-main-l-add').click(getAddPanel);
 	// middle
 	$('.msg-main-m li').click(liClick);
 	// right
 	$('#send-msg').click(sendClick);
-	$('#chart-input').keydown(function(event){
-		 if(event.keyCode==13){
-			 sendClick();
-	     }    
+	$('#chart-input').keydown(function(event) {
+		if (event.keyCode == 13) {
+			sendClick();
+		}
 	});
 	startWebSocket();
 });
 
+function msg_main_l_friend_click() {
+	$.ajax({
+		url : 'action',
+		data : {
+			userName : g_user.getUserName(),
+			method : 'get_friend_lsit_req'
+		},
+		success : function(data) {
+			var obj = Ext.JSON.decode(data);
+			if (!obj.success) {
+				alert(obj.msg);
+				return;
+			}
+			create_friend_list(obj.msg);
+
+		}
+	});
+}
+function create_friend_list(arr) {
+
+	var lis = '';
+	var el = $('.msg-main-m ul');
+	el.empty();
+	for (var i = 0; i < arr.length; i++) {
+		lis += '<li title="点击查看 ' + arr[i].userName + ' 的详细信息">';
+		lis += '<img class="user-iocn l" src="' + arr[i].img + '" />';
+		lis += '<div class="l">';
+		lis += '<h5>' + arr[i].userName + '</h5>';
+		lis += '<p>' + arr[i].mark + '</p>';
+		lis += '</div>';
+		lis += '</li>';
+	}
+	el.append(lis);
+	el.find('li').click(firend_click);
+}
+function firend_click(event) {
+	var userName = $(event.currentTarget).find('h5').text();
+	$.ajax({
+		url : 'action',
+		data : {
+			method : 'get_userInfo_req',
+			userName : userName
+		},
+		success : function(data) {
+			var obj = Ext.JSON.decode(data);
+
+			var html = '<table class="friend-table">';
+			html += '<tr><td class="text-right"><img class="user-iocn" src="'
+					+ obj.img + '"/></td></tr>';
+			html += '<tr><td class="text-right">用户名：</td><td>' + obj.userName
+					+ '</td ></td></tr>';
+			html += '<tr><td class="text-right">性     别：</td><td>' + obj.sex
+					+ '</td></tr>';
+			html += '<tr><td class="text-right">注册时间：</td><td>' + obj.regTime
+					+ '</td></tr>';
+			html += '<tr><td class="text-right">地     址：</td><td>' + obj.area
+					+ '</td></tr>';
+			html += '<tr><td class="text-right">个性签名：</td><td>' + obj.mark
+					+ '</td></tr>';
+			html += '</table>';
+
+			Ext.create('Ext.window.Window', {
+				width : 400,
+				bodyStyle : {
+					background : 'rgb(231, 226, 223)'
+				},
+				title : obj.userName + ' 的详细信息',
+				html : html
+			}).show();
+
+		}
+	});
+}
 // 发送按钮
 function sendClick() {
 	var msg = $('#chart-input').val();
-	if(getFriendId()==""){
-		Ext.Msg.alert('警告','请选择好友、消息不能为空！');
+	if (getFriendId() == "") {
+		Ext.Msg.alert('警告', '请选择好友、消息不能为空！');
 		$('#chart-input').val('');
 		return;
 	}
-	if(msg==""||new RegExp(/^\r*$/).test(msg)){
-		Ext.Msg.alert('警告','请选择好友、消息不能为空！');
+	if (msg == "" || new RegExp(/^\r*$/).test(msg)) {
+		Ext.Msg.alert('警告', '请选择好友、消息不能为空！');
 		$('#chart-input').val('');
 		return;
 	}
-	
+
 	var friend = sendMsg('sendToFriend', msg.trim(), getFriendId(), function() {
 		// 发送后清空内容
 		$('#chart-input').val('');
@@ -238,8 +314,8 @@ function getAddPanel() {
 			xtype : 'button',
 			margin : '30 0',
 			text : '添 加',
-			listeners:{
-				click:function(button, e, eOpts){
+			listeners : {
+				click : function(button, e, eOpts) {
 					addFriend();
 				}
 			}
@@ -248,21 +324,17 @@ function getAddPanel() {
 	return panel;
 }
 
-
 function addFriend() {
 	var combox = Ext.getCmp('btn-friend');
-	var friend={from:g_user.id,to: combox.getValue()};
-    //推送加好友请求
-	sendMsg('friendRequest','',combox.getRawValue());
+	var friend = {
+		from : g_user.id,
+		to : combox.getValue()
+	};
+	// 推送加好友请求
+	sendMsg('friendRequest', '', combox.getRawValue());
 	/*
-	$.ajax({
-		url : 'action',
-		data : {
-			method:'addFriend',
-			friend :Ext.JSON.encode(friend)
-		},
-		success : function(data) {
-			var obj = Ext.JSON.decode(data);
-		}
-	});*/
+	 * $.ajax({ url : 'action', data : { method:'addFriend', friend
+	 * :Ext.JSON.encode(friend) }, success : function(data) { var obj =
+	 * Ext.JSON.decode(data); } });
+	 */
 }

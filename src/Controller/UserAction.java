@@ -39,7 +39,10 @@ public class UserAction {
 			e.printStackTrace();
 		}
 
-		DBHelper.executeNonQuery(update);
+		int rst = DBHelper.executeNonQuery(update);
+		if (rst <= 0) {
+			return "{success:false,msg:'注册邮箱不对或者该用户不存在或者数据库操作失败！'}";
+		}
 		return "{success:true,msg:'密码修改成功！'}";
 
 	}
@@ -66,11 +69,11 @@ public class UserAction {
 				+ email
 				+ "','"
 				+ password
-				+ "','','保密','','',now())";
+				+ "','','保密','img/header_icon/0.jpg','',now())";
 		String query = "select userName from userInfo where userName='"
-				+ userName + "'";
+				+ userName + "' or email='"+email+"'";
 		if (DBHelper.isExist(query)) {
-			return "{success:false,msg:'注册失败，该用户名已被注册！'}";
+			return "{success:false,msg:'注册失败，该用户名或者邮箱已被注册！'}";
 		}
 
 		DBHelper.executeNonQuery(insert);
@@ -99,11 +102,12 @@ public class UserAction {
 				+ "',sex='" + user.getSex() + "',mark='" + user.getMark() + "'";
 
 		int rst = DBHelper.executeNonQuery(update);
-		if (rst == 1) {
-
-			return "{success:true,msg:'修改成功！'}";
-		} else {
+		if (rst <= 0) {
 			return "{success:false,msg:'修改失败：没有找到该用户！'}";
+
+		} else {
+			return "{success:true,msg:'修改成功！'}";
+
 		}
 
 	}
@@ -124,6 +128,7 @@ public class UserAction {
 			json += "userName:'" + rs.getString("userName") + "',";
 			// json += "password:'" + rs.getString("password") + "',";
 			json += "img:'" + rs.getString("img") + "',";
+			json += "sex:'" + rs.getString("sex") + "',";
 			json += "mark:'" + rs.getString("mark") + "',";
 			json += "regTime:'" + rs.getString("regTime") + "',";
 			json += "area:'" + get_full_are_by_areaId(rs.getString("area"))

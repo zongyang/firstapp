@@ -13,6 +13,10 @@ import Model.ChatModel;
 
 //消息聊类：负责聊天页面非websocket的请求
 public class ChatAction {
+	
+	
+	
+	
 	public static String getChatByFriend(String user, String friend)
 			throws SQLException {
 		String sql = "select * from chat where (`from`='" + user

@@ -2,14 +2,51 @@ package Controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import DB.DBHelper;
 import Model.FriendModel;
+import Model.UserModel;
 
 import com.google.gson.Gson;
 
 public class FriendAction {
+
+	public static String get_friend_lsit_req(String userName)
+			throws SQLException {
+		if (userName == null || userName.isEmpty()) {
+			return "{success:false,msg:'非法操作！'}";
+		}
+
+		LinkedList<UserModel> list = new LinkedList<UserModel>();
+		Gson gson = new Gson();
+		String sql = " SELECT t2.userName,t2.img,t2.mark,t2.regTime,t2.sex,t3.name as area FROM ( ";
+		sql += " SELECT toName AS userName FROM friend WHERE fromName = '"
+				+ userName + "' ";
+		sql += " UNION ";
+		sql += " SELECT fromName AS userName FROM friend WHERE toName = '"
+				+ userName + "' ";
+		sql += " ) AS t1 ";
+		sql += " INNER JOIN userinfo t2 ON t1.userName = t2.userName ";
+		sql += " left JOIN area t3 on t2.area=t3.id ";
+		ResultSet rs = DBHelper.executeQuery(sql);
+
+		while (rs.next()) {
+			UserModel user = new UserModel();
+			user.setUserName(rs.getString("userName"));
+			user.setImg(rs.getString("img"));
+			user.setMark(rs.getString("mark"));
+			user.setRegTime(rs.getString("regTime"));
+			user.setSex(rs.getString("sex"));
+			user.setArea(rs.getString("area"));
+			list.add(user);
+		}
+
+		return "{success:true,msg:"+gson.toJson(list)+"}";
+
+	}
+
 	// 考虑 from和to
 	public static String addFriend(String friend) throws SQLException {
 		if (friend == null) {
@@ -23,17 +60,20 @@ public class FriendAction {
 	}
 
 	public static String addFriend(FriendModel friend) throws SQLException {
-		String sql = "insert into friend (`from`,`to`) values ('"
-				+ friend.getFrom() + "','" + friend.getTo() + "')";
-
-		if (isFriend(friend.getFrom(), friend.getTo())) {
-			return CommFuns.getTip(false, "已经是好友!", "");
-		}
-		DBHelper.executeNonQuery(sql);
-		return CommFuns.getTip(true, "添加成功!", "");
+		/*
+		 * String sql = "insert into friend (`from`,`to`) values ('" +
+		 * friend.getFrom() + "','" + friend.getTo() + "')";
+		 * 
+		 * if (isFriend(friend.getFrom(), friend.getTo())) { return
+		 * CommFuns.getTip(false, "已经是好友!", ""); }
+		 * DBHelper.executeNonQuery(sql); return CommFuns.getTip(true, "添加成功!",
+		 * "");
+		 */
+		return "";
 	}
 
 	public static String update(String friend) {
+		/*
 		Gson gson = new Gson();
 		FriendModel model = gson.fromJson(friend, FriendModel.class);
 		String sql = "update frind set ";
@@ -51,7 +91,8 @@ public class FriendAction {
 				+ "' and `to`='" + model.getFrom() + "')";
 
 		DBHelper.executeNonQuery(sql);
-		return CommFuns.getTip(true, "修改成功!", "");
+		return CommFuns.getTip(true, "修改成功!", "");*/
+		return null;
 	}
 
 	public static String getFriendByUser(String id) throws SQLException {
@@ -100,7 +141,7 @@ public class FriendAction {
 
 	public static LinkedList<FriendModel> getFirends(String user)
 			throws SQLException {
-
+/*
 		LinkedList<FriendModel> friends = new LinkedList<FriendModel>();
 		String sql = "select `fromName`,`from`,`toName`,`to` from friend_view where `fromName`='"
 				+ user + "' or `toName`='" + user + "' ";
@@ -136,7 +177,8 @@ public class FriendAction {
 			}
 		}
 
-		return friends;
+		return friends;*/
+		return null;
 	}
 
 }
