@@ -1,5 +1,5 @@
 function startWebSocket() {
-	var url = 'ws://' + location.host + '/firstapp/chat/' + g_user.email;
+	var url = 'ws://' + location.host + '/firstapp/chat/' + g_user.getUserName();
 	ws = new WebSocket(url);
 
 	ws.onmessage = function(evt) {

@@ -26,14 +26,14 @@ public class ChatAction {
 		LinkedList<ChatModel> models = new LinkedList<ChatModel>();
 		ResultSet rs = DBHelper.executeQuery(sql);
 		while (rs.next()) {
-			ChatModel model = new ChatModel();
-			model.setFrom(rs.getString("from"));
-			model.setTo(rs.getString("to"));
-			model.setContent(rs.getString("content"));
-			model.setRecept(rs.getString("recept"));
-			model.setTime(rs.getString("time"));
-			model.setActions(rs.getString("actions"));
-			models.push(model);
+//			ChatModel model = new ChatModel();
+//			model.setFrom(rs.getString("from"));
+//			model.setTo(rs.getString("to"));
+//			model.setContent(rs.getString("content"));
+//			model.setRecept(rs.getString("recept"));
+//			model.setTime(rs.getString("time"));
+//			model.setActions(rs.getString("actions"));
+//			models.push(model);
 		}
 
 		return CommFuns.getTip(true, gson.toJson(models), "");
@@ -55,28 +55,28 @@ public class ChatAction {
 			// 主动发起的(key是friend)
 			if (rs.getString("from").equals(user)
 					&& !hm.containsKey(rs.getString("to"))) {
-				model.setFrom(rs.getString("from"));
-				model.setTo(rs.getString("to"));
-				model.setContent(rs.getString("content"));
-				model.setRecept(rs.getString("recept"));
-				model.setTime(rs.getString("time"));
-				model.setActions(rs.getString("actions"));
-				model.setFriend(rs.getString("to"));
-				model.setFriendName(rs.getString("toName"));
-				hm.put(rs.getString("to"), model);
+//				model.setFrom(rs.getString("from"));
+//				model.setTo(rs.getString("to"));
+//				model.setContent(rs.getString("content"));
+//				model.setRecept(rs.getString("recept"));
+//				model.setTime(rs.getString("time"));
+//				model.setActions(rs.getString("actions"));
+//				model.setFriend(rs.getString("to"));
+//				model.setFriendName(rs.getString("toName"));
+//				hm.put(rs.getString("to"), model);
 
 			}
 			// 好友发起的(key是friend)
 			if (rs.getString("to").equals(user)
 					&& !hm.containsKey(rs.getString("from"))) {
-				model.setTo(rs.getString("to"));
-				model.setContent(rs.getString("content"));
-				model.setRecept(rs.getString("recept"));
-				model.setTime(rs.getString("time"));
-				model.setActions(rs.getString("actions"));
-				model.setFriend(rs.getString("from"));
-				model.setFriendName(rs.getString("fromName"));
-				hm.put(rs.getString("from"), model);
+//				model.setTo(rs.getString("to"));
+//				model.setContent(rs.getString("content"));
+//				model.setRecept(rs.getString("recept"));
+//				model.setTime(rs.getString("time"));
+//				model.setActions(rs.getString("actions"));
+//				model.setFriend(rs.getString("from"));
+//				model.setFriendName(rs.getString("fromName"));
+//				hm.put(rs.getString("from"), model);
 
 			}
 		}
@@ -102,20 +102,50 @@ public class ChatAction {
 
 		for (int i = 0; i < len; i++) {
 			temp = mdoels.get(i);
-			insert += "INSERT INTO chat (`from`, `to`, `content`, `recept`, `time`, `actions`) VALUES ('"
-					+ temp.getFrom()
-					+ "', '"
-					+ temp.getTo()
-					+ "', '"
-					+ temp.getContent()
-					+ "', '"
-					+ temp.getRecept()
-					+ "', '"
-					+ temp.getTime() + "', '" + temp.getActions() + "'); ";
+//			insert += "INSERT INTO chat (`from`, `to`, `content`, `recept`, `time`, `actions`) VALUES ('"
+//					+ temp.getFrom()
+//					+ "', '"
+//					+ temp.getTo()
+//					+ "', '"
+//					+ temp.getContent()
+//					+ "', '"
+//					+ temp.getRecept()
+//					+ "', '"
+//					+ temp.getTime() + "', '" + temp.getActions() + "'); ";
 
 		}
 		DBHelper.executeNonQuery(insert);
 
 	}
 
+public static int add_chat_record(ChatModel mdoel){
+		LinkedList<ChatModel> list=new LinkedList<ChatModel>();
+		list.push(mdoel);
+		return add_chat_record(list);
+	}
+	public static int add_chat_record(LinkedList<ChatModel> mdoels){
+		String insert = "";
+		ChatModel temp;
+		int len = mdoels.size();
+
+		if (len == 0) {
+			return -1;
+		}
+
+		for (int i = 0; i < len; i++) {
+			temp = mdoels.get(i);
+			insert += "INSERT INTO chat (fromName,toName,content,time) VALUES ('"
+					+ temp.getFromName()
+					+ "', '"
+					+ temp.getToName()
+					+ "', '"
+					+ temp.getContent()
+					+ "', '"
+					+ temp.getTime()+"') ;";
+		}
+		
+		return DBHelper.executeNonQuery(insert);
+
+	}
+	
 }

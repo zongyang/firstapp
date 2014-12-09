@@ -3,22 +3,25 @@ $(function() {
 	$('.msg-main-l li').click(liClick);
 	$('.msg-main-l-friend').click(msg_main_l_friend_click);
 	
-	
-	return;
-	$('.msg-main-l-recent').click(getChatByUser);
-	$('.msg-main-l-add').click(getAddPanel);
-	// middle
-	$('.msg-main-m li').click(liClick);
-	// right
+	//发送消息
 	$('#send-msg').click(sendClick);
 	$('#chart-input').keydown(function(event) {
 		if (event.keyCode == 13) {
 			sendClick();
 		}
 	});
+	return;
+	
+	$('.msg-main-l-recent').click(getChatByUser);
+	$('.msg-main-l-add').click(getAddPanel);
+	// middle
+	$('.msg-main-m li').click(liClick);
+	// right
+	
 	startWebSocket();
 });
 
+//
 function msg_main_l_friend_click() {
 	$.ajax({
 		url : 'action',
@@ -37,61 +40,93 @@ function msg_main_l_friend_click() {
 		}
 	});
 }
+//
 function create_friend_list(arr) {
-
 	var lis = '';
 	var el = $('.msg-main-m ul');
 	el.empty();
 	for (var i = 0; i < arr.length; i++) {
-		lis += '<li title="点击查看 ' + arr[i].userName + ' 的详细信息">';
+		lis += '<li title="右键查看 ' + arr[i].userName + ' 的详细信息">';
 		lis += '<img class="user-iocn l" src="' + arr[i].img + '" />';
 		lis += '<div class="l">';
 		lis += '<h5>' + arr[i].userName + '</h5>';
-		lis += '<p>' + arr[i].mark + '</p>';
+		lis += '<p  class="blue-clor">' + arr[i].mark + '</p>';
 		lis += '</div>';
 		lis += '</li>';
 	}
 	el.append(lis);
-	el.find('li').click(firend_click);
+	el.find('li').on('contextmenu',firend_mousedown);
+
 }
-function firend_click(event) {
+//
+function firend_mousedown(event) {
+
+	if (event.which != 3) {
+		return;
+	}
+
 	var userName = $(event.currentTarget).find('h5').text();
-	$.ajax({
-		url : 'action',
-		data : {
-			method : 'get_userInfo_req',
-			userName : userName
-		},
-		success : function(data) {
-			var obj = Ext.JSON.decode(data);
+	var contextmenu = new Ext.menu.Menu(
+			{
 
-			var html = '<table class="friend-table">';
-			html += '<tr><td class="text-right"><img class="user-iocn" src="'
-					+ obj.img + '"/></td></tr>';
-			html += '<tr><td class="text-right">用户名：</td><td>' + obj.userName
-					+ '</td ></td></tr>';
-			html += '<tr><td class="text-right">性     别：</td><td>' + obj.sex
-					+ '</td></tr>';
-			html += '<tr><td class="text-right">注册时间：</td><td>' + obj.regTime
-					+ '</td></tr>';
-			html += '<tr><td class="text-right">地     址：</td><td>' + obj.area
-					+ '</td></tr>';
-			html += '<tr><td class="text-right">个性签名：</td><td>' + obj.mark
-					+ '</td></tr>';
-			html += '</table>';
+				items : [ {
+					text : '查看 <font class="blue-clor">' + userName + '</font> 详情',
+					handler : function() {
 
-			Ext.create('Ext.window.Window', {
-				width : 400,
-				bodyStyle : {
-					background : 'rgb(231, 226, 223)'
-				},
-				title : obj.userName + ' 的详细信息',
-				html : html
-			}).show();
+						$
+								.ajax({
+									url : 'action',
+									data : {
+										method : 'get_userInfo_req',
+										userName : userName
+									},
+									success : function(data) {
+										var obj = Ext.JSON.decode(data);
 
-		}
-	});
+										var html = '<table class="friend-table">';
+										html += '<tr><td class="text-right"><img class="user-iocn" src="'
+												+ obj.img + '"/></td></tr>';
+										html += '<tr><td class="text-right">用户名：</td><td>'
+												+ obj.userName
+												+ '</td ></td></tr>';
+										html += '<tr><td class="text-right">性     别：</td><td>'
+												+ obj.sex + '</td></tr>';
+										html += '<tr><td class="text-right">注册时间：</td><td>'
+												+ obj.regTime + '</td></tr>';
+										html += '<tr><td class="text-right">地     址：</td><td>'
+												+ obj.area + '</td></tr>';
+										html += '<tr><td class="text-right">个性签名：</td><td>'
+												+ obj.mark + '</td></tr>';
+										html += '</table>';
+
+										Ext
+												.create(
+														'Ext.window.Window',
+														{
+															width : 400,
+															bodyStyle : {
+																background : 'rgb(231, 226, 223)'
+															},
+															title : obj.userName
+																	+ ' 的详细信息',
+															html : html
+														}).show();
+
+									}
+								});
+					}
+				} ]
+			});
+
+	contextmenu.showAt(event.clientX, event.clientY);
+	event.preventDefault();
+
 }
+
+
+
+
+
 // 发送按钮
 function sendClick() {
 	var msg = $('#chart-input').val();

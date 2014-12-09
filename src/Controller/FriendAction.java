@@ -46,7 +46,47 @@ public class FriendAction {
 		return "{success:true,msg:"+gson.toJson(list)+"}";
 
 	}
+	public static Boolean is_friend(String user1,String user2){
+		Boolean flg =CommFuns.CheckNull(new String []{user1,user2});
 
+		if (flg) {
+			return true;
+		}
+
+		if (user1.equals(user2)) {
+			return true;
+		}
+
+		String sql = "select * from friend where (formName='"+user1+"' and toName='"+user2+"') or (toName='"+user1+"' and fromName='"+user2+"')";
+
+		return DBHelper.isExist(sql);
+	} 
+	
+	public static  int add_friend_req(FriendModel model){
+		
+		if(is_friend(model.getFromName(), model.getToName())){
+			return -1;
+		}
+		
+		String sql="insert into friend values('"+model.getFromName()+"','"+model.getToName()+"')";
+		return DBHelper.executeNonQuery(sql);
+	}
+	public static  String add_friend_req(String strModel){
+
+		if (strModel == null||strModel.isEmpty()) {
+			return "{success:false,msg:'非法操作！'}";
+		}
+		
+		Gson gson = new Gson();
+		FriendModel model = gson.fromJson(strModel, FriendModel.class);
+		
+		if(add_friend_req(model)<=0){
+			return "{success:false,msg:'添加好友失败：数据库操作失败!'}";
+		}
+		
+		return "{success:false,msg:'添加"+model.getToName()+"为好友成功！'}";
+	}
+	
 	// 考虑 from和to
 	public static String addFriend(String friend) throws SQLException {
 		if (friend == null) {
@@ -138,6 +178,7 @@ public class FriendAction {
 		return DBHelper.isExist(sql);
 
 	}
+
 
 	public static LinkedList<FriendModel> getFirends(String user)
 			throws SQLException {
