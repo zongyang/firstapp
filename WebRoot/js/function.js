@@ -139,7 +139,7 @@ UserInfo.prototype.login = function(callback) {
 			that.setImg(obj.img);
 			that.setMark(obj.mark);
 			that.setSex(obj.sex);
-			that.setRegTime(obj.sex);
+			that.setRegTime(obj.regTime);
 			that.setArea(obj.area);
 
 			if (callback) {

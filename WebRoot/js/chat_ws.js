@@ -1,17 +1,18 @@
-function startWebSocket() {
-	var url = 'ws://' + location.host + '/firstapp/chat/' + g_user.getUserName();
+function start_webSocket() {
+	var url = 'ws://' + location.host + '/firstapp/chat/'
+			+ g_user.getUserName();
 	ws = new WebSocket(url);
 
 	ws.onmessage = function(evt) {
 		var obj = Ext.JSON.decode(evt.data);
 		if (obj.msgType == 'IM') {
-			createIMLi(obj);
+			create_IM_li(obj);
 		}
 		if (obj.msgType == 'ALERT') {
-			createAlertWin(obj);
+			create_alert_win(obj);
 		}
 		if (obj.msgType == 'CONFIRM') {
-			createConfirmWin(obj);
+			create_confirm_win(obj);
 		}
 	};
 
@@ -24,11 +25,12 @@ function startWebSocket() {
 	};
 }
 
-function sendMsg(method, msg, friend, callback) {
+function sendMsg(method, msg, from, to, callback) {
 	var obj = {
 		method : method,
 		msg : msg,
-		friend : friend
+		from : from,
+		to : to
 	};
 	ws.send(Ext.JSON.encode(obj));
 
@@ -37,48 +39,50 @@ function sendMsg(method, msg, friend, callback) {
 	}
 }
 
-function createIMLi(obj) {
+function create_IM_li(obj) {
 	var li;
-	var self = g_user.email;
+	var self = g_user.getUserName();
+	var curr_frend = get_select_friend_name();
 
-	// 如果不是自己发起的消息，并且对话也不再当前对话框则不做操作，在聊天记录里面查找
-	if (getFriendId() != obj.friend && obj.friend != self) {
-		return;
-	}
-
-	if (obj.friend == self) {
+	if (self == obj.from) {// 自己是消息发起人
 		li += '<li>'
-		li += '<img class="msg-user-img l" src="img/meinv.jpg" />';
+		li += '<img class="user-iocn msg-user-img l" src="' + g_user.getImg() + '" />';
 		li += '<div class="msg-main-r-content msg-main-r-content-l l">';
 		li += '<pre>' + obj.msg + '</pre>';
 		li += '<i class="arrow_left"></i>';
 		li += '</div>';
 		li += '<small class="l">' + obj.time + '</small>';
 		li += '</li>';
-	} else {
-		li += '<li>'
-		li += '<img class="msg-user-img r" src="img/meinv.jpg" />';
-		li += '<div class="msg-main-r-content msg-main-r-content-r r">';
-		li += '<pre>' + obj.msg + '</pre>';
-		li += '<i class="arrow_right"></i>';
-		li += '</div>';
-		li += '<small class="r">' + obj.time + '</small>';
-		li += '</li>';
 	}
 
+	else if (self == obj.to) {// 自己是消息接收人
+		if (curr_frend == obj.from) {// 当前的对话是和发起聊天的好友
+			li += '<li>'
+			li += '<img class="user-iocn msg-user-img r" src="'+get_select_friend_img()+'" />';
+			li += '<div class="msg-main-r-content msg-main-r-content-r r">';
+			li += '<pre>' + obj.msg + '</pre>';
+			li += '<i class="arrow_right"></i>';
+			li += '</div>';
+			li += '<small class="r">' + obj.time + '</small>';
+			li += '</li>';
+		}
+		else{//不是当前好友则弹框
+			create_alert_win('来自 '+obj.from+' 的消息',obj.msg,obj.from);
+		}
+	}
 	// 滑动到最新消息
 	var ul = $('.msg-main-r ul');
 	ul.append($(li));
-	scrollButton();
+	scroll_button();
 }
 
 // 弹出消息提示框
-function createAlertWin(obj) {
+function create_alert_win(title,msg,friend) {
 	var win = Ext.create('Ext.window.Window', {
-		title : '消息提示',
+		title : title,
 		height : 20,
 		width : 250,
-		html : '<p id="rb-tip">' + obj.msg + '</p>'
+		html : '<p class="r-b-tip">' + msg + '</p>'
 	});
 	win.showAt($(window).width() - 250, $(window).height() - 50);
 	win.animate({
@@ -87,9 +91,20 @@ function createAlertWin(obj) {
 			y : $(window).height() - 140
 		}
 	});
+	//点击后显示与该好友的聊天
+	$('.r-b-tip').click(function(){
+		
+		var h5s=$('.msg-main-m li h5');
+		for(var i=0;i<h5s.length;i++){
+			if($(h5s[i]).text()==friend){
+				$(h5s[i]).parentsUntil('ul').click();
+				win.close();
+			}
+		}
+	});
 }
 // 弹出确认提示框
-function createConfirmWin(obj) {
+function create_confirm_win(obj) {
 	// var obj={from:'',fromName:'',to:'',toName:''} to是自己
 	// sendMsg('receptFriendRequest', obj,'fromName');
 	var win = Ext.create('Ext.window.Window', {

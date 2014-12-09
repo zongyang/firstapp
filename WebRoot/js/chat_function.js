@@ -1,27 +1,51 @@
 $(function() {
 	// left
-	$('.msg-main-l li').click(liClick);
+	$('.msg-main-l li').click(li_click);
 	$('.msg-main-l-friend').click(msg_main_l_friend_click);
-	
-	//发送消息
-	$('#send-msg').click(sendClick);
+
+	// 发送消息
+	$('#btn-send-msg').click(send_msg_click);
 	$('#chart-input').keydown(function(event) {
 		if (event.keyCode == 13) {
-			sendClick();
+			send_msg_click();
 		}
 	});
+	start_webSocket();
 	return;
-	
+
 	$('.msg-main-l-recent').click(getChatByUser);
 	$('.msg-main-l-add').click(getAddPanel);
 	// middle
-	$('.msg-main-m li').click(liClick);
+	$('.msg-main-m li').click(li_click);
 	// right
-	
-	startWebSocket();
+
 });
 
-//
+// 发送按钮
+function send_msg_click() {
+	var msg = $('#chart-input').val();
+	if (get_select_friend_name() == "") {
+		Ext.Msg.alert('警告', '请选择好友、消息不能为空！');
+		return;
+	}
+	if (msg == "") {
+		Ext.Msg.alert('警告', '请选择好友、消息不能为空！');
+		$('#chart-input').val('');
+		return;
+	}
+
+	var friend = sendMsg('sendToFriend', msg.trim(),g_user.getUserName() ,get_select_friend_name(),
+			function() {
+				// 发送后清空内容
+				$('#chart-input').val('');
+			});
+}
+function get_select_friend_name() {
+	return $('.msg-main-m li.active h5').text();
+}
+function get_select_friend_img() {
+	return $('.msg-main-m li.active img').attr('src');
+}
 function msg_main_l_friend_click() {
 	$.ajax({
 		url : 'action',
@@ -40,7 +64,7 @@ function msg_main_l_friend_click() {
 		}
 	});
 }
-//
+
 function create_friend_list(arr) {
 	var lis = '';
 	var el = $('.msg-main-m ul');
@@ -55,10 +79,10 @@ function create_friend_list(arr) {
 		lis += '</li>';
 	}
 	el.append(lis);
-	el.find('li').on('contextmenu',firend_mousedown);
+	el.find('li').on('contextmenu', firend_mousedown).click(li_click);
 
 }
-//
+// 右键查看好友信息
 function firend_mousedown(event) {
 
 	if (event.which != 3) {
@@ -70,7 +94,8 @@ function firend_mousedown(event) {
 			{
 
 				items : [ {
-					text : '查看 <font class="blue-clor">' + userName + '</font> 详情',
+					text : '查看 <font class="blue-clor">' + userName
+							+ '</font> 详情',
 					handler : function() {
 
 						$
@@ -122,32 +147,17 @@ function firend_mousedown(event) {
 	event.preventDefault();
 
 }
-
-
-
-
-
-// 发送按钮
-function sendClick() {
-	var msg = $('#chart-input').val();
-	if (getFriendId() == "") {
-		Ext.Msg.alert('警告', '请选择好友、消息不能为空！');
-		$('#chart-input').val('');
-		return;
-	}
-	if (msg == "" || new RegExp(/^\r*$/).test(msg)) {
-		Ext.Msg.alert('警告', '请选择好友、消息不能为空！');
-		$('#chart-input').val('');
-		return;
+//滑到消息最底部
+function scroll_button() {
+	var ul = $('.msg-main-r ul');
+	var li = ul.find('li:last');
+	if (li.length > 0) {
+		ul.scrollTop(0).scrollTop(li.offset().top);
 	}
 
-	var friend = sendMsg('sendToFriend', msg.trim(), getFriendId(), function() {
-		// 发送后清空内容
-		$('#chart-input').val('');
-	});
 }
 // 左侧和中间所有li的样式改变
-function liClick() {
+function li_click() {
 	var self = $(this);
 	self.addClass('active');
 	self.siblings().removeClass('active');
@@ -169,7 +179,7 @@ function getFriendByUser(event) {
 			}
 
 			createFriendList(JSON.parse(obj.msg));
-			$('.msg-main-m li').click(liClick);
+			$('.msg-main-m li').click(li_click);
 
 		}
 	});
@@ -193,7 +203,7 @@ function getChatByFriend(event) {
 			}
 
 			createMainChat(JSON.parse(obj.msg));
-			scrollButton();
+			scroll_button();
 		}
 	});
 }
@@ -214,8 +224,8 @@ function getChatByUser() {
 			}
 
 			createMidChat(JSON.parse(obj.msg));
-			$('.msg-main-m li').click(liClick);
-			scrollButton();
+			$('.msg-main-m li').click(li_click);
+			scroll_button();
 		}
 	});
 }
@@ -282,17 +292,8 @@ function createMidChat(arr) {
 	el.append(lis);
 	el.find('li').click(getChatByFriend);
 }
-function scrollButton() {
-	var ul = $('.msg-main-r ul');
-	var li = ul.find('li:last');
-	if (li.length > 0) {
-		ul.scrollTop(0).scrollTop(li.offset().top);
-	}
 
-}
-function getFriendId() {
-	return $('.msg-main-m li.active h5').text();
-}
+
 // 添加好友框
 function getAddPanel() {
 	var el = $('.msg-main-m ul');
