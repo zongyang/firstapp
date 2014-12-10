@@ -2,7 +2,7 @@ $(function() {
 	// left
 	$('.msg-main-l li').click(li_click);
 	$('.msg-main-l-friend').click(msg_main_l_friend_click);
-
+	$('.msg-main-l-recent').click(msg_main_l_recent_click);
 	// 发送消息
 	$('#btn-send-msg').click(send_msg_click);
 	$('#chart-input').keydown(function(event) {
@@ -13,7 +13,7 @@ $(function() {
 	start_webSocket();
 	return;
 
-	$('.msg-main-l-recent').click(getChatByUser);
+	$('.msg-main-l-recent').click(get_chat_latest_record);
 	$('.msg-main-l-add').click(getAddPanel);
 	// middle
 	$('.msg-main-m li').click(li_click);
@@ -21,6 +21,68 @@ $(function() {
 
 });
 
+function create_IM_left(obj) {
+	var li;
+	li += '<li>'
+	li += '<img class="user-iocn msg-user-img l" src="' + g_user.getImg()
+			+ '" />';
+	li += '<div class="msg-main-r-content msg-main-r-content-l l">';
+	li += '<pre>' + obj.msg + '</pre>';
+	li += '<i class="arrow_left"></i>';
+	li += '</div>';
+	li += '<small class="l">' + obj.time + '</small>';
+	li += '</li>';
+
+	// 滑动到最新消息
+	var ul = $('.msg-main-r ul');
+	ul.append($(li));
+	scroll_button();
+}
+function create_IM_right(obj) {
+	var li;
+	li += '<li>'
+	li += '<img class="user-iocn msg-user-img r" src="'
+			+ get_select_friend_img() + '" />';
+	li += '<div class="msg-main-r-content msg-main-r-content-r r">';
+	li += '<pre>' + obj.msg + '</pre>';
+	li += '<i class="arrow_right"></i>';
+	li += '</div>';
+	li += '<small class="r">' + obj.time + '</small>';
+	li += '</li>';
+	// 滑动到最新消息
+	var ul = $('.msg-main-r ul');
+	ul.append($(li));
+	scroll_button();
+}
+function create_friend_lis(arr, type) {// type:0(消息),1(签名)
+	var lis = '';
+	var el = $('.msg-main-m ul');
+	el.empty();
+	for (var i = 0; i < arr.length; i++) {
+		lis += '<li title="右键查看 ' + arr[i].userName + ' 的详细信息">';
+		lis += '<img class="user-iocn l" src="' + arr[i].img + '" />';
+		lis += '<div class="l">';
+		lis += '<h5>' + arr[i].userName + '</h5>';
+		if (type == 0) {
+			lis += '<p  class="blue-color"><span class="red-color">'
+					+ arr[i].fromName + ':</span> ' + arr[i].content + '</p>';
+		}
+		if (type == 1) {
+			lis += '<p  class="blue-color">' + arr[i].mark + '</p>';
+		}
+		lis += '</div>';
+		lis += '</li>';
+	}
+	el.append(lis);
+	el.find('li').on('contextmenu', firend_mousedown).click(li_click).click(msg_main_l_li_click);
+}
+
+function get_select_friend_name() {
+	return $('.msg-main-m li.active h5').text();
+}
+function get_select_friend_img() {
+	return $('.msg-main-m li.active img').attr('src');
+}
 // 发送按钮
 function send_msg_click() {
 	var msg = $('#chart-input').val();
@@ -34,18 +96,15 @@ function send_msg_click() {
 		return;
 	}
 
-	var friend = sendMsg('sendToFriend', msg.trim(),g_user.getUserName() ,get_select_friend_name(),
-			function() {
+	var friend = sendMsg('sendToFriend', msg.trim(), g_user.getUserName(),
+			get_select_friend_name(), function() {
 				// 发送后清空内容
 				$('#chart-input').val('');
 			});
 }
-function get_select_friend_name() {
-	return $('.msg-main-m li.active h5').text();
-}
-function get_select_friend_img() {
-	return $('.msg-main-m li.active img').attr('src');
-}
+
+//
+
 function msg_main_l_friend_click() {
 	$.ajax({
 		url : 'action',
@@ -55,34 +114,60 @@ function msg_main_l_friend_click() {
 		},
 		success : function(data) {
 			var obj = Ext.JSON.decode(data);
-			if (!obj.success) {
-				alert(obj.msg);
+			if (obj.success==false) {
+				Ext.Msg.alert('提示',obj.msg);
 				return;
 			}
-			create_friend_list(obj.msg);
-
+			create_friend_lis(obj.msg, 1);
+			
 		}
 	});
 }
 
-function create_friend_list(arr) {
-	var lis = '';
-	var el = $('.msg-main-m ul');
-	el.empty();
-	for (var i = 0; i < arr.length; i++) {
-		lis += '<li title="右键查看 ' + arr[i].userName + ' 的详细信息">';
-		lis += '<img class="user-iocn l" src="' + arr[i].img + '" />';
-		lis += '<div class="l">';
-		lis += '<h5>' + arr[i].userName + '</h5>';
-		lis += '<p  class="blue-clor">' + arr[i].mark + '</p>';
-		lis += '</div>';
-		lis += '</li>';
-	}
-	el.append(lis);
-	el.find('li').on('contextmenu', firend_mousedown).click(li_click);
+// 右键查看好友信息
+function msg_main_l_recent_click() {
+	$.ajax({
+		url : 'action',
+		data : {
+			method : 'get_chat_latest_record',
+			userName : g_user.getUserName()
+		},
+		success : function(data) {
+			var obj = Ext.JSON.decode(data);
+
+			if (obj.success == false) {
+				alert(obj.msg);
+				return;
+			}
+			create_friend_lis(obj, 0);
+
+		}
+	});
+}
+// 创建主聊天窗口
+function msg_main_l_li_click(event) {
+
+	$.ajax({
+		url : 'action',
+		data : {
+			self:g_user.getUserName(),
+			friend : get_select_friend_name(),
+			method : 'get_chat_record'
+		},
+		success : function(data) {
+			var obj = Ext.JSON.decode(data);
+			if (obj.success==false) {
+				Ext.Msg.alert('提示',obj.msg);
+				return;
+			}
+			debugger;
+			for (var i = 0; i < obj.length; i++) {
+				create_IM_li(obj[i]);
+			}
+		}
+	});
 
 }
-// 右键查看好友信息
 function firend_mousedown(event) {
 
 	if (event.which != 3) {
@@ -147,7 +232,7 @@ function firend_mousedown(event) {
 	event.preventDefault();
 
 }
-//滑到消息最底部
+// 滑到消息最底部
 function scroll_button() {
 	var ul = $('.msg-main-r ul');
 	var li = ul.find('li:last');
@@ -162,6 +247,9 @@ function li_click() {
 	self.addClass('active');
 	self.siblings().removeClass('active');
 }
+
+// 获得最近消息记录
+
 // 获得好友列表
 function getFriendByUser(event) {
 	$.ajax({
@@ -218,7 +306,7 @@ function getChatByUser() {
 		success : function(data) {
 			var obj = JSON.parse(data);
 
-			if (!obj.success) {
+			if (obj.success==false) {
 				alert(obj.msg);
 				return;
 			}
@@ -292,7 +380,6 @@ function createMidChat(arr) {
 	el.append(lis);
 	el.find('li').click(getChatByFriend);
 }
-
 
 // 添加好友框
 function getAddPanel() {

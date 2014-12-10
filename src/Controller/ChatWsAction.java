@@ -131,9 +131,9 @@ public class ChatWsAction {
 		// 设置消息类型
 		model.setMsgType(ChatWsModel.MSG_TYPE[0]);
 
-		String json = "{msg: '" + model.getMsg() + "' ,time:'"
-				+ model.getTime() + "',from:'" + model.getFrom() + "',to:'"
-				+ model.getTo() + "',msgType:'" + model.getMsgType() + "'}";
+		String json = "{content: '" + model.getContend() + "' ,time:'"
+				+ model.getTime() + "',fromName:'" + model.getFromName() + "',toName:'"
+				+ model.getToName() + "',msgType:'" + model.getMsgType() + "'}";
 
 		// 插入到数据库
 		ChatModel chat = model.toChatModel();
@@ -141,17 +141,17 @@ public class ChatWsAction {
 
 		// 插入失败
 		if (result <= 0) {
-			json = "{msg: '" + model.getMsg() + "' ,time:'" + model.getTime()
-					+ "',from:'" + model.getFrom() + "',to:'" + model.getTo()
+			json = "{content: '" + model.getContend() + "' ,time:'" + model.getTime()
+					+ "',fromName:'" + model.getFromName() + "',toName:'" + model.getToName()
 					+ "',msgType:'发送失败：数据库操作失败！'}";
-			sendMessageToUser(model.getFrom(), json);
+			sendMessageToUser(model.getFromName(), json);
 			return;
 		}
 
 		// 发送给好友
-		sendMessageToUser(model.getTo(), json);
+		sendMessageToUser(model.getToName(), json);
 		// 发送给自己
-		sendMessageToUser(model.getFrom(), json);
+		sendMessageToUser(model.getFromName(), json);
 	}
 
 	// 加好友请求
@@ -160,26 +160,26 @@ public class ChatWsAction {
 		String json = "";
 
 		// 已经是好友
-		if (FriendAction.is_friend(model.getFrom(), model.getTo())) {
+		if (FriendAction.is_friend(model.getFromName(), model.getToName())) {
 
 			model.setMsgType(ChatWsModel.MSG_TYPE[1]);
 
-			json = "{msg: '" + model.getFrom() + "和" + model.getTo()
-					+ "已经是好友！' ,time:'" + model.getTime() + "',from:'"
-					+ model.getFrom() + "',to:'" + model.getTo() + "',msgType:'"
+			json = "{content: '" + model.getFromName() + "和" + model.getToName()
+					+ "已经是好友！' ,time:'" + model.getTime() + "',fromName:'"
+					+ model.getFromName() + "',toName:'" + model.getToName() + "',msgType:'"
 					+ model.getMsgType() + "'}";
 
-			sendMessageToUser(model.getFrom(), json);
+			sendMessageToUser(model.getFromName(), json);
 		}
 
 		else {// 发送申请
 			model.setMsgType(ChatWsModel.MSG_TYPE[2]);
 
-			json = "{msg: '" + model.getFrom() + " 想加你为好友！' ,time:'"
-					+ model.getTime() + "',from:'" + model.getFrom() + "',to:'"
-					+ model.getTo() + "',msgType:'" + model.getMsgType() + "'}";
+			json = "{content: '" + model.getFromName() + " 想加你为好友！' ,time:'"
+					+ model.getTime() + "',fromName:'" + model.getFromName() + "',toName:'"
+					+ model.getToName() + "',msgType:'" + model.getMsgType() + "'}";
 
-			sendMessageToUser(model.getTo(), json);
+			sendMessageToUser(model.getToName(), json);
 		}
 
 	}
@@ -192,23 +192,23 @@ public class ChatWsAction {
 		 
 		 //添加好友失败
 		 if(FriendAction.add_friend_req(friend)<=0){
-				  json = "{msg: ' 添加 " + model.getTo() + " 为好友失败！' ,time:'" +model.getTime()
-				  + "',from:'" + model.getFrom() + "',to:'"+model.getTo()+"',msgType:'"
+				  json = "{content: ' 添加 " + model.getToName() + " 为好友失败！' ,time:'" +model.getTime()
+				  + "',fromName:'" + model.getFromName() + "',toName:'"+model.getToName()+"',msgType:'"
 				  + model.getMsgType() + "'}";
 				  
-				  sendMessageToUser(model.getFrom(), json);
+				  sendMessageToUser(model.getFromName(), json);
 				  return ;
 		 }
 		
 		 //添加好友成功
-		 json = "{msg: ' 添加 " + model.getTo() + " 为好友成功！' ,time:'" +model.getTime()
-				  + "',from:'" + model.getFrom() + "',to:'"+model.getTo()+"',msgType:'"
+		 json = "{content: ' 添加 " + model.getFromName() + " 为好友成功！' ,time:'" +model.getTime()
+				  + "',fromName:'" + model.getFromName() + "',toName:'"+model.getToName()+"',msgType:'"
 				  + model.getMsgType() + "'}";
 		 
 		// 返回给自己和新加的好友
-		 sendMessageToUser(model.getFrom(), json);
+		 sendMessageToUser(model.getFromName(), json);
 	
-		 sendMessageToUser(model.getTo(), json);
+		 sendMessageToUser(model.getToName(), json);
 	}
 	
 	

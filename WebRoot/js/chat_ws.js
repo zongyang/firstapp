@@ -25,12 +25,12 @@ function start_webSocket() {
 	};
 }
 
-function sendMsg(method, msg, from, to, callback) {
+function sendMsg(method, content, fromName, toName, callback) {
 	var obj = {
 		method : method,
-		msg : msg,
-		from : from,
-		to : to
+		content : content,
+		fromName : fromName,
+		toName : toName
 	};
 	ws.send(Ext.JSON.encode(obj));
 
@@ -39,50 +39,33 @@ function sendMsg(method, msg, from, to, callback) {
 	}
 }
 
+
 function create_IM_li(obj) {
 	var li;
 	var self = g_user.getUserName();
 	var curr_frend = get_select_friend_name();
 
 	if (self == obj.from) {// 自己是消息发起人
-		li += '<li>'
-		li += '<img class="user-iocn msg-user-img l" src="' + g_user.getImg() + '" />';
-		li += '<div class="msg-main-r-content msg-main-r-content-l l">';
-		li += '<pre>' + obj.msg + '</pre>';
-		li += '<i class="arrow_left"></i>';
-		li += '</div>';
-		li += '<small class="l">' + obj.time + '</small>';
-		li += '</li>';
+		 create_IM_left(obj);
 	}
 
 	else if (self == obj.to) {// 自己是消息接收人
-		if (curr_frend == obj.from) {// 当前的对话是和发起聊天的好友
-			li += '<li>'
-			li += '<img class="user-iocn msg-user-img r" src="'+get_select_friend_img()+'" />';
-			li += '<div class="msg-main-r-content msg-main-r-content-r r">';
-			li += '<pre>' + obj.msg + '</pre>';
-			li += '<i class="arrow_right"></i>';
-			li += '</div>';
-			li += '<small class="r">' + obj.time + '</small>';
-			li += '</li>';
-		}
-		else{//不是当前好友则弹框
-			create_alert_win('来自 '+obj.from+' 的消息',obj.msg,obj.from);
+		if (curr_frend == obj.fromName) {// 当前的对话是和发起聊天的好友
+			create_IM_right(obj);
+		} else {// 不是当前好友则弹框
+			create_alert_win('来自 ' + obj.fromName + ' 的消息', obj.content, obj.fromName);
 		}
 	}
-	// 滑动到最新消息
-	var ul = $('.msg-main-r ul');
-	ul.append($(li));
-	scroll_button();
+	
 }
 
 // 弹出消息提示框
-function create_alert_win(title,msg,friend) {
+function create_alert_win(title, content, friend) {
 	var win = Ext.create('Ext.window.Window', {
 		title : title,
 		height : 20,
 		width : 250,
-		html : '<p class="r-b-tip">' + msg + '</p>'
+		html : '<p class="r-b-tip">' + content + '</p>'
 	});
 	win.showAt($(window).width() - 250, $(window).height() - 50);
 	win.animate({
@@ -91,12 +74,12 @@ function create_alert_win(title,msg,friend) {
 			y : $(window).height() - 140
 		}
 	});
-	//点击后显示与该好友的聊天
-	$('.r-b-tip').click(function(){
-		
-		var h5s=$('.msg-main-m li h5');
-		for(var i=0;i<h5s.length;i++){
-			if($(h5s[i]).text()==friend){
+	// 点击后显示与该好友的聊天
+	$('.r-b-tip').click(function() {
+
+		var h5s = $('.msg-main-m li h5');
+		for (var i = 0; i < h5s.length; i++) {
+			if ($(h5s[i]).text() == friend) {
 				$(h5s[i]).parentsUntil('ul').click();
 				win.close();
 			}
@@ -117,7 +100,7 @@ function create_confirm_win(obj) {
 		items : [ {
 			xtype : 'panel',
 			region : 'center',
-			html : '<p id="rb-tip">' + obj.msg + '</p>',
+			html : '<p id="rb-tip">' + obj.content + '</p>',
 			border : false,
 			dockedItems : [ {
 				xtype : 'toolbar',

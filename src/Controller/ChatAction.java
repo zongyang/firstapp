@@ -13,117 +13,14 @@ import Model.ChatModel;
 
 //消息聊类：负责聊天页面非websocket的请求
 public class ChatAction {
-	
-	
-	
-	
-	public static String getChatByFriend(String user, String friend)
-			throws SQLException {
-		String sql = "select * from chat where (`from`='" + user
-				+ "' and `to`='" + friend + "') or (`from`='" + friend
-				+ "' and `to`='" + user + "') order by time desc ";
-		Gson gson = new Gson();
-		LinkedList<ChatModel> models = new LinkedList<ChatModel>();
-		ResultSet rs = DBHelper.executeQuery(sql);
-		while (rs.next()) {
-//			ChatModel model = new ChatModel();
-//			model.setFrom(rs.getString("from"));
-//			model.setTo(rs.getString("to"));
-//			model.setContent(rs.getString("content"));
-//			model.setRecept(rs.getString("recept"));
-//			model.setTime(rs.getString("time"));
-//			model.setActions(rs.getString("actions"));
-//			models.push(model);
-		}
 
-		return CommFuns.getTip(true, gson.toJson(models), "");
-	}
-
-	public static String getChatByUser(String user) throws SQLException {
-		String sql = "select * from chat_view where `from`='" + user
-				+ "' or `to`='" + user + "' order by time desc";
-
-		Gson gson = new Gson();
-
-		HashMap<String, ChatModel> hm = new HashMap<String, ChatModel>();
-		LinkedList<ChatModel> models = new LinkedList<ChatModel>();
-		ResultSet rs = DBHelper.executeQuery(sql);
-
-		// 存储每个好友的最近记录
-		while (rs.next()) {
-			ChatModel model = new ChatModel();
-			// 主动发起的(key是friend)
-			if (rs.getString("from").equals(user)
-					&& !hm.containsKey(rs.getString("to"))) {
-//				model.setFrom(rs.getString("from"));
-//				model.setTo(rs.getString("to"));
-//				model.setContent(rs.getString("content"));
-//				model.setRecept(rs.getString("recept"));
-//				model.setTime(rs.getString("time"));
-//				model.setActions(rs.getString("actions"));
-//				model.setFriend(rs.getString("to"));
-//				model.setFriendName(rs.getString("toName"));
-//				hm.put(rs.getString("to"), model);
-
-			}
-			// 好友发起的(key是friend)
-			if (rs.getString("to").equals(user)
-					&& !hm.containsKey(rs.getString("from"))) {
-//				model.setTo(rs.getString("to"));
-//				model.setContent(rs.getString("content"));
-//				model.setRecept(rs.getString("recept"));
-//				model.setTime(rs.getString("time"));
-//				model.setActions(rs.getString("actions"));
-//				model.setFriend(rs.getString("from"));
-//				model.setFriendName(rs.getString("fromName"));
-//				hm.put(rs.getString("from"), model);
-
-			}
-		}
-		// 字典存储到队列
-		String key;
-		Iterator<String> iter = hm.keySet().iterator();
-		while (iter.hasNext()) {
-			key = iter.next();
-			models.push(hm.get(key));
-		}
-
-		return CommFuns.getTip(true, gson.toJson(models), "");
-	}
-
-	public static void insertChatRecord(LinkedList<ChatModel> mdoels) {
-		String insert = "";
-		ChatModel temp;
-		int len = mdoels.size();
-
-		if (len == 0) {
-			return;
-		}
-
-		for (int i = 0; i < len; i++) {
-			temp = mdoels.get(i);
-//			insert += "INSERT INTO chat (`from`, `to`, `content`, `recept`, `time`, `actions`) VALUES ('"
-//					+ temp.getFrom()
-//					+ "', '"
-//					+ temp.getTo()
-//					+ "', '"
-//					+ temp.getContent()
-//					+ "', '"
-//					+ temp.getRecept()
-//					+ "', '"
-//					+ temp.getTime() + "', '" + temp.getActions() + "'); ";
-
-		}
-		DBHelper.executeNonQuery(insert);
-
-	}
-
-public static int add_chat_record(ChatModel mdoel){
-		LinkedList<ChatModel> list=new LinkedList<ChatModel>();
+	public static int add_chat_record(ChatModel mdoel) {
+		LinkedList<ChatModel> list = new LinkedList<ChatModel>();
 		list.push(mdoel);
 		return add_chat_record(list);
 	}
-	public static int add_chat_record(LinkedList<ChatModel> mdoels){
+
+	public static int add_chat_record(LinkedList<ChatModel> mdoels) {
 		String insert = "";
 		ChatModel temp;
 		int len = mdoels.size();
@@ -139,13 +36,88 @@ public static int add_chat_record(ChatModel mdoel){
 					+ "', '"
 					+ temp.getToName()
 					+ "', '"
-					+ temp.getContent()
-					+ "', '"
-					+ temp.getTime()+"') ;";
+					+ temp.getContent() + "', '" + temp.getTime() + "') ;";
 		}
-		
+
 		return DBHelper.executeNonQuery(insert);
 
 	}
-	
+
+	public static String get_chat_record(String self, String friend)
+			throws SQLException {
+		if (CommFuns.CheckNull(new String[] { self, friend })) {
+			return "{success:false,msg:'非法操作！'}";
+		}
+
+		if (self == friend) {
+			return "{success:false,msg:'你在逗我玩呢！'}";
+		}
+
+		String sql = " select * from chat where fromName='" + self
+				+ "' and toName ='" + friend + "' ";
+		sql += " union ";
+		sql += " select * from chat where toName='" + self
+				+ "' and fromName ='" + friend + "' ";
+
+		String json = "[";
+		ResultSet rs = DBHelper.executeQuery(sql);
+		while (rs.next()) {
+			json += "{id:'" + rs.getString("id") + "',formName:'"
+					+ rs.getString("fromName") + "',toName:'"
+					+ rs.getString("toName") + "',content:'"
+					+ rs.getString("content") + "',time:'"
+					+ rs.getString("time") + "'},";
+		}
+		json = CommFuns.TrimEnd(json, ",") + "]";
+		return json;
+	}
+
+	public static String get_chat_latest_record(String userName)
+			throws SQLException {
+		if (CommFuns.CheckNull(new String[] { userName })) {
+			return "{success:fasle,msg:'非法操作！'}";
+		}
+
+		String sql = "SELECT * from chat_view where fromName='" + userName
+				+ "' or toName='" + userName+"' ";
+		ResultSet rs = DBHelper.executeQuery(sql);
+		HashMap<String, ChatModel> hm = new HashMap<String, ChatModel>();
+		String json, key;// key存储的是好友的名字
+		while (rs.next()) {
+			ChatModel chat = new ChatModel();
+			if (rs.getString("fromName").equals(userName)) {
+				key = rs.getString("toName");
+				chat.setImg(rs.getString("toImg"));
+			} else {
+				key = rs.getString("fromName");
+				chat.setImg(rs.getString("fromImg"));
+			}
+			if (hm.containsKey(key)) {
+				continue;
+			}
+			chat.setId(rs.getString("id"));
+			chat.setFromName(rs.getString("fromName"));
+			chat.setToName(rs.getString("toName"));
+			chat.setContent(rs.getString("content"));
+			chat.setTime(rs.getString("time"));
+			hm.put(key, chat);
+		}
+
+		Iterator<String> iter = hm.keySet().iterator();
+		json = "[";
+		while (iter.hasNext()) {
+			key = iter.next();
+			json += "{id:'" + hm.get(key).getId() + "',";
+			json += "userName:'" + key + "',";
+			json += "fromName:'" + hm.get(key).getFromName() + "',";
+			json += "toName:'" + hm.get(key).getToName() + "',";
+			json += "content:'" + hm.get(key).getContent() + "',";
+			json += "time:'" + hm.get(key).getTime() + "',";
+			json += "userName:'" + key + "',";
+			json += "img:'" + hm.get(key).getImg() + "'},";
+		}
+		json = CommFuns.TrimEnd(json, ",") + "]";
+		return json;
+	}
+
 }

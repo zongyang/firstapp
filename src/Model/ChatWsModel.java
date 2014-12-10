@@ -9,17 +9,17 @@ public class ChatWsModel {
     public ChatWsModel() {
 		super();
 		this.method = "";
-		this.msg = "";
-		this.from = "";
-		this.to="";
+		this.contend = "";
+		this.fromName = "";
+		this.toName="";
 		this.msgType="";
 		this.time="";
 	}
     
 	private String method;//通过ws传过来的方法
-	private String msg;//消息内容
-	private String from;//消息发起人
-	private String to;//消息接收人
+	private String contend;//消息内容
+	private String fromName;//消息发起人
+	private String toName;//消息接收人
 	private String msgType;//消息类型
 	private String time;//消息时间
 	
@@ -30,13 +30,7 @@ public class ChatWsModel {
 	public void setMsgType(String msgType) {
 		this.msgType = msgType;
 	}
-	public String getMsg() {
-		return msg;
-	}
-
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
+	
 
 	public String getMethod() {
 		return method;
@@ -55,35 +49,47 @@ public class ChatWsModel {
 		this.time = time;
 	}
 
-	public String getFrom() {
-		return from;
+	
+
+	public String getContend() {
+		return contend;
 	}
 
-	public void setFrom(String from) {
-		this.from = from;
+	public void setContend(String contend) {
+		this.contend = contend;
 	}
 
-	public String getTo() {
-		return to;
+	public String getFromName() {
+		return fromName;
 	}
 
-	public void setTo(String to) {
-		this.to = to;
+	public void setFromName(String fromName) {
+		this.fromName = fromName;
 	}
+
+	public String getToName() {
+		return toName;
+	}
+
+	public void setToName(String toName) {
+		this.toName = toName;
+	}
+
+
 	
 	public ChatModel toChatModel(){
 		ChatModel chat=new ChatModel();
-		chat.setContent(this.msg);
-		chat.setFromName(this.from);
-		chat.setToName(this.to);
+		chat.setContent(this.contend);
+		chat.setFromName(this.fromName);
+		chat.setToName(this.toName);
 		chat.setTime(this.time);
 		return chat;
 	}
 	
 	public FriendModel toFriendModel(){
 		FriendModel friend=new FriendModel();
-		friend.setFromName(this.from);
-		friend.setToName(this.to);
+		friend.setFromName(this.fromName);
+		friend.setToName(this.toName);
 		return friend;
 	}
 	

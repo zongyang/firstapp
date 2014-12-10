@@ -7,6 +7,7 @@ public class ChatModel {
 	private String toName;
 	private String content;
 	private String time;
+	private String img;
 
 	public ChatModel() {
 		super();
@@ -15,6 +16,7 @@ public class ChatModel {
 		this.toName = "";
 		this.content = "";
 		this.time = "";
+		this.img = "";
 	}
 
 	public String getId() {
@@ -55,6 +57,14 @@ public class ChatModel {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 }

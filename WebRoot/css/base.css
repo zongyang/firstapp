@@ -350,8 +350,11 @@ html {
 	color: red;
 	font-size: 120%;
 }
-.blue-clor{
+.blue-color{
 	color: rgb(49, 49, 126);
+}
+.red-color{
+	color: #FA5965;
 }
 .user-iocn {
 	width: 40px;

@@ -71,8 +71,12 @@ public class EnterPort {
 		if (paraHash.get("method").endsWith("get_friend_lsit_req")) {
 			return FriendAction.get_friend_lsit_req(paraHash.get("userName"));
 		}
-		
-		
+		if (paraHash.get("method").endsWith("get_chat_record")) {
+			return ChatAction.get_chat_record(paraHash.get("self"),paraHash.get("friend"));
+		}
+		if (paraHash.get("method").endsWith("get_chat_latest_record")) {
+			return ChatAction.get_chat_latest_record(paraHash.get("userName"));
+		}
 		
 		/*****************/
 		if (paraHash.get("method").endsWith("login")) {
@@ -99,13 +103,7 @@ public class EnterPort {
 		if (paraHash.get("method").endsWith("getFriendByUser")) {
 			return FriendAction.getFriendByUser(paraHash.get("id"));
 		}
-		if (paraHash.get("method").endsWith("getChatByFriend")) {
-			return ChatAction.getChatByFriend(paraHash.get("user"),
-					paraHash.get("friend"));
-		}
-		if (paraHash.get("method").endsWith("getChatByUser")) {
-			return ChatAction.getChatByUser(paraHash.get("id"));
-		}
+		
 		return "";
 
 	}
