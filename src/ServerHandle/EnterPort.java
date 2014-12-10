@@ -19,7 +19,6 @@ public class EnterPort {
 
 		Enumeration<String> enu = request.getParameterNames();
 		Hashtable<String, String> paraHash = new Hashtable<String, String>();
-		String ip = request.getRemoteAddr();
 		UserAction.session = request.getSession();
 
 		while (enu.hasMoreElements()) {
@@ -72,38 +71,20 @@ public class EnterPort {
 			return FriendAction.get_friend_lsit_req(paraHash.get("userName"));
 		}
 		if (paraHash.get("method").endsWith("get_chat_record")) {
-			return ChatAction.get_chat_record(paraHash.get("self"),paraHash.get("friend"));
+			return ChatAction.get_chat_record(paraHash.get("self"),
+					paraHash.get("friend"));
 		}
 		if (paraHash.get("method").endsWith("get_chat_latest_record")) {
 			return ChatAction.get_chat_latest_record(paraHash.get("userName"));
 		}
-		
-		/*****************/
-		if (paraHash.get("method").endsWith("login")) {
-			return UserAction.login(paraHash.get("email"), paraHash.get("psw"),
-					ip);
+		if (paraHash.get("method").endsWith("get_all_userName_req")) {
+			if (paraHash.containsKey("query")) {
+				return UserAction.get_all_userName_req(paraHash.get("query"));
+			} else {
+				return UserAction.get_all_userName_req();
+			}
 		}
 
-		if (paraHash.get("method").endsWith("register")) {
-			return UserAction.register(paraHash.get("user"), ip);
-		}
-
-		if (paraHash.get("method").endsWith("getAllUser")) {
-			return (paraHash.containsKey("query")) ? UserAction
-					.getAllUser(paraHash.get("query")) : UserAction
-					.getAllUser();
-
-		}
-		/**
-		 * 好友和消息
-		 **/
-		if (paraHash.get("method").endsWith("addFriend")) {
-			return FriendAction.addFriend(paraHash.get("friend"));
-		}
-		if (paraHash.get("method").endsWith("getFriendByUser")) {
-			return FriendAction.getFriendByUser(paraHash.get("id"));
-		}
-		
 		return "";
 
 	}

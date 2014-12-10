@@ -1,33 +1,11 @@
-$(function() {
-	// left
-	$('.msg-main-l li').click(li_click);
-	$('.msg-main-l-friend').click(msg_main_l_friend_click);
-	$('.msg-main-l-recent').click(msg_main_l_recent_click);
-	// 发送消息
-	$('#btn-send-msg').click(send_msg_click);
-	$('#chart-input').keydown(function(event) {
-		if (event.keyCode == 13) {
-			send_msg_click();
-		}
-	});
-	start_webSocket();
-	return;
-
-	$('.msg-main-l-recent').click(get_chat_latest_record);
-	$('.msg-main-l-add').click(getAddPanel);
-	// middle
-	$('.msg-main-m li').click(li_click);
-	// right
-
-});
-
+//创建左边聊天条
 function create_IM_left(obj) {
 	var li;
 	li += '<li>'
 	li += '<img class="user-iocn msg-user-img l" src="' + g_user.getImg()
 			+ '" />';
 	li += '<div class="msg-main-r-content msg-main-r-content-l l">';
-	li += '<pre>' + obj.msg + '</pre>';
+	li += '<pre>' + obj.content + '</pre>';
 	li += '<i class="arrow_left"></i>';
 	li += '</div>';
 	li += '<small class="l">' + obj.time + '</small>';
@@ -38,13 +16,14 @@ function create_IM_left(obj) {
 	ul.append($(li));
 	scroll_button();
 }
+// 创建右边聊天条
 function create_IM_right(obj) {
 	var li;
 	li += '<li>'
 	li += '<img class="user-iocn msg-user-img r" src="'
 			+ get_select_friend_img() + '" />';
 	li += '<div class="msg-main-r-content msg-main-r-content-r r">';
-	li += '<pre>' + obj.msg + '</pre>';
+	li += '<pre>' + obj.content + '</pre>';
 	li += '<i class="arrow_right"></i>';
 	li += '</div>';
 	li += '<small class="r">' + obj.time + '</small>';
@@ -54,6 +33,7 @@ function create_IM_right(obj) {
 	ul.append($(li));
 	scroll_button();
 }
+// 创建好友列表
 function create_friend_lis(arr, type) {// type:0(消息),1(签名)
 	var lis = '';
 	var el = $('.msg-main-m ul');
@@ -74,164 +54,24 @@ function create_friend_lis(arr, type) {// type:0(消息),1(签名)
 		lis += '</li>';
 	}
 	el.append(lis);
-	el.find('li').on('contextmenu', firend_mousedown).click(li_click).click(msg_main_l_li_click);
+	el.find('li').on('contextmenu', firend_mousedown).click(li_click).click(
+			msg_main_l_li_click);
 }
 
+// 清除消息条
+function clear_msg_main_l_li() {
+	$('.msg-main-r ul').empty();
+};
+
+// 获得选中好友的名字
 function get_select_friend_name() {
 	return $('.msg-main-m li.active h5').text();
 }
+// 获得选中好友的头像
 function get_select_friend_img() {
 	return $('.msg-main-m li.active img').attr('src');
 }
-// 发送按钮
-function send_msg_click() {
-	var msg = $('#chart-input').val();
-	if (get_select_friend_name() == "") {
-		Ext.Msg.alert('警告', '请选择好友、消息不能为空！');
-		return;
-	}
-	if (msg == "") {
-		Ext.Msg.alert('警告', '请选择好友、消息不能为空！');
-		$('#chart-input').val('');
-		return;
-	}
 
-	var friend = sendMsg('sendToFriend', msg.trim(), g_user.getUserName(),
-			get_select_friend_name(), function() {
-				// 发送后清空内容
-				$('#chart-input').val('');
-			});
-}
-
-//
-
-function msg_main_l_friend_click() {
-	$.ajax({
-		url : 'action',
-		data : {
-			userName : g_user.getUserName(),
-			method : 'get_friend_lsit_req'
-		},
-		success : function(data) {
-			var obj = Ext.JSON.decode(data);
-			if (obj.success==false) {
-				Ext.Msg.alert('提示',obj.msg);
-				return;
-			}
-			create_friend_lis(obj.msg, 1);
-			
-		}
-	});
-}
-
-// 右键查看好友信息
-function msg_main_l_recent_click() {
-	$.ajax({
-		url : 'action',
-		data : {
-			method : 'get_chat_latest_record',
-			userName : g_user.getUserName()
-		},
-		success : function(data) {
-			var obj = Ext.JSON.decode(data);
-
-			if (obj.success == false) {
-				alert(obj.msg);
-				return;
-			}
-			create_friend_lis(obj, 0);
-
-		}
-	});
-}
-// 创建主聊天窗口
-function msg_main_l_li_click(event) {
-
-	$.ajax({
-		url : 'action',
-		data : {
-			self:g_user.getUserName(),
-			friend : get_select_friend_name(),
-			method : 'get_chat_record'
-		},
-		success : function(data) {
-			var obj = Ext.JSON.decode(data);
-			if (obj.success==false) {
-				Ext.Msg.alert('提示',obj.msg);
-				return;
-			}
-			debugger;
-			for (var i = 0; i < obj.length; i++) {
-				create_IM_li(obj[i]);
-			}
-		}
-	});
-
-}
-function firend_mousedown(event) {
-
-	if (event.which != 3) {
-		return;
-	}
-
-	var userName = $(event.currentTarget).find('h5').text();
-	var contextmenu = new Ext.menu.Menu(
-			{
-
-				items : [ {
-					text : '查看 <font class="blue-clor">' + userName
-							+ '</font> 详情',
-					handler : function() {
-
-						$
-								.ajax({
-									url : 'action',
-									data : {
-										method : 'get_userInfo_req',
-										userName : userName
-									},
-									success : function(data) {
-										var obj = Ext.JSON.decode(data);
-
-										var html = '<table class="friend-table">';
-										html += '<tr><td class="text-right"><img class="user-iocn" src="'
-												+ obj.img + '"/></td></tr>';
-										html += '<tr><td class="text-right">用户名：</td><td>'
-												+ obj.userName
-												+ '</td ></td></tr>';
-										html += '<tr><td class="text-right">性     别：</td><td>'
-												+ obj.sex + '</td></tr>';
-										html += '<tr><td class="text-right">注册时间：</td><td>'
-												+ obj.regTime + '</td></tr>';
-										html += '<tr><td class="text-right">地     址：</td><td>'
-												+ obj.area + '</td></tr>';
-										html += '<tr><td class="text-right">个性签名：</td><td>'
-												+ obj.mark + '</td></tr>';
-										html += '</table>';
-
-										Ext
-												.create(
-														'Ext.window.Window',
-														{
-															width : 400,
-															bodyStyle : {
-																background : 'rgb(231, 226, 223)'
-															},
-															title : obj.userName
-																	+ ' 的详细信息',
-															html : html
-														}).show();
-
-									}
-								});
-					}
-				} ]
-			});
-
-	contextmenu.showAt(event.clientX, event.clientY);
-	event.preventDefault();
-
-}
 // 滑到消息最底部
 function scroll_button() {
 	var ul = $('.msg-main-r ul');
@@ -248,216 +88,103 @@ function li_click() {
 	self.siblings().removeClass('active');
 }
 
-// 获得最近消息记录
+// 创建聊天消息条
+function create_IM_li(obj) {
+	var li;
+	var self = g_user.getUserName();
+	var curr_frend = get_select_friend_name();
 
-// 获得好友列表
-function getFriendByUser(event) {
-	$.ajax({
-		url : 'action',
-		data : {
-			id : g_user.id,
-			method : 'getFriendByUser'
-		},
-		success : function(data) {
-			var obj = JSON.parse(data);
-
-			if (!obj.success) {
-				alert(obj.msg);
-				return;
-			}
-
-			createFriendList(JSON.parse(obj.msg));
-			$('.msg-main-m li').click(li_click);
-
-		}
-	});
-}
-// 根据好友id获得聊天记录
-function getChatByFriend(event) {
-	var friend = $(event.currentTarget).find('h5').attr('user');
-	$.ajax({
-		url : 'action',
-		data : {
-			user : g_user.id,
-			friend : friend,
-			method : 'getChatByFriend'
-		},
-		success : function(data) {
-			var obj = JSON.parse(data);
-
-			if (!obj.success) {
-				alert(obj.msg);
-				return;
-			}
-
-			createMainChat(JSON.parse(obj.msg));
-			scroll_button();
-		}
-	});
-}
-// 根据用户id获得聊天记录
-function getChatByUser() {
-	$.ajax({
-		url : 'action',
-		data : {
-			id : g_user.id,
-			method : 'getChatByUser'
-		},
-		success : function(data) {
-			var obj = JSON.parse(data);
-
-			if (obj.success==false) {
-				alert(obj.msg);
-				return;
-			}
-
-			createMidChat(JSON.parse(obj.msg));
-			$('.msg-main-m li').click(li_click);
-			scroll_button();
-		}
-	});
-}
-// 创建主聊天的快
-function createMainChat(arr) {
-	var lis = '';
-	var el = $('.msg-main-r ul');
-	el.empty();
-
-	for (var i = 0; i < arr.length; i++) {
-		lis += '<li>';
-		if (g_user.id == arr[i].from) {
-			lis += '<img class="msg-user-img l" src="img/meinv.jpg" />';
-			lis += '<div class="msg-main-r-content msg-main-r-content-l l">';
-			lis += '<pre>' + arr[i].content + '</pre>';
-			lis += '<i class="arrow_left"></i>';
-			lis += '</div>';
-			lis += '<small class="l">' + arr[i].time + '</small>';
-		} else {
-			lis += '<img class="msg-user-img r" src="img/meinv.jpg" />';
-			lis += '<div class="msg-main-r-content msg-main-r-content-r r">';
-			lis += '<pre>' + arr[i].content + '！</pre>';
-			lis += '<i class="arrow_right"></i>';
-			lis += '</div>';
-			lis += '<small class="r">' + arr[i].time + '</small>';
-		}
-		lis += '</li>';
+	if (self == obj.fromName) {// 自己是消息发起人
+		create_IM_left(obj);
 	}
-	el.append(lis);
+
+	else if (self == obj.toName) {// 自己是消息接收人
+		if (curr_frend == obj.fromName) {// 当前的对话是和发起聊天的好友
+			create_IM_right(obj);
+		} else {// 不是当前好友则弹框
+			create_alert_win('来自 ' + obj.fromName + ' 的消息', obj.content,
+					obj.fromName);
+		}
+	}
 
 }
-// 创建好友列表的块
-function createFriendList(arr) {
-	var lis = '';
-	var el = $('.msg-main-m ul');
-	el.empty();
-	for (var i = 0; i < arr.length; i++) {
-		lis += '<li>';
-		lis += '<img class="msg-user-img l" src="img/meinv.jpg" />';
-		lis += '<div class="l">';
-		lis += '<h5 user="' + arr[i].id + '">' + arr[i].nickName + '</h5>';
-		lis += '<p></p>';
-		lis += '</div>';
-		lis += '</li>';
-	}
-	el.append(lis);
-	el.find('li').click(getChatByFriend);
-}
-// 创建用户中间聊天的记录块
-function createMidChat(arr) {
-	var lis = '';
-	var el = $('.msg-main-m ul');
-	el.empty();
-	for (var i = 0; i < arr.length; i++) {
-		lis += '<li>';
-		lis += '<img class="msg-user-img l" src="img/meinv.jpg" />';
-		lis += '<div class="l">';
-		lis += '<h5 user="' + arr[i].friend + '">' + arr[i].friendName
-				+ '</h5>';
-		lis += '<p>' + arr[i].content + '</p>';
-		lis += '</div>';
-		lis += '</li>';
-	}
-	el.append(lis);
-	el.find('li').click(getChatByFriend);
-}
 
-// 添加好友框
-function getAddPanel() {
-	var el = $('.msg-main-m ul');
-	el.empty();
-	Ext.define('User', {
-		extend : 'Ext.data.Model',
-		fields : [ {
-			name : 'email'
-		}, {
-			name : 'id'
-		} ]
+// 弹出消息提示框
+function create_alert_win(title, content, friend) {
+	var win = Ext.create('Ext.window.Window', {
+		title : title,
+		height : 20,
+		width : 250,
+		html : '<p class="r-b-tip blue-color">' + content + '</p>'
 	});
+	win.showAt($(window).width() - 250, $(window).height() - 50);
+	win.animate({
+		to : {
+			height : 150,
+			y : $(window).height() - 140
+		}
+	});
+	// 点击后显示与该好友的聊天
+	$('.r-b-tip').click(function() {
 
-	var store = Ext.create('Ext.data.Store', {
-		model : 'User',
-		proxy : {
-			type : 'ajax',
-			url : 'action',
-			extraParams : {
-				email : g_user.email,
-				method : 'getAllUser'
-			},
-			reader : {
-				type : 'json'
+		var h5s = $('.msg-main-m li h5');
+		for (var i = 0; i < h5s.length; i++) {
+			if ($(h5s[i]).text() == friend) {
+				$(h5s[i]).parentsUntil('ul').click();
+				win.close();
 			}
 		}
 	});
+}
+// 弹出确认提示框
+function create_confirm_win(obj) {
 
-	var panel = Ext.create('Ext.panel.Panel', {
-		width : 320,
-		border : false,
-		renderTo : el[0],
-
+	var win = Ext.create('Ext.window.Window', {
+		title : '消息提示',
+		height : 150,
+		width : 250,
 		layout : {
-			align : 'stretch',
-			type : 'hbox'
+			type : 'border'
 		},
-		bodyStyle : {
-			background : 'transparent'
-		},
-		titleAlign : 'center',
 		items : [ {
-			xtype : 'combobox',
-			width : 200,
-			margin : '30 20',
-			id : 'btn-friend',
-			typeAhead : true,
-			minChars : 1,
-			fieldLabel : '',
-			store : store,
-			displayField : 'email',
-			valueField : 'id'
-		}, {
-			xtype : 'button',
-			margin : '30 0',
-			text : '添 加',
-			listeners : {
-				click : function(button, e, eOpts) {
-					addFriend();
-				}
-			}
+			xtype : 'panel',
+			region : 'center',
+			html :'<p class="r-b-tip blue-color">' + obj.content + '</p>',
+			border : false,
+			dockedItems : [ {
+				xtype : 'toolbar',
+				dock : 'bottom',
+				items : [ {
+					xtype : 'button',
+					margin : '0 30 0 50',
+					width : 50,
+					text : '接 受',
+					listeners : {
+						click : function() {
+							//obj.fromName = g_user.getUserName();
+							//obj.toName = '';
+							send_msg('accepet_add_req','',obj.fromName,obj.toName);
+							win.close();
+						}
+					}
+				}, {
+					xtype : 'button',
+					width : 50,
+					text : '拒 绝',
+					listeners : {
+						click : function() {
+							win.close();
+						}
+					}
+				} ]
+			} ]
 		} ]
 	});
-	return panel;
-}
-
-function addFriend() {
-	var combox = Ext.getCmp('btn-friend');
-	var friend = {
-		from : g_user.id,
-		to : combox.getValue()
-	};
-	// 推送加好友请求
-	sendMsg('friendRequest', '', combox.getRawValue());
-	/*
-	 * $.ajax({ url : 'action', data : { method:'addFriend', friend
-	 * :Ext.JSON.encode(friend) }, success : function(data) { var obj =
-	 * Ext.JSON.decode(data); } });
-	 */
+	win.showAt($(window).width() - 250, $(window).height() - 50);
+	win.animate({
+		to : {
+			height : 150,
+			y : $(window).height() - 140
+		}
+	});
 }

@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import com.google.gson.Gson;
+
 
 import DB.DBHelper;
 import Model.ChatModel;
@@ -53,16 +53,16 @@ public class ChatAction {
 			return "{success:false,msg:'你在逗我玩呢！'}";
 		}
 
-		String sql = " select * from chat where fromName='" + self
-				+ "' and toName ='" + friend + "' ";
-		sql += " union ";
-		sql += " select * from chat where toName='" + self
-				+ "' and fromName ='" + friend + "' ";
+		String sql = " select * from chat where (";
+		sql += " fromName='" + self + "' and toName ='" + friend + "' ";
+		sql += " )or (";
+		sql += " toName='" + self + "' and fromName ='" + friend + "'";
+		sql += " ) ";
 
 		String json = "[";
 		ResultSet rs = DBHelper.executeQuery(sql);
 		while (rs.next()) {
-			json += "{id:'" + rs.getString("id") + "',formName:'"
+			json += "{id:'" + rs.getString("id") + "',fromName:'"
 					+ rs.getString("fromName") + "',toName:'"
 					+ rs.getString("toName") + "',content:'"
 					+ rs.getString("content") + "',time:'"
@@ -79,7 +79,7 @@ public class ChatAction {
 		}
 
 		String sql = "SELECT * from chat_view where fromName='" + userName
-				+ "' or toName='" + userName+"' ";
+				+ "' or toName='" + userName + "' ";
 		ResultSet rs = DBHelper.executeQuery(sql);
 		HashMap<String, ChatModel> hm = new HashMap<String, ChatModel>();
 		String json, key;// key存储的是好友的名字

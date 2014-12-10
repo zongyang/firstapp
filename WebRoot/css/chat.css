@@ -207,8 +207,11 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	cursor: pointer;
+	
 }
-
+.r-b-tip:hover{
+	color: #FA5965;
+}
 .friend-table {
 	display: block;
 	position: relative;

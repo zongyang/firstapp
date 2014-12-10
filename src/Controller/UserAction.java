@@ -2,7 +2,6 @@ package Controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.Random;
 
 import javax.servlet.http.HttpSession;
@@ -71,7 +70,7 @@ public class UserAction {
 				+ password
 				+ "','','保密','img/header_icon/0.jpg','',now())";
 		String query = "select userName from userInfo where userName='"
-				+ userName + "' or email='"+email+"'";
+				+ userName + "' or email='" + email + "'";
 		if (DBHelper.isExist(query)) {
 			return "{success:false,msg:'注册失败，该用户名或者邮箱已被注册！'}";
 		}
@@ -195,6 +194,28 @@ public class UserAction {
 
 	}
 
+	public static String get_all_userName_req() throws SQLException {
+		String sql="select userName  from userInfo";
+		ResultSet rs=DBHelper.executeQuery(sql);
+		String json="[";
+		
+		while(rs.next()){
+			json+="{userName:'"+rs.getString("userName")+"'},";
+			
+		}
+		return CommFuns.TrimEnd(json, ",")+"]";
+	}
+	public static String get_all_userName_req(String query) throws SQLException {
+		String sql="select userName  from userInfo where userName like'%"+query+"%' ";
+		ResultSet rs=DBHelper.executeQuery(sql);
+		String json="[";
+		
+		while(rs.next()){
+			json+="{userName:'"+rs.getString("userName")+"'},";
+			
+		}
+		return CommFuns.TrimEnd(json, ",")+"]";
+	}
 	private static String get_full_are_by_areaId(String areaId)
 			throws SQLException {
 		AreaModel model = new AreaModel(areaId);
