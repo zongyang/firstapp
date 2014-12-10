@@ -1,26 +1,4 @@
-$(function() {
-	// left
-	$('.msg-main-l li').click(li_click);
-	$('.msg-main-l-friend').click(msg_main_l_friend_click);
-	$('.msg-main-l-recent').click(msg_main_l_recent_click);
-	$('.msg-main-l-add').click(msg_main_l_add_click);
-	// 发送消息
-	$('#btn-send-msg').click(send_msg_click);
-	$('#chart-input').keydown(function(event) {
-		if (event.keyCode == 13) {
-			send_msg_click();
-		}
-	});
-	start_webSocket();
-	return;
 
-	$('.msg-main-l-recent').click(get_chat_latest_record);
-	$('.msg-main-l-add').click(getAddPanel);
-	// middle
-	$('.msg-main-m li').click(li_click);
-	// right
-
-});
 
 
 // 发送消息按钮点击事件

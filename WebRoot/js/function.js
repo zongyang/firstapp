@@ -112,7 +112,7 @@ UserInfo.prototype.getSex = function() {
 UserInfo.prototype.getArea = function() {
 	return this.area;
 }
-UserInfo.prototype.loginOut = function() {// 注销操作
+UserInfo.prototype.loginOut = function(callback) {// 注销操作
 	if (this.check()) {
 		return;
 	}
@@ -123,6 +123,11 @@ UserInfo.prototype.loginOut = function() {// 注销操作
 	this.setRegTime();
 	this.setSex();
 	localStorage.clear();
+	
+	if (callback) {
+		callback();
+	}
+	location.href='login.html';
 	return;
 }
 UserInfo.prototype.login = function(callback) {
@@ -148,7 +153,31 @@ UserInfo.prototype.login = function(callback) {
 		}
 	});
 }
-
+UserInfo.prototype.isLogin = function(win) {
+	if (!this.check()&&win) {
+		Ext.Msg.alert('提示', '用户  <font class="red-color">' + this.userName
+				+ '</font> 已经登录，点击确定后进入聊天页面。', function() {
+			location.href = 'chat.html';
+			return;
+		});
+	}
+	else if(this.check()&&!win){
+		Ext.Msg.alert('提示', '请先登录！', function() {
+			location.href = 'login.html';
+			return;
+		});
+	}
+	
+}
+UserInfo.prototype.isNoLogin=function(){
+	if (!this.check()) {
+		Ext.Msg.alert('提示', '用户  <font class="red-color">' + this.userName
+				+ '</font> 已经登录，请先注销。', function() {
+			history.back();
+			return;
+		});
+	}
+}
 /*
  * 字符串检测
  */

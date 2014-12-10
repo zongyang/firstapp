@@ -1,0 +1,56 @@
+.head {
+	position: relative;
+	height: 60px;
+}
+
+.head-icon {
+	padding: 8px 0 8px 90%;
+}
+.head .hover{
+	height:45px;
+	width:45px;
+}
+.head-ul {
+	width: 140px;
+	position: absolute;
+	top: 60px;
+	right: 3%;
+	background: #363d40;
+	z-index: 99;
+}
+
+.head-ul a {
+	border-top: 1px solid #4a5153;
+	width: auto;
+	height: 39px;
+	line-height: 39px;
+	font-size: 14px;
+	background-image: url(../img/head-icon.png);
+	background-repeat: no-repeat;
+	display: block;
+	color: #fff;
+	text-align: left;
+	padding: 0;
+	padding-left: 47px;
+	cursor: pointer;
+}
+
+.head-ul a:hover {
+	color: #fff;
+	background-color: #2a2c2e;
+}
+
+.head-ul .head-userName {
+	padding: 0 18px;
+	background-image: none;
+	border: 0;
+	text-align: center;
+}
+
+.head-ul .head-userInfo {
+	background-position: 19px -167px;
+}
+
+.head-ul .head-userOut {
+	background-position: 19px -207px;
+}

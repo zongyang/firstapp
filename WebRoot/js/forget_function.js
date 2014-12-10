@@ -1,4 +1,5 @@
 ﻿$(function() {
+	g_user.isNoLogin();
 	$('.sg-body-l input').on('input', input_change);
 	$('.forget-btn').click(forget_btn_click);
 });

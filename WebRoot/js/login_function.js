@@ -1,4 +1,5 @@
 $(function() {
+	g_user.isLogin(true);
 	// header
 	$('.sg-header span').click(sg_header_click);
 	// body

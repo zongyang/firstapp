@@ -362,4 +362,5 @@ html {
 	border-radius: 50%;
 	border: 2px solid #FFF;
 	box-shadow: 2px 2px 3px #999;
+	cursor: pointer;
 }

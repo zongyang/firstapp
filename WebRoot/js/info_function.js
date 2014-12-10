@@ -1,4 +1,5 @@
 $(function() {
+	g_user.isLogin();
 	// 创建store的model
 	create_area_model();
 	// 默认打开的是个人资料tab

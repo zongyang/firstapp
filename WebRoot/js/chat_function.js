@@ -1,4 +1,28 @@
-//创建左边聊天条
+$(function() {
+	g_user.isLogin();
+	// left
+	$('.msg-main-l li').click(li_click);
+	$('.msg-main-l-friend').click(msg_main_l_friend_click);
+	$('.msg-main-l-recent').click(msg_main_l_recent_click);
+	$('.msg-main-l-add').click(msg_main_l_add_click);
+	// 发送消息
+	$('#btn-send-msg').click(send_msg_click);
+	$('#chart-input').keydown(function(event) {
+		if (event.keyCode == 13) {
+			send_msg_click();
+		}
+	});
+	start_webSocket();
+	return;
+
+	$('.msg-main-l-recent').click(get_chat_latest_record);
+	$('.msg-main-l-add').click(getAddPanel);
+	// middle
+	$('.msg-main-m li').click(li_click);
+	// right
+
+});
+// 创建左边聊天条
 function create_IM_left(obj) {
 	var li;
 	li += '<li>'
@@ -149,34 +173,36 @@ function create_confirm_win(obj) {
 		items : [ {
 			xtype : 'panel',
 			region : 'center',
-			html :'<p class="r-b-tip blue-color">' + obj.content + '</p>',
+			html : '<p class="r-b-tip blue-color">' + obj.content + '</p>',
 			border : false,
 			dockedItems : [ {
 				xtype : 'toolbar',
 				dock : 'bottom',
-				items : [ {
-					xtype : 'button',
-					margin : '0 30 0 50',
-					width : 50,
-					text : '接 受',
-					listeners : {
-						click : function() {
-							//obj.fromName = g_user.getUserName();
-							//obj.toName = '';
-							send_msg('accepet_add_req','',obj.fromName,obj.toName);
-							win.close();
-						}
-					}
-				}, {
-					xtype : 'button',
-					width : 50,
-					text : '拒 绝',
-					listeners : {
-						click : function() {
-							win.close();
-						}
-					}
-				} ]
+				items : [
+						{
+							xtype : 'button',
+							margin : '0 30 0 50',
+							width : 50,
+							text : '接 受',
+							listeners : {
+								click : function() {
+									// obj.fromName = g_user.getUserName();
+									// obj.toName = '';
+									send_msg('accepet_add_req', '',
+											obj.fromName, obj.toName);
+									win.close();
+								}
+							}
+						}, {
+							xtype : 'button',
+							width : 50,
+							text : '拒 绝',
+							listeners : {
+								click : function() {
+									win.close();
+								}
+							}
+						} ]
 			} ]
 		} ]
 	});
