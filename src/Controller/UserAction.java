@@ -14,7 +14,7 @@ import Model.UserModel;
 
 //登录注册类
 public class UserAction {
-	public static HttpSession session;
+
 
 	public static String forget_req(String userName, String email,
 			String password) {

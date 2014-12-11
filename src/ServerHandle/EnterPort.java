@@ -19,7 +19,7 @@ public class EnterPort {
 
 		Enumeration<String> enu = request.getParameterNames();
 		Hashtable<String, String> paraHash = new Hashtable<String, String>();
-		UserAction.session = request.getSession();
+		
 
 		while (enu.hasMoreElements()) {
 			String paraName = (String) enu.nextElement();

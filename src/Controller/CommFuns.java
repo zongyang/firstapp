@@ -1,5 +1,8 @@
 package Controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import Model.TipModel;
 
 //公用类：常用方法的封装
@@ -56,6 +59,18 @@ public class CommFuns {
 			}
 		}
 		return false;
+	}
+	
+	public static Boolean IsDate(String str){
+		SimpleDateFormat  formate=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		try {
+			formate.parse(str);
+			return true;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	public static String TrimEnd(String input, String charsToTrim) {
