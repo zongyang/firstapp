@@ -1,0 +1,96 @@
+{
+    "name": "firstapp",
+    "settings": {
+        "exportPath": "D:/Documents/Eclipse/firstapp/WebRoot/admin",
+        "urlPrefix": "",
+        "spacesToIndent": 4,
+        "lineEnding": "CRLF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "buildShouldOverwriteIndex": true
+    },
+    "xdsVersion": "2.2.2",
+    "xdsBuild": 991,
+    "schemaVersion": 1,
+    "upgradeVersion": 210000000503,
+    "framework": "ext42",
+    "topInstanceFileMap": {
+        "ddd758b5-c12b-4e77-a870-39a2875b153d": {
+            "paths": [
+                "metadata/resource/Library"
+            ],
+            "className": "Library"
+        },
+        "b25f044b-ad8f-4af2-995b-289bba17ec28": {
+            "paths": [
+                "metadata/controller/init",
+                "app/controller/override/init.js",
+                "app/controller/init.js"
+            ],
+            "className": "init"
+        },
+        "19a7a2c9-a6ca-4c41-b705-21ba8ea329d5": {
+            "paths": [
+                "metadata/view/main_win",
+                "app/view/override/main_win.js",
+                "app/view/main_win.js",
+                "app/view/Viewport.js"
+            ],
+            "className": "main_win"
+        },
+        "8b7a46f2-b229-4970-a4d1-286b57cfbdfd": {
+            "paths": [
+                "metadata/store/user",
+                "app/store/override/user.js",
+                "app/store/user.js"
+            ],
+            "className": "user"
+        },
+        "b7f68810-fb7c-4f20-ba6c-1b703a9748ff": {
+            "paths": [
+                "metadata/model/user",
+                "app/model/override/user.js",
+                "app/model/user.js"
+            ],
+            "className": "user"
+        },
+        "245d3b48-1465-4627-aaf0-448c088ebc4b": {
+            "paths": [
+                "metadata/store/admin",
+                "app/store/override/admin.js",
+                "app/store/admin.js"
+            ],
+            "className": "admin"
+        },
+        "5999b53b-d83b-46e3-9de6-cd1f6c90ea03": {
+            "paths": [
+                "metadata/model/admin",
+                "app/model/override/admin.js",
+                "app/model/admin.js"
+            ],
+            "className": "admin"
+        }
+    },
+    "viewOrderMap": {
+        "view": [
+            "19a7a2c9-a6ca-4c41-b705-21ba8ea329d5"
+        ],
+        "store": [
+            "8b7a46f2-b229-4970-a4d1-286b57cfbdfd",
+            "245d3b48-1465-4627-aaf0-448c088ebc4b"
+        ],
+        "controller": [
+            "b25f044b-ad8f-4af2-995b-289bba17ec28"
+        ],
+        "model": [
+            "b7f68810-fb7c-4f20-ba6c-1b703a9748ff",
+            "5999b53b-d83b-46e3-9de6-cd1f6c90ea03"
+        ],
+        "resource": [
+            "ddd758b5-c12b-4e77-a870-39a2875b153d"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

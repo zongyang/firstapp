@@ -1,0 +1,30 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "init"
+    },
+    "designerId": "b25f044b-ad8f-4af2-995b-289bba17ec28",
+    "cn": [
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onLaunch",
+                "implHandler": [
+                    "var win=Ext.create('MyApp.view.main_win');\r",
+                    "win.show();"
+                ]
+            },
+            "designerId": "c1d8e2ed-f8a3-43fa-8d94-14a34c0b44ef"
+        }
+    ]
+}

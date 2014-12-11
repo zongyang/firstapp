@@ -1,0 +1,780 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "height": 600,
+        "minHeight": null,
+        "minWidth": null,
+        "width": 800,
+        "designer|userClassName": "main_win",
+        "designer|initialView": true,
+        "layout": "border",
+        "title": null
+    },
+    "designerId": "19a7a2c9-a6ca-4c41-b705-21ba8ea329d5",
+    "cn": [
+        {
+            "type": "Ext.tab.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout|flex": null,
+                "layout|region": "center",
+                "id": null,
+                "activeTab": 0
+            },
+            "designerId": "33a90dce-ea6a-450e-a302-f86f91a018d1",
+            "cn": [
+                {
+                    "type": "Ext.panel.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "border": false,
+                        "height": 600,
+                        "width": 800,
+                        "layout": "border",
+                        "title": "用户管理模块"
+                    },
+                    "designerId": "d538da61-36c8-437b-9883-119b97137b06",
+                    "cn": [
+                        {
+                            "type": "Ext.tab.Tab",
+                            "reference": {
+                                "name": "tabConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "iconAlign": null
+                            },
+                            "designerId": "6879e6b4-f467-4920-a4fe-b26c71953b68"
+                        },
+                        {
+                            "type": "Ext.grid.Panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": null,
+                                "layout|region": "center",
+                                "margin": "0 5 0 0",
+                                "title": null,
+                                "titleAlign": "center",
+                                "forceFit": true,
+                                "store": "user"
+                            },
+                            "designerId": "61741b8e-c530-45f6-92df-365de936a4d3",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.column.Column",
+                                    "reference": {
+                                        "name": "columns",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "align": "center",
+                                        "dataIndex": "userName",
+                                        "text": "用户名"
+                                    },
+                                    "designerId": "b556852a-fdea-46ff-90ef-1cf1c9364efe"
+                                },
+                                {
+                                    "type": "Ext.grid.column.Column",
+                                    "reference": {
+                                        "name": "columns",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "align": "center",
+                                        "dataIndex": "sex",
+                                        "text": "性别"
+                                    },
+                                    "designerId": "37af6a8b-f312-41ec-86b2-1dedb5f9ca1d"
+                                },
+                                {
+                                    "type": "Ext.grid.column.Column",
+                                    "reference": {
+                                        "name": "columns",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "align": "center",
+                                        "dataIndex": "img",
+                                        "text": "图像"
+                                    },
+                                    "designerId": "6a8ef86a-bd41-4ff1-a614-122e1f51e4e4"
+                                },
+                                {
+                                    "type": "Ext.grid.column.Column",
+                                    "reference": {
+                                        "name": "columns",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "align": "center",
+                                        "dataIndex": "mark",
+                                        "text": "个性签名"
+                                    },
+                                    "designerId": "049a440b-8e66-40de-b099-e8ba1e1b23dd"
+                                },
+                                {
+                                    "type": "Ext.grid.column.Column",
+                                    "reference": {
+                                        "name": "columns",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "align": "center",
+                                        "dataIndex": "email",
+                                        "text": "注册邮箱"
+                                    },
+                                    "designerId": "0c2dcd3b-6da8-4ad9-876e-7f470c3947a7"
+                                },
+                                {
+                                    "type": "Ext.grid.column.Column",
+                                    "reference": {
+                                        "name": "columns",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "align": "center",
+                                        "dataIndex": "regTime",
+                                        "text": "注册时间"
+                                    },
+                                    "designerId": "bba88c7b-54c4-4879-9971-bb3a5d472c4e"
+                                },
+                                {
+                                    "type": "Ext.toolbar.Toolbar",
+                                    "reference": {
+                                        "name": "dockedItems",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "dock": "top"
+                                    },
+                                    "designerId": "495b9335-124f-46a3-b8b7-7981f6f5c587",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.button.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|flex": null,
+                                                "icon": "../img/extjs_icon/delete.gif",
+                                                "text": "删除"
+                                            },
+                                            "designerId": "467a9591-b4ab-4fe2-9bd7-fa64dbb4168d"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.toolbar.Paging",
+                                    "reference": {
+                                        "name": "dockedItems",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "dock": "bottom",
+                                        "width": 360,
+                                        "displayInfo": true,
+                                        "store": "user"
+                                    },
+                                    "designerId": "13f59815-f8a5-4a66-bbe4-fb327324bbca"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.panel.Panel",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dock": "right",
+                                "container|align": "stretch",
+                                "border": false,
+                                "layout": "vbox",
+                                "bodyStyle": null,
+                                "collapseDirection": null,
+                                "collapsed": null,
+                                "collapsible": null,
+                                "title": null,
+                                "titleAlign": null,
+                                "titleCollapse": null
+                            },
+                            "designerId": "244df101-0511-4b25-a5a7-f86ed5d63285",
+                            "cn": [
+                                {
+                                    "type": "Ext.panel.Panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 1,
+                                        "border": false,
+                                        "width": 250,
+                                        "bodyStyle": [
+                                            "{\r",
+                                            "    borderLeft:'1px'\r",
+                                            "}"
+                                        ],
+                                        "title": "按日期删除聊天记录",
+                                        "titleAlign": "center"
+                                    },
+                                    "designerId": "c65208d4-40e1-435f-9b21-d4691a810996",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.form.field.Date",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "id": null,
+                                                "margin": "50 0 50 10",
+                                                "fieldLabel": "选择日期",
+                                                "labelAlign": "right",
+                                                "labelWidth": 60
+                                            },
+                                            "designerId": "7248c930-137d-400a-8ddc-1d97d8c0e13a"
+                                        },
+                                        {
+                                            "type": "Ext.toolbar.Toolbar",
+                                            "reference": {
+                                                "name": "dockedItems",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "dock": "bottom",
+                                                "border": false
+                                            },
+                                            "designerId": "5810bdc4-fdb8-4696-9193-40164c1c1bae",
+                                            "cn": [
+                                                {
+                                                    "type": "Ext.toolbar.Spacer",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "layout|flex": 1,
+                                                        "width": null
+                                                    },
+                                                    "designerId": "e379293c-b752-441f-9613-84c5d147a64a"
+                                                },
+                                                {
+                                                    "type": "Ext.button.Button",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "layout|flex": null,
+                                                        "margin": null,
+                                                        "icon": "../img/extjs_icon/accept.gif",
+                                                        "text": "确定"
+                                                    },
+                                                    "designerId": "46b48c70-685e-4fbb-8098-73989a03d73c"
+                                                },
+                                                {
+                                                    "type": "Ext.toolbar.Spacer",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "layout|flex": 1,
+                                                        "width": null
+                                                    },
+                                                    "designerId": "d1e21b1d-6fd5-4937-824b-d6076f8c9841"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.panel.Panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 1.5,
+                                        "border": false,
+                                        "margin": null,
+                                        "layout": "fit",
+                                        "title": "发送系统通知",
+                                        "titleAlign": "center"
+                                    },
+                                    "designerId": "53155ca5-f11c-4edd-b86d-16c0d5d8027f",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.toolbar.Toolbar",
+                                            "reference": {
+                                                "name": "dockedItems",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "dock": "bottom",
+                                                "border": false
+                                            },
+                                            "designerId": "3b5d0325-b8b4-460b-af49-43e46412941a",
+                                            "cn": [
+                                                {
+                                                    "type": "Ext.toolbar.Spacer",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "layout|flex": 1,
+                                                        "width": null
+                                                    },
+                                                    "designerId": "4f84d13d-54f6-439c-b44d-8f4dc624daaf"
+                                                },
+                                                {
+                                                    "type": "Ext.button.Button",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "layout|flex": null,
+                                                        "height": 26,
+                                                        "margin": null,
+                                                        "icon": "../img/extjs_icon/accept.gif",
+                                                        "text": "发送"
+                                                    },
+                                                    "designerId": "d392082f-c80e-4c88-a8c5-32d50de0d4bd"
+                                                },
+                                                {
+                                                    "type": "Ext.toolbar.Spacer",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "layout|flex": 1,
+                                                        "width": null
+                                                    },
+                                                    "designerId": "9f840678-9288-4929-9e06-fafbb5b0bec7"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.form.field.TextArea",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "margin": 5,
+                                                "fieldLabel": null
+                                            },
+                                            "designerId": "725b6016-c250-419c-b697-e885d81b6186"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.panel.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "border": false,
+                        "height": 600,
+                        "width": 800,
+                        "layout": "border",
+                        "title": "管理员模块"
+                    },
+                    "designerId": "460d6e9f-8baf-4bbe-9ca8-8406c4633695",
+                    "cn": [
+                        {
+                            "type": "Ext.tab.Tab",
+                            "reference": {
+                                "name": "tabConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "iconAlign": null
+                            },
+                            "designerId": "9494ae7c-e7e4-4d89-9c06-32cb8654f77c"
+                        },
+                        {
+                            "type": "Ext.grid.Panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": null,
+                                "layout|region": "center",
+                                "margin": "0 5 0 0",
+                                "title": null,
+                                "titleAlign": "center",
+                                "forceFit": true,
+                                "store": "user"
+                            },
+                            "designerId": "5ff3c72b-3e87-4a91-8e19-4b602705c07f",
+                            "cn": [
+                                {
+                                    "type": "Ext.grid.column.Column",
+                                    "reference": {
+                                        "name": "columns",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "align": "center",
+                                        "dataIndex": "userName",
+                                        "text": "用户名"
+                                    },
+                                    "designerId": "4add7bda-7860-4c51-ab52-1e7c26b3a589"
+                                },
+                                {
+                                    "type": "Ext.grid.column.Column",
+                                    "reference": {
+                                        "name": "columns",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "align": "center",
+                                        "dataIndex": "img",
+                                        "text": "权限"
+                                    },
+                                    "designerId": "42ad6391-b4c2-4f66-a673-5a656c7ea918"
+                                },
+                                {
+                                    "type": "Ext.toolbar.Toolbar",
+                                    "reference": {
+                                        "name": "dockedItems",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "dock": "top"
+                                    },
+                                    "designerId": "e7671bf7-55c6-4976-87d2-99f2211620b0",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.button.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|flex": null,
+                                                "icon": "../img/extjs_icon/add.gif",
+                                                "text": "添加"
+                                            },
+                                            "designerId": "7e0b76d9-2132-4e65-974b-49c2c07d58b0"
+                                        },
+                                        {
+                                            "type": "Ext.button.Button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|flex": null,
+                                                "icon": "../img/extjs_icon/delete.gif",
+                                                "text": "删除"
+                                            },
+                                            "designerId": "8de07a4d-38c8-428f-8f5a-340c7062dbef"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.toolbar.Paging",
+                                    "reference": {
+                                        "name": "dockedItems",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "dock": "bottom",
+                                        "width": 360,
+                                        "displayInfo": true,
+                                        "store": "user"
+                                    },
+                                    "designerId": "6a762764-a3c5-4639-b8f3-ae5cef5323a7"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.panel.Panel",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dock": "right",
+                                "container|align": "stretch",
+                                "border": false,
+                                "layout": "vbox",
+                                "bodyStyle": null,
+                                "collapseDirection": null,
+                                "collapsed": null,
+                                "collapsible": null,
+                                "title": null,
+                                "titleAlign": null,
+                                "titleCollapse": null
+                            },
+                            "designerId": "f8a1f0d7-95e1-49e4-80b3-26154939bf77",
+                            "cn": [
+                                {
+                                    "type": "Ext.panel.Panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 1,
+                                        "border": false,
+                                        "width": 250,
+                                        "bodyStyle": [
+                                            "{\r",
+                                            "    borderLeft:'1px'\r",
+                                            "}"
+                                        ],
+                                        "title": "密码修改",
+                                        "titleAlign": "center"
+                                    },
+                                    "designerId": "ecd3461f-cde9-4420-b4e5-e5991071eb09",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.toolbar.Toolbar",
+                                            "reference": {
+                                                "name": "dockedItems",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "dock": "bottom",
+                                                "border": false
+                                            },
+                                            "designerId": "3708a432-d378-4c16-a6a8-81732d768119",
+                                            "cn": [
+                                                {
+                                                    "type": "Ext.toolbar.Spacer",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "layout|flex": 1,
+                                                        "width": null
+                                                    },
+                                                    "designerId": "2c6acc7c-b97f-4822-bc69-8885ab8b1ad2"
+                                                },
+                                                {
+                                                    "type": "Ext.button.Button",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "layout|flex": null,
+                                                        "margin": null,
+                                                        "icon": "../img/extjs_icon/accept.gif",
+                                                        "text": "确定"
+                                                    },
+                                                    "designerId": "63ad10d1-6fcd-4502-b455-5cc4c794c4eb"
+                                                },
+                                                {
+                                                    "type": "Ext.toolbar.Spacer",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "layout|flex": 1,
+                                                        "width": null
+                                                    },
+                                                    "designerId": "9fa6fed9-6b6f-46ed-a227-26fbcd68e24a"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.form.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "margin": "40 0 10 0",
+                                                "fieldLabel": "原密码",
+                                                "labelAlign": "right",
+                                                "labelWidth": 60
+                                            },
+                                            "designerId": "58b7a402-f985-437c-9663-188fdbb5b1f8"
+                                        },
+                                        {
+                                            "type": "Ext.form.field.Text",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "margin": "20 0 10 0",
+                                                "fieldLabel": "新密码",
+                                                "labelAlign": "right",
+                                                "labelWidth": 60
+                                            },
+                                            "designerId": "ff244a03-9289-446c-bb8d-116165d01f29"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.panel.Panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 1.5,
+                                        "border": false,
+                                        "margin": null,
+                                        "layout": "fit",
+                                        "title": "发送系统通知",
+                                        "titleAlign": "center"
+                                    },
+                                    "designerId": "ab641ab6-c333-4c83-91f5-7c188a4b098c",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.toolbar.Toolbar",
+                                            "reference": {
+                                                "name": "dockedItems",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "dock": "bottom",
+                                                "border": false
+                                            },
+                                            "designerId": "43f3b832-a7fd-4b33-8da1-8297ac6a8199",
+                                            "cn": [
+                                                {
+                                                    "type": "Ext.toolbar.Spacer",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "layout|flex": 1,
+                                                        "width": null
+                                                    },
+                                                    "designerId": "3c210de3-4677-4698-afea-cd2bf91cc66e"
+                                                },
+                                                {
+                                                    "type": "Ext.button.Button",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "layout|flex": null,
+                                                        "height": 26,
+                                                        "margin": null,
+                                                        "icon": "../img/extjs_icon/accept.gif",
+                                                        "text": "发送"
+                                                    },
+                                                    "designerId": "bf959df1-c063-42e0-aff9-3f44c1835717"
+                                                },
+                                                {
+                                                    "type": "Ext.toolbar.Spacer",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "layout|flex": 1,
+                                                        "width": null
+                                                    },
+                                                    "designerId": "6374094c-1933-43eb-8d44-d4f2715fd77b"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.form.field.TextArea",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "margin": 5,
+                                                "fieldLabel": null
+                                            },
+                                            "designerId": "b8618c3d-25e0-45c8-b66e-edfb179d0849"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
