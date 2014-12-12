@@ -232,7 +232,11 @@ public class AdminAction {
 		return CommFuns.TrimEnd(json, ",") + "]}";
 	}
 
-	// 发送系统消息
+	// 注销
+	public String admin_out(){
+		this.session.invalidate();
+		return "{success:true,msg:'注销成功！'}";
+	}
 
 	private int add_admin(AdminModel model) {
 

@@ -70,7 +70,11 @@ public class AdminEnterPort {
 			if (paraHash.get("method").equals("query_user")) {
 				return adminAction.query_user(paraHash.get("page"),paraHash.get("limit"));
 			}
-			// 发送系统消息
+			// 注销
+			if (paraHash.get("method").equals("admin_out")) {
+				return adminAction.admin_out();
+			}
+			
 		}
 
 		return "";

@@ -20,8 +20,8 @@
             "userConfig": {
                 "fn": "onLaunch",
                 "implHandler": [
-                    "var win=Ext.getCmp('login_win');\r",
-                    "//win.show();"
+                    "var win=Ext.getCmp('sel_win');\r",
+                    "win.show();"
                 ]
             },
             "designerId": "c1d8e2ed-f8a3-43fa-8d94-14a34c0b44ef"

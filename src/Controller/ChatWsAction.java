@@ -131,14 +131,15 @@ public class ChatWsAction {
 //发送系统消息
 	private  void send_system_info(ChatWsModel model) {
 		Iterator<String> iter = connections.keySet().iterator();
+		model.setMsgType(ChatWsModel.MSG_TYPE[0]);
 		while (iter.hasNext()) {
 			
 			String key=iter.next();
 			String json;
 	
 			json = "{content: '" + model.getContent() + "' ,time:'"
-					+ model.getTime() + "',fromName:'" + model.getFromName()
-					+ "',toName:'" + key + "',msgType:'"
+					+ model.getTime() + "',fromName:'" + this.userName
+					+ "[系统消息]',toName:'" + key + "',msgType:'"
 					+ model.getMsgType() + "'}";
 			
 			sendMessageToUser (key,json);

@@ -1,0 +1,90 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|align": "stretch",
+        "height": 250,
+        "id": "sel_win",
+        "width": 400,
+        "designer|userClassName": "sel_win",
+        "designer|initialView": true,
+        "layout": "vbox",
+        "closable": false,
+        "title": "登录模块选择",
+        "titleAlign": "center"
+    },
+    "designerId": "4b380155-b184-40d3-a419-c818688e40dc",
+    "cn": [
+        {
+            "type": "Ext.button.Button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "margin": "50 50 30 50 ",
+                "scale": "large",
+                "text": "进入聊天模块"
+            },
+            "designerId": "b3a066b2-689c-4b53-b049-2ec71778274a",
+            "cn": [
+                {
+                    "type": "basiceventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "onButtonClick",
+                        "implHandler": [
+                            "location.href='../login.html';"
+                        ],
+                        "name": "click",
+                        "scope": "me"
+                    },
+                    "designerId": "97d43d55-e2a9-4e26-92d9-c72ad4aaa090"
+                }
+            ]
+        },
+        {
+            "type": "Ext.button.Button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "margin": "0 50 50 50",
+                "scale": "large",
+                "text": "进入管理员模块"
+            },
+            "designerId": "69e5a972-cb84-440c-84c0-d68a8e89adcb",
+            "cn": [
+                {
+                    "type": "basiceventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "onButtonClick1",
+                        "implHandler": [
+                            "Ext.getCmp('sel_win').close();\r",
+                            "Ext.create('MyApp.view.login_win').show();"
+                        ],
+                        "name": "click",
+                        "scope": "me"
+                    },
+                    "designerId": "d04c6421-8cdd-46f2-b773-b0d9b6f47bc9"
+                }
+            ]
+        }
+    ]
+}

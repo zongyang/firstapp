@@ -10,11 +10,8 @@ function login_click() {
 		url : '../admin',
 		params : {
 			method : 'admin_login',
-			// name : name.getValue(),
-			// password : password.getValue()
-
-			name : 'admin',
-			password : '123456'
+			name : name.getValue(),
+			password : password.getValue()
 
 		},
 		success : function(response) {
@@ -22,15 +19,15 @@ function login_click() {
 			if (obj.success === false) {
 				Ext.Msg.alert('提示', obj.msg);
 			}
-			Ext.getCmp('login_win').close();
-			Ext.create('MyApp.view.main_win').show();
-			Ext.StoreManager.get('user').load();
-			Ext.StoreManager.get('admin').load();
-			return;
+
 			if (obj.success === true) {
 				Ext.Msg.alert('提示', obj.msg, function() {
 					Ext.getCmp('login_win').close();
 					Ext.create('MyApp.view.main_win').show();
+					Ext.StoreManager.get('user').load();
+					Ext.StoreManager.get('admin').load();
+					//开启websocket
+					start_webSocket();
 				});
 			}
 		}
@@ -74,22 +71,63 @@ function get_admin_name(callback) {
 	Ext.Ajax.request({
 		url : '../admin',
 		params : {
-			method : 'get_admin_name'	
+			method : 'get_admin_name'
 		},
 		success : function(response) {
-			if(callback){
+			if (callback) {
 				callback(response.responseText);
 			}
 		}
 	});
 }
 
-function send_to_all(){
-	var tabpanel=Ext.getCmp('tab_panel');
-	var textarea=tabpanel.getActiveTab().down('textarea');
-	if(!textarea.isValid()){
-		return ;
+function send_to_all() {
+	var tabpanel = Ext.getCmp('tab_panel');
+	var textarea = tabpanel.getActiveTab().down('textarea');
+	if (!textarea.isValid()) {
+		return;
 	}
-	
-	send_msg("send_system_info", textarea.getValue(), '系统消息', '', callback);
+
+	send_msg("send_system_info", textarea.getValue(), '系统消息', '');
+}
+
+function start_webSocket() {
+	get_admin_name(function(admin) {
+		var url = 'ws://' + location.host + '/firstapp/chat/'
+				+ admin;
+		ws = new WebSocket(url);
+
+		ws.onmessage = function(evt) {
+			var obj = Ext.JSON.decode(evt.data);
+			if (obj.msgType) {
+				Ext.Msg.alert('提示', '消息已发出！');
+			} else {
+				Ext.Msg.alert('提示', '消息发送失败！');
+			}
+
+		};
+
+		ws.onclose = function(evt) {
+			// alert("close");
+		};
+
+		ws.onopen = function(evt) {
+			// alert("open");
+		};
+	});
+
+}
+
+function send_msg(method, content, fromName, toName, callback) {
+	var obj = {
+		method : method,
+		content : content,
+		fromName : fromName,
+		toName : toName
+	};
+	ws.send(Ext.JSON.encode(obj));
+
+	if (callback) {
+		callback();
+	}
 }

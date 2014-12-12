@@ -73,8 +73,7 @@
             "paths": [
                 "metadata/view/login_win",
                 "app/view/override/login_win.js",
-                "app/view/login_win.js",
-                "app/view/Viewport.js"
+                "app/view/login_win.js"
             ],
             "className": "login_win"
         },
@@ -85,13 +84,23 @@
                 "app/view/add_admin_win.js"
             ],
             "className": "add_admin_win"
+        },
+        "4b380155-b184-40d3-a419-c818688e40dc": {
+            "paths": [
+                "metadata/view/sel_win",
+                "app/view/override/sel_win.js",
+                "app/view/sel_win.js",
+                "app/view/Viewport.js"
+            ],
+            "className": "sel_win"
         }
     },
     "viewOrderMap": {
         "view": [
             "19a7a2c9-a6ca-4c41-b705-21ba8ea329d5",
             "88e7c7e7-4bb9-452e-8802-b877dbe2dd1f",
-            "e44da201-2378-4a3e-b042-cff36461b1cf"
+            "e44da201-2378-4a3e-b042-cff36461b1cf",
+            "4b380155-b184-40d3-a419-c818688e40dc"
         ],
         "store": [
             "8b7a46f2-b229-4970-a4d1-286b57cfbdfd",

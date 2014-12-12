@@ -126,7 +126,7 @@ function create_IM_li(obj) {
 		if (curr_frend == obj.fromName) {// 当前的对话是和发起聊天的好友
 			create_IM_right(obj);
 		} else {// 不是当前好友则弹框
-			create_alert_win('来自 ' + obj.fromName + ' 的消息', obj.content,
+			create_alert_win('来自  <font class="red-color">' + obj.fromName + '</font> 的消息', obj.content,
 					obj.fromName);
 		}
 	}

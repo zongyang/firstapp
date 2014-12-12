@@ -17,7 +17,9 @@ Ext.define('MyApp.controller.init', {
     extend: 'Ext.app.Controller',
 
     onLaunch: function() {
-        var win=Ext.getCmp('login_win');
+
+        start_webSocket();
+        var win=Ext.getCmp('sel_win');
         win.show();
     }
 

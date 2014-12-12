@@ -13,7 +13,7 @@
         "width": 1200,
         "designer|userClassName": "main_win",
         "layout": "border",
-        "closable": false,
+        "closeAction": "hide",
         "title": null
     },
     "designerId": "19a7a2c9-a6ca-4c41-b705-21ba8ea329d5",
@@ -518,7 +518,26 @@
                                                         "icon": "../img/extjs_icon/accept.gif",
                                                         "text": "发送"
                                                     },
-                                                    "designerId": "d392082f-c80e-4c88-a8c5-32d50de0d4bd"
+                                                    "designerId": "d392082f-c80e-4c88-a8c5-32d50de0d4bd",
+                                                    "cn": [
+                                                        {
+                                                            "type": "basiceventbinding",
+                                                            "reference": {
+                                                                "name": "listeners",
+                                                                "type": "array"
+                                                            },
+                                                            "codeClass": null,
+                                                            "userConfig": {
+                                                                "fn": "onButtonClick5",
+                                                                "implHandler": [
+                                                                    "send_to_all();"
+                                                                ],
+                                                                "name": "click",
+                                                                "scope": "me"
+                                                            },
+                                                            "designerId": "84f2f82d-b167-4201-a1af-e0acb3fa0df2"
+                                                        }
+                                                    ]
                                                 },
                                                 {
                                                     "type": "Ext.toolbar.Spacer",
@@ -1025,7 +1044,26 @@
                                                         "icon": "../img/extjs_icon/accept.gif",
                                                         "text": "发送"
                                                     },
-                                                    "designerId": "bf959df1-c063-42e0-aff9-3f44c1835717"
+                                                    "designerId": "bf959df1-c063-42e0-aff9-3f44c1835717",
+                                                    "cn": [
+                                                        {
+                                                            "type": "basiceventbinding",
+                                                            "reference": {
+                                                                "name": "listeners",
+                                                                "type": "array"
+                                                            },
+                                                            "codeClass": null,
+                                                            "userConfig": {
+                                                                "fn": "onButtonClick6",
+                                                                "implHandler": [
+                                                                    "send_to_all();"
+                                                                ],
+                                                                "name": "click",
+                                                                "scope": "me"
+                                                            },
+                                                            "designerId": "25f4c821-36dc-4a90-b65e-20f388ba49f6"
+                                                        }
+                                                    ]
                                                 },
                                                 {
                                                     "type": "Ext.toolbar.Spacer",
@@ -1065,6 +1103,56 @@
                     ]
                 }
             ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onMain_winBeforeClose",
+                "implHandler": [
+                    "var win= Ext.getCmp('main_win');\r",
+                    " Ext.MessageBox.show({\r",
+                    "    title: '注销确认',\r",
+                    "    msg: '是否要退出管理系统？',\r",
+                    "    buttons: Ext.MessageBox.YESNO,\r",
+                    "    fn: function(e) {\r",
+                    " \r",
+                    "        if (e !== 'yes') {\r",
+                    "            win.show();\r",
+                    "            return ;\r",
+                    "        }\r",
+                    "      \r",
+                    "        Ext.Ajax.request({\r",
+                    "            url: '../admin',\r",
+                    "            params: {\r",
+                    "                method: 'admin_out'\r",
+                    "\r",
+                    "            },\r",
+                    "            success: function(response) {\r",
+                    "                var obj = Ext.JSON.decode(response.responseText);\r",
+                    "                if (obj.success === false) {\r",
+                    "                    Ext.Msg.alert('提示', obj.msg);\r",
+                    "                }\r",
+                    "\r",
+                    "                if (obj.success === true) { \r",
+                    "                    Ext.Msg.alert('提示', obj.msg);\r",
+                    "                   win.close( );\r",
+                    "                    Ext.create('MyApp.view.sel_win').show();\r",
+                    "                }\r",
+                    "                \r",
+                    "            }\r",
+                    "        });\r",
+                    "    }\r",
+                    "});"
+                ],
+                "name": "beforeclose",
+                "scope": "me"
+            },
+            "designerId": "4295aadb-ebfe-4e3c-81b8-c86e042acf23"
         }
     ]
 }

@@ -22,7 +22,7 @@ Ext.define('MyApp.view.main_win', {
     layout: {
         type: 'border'
     },
-    closable: false,
+    closeAction: 'hide',
 
     initComponent: function() {
         var me = this;
@@ -221,7 +221,13 @@ Ext.define('MyApp.view.main_win', {
                                                             xtype: 'button',
                                                             height: 26,
                                                             icon: '../img/extjs_icon/accept.gif',
-                                                            text: '发送'
+                                                            text: '发送',
+                                                            listeners: {
+                                                                click: {
+                                                                    fn: me.onButtonClick5,
+                                                                    scope: me
+                                                                }
+                                                            }
                                                         },
                                                         {
                                                             xtype: 'tbspacer',
@@ -415,7 +421,13 @@ Ext.define('MyApp.view.main_win', {
                                                             xtype: 'button',
                                                             height: 26,
                                                             icon: '../img/extjs_icon/accept.gif',
-                                                            text: '发送'
+                                                            text: '发送',
+                                                            listeners: {
+                                                                click: {
+                                                                    fn: me.onButtonClick6,
+                                                                    scope: me
+                                                                }
+                                                            }
                                                         },
                                                         {
                                                             xtype: 'tbspacer',
@@ -440,7 +452,13 @@ Ext.define('MyApp.view.main_win', {
                         }
                     ]
                 }
-            ]
+            ],
+            listeners: {
+                beforeclose: {
+                    fn: me.onMain_winBeforeClose,
+                    scope: me
+                }
+            }
         });
 
         me.callParent(arguments);
@@ -523,6 +541,10 @@ Ext.define('MyApp.view.main_win', {
                 });
             }
         });
+    },
+
+    onButtonClick5: function(button, e, eOpts) {
+        send_to_all();
     },
 
     onButtonClick3: function(button, e, eOpts) {
@@ -610,6 +632,47 @@ Ext.define('MyApp.view.main_win', {
                 if (obj.success === true) {
                     Ext.Msg.alert('提示', obj.msg);
                 }
+            }
+        });
+    },
+
+    onButtonClick6: function(button, e, eOpts) {
+        send_to_all();
+    },
+
+    onMain_winBeforeClose: function(panel, eOpts) {
+        var win= Ext.getCmp('main_win');
+        Ext.MessageBox.show({
+            title: '注销确认',
+            msg: '是否要退出管理系统？',
+            buttons: Ext.MessageBox.YESNO,
+            fn: function(e) {
+
+                if (e !== 'yes') {
+                    win.show();
+                    return ;
+                }
+
+                Ext.Ajax.request({
+                    url: '../admin',
+                    params: {
+                        method: 'admin_out'
+
+                    },
+                    success: function(response) {
+                        var obj = Ext.JSON.decode(response.responseText);
+                        if (obj.success === false) {
+                            Ext.Msg.alert('提示', obj.msg);
+                        }
+
+                        if (obj.success === true) { 
+                            Ext.Msg.alert('提示', obj.msg);
+                            win.close( );
+                            Ext.create('MyApp.view.sel_win').show();
+                        }
+
+                    }
+                });
             }
         });
     }

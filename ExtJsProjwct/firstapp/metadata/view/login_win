@@ -10,7 +10,6 @@
         "id": "login_win",
         "width": 350,
         "designer|userClassName": "login_win",
-        "designer|initialView": true,
         "layout": "border",
         "closable": false,
         "title": "管理员登录",

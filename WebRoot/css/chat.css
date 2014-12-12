@@ -203,10 +203,11 @@
 	position: relative;
 	margin-top: 10%;
 	height: 100%;
-	white-space: nowrap;
+	width:235px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	cursor: pointer;
+	word-wrap: break-word;
 	
 }
 .r-b-tip:hover{
