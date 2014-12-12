@@ -32,6 +32,7 @@ Ext.define('MyApp.view.main_win', {
                 {
                     xtype: 'tabpanel',
                     region: 'center',
+                    id: 'tab_panel',
                     activeTab: 0,
                     items: [
                         {
@@ -232,7 +233,10 @@ Ext.define('MyApp.view.main_win', {
                                             items: [
                                                 {
                                                     xtype: 'textareafield',
-                                                    margin: 5
+                                                    margin: 5,
+                                                    allowBlank: false,
+                                                    blankText: '请输入系统消息',
+                                                    emptyText: '输入系统消息'
                                                 }
                                             ]
                                         }
@@ -423,7 +427,10 @@ Ext.define('MyApp.view.main_win', {
                                             items: [
                                                 {
                                                     xtype: 'textareafield',
-                                                    margin: 5
+                                                    margin: 5,
+                                                    allowBlank: false,
+                                                    blankText: '系统消息不能为空！',
+                                                    emptyText: '输入系统消息'
                                                 }
                                             ]
                                         }

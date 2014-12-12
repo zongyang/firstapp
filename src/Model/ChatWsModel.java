@@ -4,6 +4,7 @@ public class ChatWsModel {
 	public static String SEND_TO_FRIEND = "send_msg_to_friend";
 	public static String FRIEND_REQUEST = "send_add_req_to_friend";
 	public static String RECEPT_REQUEST = "accepet_add_req";
+	public static String SYSTREM_INFO = "send_system_info";
     public static String[] MSG_TYPE={"IM","ALERT","CONFIRM"};//即时消息、弹框、确认框
 	
     public ChatWsModel() {

@@ -28,7 +28,7 @@
             "userConfig": {
                 "layout|flex": null,
                 "layout|region": "center",
-                "id": null,
+                "id": "tab_panel",
                 "activeTab": 0
             },
             "designerId": "33a90dce-ea6a-450e-a302-f86f91a018d1",
@@ -544,7 +544,10 @@
                                             "codeClass": null,
                                             "userConfig": {
                                                 "margin": 5,
-                                                "fieldLabel": null
+                                                "fieldLabel": null,
+                                                "allowBlank": false,
+                                                "blankText": "请输入系统消息",
+                                                "emptyText": "输入系统消息"
                                             },
                                             "designerId": "725b6016-c250-419c-b697-e885d81b6186"
                                         }
@@ -1048,7 +1051,10 @@
                                             "codeClass": null,
                                             "userConfig": {
                                                 "margin": 5,
-                                                "fieldLabel": null
+                                                "fieldLabel": null,
+                                                "allowBlank": false,
+                                                "blankText": "系统消息不能为空！",
+                                                "emptyText": "输入系统消息"
                                             },
                                             "designerId": "b8618c3d-25e0-45c8-b66e-edfb179d0849"
                                         }

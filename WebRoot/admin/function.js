@@ -83,3 +83,13 @@ function get_admin_name(callback) {
 		}
 	});
 }
+
+function send_to_all(){
+	var tabpanel=Ext.getCmp('tab_panel');
+	var textarea=tabpanel.getActiveTab().down('textarea');
+	if(!textarea.isValid()){
+		return ;
+	}
+	
+	send_msg("send_system_info", textarea.getValue(), '系统消息', '', callback);
+}

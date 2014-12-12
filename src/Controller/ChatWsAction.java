@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -101,6 +102,11 @@ public class ChatWsAction {
 		if (model.getMethod().equals(ChatWsModel.RECEPT_REQUEST)) {
 			accepet_add_req(model);
 		}
+		
+		//系统消息
+		if(model.getMethod().equals(ChatWsModel.SYSTREM_INFO)){
+			send_system_info(model);
+		}
 
 	}
 
@@ -120,6 +126,22 @@ public class ChatWsAction {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+//发送系统消息
+	private  void send_system_info(ChatWsModel model) {
+		Iterator<String> iter = connections.keySet().iterator();
+		while (iter.hasNext()) {
+			
+			String key=iter.next();
+			String json;
+	
+			json = "{content: '" + model.getContent() + "' ,time:'"
+					+ model.getTime() + "',fromName:'" + model.getFromName()
+					+ "',toName:'" + key + "',msgType:'"
+					+ model.getMsgType() + "'}";
+			
+			sendMessageToUser (key,json);
 		}
 	}
 

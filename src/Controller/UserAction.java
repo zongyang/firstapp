@@ -4,8 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Random;
 
-import javax.servlet.http.HttpSession;
-
 import com.google.gson.Gson;
 
 import DB.DBHelper;
