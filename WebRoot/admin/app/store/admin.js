@@ -25,12 +25,18 @@ Ext.define('MyApp.store.admin', {
         cfg = cfg || {};
         me.callParent([Ext.apply({
             model: 'MyApp.model.admin',
-            storeId: 'MyJsonStore1',
+            storeId: 'admin',
+            pageSize: 10,
             proxy: {
                 type: 'ajax',
-                url: 'admin',
+                getMethod: function(){ return 'POST'; },
+                extraParams: {
+                    method: 'query_admin'
+                },
+                url: '../admin',
                 reader: {
-                    type: 'json'
+                    type: 'json',
+                    root: 'rows'
                 }
             }
         }, cfg)]);

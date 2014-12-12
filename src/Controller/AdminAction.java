@@ -17,18 +17,18 @@ public class AdminAction {
 		this.session = session;
 	}
 
-	private Boolean is_super_admin() {
-		if (this.get_admin_auth() == AdminModel.SUPER_ADMIN) {
+	public Boolean is_super_admin() {
+		if (this.get_admin_auth().equals(AdminModel.SUPER_ADMIN)) {
 			return true;
 		}
 		return false;
 	}
 
-	private Boolean is_admin() {
+	public Boolean is_admin() {
 		if (is_super_admin()) {
 			return true;
 		}
-		if (this.get_admin_auth() == AdminModel.GENERAL_ADMIN) {
+		if (this.get_admin_auth().equals(AdminModel.GENERAL_ADMIN)) {
 			return true;
 		}
 		return false;
@@ -39,16 +39,17 @@ public class AdminAction {
 		this.session.setAttribute("admin_name", val);
 	}
 
-	private String get_admin_name() {
-		return session.getAttribute("admin_name").toString();
-	}
-
 	private void set_admin_auth(String val) {
 		this.session.setAttribute("admin_auth", val);
 	}
 
 	private String get_admin_auth() {
 		return session.getAttribute("admin_auth").toString();
+	}
+
+	// 获得当前管理员名
+	public String get_admin_name() {
+		return session.getAttribute("admin_name").toString();
 	}
 
 	// 添加一般管理员
@@ -60,6 +61,7 @@ public class AdminAction {
 
 		Gson gson = new Gson();
 		AdminModel model = gson.fromJson(strModel, AdminModel.class);
+		model.setAuth(AdminModel.GENERAL_ADMIN);
 
 		if (add_admin(model) <= 0) {
 			return "{success:false,msg:'添加失败：数据库操作失败或者该用户名已存在!'}";
@@ -73,47 +75,73 @@ public class AdminAction {
 			return "{success:false,msg:'非法操作！'}";
 		}
 
-		String sql = "select auth from admin where name='" + name + "'";
-		ResultSet rs = DBHelper.executeQuery(sql);
-		if (rs.next()) {
-			if (rs.getString("auth") == AdminModel.SUPER_ADMIN) {
+		String sql_query = "select auth from admin where name='" + name + "'";
+		String sql_del = "delete  from admin where name='" + name + "'";
+
+		ResultSet rs_query = DBHelper.executeQuery(sql_query);
+		if (rs_query.next()) {
+			if (rs_query.getString("auth").equals(AdminModel.SUPER_ADMIN)) {
 				return "{success:false,msg:'删除失败：超级管理员不能被删除！'}";
-			} else {
-				return "{success:true,msg:'删除成功！'}";
 			}
 		}
-		return "{success:false,msg:'删除失败：数据库操作失败或者该用户名不存在！'}";
+		if (DBHelper.executeNonQuery(sql_del) <= 0) {
+			return "{success:false,msg:'删除失败：数据库操作失败或者该用户名不存在！'}";
+		}
+		return "{success:true,msg:'删除成功！'}";
+
 	}
 
 	// 管理员登录
 	public String admin_login(String name, String password) throws SQLException {
-		String sql = " select * from admin where name ='" + name + "',password='"+password+"' ";
-		ResultSet rs=DBHelper.executeQuery(sql);
-		if(rs.next()){
+		String sql = " select * from admin where name ='" + name
+				+ "' and password='" + password + "' ";
+		ResultSet rs = DBHelper.executeQuery(sql);
+		if (rs.next()) {
 			this.set_admin_auth(rs.getString("auth"));
 			this.set_admin_name(rs.getString("name"));
 			return "{success:true,msg:'登录成功！'}";
 		}
-		return "{success:false,msg:'登录失败！'}";
+		return "{success:false,msg:'登录失败：用户名或者密码错误！'}";
 	}
 
 	// 管理员查看
-	public String query_admin() throws SQLException {
-		String sql = "select name,auth from admin";
+	public String query_admin(String page, String limit) throws SQLException {
+
+		int start, end;
+		try {
+			int i_page = Integer.parseInt(page);
+			int i_limit = Integer.parseInt(limit);
+			start = (i_page - 1) * i_limit;
+			end = (i_page) * i_limit - 1;
+		} catch (Exception e) {
+			start = 0;
+			end = 0;
+		}
+
+		String sql_query = "select name,auth from admin ";
+		String sql_total = "select count(*)as total from admin ";
 		if (!this.is_super_admin()) {
-			sql = "select name,auth from admin where name='"
+			sql_query = "select name,auth from admin where name='"
+					+ this.get_admin_name() + "'";
+			sql_total += "select name,auth from admin where name='"
 					+ this.get_admin_name() + "'";
 		}
+		sql_query += " limit " + start + "," + end + "";
+		sql_total += " limit " + start + "," + end + "";
 
-		String json = "[";
+		String json = "{total:";
+		ResultSet rs_query = DBHelper.executeQuery(sql_query);
+		ResultSet rs_total = DBHelper.executeQuery(sql_total);
 
-		ResultSet rs = DBHelper.executeQuery(sql);
-		while (rs.next()) {
-			json += "{name:'" + rs.getString("name") + "',auth:'"
-					+ rs.getString("auth") + "'},";
+		if (rs_total.next()) {
+			json += rs_total.getString("total");
 		}
-
-		return CommFuns.TrimEnd(json, ",") + "]";
+		json += ",rows:[";
+		while (rs_query.next()) {
+			json += "{name:'" + rs_query.getString("name") + "',auth:'"
+					+ rs_query.getString("auth") + "'},";
+		}
+		return CommFuns.TrimEnd(json, ",") + "]}";
 	}
 
 	// 密码修改
@@ -127,7 +155,7 @@ public class AdminAction {
 		if (DBHelper.executeNonQuery(sql) > 0) {
 			return "{success:false,msg:'密码修改成功！'}";
 		}
-		return "{success:false,msg:'密码修改失败：数据库操作失败！'}";
+		return "{success:false,msg:'密码修改失败：密码错误或者数据库操作失败！'}";
 	}
 
 	// 消息删除
@@ -135,9 +163,12 @@ public class AdminAction {
 		if (strDate == null || strDate.isEmpty()) {
 			return "{success:false,msg:'非法操作！'}";
 		}
-		if (CommFuns.IsDate(strDate)) {
-			return "{success:false,msg:'请检查时间格式！'}";
+
+		strDate = CommFuns.GetMaxTimeOfTheDay(strDate);
+		if (strDate == null) {
+			return "{success:false,msg:'时间格式有误！'}";
 		}
+
 		String sql = "delete from chat where time <='" + strDate + "'";
 
 		DBHelper.executeNonQuery(sql);
@@ -145,16 +176,18 @@ public class AdminAction {
 	}
 
 	// 用户删除
-	public String del_user(String userName) {
-		if (userName == null || userName.isEmpty()) {
+	public String del_user(String userNames) {
+		if (userNames == null || userNames.isEmpty()) {
 			return "{success:false,msg:'非法操作！'}";
 		}
-		String del_user = "delete from userInfo where userName='" + userName
-				+ "'";
-		String del_chat = "delete from chat where formName='" + userName
-				+ "' or toName='" + userName + "'";
-		String del_friend = "delete from friend where fromName='" + userName
-				+ "' or toName='" + userName + "'";
+		userNames = CommFuns.StringSplit(userNames);
+
+		String del_user = "delete from userInfo where userName in(" + userNames
+				+ ")";
+		String del_chat = "delete from chat where formNamein(" + userNames
+				+ ") or toName in(" + userNames + ")";
+		String del_friend = "delete from friend where fromName in(" + userNames
+				+ ") or toName in (" + userNames + ")";
 
 		DBHelper.executeNonQuery(del_user);
 		DBHelper.executeNonQuery(del_chat);
@@ -164,20 +197,39 @@ public class AdminAction {
 	}
 
 	// 查看所有用户
-	public String query_user() throws SQLException {
-		String sql = "select userName,sex,mark,img,regTime from userInfo";
-		String json = "[";
-
-		ResultSet rs = DBHelper.executeQuery(sql);
-		while (rs.next()) {
-			json += "{" + "userName:'" + rs.getString("userName") + "',"
-					+ "sex:'" + rs.getString("sex") + "'," + "mark:'"
-					+ rs.getString("mark") + "'," + "img:'"
-					+ rs.getString("img") + "'," + "regTime:'"
-					+ rs.getString("regTime") + "'},";
+	public String query_user(String page, String limit) throws SQLException {
+		int start, end;
+		try {
+			int i_page = Integer.parseInt(page);
+			int i_limit = Integer.parseInt(limit);
+			start = (i_page - 1) * i_limit;
+			end = (i_page) * i_limit - 1;
+		} catch (Exception e) {
+			start = 0;
+			end = 0;
 		}
 
-		return CommFuns.TrimEnd(json, ",") + "]";
+		String sql = "select userName,sex,mark,img,regTime from userInfo limit "
+				+ start + " ," + end + " ";
+		String total = "SELECT count(*)as total  from userinfo ";
+		String json = "{total:";
+
+		ResultSet rs_total = DBHelper.executeQuery(total);
+		ResultSet rs_query = DBHelper.executeQuery(sql);
+
+		if (rs_total.next()) {
+			json += rs_total.getString("total");
+		}
+		json += ",rows:[";
+		while (rs_query.next()) {
+			json += "{" + "userName:'" + rs_query.getString("userName") + "',"
+					+ "sex:'" + rs_query.getString("sex") + "'," + "mark:'"
+					+ rs_query.getString("mark") + "'," + "img:'"
+					+ rs_query.getString("img") + "'," + "regTime:'"
+					+ rs_query.getString("regTime") + "'},";
+		}
+
+		return CommFuns.TrimEnd(json, ",") + "]}";
 	}
 
 	// 发送系统消息
@@ -189,9 +241,9 @@ public class AdminAction {
 			return -1;
 		}
 
-		String sql = " insert into admin values (" + "'" + model.getName()
-				+ "'" + "'" + model.getPassword() + "'" + "'" + model.getAuth()
-				+ "'" + ")";
+		String sql = " insert into admin (name,password,auth) values (" + "'"
+				+ model.getName() + "'," + "'" + model.getPassword() + "',"
+				+ "'" + model.getAuth() + "'" + ")";
 
 		if (is_exist_admin(model.getName(), null)) {
 			return -1;

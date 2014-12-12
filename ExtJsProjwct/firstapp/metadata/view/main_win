@@ -6,13 +6,14 @@
     },
     "codeClass": null,
     "userConfig": {
-        "height": 600,
+        "height": 500,
+        "id": "main_win",
         "minHeight": null,
         "minWidth": null,
-        "width": 800,
+        "width": 1200,
         "designer|userClassName": "main_win",
-        "designer|initialView": true,
         "layout": "border",
+        "closable": false,
         "title": null
     },
     "designerId": "19a7a2c9-a6ca-4c41-b705-21ba8ea329d5",
@@ -70,6 +71,7 @@
                             "userConfig": {
                                 "layout|flex": null,
                                 "layout|region": "center",
+                                "id": "panel_user",
                                 "margin": "0 5 0 0",
                                 "title": null,
                                 "titleAlign": "center",
@@ -88,7 +90,9 @@
                                     "userConfig": {
                                         "align": "center",
                                         "dataIndex": "userName",
-                                        "text": "用户名"
+                                        "tdCls": "grid-row",
+                                        "text": "用户名",
+                                        "flex": 1
                                     },
                                     "designerId": "b556852a-fdea-46ff-90ef-1cf1c9364efe"
                                 },
@@ -102,7 +106,9 @@
                                     "userConfig": {
                                         "align": "center",
                                         "dataIndex": "sex",
-                                        "text": "性别"
+                                        "tdCls": "grid-row",
+                                        "text": "性别",
+                                        "flex": 0.5
                                     },
                                     "designerId": "37af6a8b-f312-41ec-86b2-1dedb5f9ca1d"
                                 },
@@ -116,7 +122,9 @@
                                     "userConfig": {
                                         "align": "center",
                                         "dataIndex": "img",
-                                        "text": "图像"
+                                        "tdCls": "grid-row",
+                                        "text": "图像",
+                                        "flex": 1.2
                                     },
                                     "designerId": "6a8ef86a-bd41-4ff1-a614-122e1f51e4e4"
                                 },
@@ -130,7 +138,9 @@
                                     "userConfig": {
                                         "align": "center",
                                         "dataIndex": "mark",
-                                        "text": "个性签名"
+                                        "tdCls": "grid-row",
+                                        "text": "个性签名",
+                                        "flex": 1.2
                                     },
                                     "designerId": "049a440b-8e66-40de-b099-e8ba1e1b23dd"
                                 },
@@ -144,7 +154,9 @@
                                     "userConfig": {
                                         "align": "center",
                                         "dataIndex": "email",
-                                        "text": "注册邮箱"
+                                        "tdCls": "grid-row",
+                                        "text": "注册邮箱",
+                                        "flex": 1.2
                                     },
                                     "designerId": "0c2dcd3b-6da8-4ad9-876e-7f470c3947a7"
                                 },
@@ -158,7 +170,9 @@
                                     "userConfig": {
                                         "align": "center",
                                         "dataIndex": "regTime",
-                                        "text": "注册时间"
+                                        "tdCls": "grid-row",
+                                        "text": "注册时间",
+                                        "flex": 1.2
                                     },
                                     "designerId": "bba88c7b-54c4-4879-9971-bb3a5d472c4e"
                                 },
@@ -186,7 +200,67 @@
                                                 "icon": "../img/extjs_icon/delete.gif",
                                                 "text": "删除"
                                             },
-                                            "designerId": "467a9591-b4ab-4fe2-9bd7-fa64dbb4168d"
+                                            "designerId": "467a9591-b4ab-4fe2-9bd7-fa64dbb4168d",
+                                            "cn": [
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onButtonClick",
+                                                        "implHandler": [
+                                                            "var panel = Ext.getCmp('panel_user');\r",
+                                                            "var selections = panel.selModel.getSelection();\r",
+                                                            "var userNames = [];\r",
+                                                            "\r",
+                                                            "if (selections.length <= 0) {\r",
+                                                            "    Ext.Msg.alert('提示', '请选择需要删除的用户！');\r",
+                                                            "    return;\r",
+                                                            "}\r",
+                                                            "\r",
+                                                            "for (var i = 0; i < selections.length; i++) {\r",
+                                                            "    userNames.push(selections[i].get('userName'));\r",
+                                                            "}\r",
+                                                            "\r",
+                                                            "Ext.MessageBox.show({\r",
+                                                            "    title: '删除确认',\r",
+                                                            "    msg: '是否要删除 <font class=\"blue-color\">' + userNames.join(',') + '</font> 的所有相关信息？',\r",
+                                                            "    buttons: Ext.MessageBox.YESNO,\r",
+                                                            "    fn: function(e) {\r",
+                                                            "        if (e !== 'yes') {\r",
+                                                            "            return;\r",
+                                                            "        }\r",
+                                                            "        Ext.Ajax.request({\r",
+                                                            "            url: '../admin',\r",
+                                                            "            params: {\r",
+                                                            "                method: 'del_user',\r",
+                                                            "                userNames: userNames.join(',')\r",
+                                                            "\r",
+                                                            "            },\r",
+                                                            "            success: function(response) {\r",
+                                                            "                var obj = Ext.JSON.decode(response.responseText);\r",
+                                                            "                if (obj.success === false) {\r",
+                                                            "                    Ext.Msg.alert('提示', obj.msg);\r",
+                                                            "                }\r",
+                                                            "\r",
+                                                            "                if (obj.success === true) { \r",
+                                                            "                    Ext.Msg.alert('提示', obj.msg);\r",
+                                                            "                    panel.getStore().load();\r",
+                                                            "                }\r",
+                                                            "            }\r",
+                                                            "        });\r",
+                                                            "    }\r",
+                                                            "});"
+                                                        ],
+                                                        "name": "click",
+                                                        "scope": "me"
+                                                    },
+                                                    "designerId": "b40ba86b-b115-462a-9027-6dad4e163d06"
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
@@ -204,6 +278,15 @@
                                         "store": "user"
                                     },
                                     "designerId": "13f59815-f8a5-4a66-bbe4-fb327324bbca"
+                                },
+                                {
+                                    "type": "Ext.selection.CheckboxModel",
+                                    "reference": {
+                                        "name": "selModel",
+                                        "type": "object"
+                                    },
+                                    "codeClass": "Ext.selection.CheckboxModel",
+                                    "designerId": "9222bcce-7afc-455a-b484-39537a47b4bb"
                                 }
                             ]
                         },
@@ -258,11 +341,16 @@
                                             },
                                             "codeClass": null,
                                             "userConfig": {
-                                                "id": null,
+                                                "id": "date_del",
                                                 "margin": "50 0 50 10",
                                                 "fieldLabel": "选择日期",
                                                 "labelAlign": "right",
-                                                "labelWidth": 60
+                                                "labelWidth": 60,
+                                                "allowBlank": false,
+                                                "emptyText": "选择删除的截止日期",
+                                                "editable": false,
+                                                "format": "Y-m-d ",
+                                                "submitFormat": "Y-m-d"
                                             },
                                             "designerId": "7248c930-137d-400a-8ddc-1d97d8c0e13a"
                                         },
@@ -305,7 +393,56 @@
                                                         "icon": "../img/extjs_icon/accept.gif",
                                                         "text": "确定"
                                                     },
-                                                    "designerId": "46b48c70-685e-4fbb-8098-73989a03d73c"
+                                                    "designerId": "46b48c70-685e-4fbb-8098-73989a03d73c",
+                                                    "cn": [
+                                                        {
+                                                            "type": "basiceventbinding",
+                                                            "reference": {
+                                                                "name": "listeners",
+                                                                "type": "array"
+                                                            },
+                                                            "codeClass": null,
+                                                            "userConfig": {
+                                                                "fn": "onButtonClick1",
+                                                                "implHandler": [
+                                                                    "var time = Ext.getCmp('date_del').getRawValue();\r",
+                                                                    "\r",
+                                                                    "\r",
+                                                                    "Ext.MessageBox.show({\r",
+                                                                    "    title: '聊天删除确认',\r",
+                                                                    "    msg: '是否要删除截止到 <font class=\"blue-color\">' + time + '</font> 的所有聊天记录？',\r",
+                                                                    "    buttons: Ext.MessageBox.YESNO,\r",
+                                                                    "    fn: function(e) {\r",
+                                                                    "        if (e !== 'yes') {\r",
+                                                                    "            return;\r",
+                                                                    "        }\r",
+                                                                    "        Ext.Ajax.request({\r",
+                                                                    "            url: '../admin',\r",
+                                                                    "            params: {\r",
+                                                                    "                method: 'del_chat',\r",
+                                                                    "                strDate: time\r",
+                                                                    "\r",
+                                                                    "            },\r",
+                                                                    "            success: function(response) {\r",
+                                                                    "                var obj = Ext.JSON.decode(response.responseText);\r",
+                                                                    "                if (obj.success === false) {\r",
+                                                                    "                    Ext.Msg.alert('提示', obj.msg);\r",
+                                                                    "                }\r",
+                                                                    "\r",
+                                                                    "                if (obj.success === true) {\r",
+                                                                    "                    Ext.Msg.alert('提示', obj.msg);\r",
+                                                                    "                }\r",
+                                                                    "            }\r",
+                                                                    "        });\r",
+                                                                    "    }\r",
+                                                                    "});"
+                                                                ],
+                                                                "name": "click",
+                                                                "scope": "me"
+                                                            },
+                                                            "designerId": "c82c9b8e-964a-4499-b503-10fa362d6c33"
+                                                        }
+                                                    ]
                                                 },
                                                 {
                                                     "type": "Ext.toolbar.Spacer",
@@ -455,11 +592,12 @@
                             "userConfig": {
                                 "layout|flex": null,
                                 "layout|region": "center",
+                                "id": "panel_admin",
                                 "margin": "0 5 0 0",
                                 "title": null,
                                 "titleAlign": "center",
                                 "forceFit": true,
-                                "store": "user"
+                                "store": "admin"
                             },
                             "designerId": "5ff3c72b-3e87-4a91-8e19-4b602705c07f",
                             "cn": [
@@ -472,7 +610,8 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "align": "center",
-                                        "dataIndex": "userName",
+                                        "dataIndex": "name",
+                                        "tdCls": "grid-row",
                                         "text": "用户名"
                                     },
                                     "designerId": "4add7bda-7860-4c51-ab52-1e7c26b3a589"
@@ -486,7 +625,8 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "align": "center",
-                                        "dataIndex": "img",
+                                        "dataIndex": "auth",
+                                        "tdCls": "grid-row",
                                         "text": "权限"
                                     },
                                     "designerId": "42ad6391-b4c2-4f66-a673-5a656c7ea918"
@@ -515,7 +655,30 @@
                                                 "icon": "../img/extjs_icon/add.gif",
                                                 "text": "添加"
                                             },
-                                            "designerId": "7e0b76d9-2132-4e65-974b-49c2c07d58b0"
+                                            "designerId": "7e0b76d9-2132-4e65-974b-49c2c07d58b0",
+                                            "cn": [
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onButtonClick3",
+                                                        "implHandler": [
+                                                            "var win = Ext.getCmp('add_admin_win');\r",
+                                                            "if (!win) {\r",
+                                                            "    win = Ext.create('MyApp.view.add_admin_win');\r",
+                                                            "}\r",
+                                                            "win.show();"
+                                                        ],
+                                                        "name": "click",
+                                                        "scope": "me"
+                                                    },
+                                                    "designerId": "1ed5fcd7-774e-4380-a830-2b00c58aab99"
+                                                }
+                                            ]
                                         },
                                         {
                                             "type": "Ext.button.Button",
@@ -529,7 +692,67 @@
                                                 "icon": "../img/extjs_icon/delete.gif",
                                                 "text": "删除"
                                             },
-                                            "designerId": "8de07a4d-38c8-428f-8f5a-340c7062dbef"
+                                            "designerId": "8de07a4d-38c8-428f-8f5a-340c7062dbef",
+                                            "cn": [
+                                                {
+                                                    "type": "basiceventbinding",
+                                                    "reference": {
+                                                        "name": "listeners",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "fn": "onButtonClick2",
+                                                        "implHandler": [
+                                                            "var panel = Ext.getCmp('panel_admin');\r",
+                                                            "var selections = panel.selModel.getSelection();\r",
+                                                            "var admins = [];\r",
+                                                            "\r",
+                                                            "if (selections.length <= 0) {\r",
+                                                            "    Ext.Msg.alert('提示', '请选择需要删除的管理员！');\r",
+                                                            "    return;\r",
+                                                            "}\r",
+                                                            "\r",
+                                                            "for (var i = 0; i < selections.length; i++) {\r",
+                                                            "    admins.push(selections[i].get('name'));\r",
+                                                            "}\r",
+                                                            "\r",
+                                                            "Ext.MessageBox.show({\r",
+                                                            "    title: '删除确认',\r",
+                                                            "    msg: '是否要删除管理员 <font class=\"blue-color\">' + admins.join(',') + '</font> ？',\r",
+                                                            "    buttons: Ext.MessageBox.YESNO,\r",
+                                                            "    fn: function(e) {\r",
+                                                            "        if (e !== 'yes') {\r",
+                                                            "            return;\r",
+                                                            "        }\r",
+                                                            "        Ext.Ajax.request({\r",
+                                                            "            url: '../admin',\r",
+                                                            "            params: {\r",
+                                                            "                method: 'del_admin',\r",
+                                                            "                name: admins.join(',')\r",
+                                                            "\r",
+                                                            "            },\r",
+                                                            "            success: function(response) {\r",
+                                                            "                var obj = Ext.JSON.decode(response.responseText);\r",
+                                                            "                if (obj.success === false) {\r",
+                                                            "                    Ext.Msg.alert('提示', obj.msg);\r",
+                                                            "                }\r",
+                                                            "\r",
+                                                            "                if (obj.success === true) { \r",
+                                                            "                    Ext.Msg.alert('提示', obj.msg);\r",
+                                                            "                    panel.getStore().load();\r",
+                                                            "                }\r",
+                                                            "            }\r",
+                                                            "        });\r",
+                                                            "    }\r",
+                                                            "});"
+                                                        ],
+                                                        "name": "click",
+                                                        "scope": "me"
+                                                    },
+                                                    "designerId": "9d39a8d2-e8a6-4f0b-b6b2-bd33d5e78b02"
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
@@ -544,7 +767,7 @@
                                         "dock": "bottom",
                                         "width": 360,
                                         "displayInfo": true,
-                                        "store": "user"
+                                        "store": "admin"
                                     },
                                     "designerId": "6a762764-a3c5-4639-b8f3-ae5cef5323a7"
                                 }
@@ -591,7 +814,7 @@
                                         "title": "密码修改",
                                         "titleAlign": "center"
                                     },
-                                    "designerId": "ecd3461f-cde9-4420-b4e5-e5991071eb09",
+                                    "designerId": "e22bf4a1-3f89-482a-9f05-13b517c1e5ab",
                                     "cn": [
                                         {
                                             "type": "Ext.toolbar.Toolbar",
@@ -604,7 +827,7 @@
                                                 "dock": "bottom",
                                                 "border": false
                                             },
-                                            "designerId": "3708a432-d378-4c16-a6a8-81732d768119",
+                                            "designerId": "f0dc417a-cae5-4756-b216-6029b5243667",
                                             "cn": [
                                                 {
                                                     "type": "Ext.toolbar.Spacer",
@@ -617,7 +840,7 @@
                                                         "layout|flex": 1,
                                                         "width": null
                                                     },
-                                                    "designerId": "2c6acc7c-b97f-4822-bc69-8885ab8b1ad2"
+                                                    "designerId": "e767c8db-2ca8-4f36-925d-4d15c052f937"
                                                 },
                                                 {
                                                     "type": "Ext.button.Button",
@@ -632,7 +855,58 @@
                                                         "icon": "../img/extjs_icon/accept.gif",
                                                         "text": "确定"
                                                     },
-                                                    "designerId": "63ad10d1-6fcd-4502-b455-5cc4c794c4eb"
+                                                    "designerId": "706d532a-645f-4ed0-a18a-068ba56d3226",
+                                                    "cn": [
+                                                        {
+                                                            "type": "basiceventbinding",
+                                                            "reference": {
+                                                                "name": "listeners",
+                                                                "type": "array"
+                                                            },
+                                                            "codeClass": null,
+                                                            "userConfig": {
+                                                                "fn": "onButtonClick4",
+                                                                "implHandler": [
+                                                                    "var old = Ext.getCmp('lb_modify_psw_old');\r",
+                                                                    "var refresh = Ext.getCmp('lb_modify_psw_refresh');\r",
+                                                                    "var panel = Ext.getCmp('panel_admin');\r",
+                                                                    "var model = panel.selModel.getLastSelected();\r",
+                                                                    "\r",
+                                                                    "if (!old.isValid() || !refresh.isValid()) {\r",
+                                                                    "    return;\r",
+                                                                    "}\r",
+                                                                    "\r",
+                                                                    "if (!model) {\r",
+                                                                    "    Ext.Msg.alert('提示', '请选择需要修改密码的管理员！');\r",
+                                                                    "    return;\r",
+                                                                    "}\r",
+                                                                    "\r",
+                                                                    "Ext.Ajax.request({\r",
+                                                                    "    url: '../admin',\r",
+                                                                    "    params: {\r",
+                                                                    "        method: 'password_modify',\r",
+                                                                    "        name: model.get('name'),\r",
+                                                                    "        old: old.getValue(),\r",
+                                                                    "        refresh: refresh.getValue()\r",
+                                                                    "    },\r",
+                                                                    "    success: function(response) {\r",
+                                                                    "        var obj = Ext.JSON.decode(response.responseText);\r",
+                                                                    "        if (obj.success === false) {\r",
+                                                                    "            Ext.Msg.alert('提示', obj.msg);\r",
+                                                                    "        }\r",
+                                                                    "\r",
+                                                                    "        if (obj.success === true) {\r",
+                                                                    "            Ext.Msg.alert('提示', obj.msg);\r",
+                                                                    "        }\r",
+                                                                    "    }\r",
+                                                                    "});"
+                                                                ],
+                                                                "name": "click",
+                                                                "scope": "me"
+                                                            },
+                                                            "designerId": "e7f1fc3a-9766-481f-84f2-73a01542d9dc"
+                                                        }
+                                                    ]
                                                 },
                                                 {
                                                     "type": "Ext.toolbar.Spacer",
@@ -645,7 +919,7 @@
                                                         "layout|flex": 1,
                                                         "width": null
                                                     },
-                                                    "designerId": "9fa6fed9-6b6f-46ed-a227-26fbcd68e24a"
+                                                    "designerId": "f71ca0a2-0176-4998-8123-c5082c944ec8"
                                                 }
                                             ]
                                         },
@@ -657,12 +931,17 @@
                                             },
                                             "codeClass": null,
                                             "userConfig": {
+                                                "id": "lb_modify_psw_old",
                                                 "margin": "40 0 10 0",
                                                 "fieldLabel": "原密码",
                                                 "labelAlign": "right",
-                                                "labelWidth": 60
+                                                "labelWidth": 60,
+                                                "inputType": "password",
+                                                "allowBlank": false,
+                                                "blankText": "密码不能为空",
+                                                "emptyText": "请输入原密码"
                                             },
-                                            "designerId": "58b7a402-f985-437c-9663-188fdbb5b1f8"
+                                            "designerId": "09af8f5e-8a25-4f1a-8c2f-a19e11ccd357"
                                         },
                                         {
                                             "type": "Ext.form.field.Text",
@@ -672,12 +951,17 @@
                                             },
                                             "codeClass": null,
                                             "userConfig": {
+                                                "id": "lb_modify_psw_refresh",
                                                 "margin": "20 0 10 0",
                                                 "fieldLabel": "新密码",
                                                 "labelAlign": "right",
-                                                "labelWidth": 60
+                                                "labelWidth": 60,
+                                                "inputType": "password",
+                                                "allowBlank": false,
+                                                "blankText": "密码不能为空",
+                                                "emptyText": "请输入新密码"
                                             },
-                                            "designerId": "ff244a03-9289-446c-bb8d-116165d01f29"
+                                            "designerId": "c20d98a4-fc41-49ae-b64c-591d27dc452e"
                                         }
                                     ]
                                 },
@@ -689,7 +973,7 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "layout|flex": 1.5,
+                                        "layout|flex": 1,
                                         "border": false,
                                         "margin": null,
                                         "layout": "fit",

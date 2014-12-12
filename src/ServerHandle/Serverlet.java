@@ -78,7 +78,7 @@ public class Serverlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		try {
-			json = EnterPort.getRequestMehthod(request, response);
+			json = ActionEnterPort.getRequestMehthod(request, response);
 		} catch (Exception e) {
 
 			e.printStackTrace();

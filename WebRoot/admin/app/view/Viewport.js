@@ -14,6 +14,6 @@
  */
 
 Ext.define('MyApp.view.Viewport', {
-    extend: 'MyApp.view.main_win',
+    extend: 'MyApp.view.login_win',
     renderTo: Ext.getBody()
 });

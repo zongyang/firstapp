@@ -2,6 +2,8 @@ package Controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import Model.TipModel;
 
@@ -15,7 +17,7 @@ public class CommFuns {
 	}
 
 	// 字符串过滤
-	public static String filter(String message) {
+	public static String Filter(String message) {
 
 		if (message == null)
 			return (null);
@@ -49,30 +51,18 @@ public class CommFuns {
 	}
 
 	public static Boolean CheckNull(String[] args) {
-	
-		if(args==null){
+
+		if (args == null) {
 			return true;
 		}
-		for(int i=0;i<args.length;i++){
-			if(args[i]==null||args.equals("")){
+		for (int i = 0; i < args.length; i++) {
+			if (args[i] == null || args.equals("")) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
-	public static Boolean IsDate(String str){
-		SimpleDateFormat  formate=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		try {
-			formate.parse(str);
-			return true;
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		}
-	}
-	
+
 	public static String TrimEnd(String input, String charsToTrim) {
 		return input.replaceAll("[" + charsToTrim + "]+$", "");
 	}
@@ -84,6 +74,51 @@ public class CommFuns {
 	public static String Trim(String input, String charsToTrim) {
 		return input.replaceAll("^[" + charsToTrim + "]+|[" + charsToTrim
 				+ "]+$", "");
+	}
+
+	public static String StringSplit(String strArr) {
+		String[] arr = strArr.split(",");
+
+		strArr = "";
+		for (int i = 0; i < arr.length; i++) {
+			strArr += "'" + arr[i] + "',";
+		}
+		return TrimEnd(strArr, ",");
+
+	}
+
+	public static String GetMaxTimeOfTheDay(String str) {
+		SimpleDateFormat formate = new SimpleDateFormat("yyyy-MM-dd ");
+		Date date;
+		Calendar calendar = Calendar.getInstance();
+		try {
+			date = formate.parse(str);
+			calendar.setTime(date);
+			calendar.add(Calendar.DATE, 1);
+			//calendar.set(Calendar.HOUR_OF_DAY, 0);
+			//calendar.set(Calendar.SECOND, 0);
+			//calendar.set(Calendar.MINUTE, 0);
+			//calendar.set(Calendar.MILLISECOND, 0);
+			date = calendar.getTime();
+			formate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			return formate.format(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "";
+		}
+	}
+
+	public static Boolean IsDate(String str) {
+		SimpleDateFormat formate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		try {
+			formate.parse(str);
+			return true;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

@@ -7,8 +7,9 @@
     "codeClass": null,
     "userConfig": {
         "model": "admin",
-        "storeId": "MyJsonStore1",
-        "designer|userClassName": "admin"
+        "storeId": "admin",
+        "designer|userClassName": "admin",
+        "pageSize": 10
     },
     "designerId": "245d3b48-1465-4627-aaf0-448c088ebc4b",
     "cn": [
@@ -20,9 +21,27 @@
             },
             "codeClass": null,
             "userConfig": {
-                "url": "admin"
+                "getMethod": [
+                    "function(){ return 'POST'; }"
+                ],
+                "extraParams": [
+                    "{\r",
+                    "    method:'query_admin'\r",
+                    "}"
+                ],
+                "url": "../admin"
+            },
+            "configAlternates": {
+                "getMethod": "object"
             },
             "designerId": "3876fedd-b966-403b-a057-e9907648bdee",
+            "customConfigs": [
+                {
+                    "group": "(Custom Properties)",
+                    "name": "getMethod",
+                    "type": "string"
+                }
+            ],
             "cn": [
                 {
                     "type": "Ext.data.reader.Json",
@@ -31,6 +50,9 @@
                         "type": "object"
                     },
                     "codeClass": null,
+                    "userConfig": {
+                        "root": "rows"
+                    },
                     "designerId": "7fdfdf78-70c1-4797-b6ae-1d59ab5c8741"
                 }
             ]

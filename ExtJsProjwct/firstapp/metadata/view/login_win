@@ -1,0 +1,195 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "height": 220,
+        "id": "login_win",
+        "width": 350,
+        "designer|userClassName": "login_win",
+        "designer|initialView": true,
+        "layout": "border",
+        "closable": false,
+        "title": "管理员登录",
+        "titleAlign": "center"
+    },
+    "designerId": "88e7c7e7-4bb9-452e-8802-b877dbe2dd1f",
+    "cn": [
+        {
+            "type": "Ext.toolbar.Toolbar",
+            "reference": {
+                "name": "dockedItems",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "dock": "bottom"
+            },
+            "designerId": "31acc711-30f0-488e-a34c-1a8d17837cb1",
+            "cn": [
+                {
+                    "type": "Ext.toolbar.Spacer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 1
+                    },
+                    "designerId": "b63a9131-3c9a-48cf-b062-6fe9b95366b1"
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": null,
+                        "icon": "../img/extjs_icon/accept.gif",
+                        "text": "确定"
+                    },
+                    "designerId": "18d8eb3f-754e-4dbf-850f-880083b1ff22",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onButtonClick",
+                                "implHandler": [
+                                    "login_click();"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "designerId": "64ccb4c6-5348-4b52-a35c-4f8bdb3387c2"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.toolbar.Spacer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 1
+                    },
+                    "designerId": "2e95bf4d-1cf6-4880-82a9-0a255a73293e"
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout|region": "center",
+                "container|align": "stretch",
+                "border": false,
+                "margin": null,
+                "layout": "vbox",
+                "title": null
+            },
+            "designerId": "67e879e3-8f63-4e65-8b4d-40c806075068",
+            "cn": [
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "lb_name",
+                        "margin": 30,
+                        "fieldLabel": "管理员名",
+                        "labelAlign": "right",
+                        "labelWidth": 70,
+                        "name": null,
+                        "allowBlank": false,
+                        "blankText": "管理员名不能为空",
+                        "emptyText": "输入管理员名"
+                    },
+                    "designerId": "52b3d03b-5900-4b8b-bdaf-5fb01e5e4eb4",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onLb_nameSpecialkey",
+                                "implHandler": [
+                                    "if (e.getKey() == Ext.EventObject.ENTER) { //响应回车  \r",
+                                    "    login_click();\r",
+                                    "}"
+                                ],
+                                "name": "specialkey",
+                                "scope": "me"
+                            },
+                            "designerId": "6f6e832e-2abb-4e91-8dce-35d651dc0d66"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "lb_password",
+                        "margin": "0 30 0 30",
+                        "fieldLabel": "管理员密码",
+                        "labelAlign": "right",
+                        "labelWidth": 70,
+                        "name": null,
+                        "inputType": "password",
+                        "allowBlank": false,
+                        "blankText": "管理员密码不能为空",
+                        "emptyText": "输入管理员密码"
+                    },
+                    "designerId": "313e1d39-8755-45df-b254-a8adf5b81ab4",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onLb_passwordSpecialkey",
+                                "implHandler": [
+                                    "if (e.getKey() == Ext.EventObject.ENTER) { //响应回车  \r",
+                                    "    login_click();\r",
+                                    "}"
+                                ],
+                                "name": "specialkey",
+                                "scope": "me"
+                            },
+                            "designerId": "23affdaf-0ef0-4ffc-9f22-66d039a0fd8b"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
