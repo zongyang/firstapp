@@ -10,10 +10,26 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2014-12-11 00:20:29
+Date: 2014-12-12 23:19:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for admin
+-- ----------------------------
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE `admin` (
+  `password` varchar(255) DEFAULT NULL,
+  `auth` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of admin
+-- ----------------------------
+INSERT INTO `admin` VALUES ('123456', '最高管理员', 'admin');
 
 -- ----------------------------
 -- Table structure for area
@@ -3569,67 +3585,6 @@ CREATE TABLE `chat` (
 -- ----------------------------
 -- Records of chat
 -- ----------------------------
-INSERT INTO `chat` VALUES ('1', '宗杨12138', '宗牧杨', '1334', '2014-12-09 11:42:48');
-INSERT INTO `chat` VALUES ('2', '宗杨12138', '宗牧杨', '1234324', '2014-12-09 11:45:40');
-INSERT INTO `chat` VALUES ('3', '宗杨12138', '宗牧杨', '123', '2014-12-09 11:46:12');
-INSERT INTO `chat` VALUES ('4', '宗杨12138', '宗杨', '12234', '2014-12-09 11:47:40');
-INSERT INTO `chat` VALUES ('5', '宗杨12138', '宗杨', '问问', '2014-12-09 11:48:22');
-INSERT INTO `chat` VALUES ('6', '宗杨12138', '宗杨', '二等分', '2014-12-09 11:52:33');
-INSERT INTO `chat` VALUES ('7', '宗杨12138', '宗杨', '水电费', '2014-12-09 11:52:49');
-INSERT INTO `chat` VALUES ('8', '宗杨12138', '宗杨', '水电费的说法', '2014-12-09 11:53:03');
-INSERT INTO `chat` VALUES ('9', '宗杨12138', '宗杨', '豆腐', '2014-12-09 11:53:17');
-INSERT INTO `chat` VALUES ('10', '宗杨', '宗杨12138', 'asd sdf', '2014-12-09 11:53:42');
-INSERT INTO `chat` VALUES ('11', '宗杨', '宗杨12138', 'f', '2014-12-09 11:55:10');
-INSERT INTO `chat` VALUES ('12', '宗杨', '宗杨12138', 'sdf', '2014-12-09 11:57:53');
-INSERT INTO `chat` VALUES ('13', '宗杨', '宗杨12138', 'sdfrdsfg', '2014-12-10 12:02:28');
-INSERT INTO `chat` VALUES ('14', '宗杨12138', '宗牧杨', 'sad', '2014-12-10 12:06:46');
-INSERT INTO `chat` VALUES ('15', '宗杨12138', '宗杨', 'asfasf', '2014-12-10 12:07:03');
-INSERT INTO `chat` VALUES ('16', '宗杨', '宗杨12138', 'rtet', '2014-12-10 12:07:15');
-INSERT INTO `chat` VALUES ('17', '宗杨', '宗杨12138', 'ghj', '2014-12-10 12:07:29');
-INSERT INTO `chat` VALUES ('18', '宗杨12138', '宗杨', 'dsf', '2014-12-10 12:08:38');
-INSERT INTO `chat` VALUES ('19', '宗杨12138', '宗杨', 'sad', '2014-12-10 12:09:45');
-INSERT INTO `chat` VALUES ('20', '宗杨', '宗杨12138', 'asdasd', '2014-12-10 12:10:51');
-INSERT INTO `chat` VALUES ('21', '宗杨', '宗杨12138', 'sad', '2014-12-10 12:11:30');
-INSERT INTO `chat` VALUES ('22', '宗杨12138', '宗杨', 'dfdsf', '2014-12-10 12:11:40');
-INSERT INTO `chat` VALUES ('23', '宗杨', '宗杨12138', 'asdasd', '2014-12-10 12:12:34');
-INSERT INTO `chat` VALUES ('24', '宗杨12138', '宗杨', 'lk;', '2014-12-10 12:12:39');
-INSERT INTO `chat` VALUES ('25', '宗杨', '宗杨12138', 'asdasd', '2014-12-10 12:17:00');
-INSERT INTO `chat` VALUES ('26', '宗杨12138', '宗杨', 'asdsda', '2014-12-10 12:17:11');
-INSERT INTO `chat` VALUES ('27', '宗杨', '宗杨12138', 'asdasd', '2014-12-10 12:17:17');
-INSERT INTO `chat` VALUES ('28', '宗杨', '宗杨12138', 'asdasd', '2014-12-10 12:17:28');
-INSERT INTO `chat` VALUES ('29', '宗杨', '宗杨12138', '', '2014-12-10 04:50:19');
-INSERT INTO `chat` VALUES ('30', '宗杨', '宗杨12138', '', '2014-12-10 04:54:06');
-INSERT INTO `chat` VALUES ('31', '宗杨12138', '宗杨', '', '2014-12-10 04:54:57');
-INSERT INTO `chat` VALUES ('32', '宗杨', '宗杨12138', '', '2014-12-10 04:55:36');
-INSERT INTO `chat` VALUES ('33', '宗杨', '宗杨12138', '', '2014-12-10 04:56:07');
-INSERT INTO `chat` VALUES ('34', '宗杨12138', '宗杨', '', '2014-12-10 04:57:27');
-INSERT INTO `chat` VALUES ('35', '宗杨', '宗杨12138', '', '2014-12-10 04:57:46');
-INSERT INTO `chat` VALUES ('36', '宗杨12138', '宗杨', '', '2014-12-10 05:00:43');
-INSERT INTO `chat` VALUES ('37', '宗杨12138', '宗牧杨', '', '2014-12-10 05:01:17');
-INSERT INTO `chat` VALUES ('38', '宗杨', '宗杨12138', 'asdasd', '2014-12-10 05:04:35');
-INSERT INTO `chat` VALUES ('39', '宗杨12138', '宗杨', 'asdasd', '2014-12-10 05:04:50');
-INSERT INTO `chat` VALUES ('40', '宗杨12138', '宗杨', 'asdasd', '2014-12-10 05:05:09');
-INSERT INTO `chat` VALUES ('41', '宗杨12138', '宗杨', 'sadasd', '2014-12-10 05:05:52');
-INSERT INTO `chat` VALUES ('42', '宗杨', '宗杨12138', 'asdasdasd', '2014-12-10 05:07:18');
-INSERT INTO `chat` VALUES ('43', '宗杨12138', '宗杨', 'asdasda', '2014-12-10 05:07:35');
-INSERT INTO `chat` VALUES ('44', '宗杨', '宗杨12138', 'asdasd', '2014-12-10 05:07:41');
-INSERT INTO `chat` VALUES ('45', '宗杨12138', '宗杨', 'asdasd', '2014-12-10 05:07:45');
-INSERT INTO `chat` VALUES ('46', '宗杨', '宗杨12138', 'asdasd', '2014-12-10 05:07:53');
-INSERT INTO `chat` VALUES ('47', '宗杨12138', '宗杨', 'asdasd', '2014-12-10 05:07:55');
-INSERT INTO `chat` VALUES ('48', '宗杨12138', '宗杨', 'ghgfgh', '2014-12-10 05:07:58');
-INSERT INTO `chat` VALUES ('49', '宗杨12138', '宗杨', 'asdasd', '2014-12-10 05:08:06');
-INSERT INTO `chat` VALUES ('50', '宗杨', '宗杨12138', 'asdas', '2014-12-10 05:08:08');
-INSERT INTO `chat` VALUES ('51', '宗杨', '宗杨12138', '撒大时代', '2014-12-10 08:23:55');
-INSERT INTO `chat` VALUES ('52', '宗杨12138', '宗杨', 'kjljk', '2014-12-10 08:24:03');
-INSERT INTO `chat` VALUES ('53', '宗杨12138', '宗杨', 'kjljkl', '2014-12-10 08:24:16');
-INSERT INTO `chat` VALUES ('54', '宗杨', '宗杨12138', '很健康很健康', '2014-12-10 08:24:20');
-INSERT INTO `chat` VALUES ('55', '宗杨', '宗杨12138', '的风格', '2014-12-10 08:24:25');
-INSERT INTO `chat` VALUES ('56', '宗杨12138', '宗杨', 'dfgd', '2014-12-10 08:24:27');
-INSERT INTO `chat` VALUES ('57', '宗杨', '宗杨12138', '啊实打实大', '2014-12-10 08:26:35');
-INSERT INTO `chat` VALUES ('58', '宗杨', '宗杨12138', '梵蒂冈', '2014-12-10 08:26:46');
-INSERT INTO `chat` VALUES ('59', '宗杨', '宗杨12138', '阿斯达', '2014-12-10 08:27:22');
-INSERT INTO `chat` VALUES ('60', '宗杨12138', '宗牧杨', 'asdasd', '2014-12-10 08:27:34');
-INSERT INTO `chat` VALUES ('61', '宗杨', '宗杨12138', '阿斯达', '2014-12-10 08:27:40');
 
 -- ----------------------------
 -- Table structure for friend
@@ -3644,7 +3599,6 @@ CREATE TABLE `friend` (
 -- ----------------------------
 -- Records of friend
 -- ----------------------------
-INSERT INTO `friend` VALUES ('宗杨', '宗杨12138');
 
 -- ----------------------------
 -- Table structure for icon
@@ -3690,10 +3644,6 @@ CREATE TABLE `userinfo` (
 -- ----------------------------
 -- Records of userinfo
 -- ----------------------------
-INSERT INTO `userinfo` VALUES ('宗杨', '123456', 'img/header_icon/6.jpg', '12wewqe', '2014-12-05 14:30:03', '保密', 'zhangzengyang@qq.com', '230706');
-INSERT INTO `userinfo` VALUES ('宗杨12138', '123456', 'img/header_icon/0.jpg', 'dasd', '2014-12-06 19:44:55', '保密', 'zhangzengyan11g@qq.com', '');
-INSERT INTO `userinfo` VALUES ('宗杨123456', '123456', 'img/header_icon/0.jpg', 'asdasd', '2014-12-06 19:43:38', '保密', 'zhangzengyan1g@qq.com', '');
-INSERT INTO `userinfo` VALUES ('宗牧杨', '123456', 'img/header_icon/0.jpg', 'sdasd', '2014-12-06 19:42:50', '保密', 'zhangzeygnag@qq.com', '');
 
 -- ----------------------------
 -- View structure for chat_view
