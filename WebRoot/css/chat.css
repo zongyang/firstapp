@@ -1,10 +1,15 @@
+.absolute {
+	width: 100%
+}
+
 .msg-header {
 	min-height: 60px;
 	height: 10%;
 }
 
 .msg-main {
-	margin: 10px 5%;
+	margin:auto;
+	margin-top:10px;
 	width: 1200px;
 	height: 600px;
 	position: relative;
@@ -203,16 +208,17 @@
 	position: relative;
 	margin-top: 10%;
 	height: 100%;
-	width:235px;
+	width: 235px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	cursor: pointer;
 	word-wrap: break-word;
-	
 }
-.r-b-tip:hover{
+
+.r-b-tip:hover {
 	color: #FA5965;
 }
+
 .friend-table {
 	display: block;
 	position: relative;

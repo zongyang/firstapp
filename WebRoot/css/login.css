@@ -42,7 +42,7 @@
 	height: 17px;
 	margin-top: 12px;
 	cursor: pointer;
-	background: url(../img/login/nlogin.png) no-repeat 0 0;
+	background: url(../img/nlogin.png) no-repeat 0 0;
 	transition: transform 0.2s;
 	-webkit-transition: transform 0.2s;
 	-moz-transition: transform 0.2s;

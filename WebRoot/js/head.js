@@ -15,10 +15,10 @@ $(function() {
 	
 	$('.head .user-iocn').attr('src', g_user.getImg()).mouseover(function() {
 		$('.head-ul').removeClass('hide');
-		$('.head .user-iocn').addClass('hover');
+		//$('.head .user-iocn').addClass('hover');
 	});
 	$('.head-ul').mouseleave(function() {
 		$('.head-ul').addClass('hide');
-		$('.head .user-iocn').removeClass('hover');
+		//$('.head .user-iocn').removeClass('hover');
 	});
 });

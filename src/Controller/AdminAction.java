@@ -44,11 +44,19 @@ public class AdminAction {
 	}
 
 	private String get_admin_auth() {
+		Object admin_auth=session.getAttribute("admin_auth");
+		if(admin_auth==null){
+			return "";
+		}
 		return session.getAttribute("admin_auth").toString();
 	}
 
 	// 获得当前管理员名
 	public String get_admin_name() {
+		Object admin_name=session.getAttribute("admin_name");
+		if(admin_name==null){
+			return "";
+		}
 		return session.getAttribute("admin_name").toString();
 	}
 

@@ -30,4 +30,4 @@ response.setContentType("text/html;charset=UTF-8");
 gson-2.3.1.jar
 tomcat-juli-8.0.15.jar
 tomcat-jdbc.jar
-servlet-api.jar
+//servlet-api.jar
