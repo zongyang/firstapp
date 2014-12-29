@@ -50,7 +50,9 @@
 .head-ul .head-userInfo {
 	background-position: 19px -167px;
 }
-
+.head-ul .head-userChat {
+	background-position: 19px -167px;
+}
 .head-ul .head-userOut {
 	background-position: 19px -207px;
 }

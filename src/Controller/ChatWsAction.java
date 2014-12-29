@@ -51,10 +51,6 @@ public class ChatWsAction {
 	private String userName;// 当前连接的用户
 	private Session session;// 当前连接的session
 
-	public ChatWsAction() {
-
-	}
-
 	@OnOpen
 	public void start(Session session, @PathParam("userName") String userName)
 			throws SQLException {
@@ -248,13 +244,13 @@ public class ChatWsAction {
 
 		// 添加好友成功
 		//发消息给自己
-		model.setContent("添加 " + model.getFromName() + " 为好友成功！");
+		model.setContent("添加 " + model.getToName() + " 为好友成功！");
 		json = json_format(model);
 		sendMessageToUser(model.getFromName(), json);
 		
 		//发消息给新加的好友
 		userSwap(model);
-		model.setContent("添加 " + model.getFromName() + " 为好友成功！");
+		model.setContent("添加 " + model.getToName() + " 为好友成功！");
 		json = json_format(model);
 		sendMessageToUser(model.getFromName(), json);
 	}

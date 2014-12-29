@@ -3,6 +3,9 @@ $(function() {
 	$('.head-userInfo').click(function() {
 		location.href = 'info.html';
 	});
+	$('.head-userChat').click(function() {
+		location.href = 'chat.html';
+	});
 	$('.head-userOut').click(function() {
 		Ext.Msg.confirm('确认注销？', '是否注销当前用户?', function(e) {
 			if (e == 'yes') {

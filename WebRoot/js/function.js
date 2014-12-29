@@ -76,6 +76,10 @@ UserInfo.prototype.setUserName = function(val) {
 UserInfo.prototype.setImg = function(val) {
 	this.img = val;
 	localStorage.setItem('img', val);
+	
+	if($('.user-iocn').length>0){
+		$('.user-iocn').attr('src',val);
+	}
 }
 UserInfo.prototype.setMark = function(val) {
 	this.mark = val;
