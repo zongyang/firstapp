@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Controller.AdminAction;
+import DB.DBConFigure;
 
 public class AdminEnterPort {
 	public static String getRequestMehthod(HttpServletRequest request,
@@ -15,6 +16,7 @@ public class AdminEnterPort {
 		AdminAction adminAction = new AdminAction(request.getSession());
 		Enumeration<String> enu = request.getParameterNames();
 		Hashtable<String, String> paraHash = new Hashtable<String, String>();
+		DBConFigure dbConfigure = new DBConFigure();
 
 		while (enu.hasMoreElements()) {
 			String paraName = (String) enu.nextElement();
@@ -24,6 +26,15 @@ public class AdminEnterPort {
 
 		if (!paraHash.containsKey("method")) {
 			return "";
+		}
+		// 配置数据库
+		if (paraHash.get("method").equals("get_db_configure")) {
+			dbConfigure.setFromXml();
+			return dbConfigure.toJson();
+		}
+		if (paraHash.get("method").equals("set_configure")) {
+			return dbConfigure.setFromStr(paraHash.get("str"));
+
 		}
 		// 管理员登录
 		if (paraHash.get("method").equals("admin_login")) {
@@ -46,12 +57,13 @@ public class AdminEnterPort {
 		/** 需一般管理员权限 **/
 		if (adminAction.is_admin()) {
 			// 获得当前管理员名
-			if(paraHash.get("method").equals("get_admin_name")){
+			if (paraHash.get("method").equals("get_admin_name")) {
 				return adminAction.get_admin_name();
 			}
 			// 管理员查看(如果是一般的只能看自己的信息)
 			if (paraHash.get("method").equals("query_admin")) {
-				return adminAction.query_admin(paraHash.get("page"),paraHash.get("limit"));
+				return adminAction.query_admin(paraHash.get("page"),
+						paraHash.get("limit"));
 			}
 			// 密码修改
 			if (paraHash.get("method").equals("password_modify")) {
@@ -68,13 +80,14 @@ public class AdminEnterPort {
 			}
 			// 查看所有用户
 			if (paraHash.get("method").equals("query_user")) {
-				return adminAction.query_user(paraHash.get("page"),paraHash.get("limit"));
+				return adminAction.query_user(paraHash.get("page"),
+						paraHash.get("limit"));
 			}
 			// 注销
 			if (paraHash.get("method").equals("admin_out")) {
 				return adminAction.admin_out();
 			}
-			
+
 		}
 
 		return "";
