@@ -7,6 +7,7 @@
         "resource": true,
         "19a7a2c9-a6ca-4c41-b705-21ba8ea329d5": {
             "id": "19a7a2c9-a6ca-4c41-b705-21ba8ea329d5",
+            "expanded": false,
             "cn": [
                 {
                     "id": "33a90dce-ea6a-450e-a302-f86f91a018d1",
@@ -502,6 +503,7 @@
         },
         "b25f044b-ad8f-4af2-995b-289bba17ec28": {
             "id": "b25f044b-ad8f-4af2-995b-289bba17ec28",
+            "expanded": false,
             "cn": [
                 {
                     "id": "c1d8e2ed-f8a3-43fa-8d94-14a34c0b44ef"

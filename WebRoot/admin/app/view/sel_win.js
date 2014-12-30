@@ -79,13 +79,8 @@ Ext.define('MyApp.view.sel_win', {
     },
 
     onButtonClick1: function(button, e, eOpts) {
-
         Ext.getCmp('sel_win').close();
-        var login_win=Ext.getCmp('login_win');
-        if(login_win===undefined){
-            login_win=Ext.create('MyApp.view.login_win');
-        }
-        login_win.show();
+        Ext.create('MyApp.view.login_win').show();
 
     },
 

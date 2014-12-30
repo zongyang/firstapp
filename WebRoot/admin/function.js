@@ -1,3 +1,4 @@
+var ws;
 function login_click() {
 	var name = Ext.getCmp('lb_name');
 	var password = Ext.getCmp('lb_password');
@@ -98,8 +99,9 @@ function send_to_all() {
 function start_webSocket() {
 	get_admin_name(function(admin) {
 		var url = 'ws://' + location.host + '/firstapp/chat/' + admin;
-		ws = new WebSocket(url);
 
+		ws = new WebSocket(url);
+		console.info(url);
 		ws.onmessage = function(evt) {
 			var obj = Ext.JSON.decode(evt.data);
 			if (obj.msgType) {

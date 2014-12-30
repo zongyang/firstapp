@@ -80,7 +80,7 @@ Ext.define('MyApp.view.sel_win', {
 
     onButtonClick1: function(button, e, eOpts) {
         Ext.getCmp('sel_win').close();
-        Ext.create('MyApp.view.login_win')show();
+        Ext.create('MyApp.view.login_win').show();
 
     },
 

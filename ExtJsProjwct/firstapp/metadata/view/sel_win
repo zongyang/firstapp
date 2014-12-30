@@ -77,7 +77,7 @@
                         "fn": "onButtonClick1",
                         "implHandler": [
                             "Ext.getCmp('sel_win').close();\r",
-                            "Ext.create('MyApp.view.login_win')show();\r",
+                            "Ext.create('MyApp.view.login_win').show();\r",
                             ""
                         ],
                         "name": "click",

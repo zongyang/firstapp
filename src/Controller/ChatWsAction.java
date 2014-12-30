@@ -59,10 +59,15 @@ public class ChatWsAction {
 			return;
 		}
 
-		if (connections.containsKey(this.userName)) {
+		if (connections.containsKey(userName)) {
 			return;
 		}
-
+		/*Iterator iter = connections.entrySet().iterator();
+		while (iter.hasNext()) {
+			String key=(String)iter.next();
+			System.out.println(key);
+		}*/
+      
 		this.userName = userName;
 		this.session = session;
 		connections.put(this.userName, this);
