@@ -85,7 +85,7 @@ public class Serverlet extends HttpServlet {
 		}
 		// json=CommFuns.filter(json);
 		if (json.isEmpty()) {
-			json = CommFuns.getTip(false, "非法！", "");
+			json = CommFuns.getTip(false, "非法:权限不够或者数据库连接失败！", "");
 		}
 		out.print(json);
 		out.flush();

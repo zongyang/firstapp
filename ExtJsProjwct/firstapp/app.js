@@ -31,7 +31,8 @@ Ext.application({
         'main_win',
         'login_win',
         'add_admin_win',
-        'sel_win'
+        'sel_win',
+        'ip_win'
     ],
     autoCreateViewport: true,
     controllers: [

@@ -1,13 +1,13 @@
 {
     "name": "firstapp",
     "settings": {
-        "exportPath": "D:/Documents/Eclipse/firstapp/WebRoot/admin",
+        "exportPath": "D:/我的文档/MyEclipse/firstapp/WebRoot/admin",
         "urlPrefix": "",
         "spacesToIndent": 4,
         "lineEnding": "CRLF",
         "genTimestamps": false,
         "cacheBust": false,
-        "buildShouldOverwriteIndex": true
+        "buildShouldOverwriteIndex": false
     },
     "xdsVersion": "2.2.2",
     "xdsBuild": 991,
@@ -93,6 +93,14 @@
                 "app/view/Viewport.js"
             ],
             "className": "sel_win"
+        },
+        "9091bb44-ccf3-4fea-9ed5-79203c802c0d": {
+            "paths": [
+                "metadata/view/ip_win",
+                "app/view/override/ip_win.js",
+                "app/view/ip_win.js"
+            ],
+            "className": "ip_win"
         }
     },
     "viewOrderMap": {
@@ -100,7 +108,8 @@
             "19a7a2c9-a6ca-4c41-b705-21ba8ea329d5",
             "88e7c7e7-4bb9-452e-8802-b877dbe2dd1f",
             "e44da201-2378-4a3e-b042-cff36461b1cf",
-            "4b380155-b184-40d3-a419-c818688e40dc"
+            "4b380155-b184-40d3-a419-c818688e40dc",
+            "9091bb44-ccf3-4fea-9ed5-79203c802c0d"
         ],
         "store": [
             "8b7a46f2-b229-4970-a4d1-286b57cfbdfd",

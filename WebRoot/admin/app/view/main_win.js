@@ -667,8 +667,8 @@ Ext.define('MyApp.view.main_win', {
 
                         if (obj.success === true) { 
                             Ext.Msg.alert('提示', obj.msg);
-                            win.close( );
-                            Ext.create('MyApp.view.sel_win').show();
+                            win.close();
+                            Ext.create('MyApp.view.login_win').show();
                         }
 
                     }

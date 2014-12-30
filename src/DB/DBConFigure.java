@@ -2,6 +2,7 @@ package DB;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.net.URISyntaxException;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -11,7 +12,6 @@ import org.dom4j.io.XMLWriter;
 import com.google.gson.Gson;
 
 public class DBConFigure {
-	private static String xml_path = "../";
 
 	private String host;
 	private String port;
@@ -19,6 +19,15 @@ public class DBConFigure {
 	private String password;
 	private String dbName;
 	private Document document;
+	private String xml_path;
+
+	public DBConFigure() throws URISyntaxException {
+		/*this.xml_path = new File(request.getSession().getServletContext()
+				.getRealPath(request.getServletPath())).getParent()
+				+ "\\init.xml";*/
+		this.xml_path=DBConFigure.class.getResource("").toURI().getPath()+"\\init.xml";
+		//System.out.println(xml_path);
+	}
 
 	private Document xmlLoad() {
 
@@ -123,7 +132,7 @@ public class DBConFigure {
 		try {
 			Gson gson = new Gson();
 			DBConFigure temp = gson.fromJson(str, DBConFigure.class);
-			setHost(temp.getDbName());
+			setHost(temp.getHost());
 			setPort(temp.getPort());
 			setUser(temp.getUser());
 			setPassword(temp.getPassword());
@@ -135,9 +144,17 @@ public class DBConFigure {
 
 		}
 	}
-
 	public String toJson() {
-		Gson gson = new Gson();
-		return gson.toJson(this);
+		/*
+		 * 转换有问题，所以自己写了 Gson gson = new Gson(); return gson.toJson(this);
+		 */
+		return "{host:'" + this.host + "',port:'" + this.port + "',user:'"
+				+ this.user + "',password:'" + this.password + "',dbName:'"
+				+ this.dbName + "'}";
+
+	}
+	public String getUrl(){
+		//String url = "jdbc:MySQL://127.0.0.1:3306/chat"; // 数据库
+		return "jdbc:MySQL://"+this.host+":"+this.port+"/"+this.dbName+"";
 	}
 }

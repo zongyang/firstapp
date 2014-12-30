@@ -14,10 +14,15 @@ public final class DBHelper {
 		Connection conn = null;
 
 		try {
+			DBConFigure dbConfigure = new DBConFigure();
+			dbConfigure.setFromXml();
 			String driver = "com.mysql.jdbc.Driver"; // 数据库驱动
-			String url = "jdbc:MySQL://127.0.0.1:3306/chat"; // 数据库
-			String user = "root"; // 用户名
-			String password = ""; // 密码
+			//String url = "jdbc:MySQL://127.0.0.1:3306/chat"; // 数据库
+			//String user = "root"; // 用户名
+			//String password = ""; // 密码
+			String url =dbConfigure.getUrl();
+			String user = dbConfigure.getUser(); // 用户名
+			String password =dbConfigure.getPassword(); // 密码
 			Class.forName(driver); // 加载数据库驱动
 
 			if (null == conn) {
@@ -35,7 +40,7 @@ public final class DBHelper {
 
 		return conn;
 	}
-
+	
 	/**
 	 * 增删改【Add、Del、Update】
 	 * 

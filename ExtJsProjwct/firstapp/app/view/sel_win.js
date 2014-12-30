@@ -16,7 +16,7 @@
 Ext.define('MyApp.view.sel_win', {
     extend: 'Ext.window.Window',
 
-    height: 250,
+    height: 350,
     id: 'sel_win',
     width: 400,
     layout: {
@@ -34,7 +34,7 @@ Ext.define('MyApp.view.sel_win', {
             items: [
                 {
                     xtype: 'button',
-                    margin: '50 50 30 50 ',
+                    margin: '50 50 0 50',
                     scale: 'large',
                     text: '进入聊天模块',
                     listeners: {
@@ -46,12 +46,24 @@ Ext.define('MyApp.view.sel_win', {
                 },
                 {
                     xtype: 'button',
-                    margin: '0 50 50 50',
+                    margin: '50 50 0 50',
                     scale: 'large',
                     text: '进入管理员模块',
                     listeners: {
                         click: {
                             fn: me.onButtonClick1,
+                            scope: me
+                        }
+                    }
+                },
+                {
+                    xtype: 'button',
+                    margin: '50 50 0 50',
+                    scale: 'large',
+                    text: '进入管理员模块',
+                    listeners: {
+                        click: {
+                            fn: me.onButtonClick11,
                             scope: me
                         }
                     }
@@ -68,7 +80,15 @@ Ext.define('MyApp.view.sel_win', {
 
     onButtonClick1: function(button, e, eOpts) {
         Ext.getCmp('sel_win').close();
-        Ext.create('MyApp.view.login_win').show();
+        Ext.create('MyApp.view.login_win')show();
+
+    },
+
+    onButtonClick11: function(button, e, eOpts) {
+        Ext.getCmp('sel_win').close();
+        Ext.create('MyApp.view.ip_win').show();
+
+
     }
 
 });

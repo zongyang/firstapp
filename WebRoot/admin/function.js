@@ -23,10 +23,14 @@ function login_click() {
 			if (obj.success === true) {
 				Ext.Msg.alert('提示', obj.msg, function() {
 					Ext.getCmp('login_win').close();
-					Ext.create('MyApp.view.main_win').show();
+					var main_win = Ext.getCmp('main_win');
+					if (main_win === undefined) {
+						main_win = Ext.create('MyApp.view.main_win');
+					}
+					main_win.show();
 					Ext.StoreManager.get('user').load();
 					Ext.StoreManager.get('admin').load();
-					//开启websocket
+					// 开启websocket
 					start_webSocket();
 				});
 			}
@@ -93,8 +97,7 @@ function send_to_all() {
 
 function start_webSocket() {
 	get_admin_name(function(admin) {
-		var url = 'ws://' + location.host + '/firstapp/chat/'
-				+ admin;
+		var url = 'ws://' + location.host + '/firstapp/chat/' + admin;
 		ws = new WebSocket(url);
 
 		ws.onmessage = function(evt) {
@@ -130,4 +133,79 @@ function send_msg(method, content, fromName, toName, callback) {
 	if (callback) {
 		callback();
 	}
+}
+
+function IPConfigure() {
+	this.host = Ext.getCmp('ip_host');
+	this.port = Ext.getCmp('ip_port');
+	this.user = Ext.getCmp('ip_user');
+	this.password = Ext.getCmp('ip_password');
+	this.dbname = Ext.getCmp('ip_dbname');
+}
+IPConfigure.prototype.setByServer = function() {
+	var that = this;
+	Ext.Ajax.request({
+		url : '../admin',
+		params : {
+			method : 'get_db_configure'
+		},
+		success : function(response) {
+			var obj = Ext.JSON.decode(response.responseText);
+			if (obj.success === false) {
+
+				Ext.Msg.alert('提示', obj.msg);
+				return;
+			}
+
+			that.host.setValue(obj.host);
+			that.port.setValue(obj.port);
+			that.user.setValue(obj.user);
+			that.password.setValue(obj.password);
+			that.dbname.setValue(obj.dbName);
+
+			Ext.Msg.alert('提示', '加载配置成功！');
+		}
+	});
+}
+IPConfigure.prototype.setByClient = function() {
+	if (!this.check()) {
+		return;
+	}
+	var obj = {
+		host : this.host.getValue(),
+		port : this.port.getValue(),
+		user : this.user.getValue(),
+		password : this.password.getValue(),
+		dbName : this.dbname.getValue()
+	};
+
+	Ext.Ajax.request({
+		url : '../admin',
+		params : {
+			method : 'set_db_configure',
+			str : Ext.JSON.encode(obj)
+		},
+		success : function(response) {
+			var obj = Ext.JSON.decode(response.responseText);
+			Ext.Msg.alert('提示', obj.msg);
+		}
+	});
+}
+IPConfigure.prototype.check = function() {
+	if (!this.host.isValid()) {
+		return false;
+	}
+	if (!this.port.isValid()) {
+		return false;
+	}
+	if (!this.user.isValid()) {
+		return false;
+	}
+	if (!this.password.isValid()) {
+		return false;
+	}
+	if (!this.dbname.isValid()) {
+		return false;
+	}
+	return true;
 }

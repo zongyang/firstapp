@@ -1,0 +1,311 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "container|align": "stretch",
+        "height": null,
+        "id": "ip_win",
+        "width": 400,
+        "designer|userClassName": "ip_win",
+        "layout": "vbox",
+        "closable": false,
+        "title": "数据库连接设置"
+    },
+    "designerId": "9091bb44-ccf3-4fea-9ed5-79203c802c0d",
+    "cn": [
+        {
+            "type": "Ext.form.FieldContainer",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout|flex": 1,
+                "container|align": "stretch",
+                "margin": 10,
+                "layout": "vbox",
+                "fieldLabel": null
+            },
+            "designerId": "35cf5c0b-1b9d-4744-a45c-a27d0b986799",
+            "cn": [
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "ip_host",
+                        "margin": "10 0 0 0",
+                        "fieldLabel": "主机地址",
+                        "labelAlign": "right",
+                        "labelWidth": 60,
+                        "allowBlank": false,
+                        "emptyText": "输入数据库地址"
+                    },
+                    "designerId": "fc4640d6-ed7d-4995-830b-242c07068641"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "ip_port",
+                        "margin": "10 0 0 0",
+                        "fieldLabel": "端 口",
+                        "labelAlign": "right",
+                        "labelWidth": 60,
+                        "allowBlank": false,
+                        "emptyText": "输入数据库端口"
+                    },
+                    "designerId": "86be0658-7118-41ad-86e8-13540db35812"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "ip_user",
+                        "margin": "10 0 0 0",
+                        "fieldLabel": "登录名",
+                        "labelAlign": "right",
+                        "labelWidth": 60,
+                        "allowBlank": false,
+                        "emptyText": "输入数据库登录名"
+                    },
+                    "designerId": "9671701c-e785-4aef-9fc7-1bba34c3ff1f"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "ip_password",
+                        "margin": "10 0 0 0",
+                        "fieldLabel": "登录密码",
+                        "labelAlign": "right",
+                        "labelWidth": 60,
+                        "emptyText": "输入数据库登录密码"
+                    },
+                    "designerId": "d48b2d58-638c-4b88-bfe4-861c075918df"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "ip_dbname",
+                        "margin": "10 0 0 0",
+                        "fieldLabel": "数据库名",
+                        "labelAlign": "right",
+                        "labelWidth": 60,
+                        "allowBlank": false,
+                        "emptyText": "输入数据库表名"
+                    },
+                    "designerId": "60863727-22ed-4ced-8847-4d827653b070"
+                }
+            ]
+        },
+        {
+            "type": "Ext.toolbar.Toolbar",
+            "reference": {
+                "name": "dockedItems",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout|flex": 1,
+                "dock": "bottom"
+            },
+            "designerId": "75349b43-687b-4666-a9c5-0924b67ccba5",
+            "cn": [
+                {
+                    "type": "Ext.toolbar.Spacer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 1
+                    },
+                    "designerId": "9dbeefef-fd6a-4214-97f9-a0671316502c"
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": null,
+                        "icon": "../img/extjs_icon/accept.gif",
+                        "text": "确 定"
+                    },
+                    "designerId": "1475243f-be80-4809-a743-ce88c3be3253",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onButtonClick",
+                                "implHandler": [
+                                    "var ip=new IPConfigure();\r",
+                                    "ip.setByClient();"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "designerId": "4dba4a3b-fade-4f7d-9c12-090f77302c7f"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.toolbar.Spacer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 0.5
+                    },
+                    "designerId": "7032763e-8560-45ef-b83d-042f6e94c4b5"
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": null,
+                        "icon": "../img/extjs_icon/table_refresh.png",
+                        "text": "重 置"
+                    },
+                    "designerId": "6595509c-a643-48d3-802c-f746f74600b6",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onButtonClick1",
+                                "implHandler": [
+                                    "var ip=new IPConfigure();\r",
+                                    "ip.setByServer();"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "designerId": "de6d4074-5afc-48eb-b624-e74bcc79e34a"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.toolbar.Spacer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 0.5
+                    },
+                    "designerId": "72587f68-7a91-4b6b-9cad-8a37e0fe62b2"
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": null,
+                        "icon": "../img/extjs_icon/rss_go.png",
+                        "text": "返 回"
+                    },
+                    "designerId": "17f878fe-69e8-4d21-894f-c5494da11792",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onButtonClick11",
+                                "implHandler": [
+                                    "Ext.getCmp('ip_win').close();\r",
+                                    "Ext.create('MyApp.view.sel_win').show();"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "designerId": "598fb1ef-508e-48f8-abdf-80dae993ab2c"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.toolbar.Spacer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": 1
+                    },
+                    "designerId": "cc51597b-ac09-47b0-affc-b6a8b2b18452"
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onIp_winShow",
+                "implHandler": [
+                    "var ip=new IPConfigure();\r",
+                    "ip.setByServer();"
+                ],
+                "name": "show",
+                "scope": "me"
+            },
+            "designerId": "c34d50eb-787c-41bc-aa9e-f6aeac28e778"
+        }
+    ]
+}

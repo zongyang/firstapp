@@ -52,6 +52,21 @@ Ext.define('MyApp.view.login_win', {
                         },
                         {
                             xtype: 'tbspacer',
+                            flex: 0.5
+                        },
+                        {
+                            xtype: 'button',
+                            icon: '../img/extjs_icon/rss_go.png',
+                            text: '返回',
+                            listeners: {
+                                click: {
+                                    fn: me.onButtonClick1,
+                                    scope: me
+                                }
+                            }
+                        },
+                        {
+                            xtype: 'tbspacer',
                             flex: 1
                         }
                     ]
@@ -112,6 +127,11 @@ Ext.define('MyApp.view.login_win', {
 
     onButtonClick: function(button, e, eOpts) {
         login_click();
+    },
+
+    onButtonClick1: function(button, e, eOpts) {
+        Ext.getCmp('login_win').close();
+        Ext.create('MyApp.view.sel_win').show();
     },
 
     onLb_nameSpecialkey: function(field, e, eOpts) {

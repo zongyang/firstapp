@@ -7,7 +7,7 @@
     "codeClass": null,
     "userConfig": {
         "container|align": "stretch",
-        "height": 250,
+        "height": 350,
         "id": "sel_win",
         "width": 400,
         "designer|userClassName": "sel_win",
@@ -27,7 +27,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "margin": "50 50 30 50 ",
+                "margin": "50 50 0 50",
                 "scale": "large",
                 "text": "进入聊天模块"
             },
@@ -60,7 +60,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "margin": "0 50 50 50",
+                "margin": "50 50 0 50",
                 "scale": "large",
                 "text": "进入管理员模块"
             },
@@ -77,12 +77,49 @@
                         "fn": "onButtonClick1",
                         "implHandler": [
                             "Ext.getCmp('sel_win').close();\r",
-                            "Ext.create('MyApp.view.login_win').show();"
+                            "Ext.create('MyApp.view.login_win')show();\r",
+                            ""
                         ],
                         "name": "click",
                         "scope": "me"
                     },
                     "designerId": "d04c6421-8cdd-46f2-b773-b0d9b6f47bc9"
+                }
+            ]
+        },
+        {
+            "type": "Ext.button.Button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "margin": "50 50 0 50",
+                "scale": "large",
+                "text": "进入管理员模块"
+            },
+            "designerId": "25019808-bfdb-438f-834d-84055377bcff",
+            "cn": [
+                {
+                    "type": "basiceventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "onButtonClick11",
+                        "implHandler": [
+                            "Ext.getCmp('sel_win').close();\r",
+                            "Ext.create('MyApp.view.ip_win').show();\r",
+                            "\r",
+                            ""
+                        ],
+                        "name": "click",
+                        "scope": "me"
+                    },
+                    "designerId": "577d087c-0a76-4fbb-a091-7c5e84f26d6e"
                 }
             ]
         }

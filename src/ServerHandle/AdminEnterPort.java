@@ -32,7 +32,7 @@ public class AdminEnterPort {
 			dbConfigure.setFromXml();
 			return dbConfigure.toJson();
 		}
-		if (paraHash.get("method").equals("set_configure")) {
+		if (paraHash.get("method").equals("set_db_configure")) {
 			return dbConfigure.setFromStr(paraHash.get("str"));
 
 		}

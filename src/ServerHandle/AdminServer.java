@@ -58,7 +58,7 @@ public class AdminServer extends HttpServlet {
 		}
 		
 		if (json.isEmpty()) {
-			json = CommFuns.getTip(false, "非法:权限不够！", "");
+			json = CommFuns.getTip(false, "非法:权限不够或者数据库连接失败！", "");
 		}
 		out.print(json);
 		out.flush();

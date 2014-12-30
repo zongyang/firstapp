@@ -302,3 +302,12 @@ Ext.define("Ext.locale.zh_CN.Component", {
     override: "Ext.Component"
 });
 
+Ext.onReady(function(){  
+    var proto = Ext.picker.Date.prototype,  
+        date = Ext.Date;  
+
+    proto.monthNames = date.monthNames;  
+    proto.dayNames   = date.dayNames;  
+    proto.format     = date.defaultFormat;  
+});  
+

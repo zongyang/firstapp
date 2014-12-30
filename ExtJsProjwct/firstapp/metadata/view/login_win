@@ -82,6 +82,52 @@
                     },
                     "codeClass": null,
                     "userConfig": {
+                        "layout|flex": 0.5
+                    },
+                    "designerId": "7ec80855-680e-404e-ad89-1d39697cf7d1"
+                },
+                {
+                    "type": "Ext.button.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|flex": null,
+                        "icon": "../img/extjs_icon/rss_go.png",
+                        "text": "返回"
+                    },
+                    "designerId": "e1752bf4-e96a-4502-a2a4-54317e6561c1",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onButtonClick1",
+                                "implHandler": [
+                                    "Ext.getCmp('login_win').close();\r",
+                                    "Ext.create('MyApp.view.sel_win').show();"
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "designerId": "d552c118-e61e-4547-8ae7-aa5ce15d0df9"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.toolbar.Spacer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
                         "layout|flex": 1
                     },
                     "designerId": "2e95bf4d-1cf6-4880-82a9-0a255a73293e"
