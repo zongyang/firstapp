@@ -157,6 +157,7 @@ public class ChatWsAction {
 
 		while (iter.hasNext()) {
 			key = iter.next();
+			model.setToName(key);
 			json = json_format(model);
 			sendMessageToUser(key, json);
 		}

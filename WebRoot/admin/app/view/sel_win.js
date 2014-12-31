@@ -60,7 +60,7 @@ Ext.define('MyApp.view.sel_win', {
                     xtype: 'button',
                     margin: '50 50 0 50',
                     scale: 'large',
-                    text: '进入管理员模块',
+                    text: '数据库连接设置',
                     listeners: {
                         click: {
                             fn: me.onButtonClick11,
