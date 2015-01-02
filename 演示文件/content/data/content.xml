@@ -1,0 +1,1561 @@
+<zuiprezi>
+  <version>5</version>
+  <zui-table>
+    <settings>
+      <autoplay>
+        <delay>4000</delay>
+      </autoplay>
+      <bounds x="-95759.92351547792" y="-56180.40566676912" width="191519.84703095583" height="112360.81133353824"/>
+      <aspectratio>off</aspectratio>
+      <mode type="normal"/>
+    </settings>
+    <object id="32_2475237" type="button" x="0" y="0" r="0" s="187.58065331141609" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>1022.0039292730844</w>
+        <h>600</h>
+      </size>
+      <meta>
+        <parentTemplate>white-space</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="2_2648233" type="button" x="251.07717210963955" y="2301.009122981808" r="-8.080455995195481e-15" s="16.740152242488488" class="circle">
+      <type>circle</type>
+      <size>
+        <w>800</w>
+        <h>800</h>
+      </size>
+      <meta>
+        <parentTemplate>white-space</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="15_2648233" type="labelwithplaceholder" x="498.04316859756966" y="-120.7398392691234" r="-1.3156204614026314e-15" s="22.03220037075902" class="strong">
+      <placeholder text="Click to add text" x="-95.35" y="-17.8" align="center" width="190.75"/>
+      <layout/>
+    </object>
+    <object id="23_2648233" type="button" x="52582.51648493857" y="-17642.9939058652" r="-6.14933122557141" s="32.16448519114956" class="roundrect">
+      <type>roundrect</type>
+      <size>
+        <w>1096.4169381107492</w>
+        <h>600</h>
+      </size>
+      <meta>
+        <parentTemplate>white-space</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="28_2648233" type="label" x="41192.355883629" y="-22385.306751817912" r="-6.149331225571403" s="80.45703484265073" class="strong">
+      <textfield autoSize="true">
+        <x>-50</x>
+        <y>-17.8</y>
+        <text><![CDATA[聊天模块]]></text>
+        <annotations>r0-4 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="0_2690304" type="label" x="2667.656094640085" y="-44672.56129514893" r="0" s="353.4946873414686" class="head">
+      <textfield autoSize="true">
+        <x>-188.85</x>
+        <y>-17.8</y>
+        <text><![CDATA[基于websocket的网页聊天系统]]></text>
+        <w>377.7</w>
+        <h>35.6</h>
+        <annotations>r0-18 { align: center; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="0_2685266" type="labelwithplaceholder" x="41374.68512662925" y="-17836.085094950125" r="-6.149331225571405" s="43.74513109916484" class="body">
+      <placeholder text="Click to add text" x="-95.35" y="-17.8"/>
+      <layout/>
+    </object>
+    <object id="12_4225793" type="button" x="-46348.72445798653" y="16256.525407972407" r="-10.845356572958774" s="32.16448519114956" class="roundrect">
+      <type>roundrect</type>
+      <size>
+        <w>1096.4169381107492</w>
+        <h>600</h>
+      </size>
+      <meta>
+        <parentTemplate>white-space</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="13_4225793" type="label" x="-59989.02368872297" y="12806.827981747596" r="-10.845356572958773" s="80.4570348426508" class="strong">
+      <textfield autoSize="true">
+        <x>-26</x>
+        <y>-17.8</y>
+        <text><![CDATA[首页]]></text>
+        <annotations>r0-2 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="28" type="image" x="-55574.7852632567" y="19467.97407700696" r="-10.84535657295877" s="24.421880536166437">
+      <source w="430" h="382">
+        __QQ截图20141231164625.png
+        <url>__QQ截图20141231164625.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231164625.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="14_4225793" type="labelwithplaceholder" x="-57128.411286554714" y="16917.17793241461" r="-10.845356572958774" s="43.74513109916484" class="body">
+      <placeholder text="Click to add text" x="-95.35" y="-17.8"/>
+      <layout/>
+    </object>
+    <object id="1" type="button" x="52181.34873458377" y="-21366.47139851616" r="-6.149331225571405" s="8.61969852851761" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>976.7123287671232</w>
+        <h>600</h>
+      </size>
+      <meta>
+        <parentTemplate>freefall</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="2" type="button" x="52956.62602813641" y="-17179.268191133975" r="11.37568114220453" s="3.1324525071926064" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>1375.317524341804</w>
+        <h>811.2031542141978</h>
+      </size>
+      <meta>
+        <parentTemplate>freefall</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="6" type="button" x="52813.63746414197" y="-14466.735006962252" r="-14.234787985787523" s="2.6388099095785345" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>1182.278177990647</w>
+        <h>759.594723729012</h>
+      </size>
+      <meta>
+        <parentTemplate>freefall</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="9" type="button" x="-47239.4180679387" y="-19394.15465435403" r="11.487072715690818" s="33.551175124246114" class="roundrect">
+      <type>roundrect</type>
+      <size>
+        <w>1096.4169381107492</w>
+        <h>600</h>
+      </size>
+      <meta>
+        <parentTemplate>white-space</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="10" type="label" x="-55583.04699369595" y="-27407.28792279323" r="11.487072715690848" s="83.92573516849347" class="strong">
+      <textfield autoSize="true">
+        <x>-68</x>
+        <y>-17.8</y>
+        <text><![CDATA[系统简介]]></text>
+        <annotations>r0-4 { align: left; }
+r0-4 { blockIndent: 36; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="11" type="label" x="-48456.42870388998" y="-18317.10236123257" r="11.487072715690848" s="45.63109111241239" class="body">
+      <textfield>
+        <x>-256.35</x>
+        <y>-81</y>
+        <text><![CDATA[       系统主要使用HTML5的WebSocket协议实现浏览器与服务器的全双工通信。主要实现了用户管理、用户聊天、后台管理等模块。前台用到了Extjs、Jquery，数据库使用的是mysql，服务器使用的是Tomcat 7。]]></text>
+        <w>512.7</w>
+        <h>162</h>
+        <annotations>r0-116 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="29" type="button" x="1848.2196190139712" y="32623.931841740367" r="-8.657631423423729e-15" s="32.16448519114957" class="roundrect">
+      <type>roundrect</type>
+      <size>
+        <w>1096.4169381107492</w>
+        <h>600</h>
+      </size>
+      <meta>
+        <parentTemplate>white-space</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="30" type="label" x="-8871.857242780325" y="26576.15031866889" r="-6.114636789041695e-15" s="80.45703484265083" class="strong">
+      <textfield autoSize="true">
+        <x>-62</x>
+        <y>-17.8</y>
+        <text><![CDATA[数据库连接]]></text>
+        <annotations>r0-5 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="31" type="labelwithplaceholder" x="-9274.438851391968" y="31231.367116382553" r="-3.980498157110224e-15" s="43.74513109916486" class="body">
+      <placeholder text="Click to add text" x="-95.35" y="-17.8"/>
+      <layout/>
+    </object>
+    <object id="32" type="button" x="1848.2196190139468" y="28878.90578012168" r="-5.690564083042866e-15" s="8.619698528517622" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>976.7123287671232</w>
+        <h>600</h>
+      </size>
+      <meta>
+        <parentTemplate>freefall</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="35" type="button" x="1571.9623365608577" y="37980.67442512659" r="11.29523789524508" s="1.234512140883985" class="roundrect">
+      <type>roundrect</type>
+      <size>
+        <w>1815.598905036677</w>
+        <h>1246.8017532998497</h>
+      </size>
+      <meta>
+        <parentTemplate>freefall</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="36" type="image" x="1650.30458255973" y="28725.02081277343" r="-0.7066072128659023" s="9.412660961260638">
+      <source w="494" h="326">
+        QQ截图20141231164941.png
+        <url>QQ截图20141231164941.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231164941.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="44" type="button" x="48888.963191417635" y="19609.385357850315" r="20.930338747009944" s="32.16448519114958" class="roundrect">
+      <type>roundrect</type>
+      <size>
+        <w>1096.4169381107492</w>
+        <h>600</h>
+      </size>
+      <meta>
+        <parentTemplate>white-space</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="45" type="label" x="41036.71065697836" y="10131.102844178671" r="20.930338747009944" s="80.4570348426509" class="strong">
+      <textfield autoSize="true">
+        <x>-62</x>
+        <y>-17.8</y>
+        <text><![CDATA[登录和注册]]></text>
+        <annotations>r0-5 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="46" type="labelwithplaceholder" x="38997.697918698905" y="14335.331957635968" r="20.930338747009937" s="43.74513109916487" class="body">
+      <placeholder text="Click to add text" x="-95.35" y="-17.8"/>
+      <layout/>
+    </object>
+    <object id="47" type="button" x="50226.808666579906" y="16111.473168159033" r="20.930338747009937" s="8.619698528517619" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>976.7123287671232</w>
+        <h>600</h>
+      </size>
+      <meta>
+        <parentTemplate>freefall</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="48" type="button" x="48992.35118675524" y="20186.1664893578" r="38.45535111478587" s="3.132452507192605" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>1375.317524341804</w>
+        <h>811.2031542141978</h>
+      </size>
+      <meta>
+        <parentTemplate>freefall</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="49" type="button" x="47648.822204095384" y="22542.657904248223" r="12.844881986793826" s="2.638809909578535" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>1182.278177990647</w>
+        <h>759.594723729012</h>
+      </size>
+      <meta>
+        <parentTemplate>freefall</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="50" type="button" x="46717.33143004585" y="24513.97756146653" r="32.225576642255014" s="1.234512140883984" class="roundrect">
+      <type>roundrect</type>
+      <size>
+        <w>1815.598905036677</w>
+        <h>1246.8017532998497</h>
+      </size>
+      <meta>
+        <parentTemplate>freefall</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="54" type="image" x="48609.68428782952" y="15479.806532871213" r="21.16669679293837" s="7.759727747720236">
+      <source w="502" h="393">
+        QQ截图20141231165621.png
+        <url>QQ截图20141231165621.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231165621.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="55" type="label" x="47850.80878919895" y="13101.023610488" r="20.930338747009937" s="8.086720292266923" class="head">
+      <textfield autoSize="true">
+        <x>-26</x>
+        <y>-17.8</y>
+        <text><![CDATA[登录]]></text>
+        <annotations>r0-2 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="56" type="label" x="48443.799522538386" y="18800.89257156666" r="38.45535111478588" s="4.043360146133459" class="head">
+      <textfield autoSize="true">
+        <x>-26</x>
+        <y>-17.8</y>
+        <text><![CDATA[注册]]></text>
+        <annotations>r0-2 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="57" type="image" x="49000.294021181304" y="20258.411333122873" r="37.606739037357094" s="3.535710066356071">
+      <source w="519" h="521">
+        QQ截图20141231165351.png
+        <url>QQ截图20141231165351.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231165351.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="58" type="label" x="46858.78307343817" y="21560.279456428016" r="12.844881986793826" s="3.0378363231656267" class="head">
+      <textfield autoSize="true">
+        <x>-50</x>
+        <y>-17.8</y>
+        <text><![CDATA[忘记密码]]></text>
+        <annotations>r0-4 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="59" type="image" x="47145.93581880814" y="22427.23717019086" r="12.43728103649027" s="2.712539332072561">
+      <source w="515" h="501">
+        QQ截图20141231165743.png
+        <url>QQ截图20141231165743.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231165743.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="60" type="label" x="48518.34715999143" y="-23234.891117732357" r="-6.149331225571408" s="7.351563902060827" class="head">
+      <textfield autoSize="true">
+        <x>-74</x>
+        <y>-17.8</y>
+        <text><![CDATA[用户信息设置]]></text>
+        <annotations>r0-6 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="61" type="image" x="48909.77237023131" y="-22018.085778488356" r="-6.149331225571405" s="7.486155458257766">
+      <source w="193" h="232">
+        QQ截图20141231170825.png
+        <url>QQ截图20141231170825.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231170825.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="62" type="image" x="51407.93707058661" y="-22329.919677061313" r="-6.14933122557141" s="7.5626497122676035">
+      <source w="305" h="220">
+        QQ截图20141231171908.png
+        <url>QQ截图20141231171908.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231171908.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="63" type="image" x="54423.445296776925" y="-22657.55032451471" r="-6.149331225571407" s="5.531255568754229">
+      <source w="939" h="653">
+        QQ截图20141231171316.png
+        <url>QQ截图20141231171316.png</url>
+        <mask x="106" y="33" w="632" h="495"/>
+      </source>
+      <sourceUrl>QQ截图20141231171316.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="64" type="image" x="53975.97200637465" y="-20034.074875828872" r="-6.149331225571409" s="5.54393950463709">
+      <source w="514" h="327">
+        _QQ截图20141231171838.png
+        <url>_QQ截图20141231171838.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231171838.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="65" type="image" x="50197.51118762125" y="-19876.41117065658" r="-6.149331225571408" s="6.015038294318148">
+      <source w="544" h="406">
+        __QQ截图20141231171722.png
+        <url>__QQ截图20141231171722.png</url>
+        <mask x="51" y="8" w="464" h="312"/>
+      </source>
+      <sourceUrl>QQ截图20141231171722.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="66" type="shape" x="49905.080352345714" y="-22383.51783442527" r="-32.084014409185286" s="4.339766175950903" class="line3">
+      <geom type="arrow">
+        <sp>-141.54607277178576 0</sp>
+        <ep>141.54607277178576 0</ep>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="67" type="shape" x="52004.88120942228" y="-22939.06462202558" r="-10.50919222356411" s="4.339766175950904" class="line3">
+      <geom type="arrow">
+        <sp>-179.05676171612387 0</sp>
+        <ep>179.05676171612384 0</ep>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="68" type="shape" x="50302.566534455735" y="-21581.353497992935" r="-70.55029584806788" s="4.339766175950903" class="line3">
+      <geom type="arrow">
+        <sp>192.19932346627488 40.71336072173856</sp>
+        <ep>-192.19932346627488 40.71336072173851</ep>
+        <b>81.42672144347708</b>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="69" type="shape" x="52502.66636914879" y="-21280.318041812283" r="33.60552202669146" s="4.339766175950904" class="line3">
+      <geom type="arrow">
+        <sp>-305.25317557448517 25.865977423063317</sp>
+        <ep>305.25317557448517 25.865977423063317</ep>
+        <b>-51.731954846126634</b>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="70" type="label" x="51623.20390664244" y="-19523.106370413123" r="-6.1493312255714025" s="6.683239910964387" class="head">
+      <textfield autoSize="true">
+        <x>-50</x>
+        <y>-17.8</y>
+        <text><![CDATA[图像设置]]></text>
+        <annotations>r0-4 { color: #194a99; }
+r0-4 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="71" type="label" x="54485.45154238327" y="-20433.274674181557" r="-6.1493312255714025" s="6.683239910964387" class="head">
+      <textfield autoSize="true">
+        <x>-50</x>
+        <y>-17.8</y>
+        <text><![CDATA[密码修改]]></text>
+        <annotations>r0-4 { color: #194a99; }
+r0-4 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="72" type="label" x="54873.50074805391" y="-22713.14272922864" r="-6.149331225571403" s="6.075672646331259" class="head">
+      <textfield autoSize="true">
+        <x>-74</x>
+        <y>-17.8</y>
+        <text><![CDATA[个人信息修改]]></text>
+        <annotations>r0-6 { color: #194a99; }
+r0-6 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="73" type="label" x="51618.61101959811" y="-18485.385918279033" r="11.375681142204543" s="5.954159193404633" class="head">
+      <textfield autoSize="true">
+        <x>-62</x>
+        <y>-17.8</y>
+        <text><![CDATA[聊天主界面]]></text>
+        <annotations>r0-5 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="75" type="label" x="51471.76078643025" y="-17983.1181601519" r="11.375681142204531" s="4.252970852431883" class="head">
+      <textfield autoSize="true">
+        <x>-50</x>
+        <y>-17.8</y>
+        <text><![CDATA[好友列表]]></text>
+        <annotations>r0-4 { color: #194a99; }
+r0-4 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="76" type="label" x="51425.556521260936" y="-17713.16792493033" r="11.375681142204531" s="4.252970852431883" class="head">
+      <textfield autoSize="true">
+        <x>-50</x>
+        <y>-17.8</y>
+        <text><![CDATA[消息历史]]></text>
+        <annotations>r0-4 { color: #194a99; }
+r0-4 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="77" type="label" x="51367.98952293695" y="-17442.344816720113" r="11.375681142204531" s="4.252970852431883" class="head">
+      <textfield autoSize="true">
+        <x>-50</x>
+        <y>-17.8</y>
+        <text><![CDATA[添加好友]]></text>
+        <annotations>r0-4 { color: #194a99; }
+r0-4 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="78" type="image" x="53309.31882525595" y="-16740.908409701173" r="11.37568114220453" s="2.5079268187217876">
+      <source w="1244" h="634">
+        QQ截图20141231211554.png
+        <url>QQ截图20141231211554.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231211554.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="79" type="label" x="52575.07378594681" y="-18008.14183190971" r="11.375681142204531" s="4.252970852431883" class="head">
+      <textfield autoSize="true">
+        <x>-98</x>
+        <y>-17.8</y>
+        <text><![CDATA[右键查看好友信息]]></text>
+        <annotations>r0-8 { color: #194a99; }
+r0-8 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="80" type="label" x="53506.47440262942" y="-16940.49425613315" r="11.375681142204531" s="4.252970852431883" class="head">
+      <textfield autoSize="true">
+        <x>-38</x>
+        <y>-17.8</y>
+        <text><![CDATA[聊天区]]></text>
+        <annotations>r0-3 { color: #194a99; }
+r0-3 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="81" type="image" x="54180.266499107536" y="-17783.797619443936" r="11.375681142204526" s="2.051812735004247">
+      <source w="459" h="310">
+        QQ截图20141231211750.png
+        <url>QQ截图20141231211750.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231211750.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="82" type="shape" x="51854.543111365245" y="-17815.475508698462" r="38.98897263905419" s="2.1698830879754523" class="line3">
+      <geom type="arrow">
+        <sp>-91.88586646398616 0</sp>
+        <ep>91.88586646398616 0</ep>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="83" type="shape" x="51786.91131020613" y="-17595.515844772657" r="17.16945455409934" s="2.1698830879754514" class="line3">
+      <geom type="arrow">
+        <sp>-78.77781977016487 0</sp>
+        <ep>78.77781977016488 0</ep>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="84" type="shape" x="51751.427077204185" y="-17379.846755899354" r="14.288606999886683" s="2.1698830879754523" class="line3">
+      <geom type="arrow">
+        <sp>-74.89977228249565 0</sp>
+        <ep>74.89977228249563 0</ep>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="85" type="shape" x="52688.59134588238" y="-17673.110264731687" r="76.65458488033245" s="2.1698830879754527" class="line3">
+      <geom type="arrow">
+        <sp>-133.40840765191697 0</sp>
+        <ep>133.40840765191697 0</ep>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="86" type="shape" x="53283.73081135805" y="-17558.872495804782" r="-25.141425170465425" s="2.1698830879754527" class="line3">
+      <geom type="arrow">
+        <sp>-211.8940637495077 0</sp>
+        <ep>211.8940637495077 0</ep>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="89" type="shape" x="53501.006297247695" y="-16938.36777070693" r="50.47563847590367" s="3.0378363231656285" class="line3">
+      <geom type="line">
+        <sp>9.999999999999986 61.485051094824826</sp>
+        <ep>-10.00000000000002 61.485051094824826</ep>
+        <b>122.97010218964964</b>
+        <t>8</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="90" type="label" x="51451.20120470931" y="-14963.747806845013" r="-14.234787985787523" s="3.037836323165625" class="head">
+      <textfield autoSize="true">
+        <x>-50</x>
+        <y>-17.8</y>
+        <text><![CDATA[添加好友]]></text>
+        <annotations>r0-4 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="91" type="image" x="51799.2103890103" y="-14606.828392677318" r="-15.062303045331557" s="1.8946196570312528">
+      <source w="442" h="284">
+        QQ截图20141231193029.png
+        <url>QQ截图20141231193029.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231193029.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="94" type="image" x="52363.03281058985" y="-13851.62228273834" r="-15.062303045331559" s="2.2293554224000967">
+      <source w="560" h="325">
+        _QQ截图20141231193111.png
+        <url>_QQ截图20141231193111.png</url>
+        <mask x="192" y="135" w="314" h="190"/>
+      </source>
+      <sourceUrl>QQ截图20141231193111.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="95" type="image" x="53636.49379726088" y="-15153.183255398651" r="-15.062303045331566" s="2.6747930317870168">
+      <source w="300" h="202">
+        _QQ截图20141231193351.png
+        <url>_QQ截图20141231193351.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231193351.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="96" type="image" x="53831.370997391976" y="-14395.850660033462" r="-15.06230304533155" s="2.3492773735570887">
+      <source w="346" h="205">
+        _QQ截图20141231193323.png
+        <url>_QQ截图20141231193323.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231193323.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="97" type="label" x="52396.145226512344" y="-14852.589351221406" r="-14.234787985787523" s="2.169883087975446" class="head">
+      <textfield autoSize="true">
+        <x>-86</x>
+        <y>-17.8</y>
+        <text><![CDATA[请求添加为好友]]></text>
+        <annotations>r0-7 { color: #194a99; }
+r0-7 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="98" type="label" x="51944.26707344147" y="-13968.2751975479" r="-14.234787985787523" s="2.169883087975446" class="head">
+      <textfield autoSize="true">
+        <x>-86</x>
+        <y>-17.8</y>
+        <text><![CDATA[同意添加为好友]]></text>
+        <annotations>r0-7 { color: #194a99; }
+r0-7 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="99" type="label" x="53680.846207579096" y="-14858.51313205158" r="-14.234787985787523" s="2.169883087975446" class="head">
+      <textfield autoSize="true">
+        <x>-86</x>
+        <y>-17.8</y>
+        <text><![CDATA[添加为好友成功]]></text>
+        <annotations>r0-7 { color: #194a99; }
+r0-7 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="100" type="label" x="53485.513331999544" y="-14577.968947607238" r="-14.234787985787523" s="2.169883087975446" class="head">
+      <textfield autoSize="true">
+        <x>-86</x>
+        <y>-17.8</y>
+        <text><![CDATA[添加为好友成功]]></text>
+        <annotations>r0-7 { color: #194a99; }
+r0-7 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="101" type="shape" x="52203.41167727425" y="-14292.024235064728" r="62.77184014109772" s="1.518918161582815" class="line4">
+      <geom type="arrow">
+        <sp>-241.69174551206245 0</sp>
+        <ep>241.69174551206245 0</ep>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="102" type="shape" x="53053.65105469857" y="-14152.063512971332" r="-26.481120215751165" s="1.518918161582816" class="line4">
+      <geom type="arrow">
+        <sp>-235.7203364369795 0</sp>
+        <ep>235.7203364369795 0</ep>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="103" type="shape" x="52999.33221171856" y="-14487.517815080222" r="-56.94636560706179" s="1.5189181615828151" class="line4">
+      <geom type="arrow">
+        <sp>-362.7299287004145 0</sp>
+        <ep>362.72992870041446 0</ep>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="104" type="button" x="2384.7015136850214" y="-23930.403743921113" r="-8.657631423423729e-15" s="32.16448519114956" class="roundrect">
+      <type>roundrect</type>
+      <size>
+        <w>1096.4169381107492</w>
+        <h>600</h>
+      </size>
+      <meta>
+        <parentTemplate>white-space</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="105" type="label" x="-7466.439371808655" y="-29865.545418212863" r="-4.843139471850677e-15" s="80.45703484265071" class="strong">
+      <textfield autoSize="true">
+        <x>-62</x>
+        <y>-17.8</y>
+        <text><![CDATA[管理员模块]]></text>
+        <annotations>r0-5 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="106" type="labelwithplaceholder" x="-8737.95695672092" y="-25322.968469278905" r="-1.6419315239534758e-15" s="43.745131099164794" class="body">
+      <placeholder text="Click to add text" x="-95.35" y="-17.8"/>
+      <layout/>
+    </object>
+    <object id="107" type="button" x="2363.132875790524" y="-27653.8611676453" r="-4.948797247947639e-15" s="8.619698528517619" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>976.7123287671232</w>
+        <h>600</h>
+      </size>
+      <meta>
+        <parentTemplate>freefall</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="108" type="button" x="2706.984093903181" y="-23429.271598372023" r="17.525012367775922" s="3.132452507192602" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>1375.317524341804</w>
+        <h>811.2031542141978</h>
+      </size>
+      <meta>
+        <parentTemplate>freefall</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="109" type="button" x="2274.251314923184" y="-20747.66306119472" r="-8.085456760216124" s="2.6388099095785313" class="invisible">
+      <type>invisible</type>
+      <size>
+        <w>1182.278177990647</w>
+        <h>759.594723729012</h>
+      </size>
+      <meta>
+        <parentTemplate>freefall</parentTemplate>
+      </meta>
+      <layout/>
+    </object>
+    <object id="149" type="image" x="2363.132875790522" y="-27653.8611676453" r="0.14195446277671564" s="7.45213891279572">
+      <source w="461" h="282">
+        QQ截图20141231193713.png
+        <url>QQ截图20141231193713.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231193713.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="150" type="label" x="1402.6510396207866" y="-24868.84656425864" r="17.525012367775922" s="4.043360146133457" class="head">
+      <textfield autoSize="true">
+        <x>-50</x>
+        <y>-17.8</y>
+        <text><![CDATA[用户管理]]></text>
+        <annotations>r0-4 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="151" type="image" x="2453.660398220878" y="-23371.138076826323" r="17.642948015500554" s="2.7411375216683846">
+      <source w="1233" h="538">
+        _QQ截图20141231193736.png
+        <url>_QQ截图20141231193736.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231193736.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="152" type="label" x="1984.5325792632284" y="-23258.279411346342" r="17.525012367775936" s="3.675781951030415" class="head">
+      <textfield autoSize="true">
+        <x>-122</x>
+        <y>-17.8</y>
+        <text><![CDATA[显示所有注册用户信息]]></text>
+        <annotations>r0-10 { color: #194a99; }
+r0-10 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="153" type="label" x="1965.359047748553" y="-24426.48265866904" r="17.525012367775936" s="3.675781951030415" class="head">
+      <textfield autoSize="true">
+        <x>-74</x>
+        <y>-17.8</y>
+        <text><![CDATA[删除注册用户]]></text>
+        <annotations>r0-6 { color: #194a99; }
+r0-6 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="154" type="label" x="4019.615165048182" y="-23728.385308174897" r="17.525012367775922" s="3.3416199554821957" class="head">
+      <textfield autoSize="true">
+        <x>-74</x>
+        <y>-17.8</y>
+        <text><![CDATA[删除消息记录]]></text>
+        <annotations>r0-6 { color: #194a99; }
+r0-6 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="155" type="label" x="4350.485398405499" y="-22822.5048368626" r="17.525012367775922" s="3.3416199554821957" class="head">
+      <textfield>
+        <x>-75</x>
+        <y>-49.4</y>
+        <text><![CDATA[给所有注册用户发送系统消息]]></text>
+        <w>150</w>
+        <h>98.8</h>
+        <annotations>r0-13 { color: #194a99; }
+r0-13 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="156" type="shape" x="1425.1081979292633" y="-24337.217457701532" r="-27.474988329463464" s="1.5499164914110368" class="line1">
+      <geom type="arrow">
+        <sp>164.78107726734808 10.189353303288977</sp>
+        <ep>-164.78107726734808 10.189353303288891</ep>
+        <b>20.378706606577868</b>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="157" type="shape" x="3645.957550217037" y="-23550.572884950187" r="-72.47498832946336" s="1.5499164914110366" class="line1">
+      <geom type="arrow">
+        <sp>168.25396286384463 38.976182609775194</sp>
+        <ep>-168.25396286384463 38.9761826097751</ep>
+        <b>77.9523652195503</b>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="158" type="shape" x="3836.632943374153" y="-22793.84286760276" r="-27.474988329463375" s="1.5499164914110362" class="line1">
+      <geom type="arrow">
+        <sp>183.55961561329983 22.001033808877235</sp>
+        <ep>-183.55961561329983 22.001033808877153</ep>
+        <b>44.00206761775439</b>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="159" type="marker" x="1964.1130747427355" y="-23269.978127264912" r="17.525012367775922" s="2.696241833584611">
+      <width>461.7</width>
+      <height>152.3</height>
+      <offsetx>-1904.15</offsetx>
+      <offsety>-8449.275000000001</offsety>
+      <p x="-2059.300104920012" y="-8501.749980972552"/>
+      <p x="-1950.9501048461743" y="-8501.999982291254"/>
+      <p x="-1838.9501046815208" y="-8494.999983649228"/>
+      <p x="-1734.9501043515677" y="-8473.949984899882"/>
+      <p x="-1687.9501040754446" y="-8453.999985457674"/>
+      <p x="-1695.9501038012313" y="-8430.999985344002"/>
+      <p x="-1743.9501034702162" y="-8400.999984738597"/>
+      <p x="-1816.9501033638148" y="-8387.999983841028"/>
+      <p x="-1912.9501034319317" y="-8387.99998267279"/>
+      <p x="-2004.9501034972104" y="-8387.999981553232"/>
+      <p x="-2091.000103898394" y="-8415.949980525911"/>
+      <p x="-2118.950104162217" y="-8435.999980200011"/>
+      <p x="-2119.350104719238" y="-8481.749980227605"/>
+      <p x="-2095.0001050579076" y="-8510.999980544677"/>
+      <p x="-2083.9501050622357" y="-8511.999980679855"/>
+      <layout/>
+    </object>
+    <object id="160" type="image" x="3113.934123060925" y="-24271.856546644933" r="17.525012367775922" s="2.386927007311172">
+      <source w="375" h="179">
+        QQ截图20141231213319.png
+        <url>QQ截图20141231213319.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231213319.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="161" type="shape" x="2050.3569091949803" y="-24176.993917207048" r="-4.532630408294138" s="1.549916491411035" class="line1">
+      <geom type="arrow">
+        <sp>-505.7253840257407 -45.62720478916573</sp>
+        <ep>505.7253840257407 -45.62720478916573</ep>
+        <b>91.25440957833146</b>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="162" type="label" x="989.8402365284998" y="-21415.370663443508" r="-8.085456760216124" s="4.252970852431887" class="head">
+      <textfield autoSize="true">
+        <x>-62</x>
+        <y>-17.8</y>
+        <text><![CDATA[管理员管理]]></text>
+        <annotations>r0-5 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="163" type="image" x="2578.3635792868276" y="-20517.242743028368" r="-8.032888592611528" s="1.9802612305424705">
+      <source w="1231" h="549">
+        QQ截图20141231194840.png
+        <url>QQ截图20141231194840.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231194840.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="164" type="image" x="2412.890606658893" y="-21455.47226797412" r="-8.207471714491687" s="2.27745590197422">
+      <source w="360" h="218">
+        QQ截图20141231194933.png
+        <url>QQ截图20141231194933.png</url>
+        <mask x="42" y="26" w="273" h="141"/>
+      </source>
+      <sourceUrl>QQ截图20141231194933.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="165" type="image" x="1573.6427356362803" y="-21261.595922857803" r="-8.207471714491676" s="1.4340606688502051">
+      <source w="420" h="259">
+        QQ截图20141231194851.png
+        <url>QQ截图20141231194851.png</url>
+      </source>
+      <sourceUrl>QQ截图20141231194851.png</sourceUrl>
+      <layout/>
+    </object>
+    <object id="166" type="label" x="2370.092579549966" y="-20399.45140417584" r="-8.085456760216113" s="3.1953199492350786" class="head">
+      <textfield autoSize="true">
+        <x>-110</x>
+        <y>-17.8</y>
+        <text><![CDATA[显示所有管理员信息]]></text>
+        <annotations>r0-9 { color: #194a99; }
+r0-9 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="167" type="label" x="1060.5086604171222" y="-20475.016818136377" r="-8.085456760216125" s="3.5148519441585853" class="head">
+      <textfield autoSize="true">
+        <x>-62</x>
+        <y>-17.8</y>
+        <text><![CDATA[删除管理员]]></text>
+        <annotations>r0-5 { color: #194a99; }
+r0-5 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="168" type="label" x="1008.8654429233048" y="-20812.67232545623" r="-8.085456760216125" s="3.5148519441585853" class="head">
+      <textfield autoSize="true">
+        <x>-62</x>
+        <y>-17.8</y>
+        <text><![CDATA[添加管理员]]></text>
+        <annotations>r0-5 { color: #194a99; }
+r0-5 { align: left; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="169" type="label" x="3387.548888140915" y="-21388.7418481718" r="-8.085456760216125" s="3.5148519441585853" class="head">
+      <textfield autoSize="true">
+        <x>-87</x>
+        <y>-17.8</y>
+        <text><![CDATA[修改管理员密码]]></text>
+        <w>174</w>
+        <h>35.6</h>
+        <annotations>r0-7 { color: #194a99; }
+r0-7 { align: right; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+    <object id="170" type="marker" x="2334.729106168944" y="-20379.02119032433" r="-8.085456760216122" s="2.1273299462538415">
+      <width>467.1</width>
+      <height>134.4</height>
+      <offsetx>2433.95</offsetx>
+      <offsety>-9330.05</offsety>
+      <p x="2344.4499767582774" y="-9383.200080680272"/>
+      <p x="2481.9999777878807" y="-9384.000081285109"/>
+      <p x="2604.999978785697" y="-9367.000081692911"/>
+      <p x="2630.9999790288616" y="-9356.000081723489"/>
+      <p x="2654.999979313601" y="-9332.000081647717"/>
+      <p x="2627.399979183583" y="-9314.250081394246"/>
+      <p x="2535.44997861488" y="-9286.25008078364"/>
+      <p x="2419.449977787401" y="-9276.20008020315"/>
+      <p x="2342.4499772088657" y="-9276.250079868303"/>
+      <p x="2259.4499765724236" y="-9279.250079529496"/>
+      <p x="2219.4499761849283" y="-9299.250079505566"/>
+      <p x="2216.999976093606" y="-9316.000079620702"/>
+      <p x="2265.999976378909" y="-9335.000079976728"/>
+      <p x="2299.999976573321" y="-9349.000080229896"/>
+      <p x="2328.999976730397" y="-9362.95008046092"/>
+      <p x="2355.9499769064696" y="-9369.000080623688"/>
+      <p x="2365.999976951477" y="-9376.000080720014"/>
+      <p x="2368.999976961166" y="-9378.950080755232"/>
+      <layout/>
+    </object>
+    <object id="171" type="shape" x="1339.2595865584872" y="-20774.615358019095" r="41.04831196886502" s="1.084941543987725" class="line1">
+      <geom type="arrow">
+        <sp>-105.78631247889122 18.46056106884555</sp>
+        <ep>105.78631247889123 18.46056106884555</ep>
+        <b>-36.9211221376911</b>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="172" type="shape" x="1563.5734937065613" y="-20893.64637582286" r="-68.08545669101706" s="1.0849415439877252" class="line1">
+      <geom type="arrow">
+        <sp>-192.56115408155057 -21.928875478297524</sp>
+        <ep>192.56115408155057 -21.928875478297524</ep>
+        <b>43.85775095659505</b>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="173" type="shape" x="1443.1299269832282" y="-20562.087980790227" r="-31.549919301806437" s="1.084941543987726" class="line1">
+      <geom type="arrow">
+        <sp>-160.90312135594374 -23.06952536454378</sp>
+        <ep>160.9031213559437 -23.06952536454378</ep>
+        <b>46.13905072908756</b>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="174" type="shape" x="2032.1631198749365" y="-20979.453136998753" r="-40.86679704305612" s="1.0849415439877257" class="line1">
+      <geom type="arrow">
+        <sp>-435.4795197887684 -42.1705532988056</sp>
+        <ep>435.4795197887684 -42.1705532988056</ep>
+        <b>84.3411065976112</b>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="175" type="shape" x="3175.769908916262" y="-21056.90264147312" r="62.096640538432645" s="0.7749582457055182" class="line1">
+      <geom type="arrow">
+        <sp>-349.78361198764435 -69.31347297908769</sp>
+        <ep>349.78361198764435 -69.31347297908769</ep>
+        <b>138.62694595817538</b>
+        <t>10</t>
+      </geom>
+      <layout/>
+    </object>
+    <object id="177" type="marker" x="1447.238494886612" y="-20682.72171589073" r="-8.085456760216122" s="2.1273299462538415">
+      <width>40</width>
+      <height>27.2</height>
+      <offsetx>2041.0500000000002</offsetx>
+      <offsety>-9530.05</offsety>
+      <p x="2033.550029891166" y="-9529.250083683282"/>
+      <p x="2047.0000300124448" y="-9529.000083664778"/>
+      <p x="2044.000029987742" y="-9531.00008368648"/>
+      <p x="2037.0000299244657" y="-9531.000083694937"/>
+      <layout/>
+    </object>
+    <object id="178" type="marker" x="1575.9949352545902" y="-20698.97520334337" r="-8.085456760216122" s="2.1273299462538415">
+      <width>44.1</width>
+      <height>25.3</height>
+      <offsetx>2102.05</offsetx>
+      <offsety>-9529.1</offsety>
+      <p x="2092.500030424042" y="-9529.250083612083"/>
+      <p x="2110.9500305905185" y="-9529.000083587543"/>
+      <p x="2104.000030527634" y="-9528.950083595484"/>
+      <layout/>
+    </object>
+    <object id="179" type="label" x="251.07717210963955" y="2301.009122981808" r="-8.080455995195482e-15" s="83.32369662732478" class="head">
+      <textfield>
+        <x>-66.2</x>
+        <y>-33.6</y>
+        <text><![CDATA[The EndThank You]]></text>
+        <w>132.45</w>
+        <h>67.2</h>
+        <annotations>r0-8 { align: center; }
+r8-17 { align: center; }</annotations>
+      </textfield>
+      <layout/>
+    </object>
+  </zui-table>
+  <background>
+    <layer depth="114.65388911585534" fadescale="0.019188184691903008">
+      <object id="bgw7eZr3fqqa.jpg" type="image" x="0" y="0" r="0" s="240.9990353048545">
+        <source w="2000" h="1150">
+          w7eZr3fqqa.jpg
+          <url>w7eZr3fqqa.jpg</url>
+        </source>
+        <sourceUrl>004.jpg</sourceUrl>
+        <layout/>
+      </object>
+    </layer>
+  </background>
+  <path>
+    <s>
+      <eagle o="32_2475237"/>
+    </s>
+    <s>
+      <eagle o="9"/>
+    </s>
+    <s>
+      <eagle o="12_4225793"/>
+    </s>
+    <s>
+      <eagle o="29"/>
+    </s>
+    <s>
+      <eagle o="36"/>
+    </s>
+    <s>
+      <eagle o="44"/>
+    </s>
+    <s>
+      <eagle o="47"/>
+    </s>
+    <s>
+      <eagle o="48"/>
+    </s>
+    <s>
+      <eagle o="49"/>
+    </s>
+    <s>
+      <eagle o="23_2648233"/>
+    </s>
+    <s>
+      <eagle o="1"/>
+    </s>
+    <s>
+      <eagle o="2"/>
+    </s>
+    <s>
+      <eagle o="6"/>
+    </s>
+    <s>
+      <eagle o="32_2475237"/>
+    </s>
+    <s>
+      <eagle o="104"/>
+    </s>
+    <s>
+      <eagle o="107"/>
+    </s>
+    <s>
+      <eagle o="108"/>
+    </s>
+    <s>
+      <eagle o="109"/>
+    </s>
+    <s>
+      <eagle o="2_2648233"/>
+    </s>
+  </path>
+  <style type="text/css"><![CDATA[
+@font-face
+{
+	src: url('wryh.swf');
+	fontFamily: head;
+}
+
+@font-face
+{
+	src: url('wryh.swf');
+	fontFamily: strong;
+}
+
+@font-face
+{
+	src: url('wryh.swf');
+	fontFamily: body;
+}
+
+background
+{
+	gradEnd: #808080;
+	gradStart: #808080;
+}
+
+text
+{
+	padding: 1.2;
+}
+
+text.title
+{
+	fontFamily: head;
+	color: #fff808;
+}
+
+text.subtitle
+{
+	fontFamily: strong;
+	color: #fff;
+}
+
+text.body
+{
+	fontFamily: body;
+	color: #fff;
+}
+
+frame.circle
+{
+	gradStartColor: #333;
+	gradEndColor: #333;
+	borderThickness: 0;
+	borderColor: #999;
+}
+
+frame.bracket
+{
+	gradStartColor: #fff;
+	gradEndColor: #c5c3c3;
+	thickness: 7;
+	borderThickness: 0;
+	borderColor: #fff;
+}
+
+frame.rectangle
+{
+	gradStartColor: #000;
+	gradEndColor: #000;
+	radius: 0;
+	borderThickness: 0;
+	borderColor: #fff;
+}
+
+arrow
+{
+	gradStartColor: #fff808;
+	gradEndColor: #fff808;
+	borderThickness: -1;
+	borderColor: #fff;
+}
+
+line
+{
+	color: #fff808;
+}
+
+line-arrow.style1
+{
+	gradStartColor: #fff;
+	color: #fff;
+	gradEndColor: #fff;
+}
+
+line-arrow.style2
+{
+	gradStartColor: #c5c3c3;
+	color: #c5c3c3;
+	gradEndColor: #c5c3c3;
+}
+
+line-arrow.style3
+{
+	gradStartColor: #fff808;
+	color: #fff808;
+	gradEndColor: #fff808;
+}
+
+line-arrow.style4
+{
+	gradStartColor: #333;
+	color: #333;
+	gradEndColor: #333;
+}
+
+line-arrow.style5
+{
+	gradStartColor: #000;
+	color: #000;
+	gradEndColor: #000;
+}
+
+circle
+{
+	thickness: 100;
+	radius: 0;
+	lockTintAlpha: 0.6;
+	borderAlpha: 1;
+}
+
+shape
+{
+	gradStartAlpha: 0.7;
+	radius: 0;
+	borderAlpha: 1;
+	gradEndAlpha: 0.8;
+	thickness: 100;
+	lockTintAlpha: 0.6;
+}
+
+shape.style1
+{
+	gradStartColor: #fff;
+	gradEndColor: #fff;
+	borderThickness: 0;
+	borderColor: #fff;
+}
+
+shape.style2
+{
+	gradStartColor: #c5c3c3;
+	gradEndColor: #c5c3c3;
+	borderThickness: 0;
+	borderColor: #c5c3c3;
+}
+
+shape.style3
+{
+	gradStartColor: #fff808;
+	gradEndColor: #fff808;
+	borderThickness: 0;
+	borderColor: #fff808;
+}
+
+shape.style4
+{
+	gradStartColor: #333;
+	gradEndColor: #333;
+	borderThickness: 0;
+	borderColor: #333;
+}
+
+shape.style5
+{
+	gradStartColor: #000;
+	gradEndColor: #000;
+	borderThickness: 0;
+	borderColor: #000;
+}
+
+free-line
+{
+	color: #fff808;
+}
+
+free-marker
+{
+	alpha: 0.3;
+	color: #ffff0d;
+}
+
+grid
+{
+	color: #ddd;
+}
+
+ZCircle
+{
+	gradStartAlpha: 1;
+	gradStartColor: #008080;
+	thickness: 100;
+	radius: 0;
+	borderAlpha: 1;
+	borderThickness: 0;
+	gradEndColor: #008080;
+	gradEndAlpha: 1;
+	lockTintColor: #ffffe6;
+	lockTintAlpha: 0;
+	borderColor: #008080;
+}
+
+ZPoly
+{
+	gradStartAlpha: 1;
+	gradStartColor: #f8981d;
+	color: #f8981d;
+	radius: 0;
+	borderColor: #f8981d;
+	borderAlpha: 1;
+	borderThickness: 0;
+	gradEndColor: #f8981d;
+	gradEndAlpha: 1;
+	thickness: 100;
+	lockTintAlpha: 0;
+}
+
+Background
+{
+	gradEnd: #c2c0c6;
+	gradStart: #969396;
+}
+
+ZLabel
+{
+	padding: 1.2;
+}
+
+ZLabel.head
+{
+	fontFamily: head;
+	color: #000;
+}
+
+.line5
+{
+	gradStartColor: #000;
+	color: #000;
+	gradEndColor: #000;
+}
+
+.poly5
+{
+	gradStartColor: #f0f0f0;
+	gradEndColor: #f0f0f0;
+	borderThickness: 9;
+	borderColor: #000;
+}
+
+ZLabel.strong
+{
+	fontFamily: strong;
+	color: #464646;
+}
+
+.line1
+{
+	gradStartColor: #e0610c;
+	color: #e0610c;
+	gradEndColor: #e0610c;
+}
+
+.poly1
+{
+	gradStartColor: #f0f0f0;
+	gradEndColor: #f0f0f0;
+	borderThickness: 9;
+	borderColor: #e0610c;
+}
+
+ZLabel.body
+{
+	fontFamily: body;
+	color: #000;
+}
+
+ZFrame.circle
+{
+	gradStartAlpha: 1;
+	gradStartColor: #000;
+	gradEndColor: #000;
+	gradEndAlpha: 1;
+	thickness: 5;
+}
+
+.line4
+{
+	gradStartColor: #d04141;
+	color: #d04141;
+	gradEndColor: #d04141;
+}
+
+.poly4
+{
+	gradStartColor: #03c2c9;
+	gradEndColor: #03c2c9;
+	borderColor: #03c2c9;
+}
+
+ZFrame.bracket
+{
+	gradStartAlpha: 1;
+	gradStartColor: #000;
+	borderAlpha: 0;
+	gradEndColor: #000;
+	gradEndAlpha: 1;
+	thickness: 5;
+}
+
+.line2
+{
+	gradStartColor: #717171;
+	color: #717171;
+	gradEndColor: #717171;
+}
+
+.poly2
+{
+	gradStartColor: #e0610c;
+	gradEndColor: #e0610c;
+	borderColor: #e0610c;
+}
+
+ZFrame.roundrect
+{
+	gradStartAlpha: 0.6;
+	gradStartColor: #fff;
+	radius: 0;
+	borderAlpha: 0.1;
+	gradEndColor: #fff;
+	gradEndAlpha: 0.8;
+	borderThickness: 1;
+	borderColor: #000;
+}
+
+ZArrow
+{
+	color: #f8981d;
+	radius: 0;
+	borderColor: #f8981d;
+	borderAlpha: 0;
+	gradEndAlpha: 1;
+	borderThickness: 0;
+	lockTintColor: #f8981d;
+	gradStartAlpha: 1;
+	gradStartColor: #f8981d;
+	gradEndColor: #f8981d;
+	thickness: 10;
+	lockTintAlpha: 0;
+}
+
+.line3
+{
+	gradStartColor: #03c2c9;
+	color: #03c2c9;
+	gradEndColor: #03c2c9;
+}
+
+.poly3
+{
+	gradStartColor: #f0f0f0;
+	gradEndColor: #f0f0f0;
+	borderThickness: 9;
+	borderColor: #03c2c9;
+}
+
+ZLine
+{
+	gradStartColor: #f8981d;
+	color: #f8981d;
+	gradEndColor: #f8981d;
+	lockTintAlpha: 0;
+	borderColor: #f8981d;
+}
+
+ZCurveLine
+{
+	color: #000;
+	alpha: 1;
+	thickness: 2;
+}
+
+ZMarker
+{
+	color: #eee10b;
+	alpha: 0.5;
+	thickness: 25;
+}
+
+Grid
+{
+	color: #d6d2d8;
+}
+
+ZPath
+{
+	textColor: #fff;
+	color: #40abe6;
+	alpha: 1;
+	thickness: 3;
+}
+
+ZPath Ball.mid
+{
+	alpha: .5;
+	radius: 8;
+	fillColor: #40abe6;
+}
+
+ZPath Ball.base
+{
+	alpha: 1;
+	radius: 12;
+	fillColor: #40abe6;
+}
+
+]]></style>
+  <hash>-69f4238a</hash>
+  <sync>
+    <oid>UNKNOWN</oid>
+    <hash>UNKNOWN</hash>
+  </sync>
+  <config>ri+WlIhDpIq7RAAbC6UB1qIUaGV7JnG3ZQ==</config>
+</zuiprezi>
